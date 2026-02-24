@@ -1,0 +1,29 @@
+<template>
+    <div id="booking" class="booking-wrapper">
+        <div class="booking-bar">
+            <div class="booking-field">
+                <label class="booking-label">Check-In</label>
+                <input class="booking-input" type="date" value={checkIn} onchange={handleCheckIn} />
+            </div>
+            <div class="booking-field">
+                <label class="booking-label">Check-Out</label>
+                <input class="booking-input" type="date" value={checkOut} onchange={handleCheckOut} min={checkOutMin} />
+            </div>
+            <div class="booking-field no-border">
+                <label class="booking-label">Guests</label>
+                <select class="booking-input" onchange={handleGuests}>
+                    <template for:each={guestOptions} for:item="opt">
+                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    </template>
+                </select>
+            </div>
+            <button class="booking-submit" onclick={checkAvailability}>
+                <span>Check</span>
+                <span>Availability</span>
+            </button>
+        </div>
+        <template if:true={availabilityMsg}>
+            <div class="availability-msg">{availabilityMsg}</div>
+        </template>
+    </div>
+</template>

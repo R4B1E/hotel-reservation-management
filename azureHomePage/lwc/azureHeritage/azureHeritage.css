@@ -1,0 +1,141 @@
+:host { display: block; }
+
+.heritage {
+    padding: 120px 0 100px;
+    background: #faf8f4;
+}
+
+@font-face {
+    font-family: 'Jost';
+    src: url('sfsites/c/resource/Jost') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('sfsites/c/resource/Cormorant_Garamond') format('truetype');
+}
+
+.heritage-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+/* ─── Reveal ─── */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+}
+[data-reveal].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ─── Images ─── */
+.heritage-images {
+    position: relative;
+    height: 520px;
+    transition-delay: 0s;
+}
+
+.img-main {
+    position: absolute;
+    top: 0; left: 0;
+    width: 76%;
+    height: 85%;
+    object-fit: cover;
+}
+
+.img-accent {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 54%;
+    height: 52%;
+    object-fit: cover;
+    border: 6px solid #faf8f4;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+}
+
+/* ─── Text ─── */
+.heritage-text {
+    padding-left: 12px;
+    transition-delay: 0.15s;
+}
+
+.eyebrow {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: #b8956a;
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.12;
+    color: #2c2520;
+    margin: 0;
+}
+
+.section-title em {
+    font-style: italic;
+    color: #b8956a;
+}
+
+.divider {
+    width: 48px;
+    height: 1px;
+    background: #b8956a;
+    margin: 28px 0;
+}
+
+.body-text {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: #9e8e7a;
+}
+
+.body-text p + p { margin-top: 14px; }
+
+.link-underline {
+    display: inline-block;
+    margin-top: 32px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #2c2520;
+    text-decoration: none;
+    position: relative;
+}
+
+.link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0; right: 0;
+    height: 1px;
+    background: #b8956a;
+    transform: scaleX(0.4);
+    transform-origin: left;
+    transition: transform 0.3s;
+}
+
+.link-underline:hover::after { transform: scaleX(1); }
+
+@media (max-width: 900px) {
+    .heritage-inner { grid-template-columns: 1fr; gap: 48px; padding: 0 24px; }
+    .heritage-images { height: 360px; }
+    .heritage-text { padding-left: 0; }
+}

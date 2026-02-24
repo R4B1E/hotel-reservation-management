@@ -1,0 +1,87 @@
+<template>
+    <div class="confirmation-page">
+        <div class="confirmation-inner">
+
+            <!-- Animated checkmark -->
+            <div class="check-circle">
+                <svg class="check-svg" viewBox="0 0 52 52">
+                    <circle class="check-ring" cx="26" cy="26" r="24" fill="none" />
+                    <path class="check-mark" fill="none" d="M14 26l9 9 16-18" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+
+            <span class="conf-eyebrow">Reservation Confirmed</span>
+            <h1 class="conf-title">Your sanctuary awaits.</h1>
+            <p class="conf-sub">
+                Thank you, <em>{guestFirstName}</em>. A confirmation has been sent to <strong>{guestData.email}</strong>.
+                Our concierge will be in touch within 24 hours.
+            </p>
+
+            <!-- Confirmation code -->
+            <div class="conf-code-block">
+                <span class="conf-code-label">Confirmation Code</span>
+                <span class="conf-code">{confirmationCode}</span>
+            </div>
+
+            <!-- Booking summary card -->
+            <div class="conf-summary">
+                <div class="conf-room-img-wrap">
+                    <img class="conf-room-img" src={room.image} alt={room.name} />
+                </div>
+                <div class="conf-room-details">
+                    <span class="conf-room-cat">{room.category}</span>
+                    <h2 class="conf-room-name">{room.name}</h2>
+                    <div class="conf-dates">
+                        <div class="conf-date-block">
+                            <span class="conf-date-label">Check-In</span>
+                            <span class="conf-date-val">{checkIn}</span>
+                        </div>
+                        <span class="conf-date-arrow">→</span>
+                        <div class="conf-date-block">
+                            <span class="conf-date-label">Check-Out</span>
+                            <span class="conf-date-val">{checkOut}</span>
+                        </div>
+                        <div class="conf-date-block">
+                            <span class="conf-date-label">Duration</span>
+                            <span class="conf-date-val">{nights} {nightLabel}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What happens next -->
+            <div class="next-steps">
+                <h3 class="next-steps-title">What happens next</h3>
+                <div class="next-steps-grid">
+                    <div class="next-step">
+                        <span class="ns-num">01</span>
+                        <div>
+                            <div class="ns-title">Confirmation Email</div>
+                            <div class="ns-desc">A detailed itinerary and booking voucher have been sent to your inbox.</div>
+                        </div>
+                    </div>
+                    <div class="next-step">
+                        <span class="ns-num">02</span>
+                        <div>
+                            <div class="ns-title">Concierge Contact</div>
+                            <div class="ns-desc">Our personal concierge will reach out to arrange your arrival transfer and discuss preferences.</div>
+                        </div>
+                    </div>
+                    <div class="next-step">
+                        <span class="ns-num">03</span>
+                        <div>
+                            <div class="ns-title">Your Arrival</div>
+                            <div class="ns-desc">Arrive to a room prepared exactly to your liking, with welcome amenities awaiting.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTAs -->
+            <div class="conf-actions">
+                <a href="#" class="btn-secondary">← Browse More Rooms</a>
+                <a href="#" class="btn-primary">Manage My Reservation →</a>
+            </div>
+        </div>
+    </div>
+</template>

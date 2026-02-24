@@ -1,0 +1,52 @@
+<template>
+    <div class="results-shell">
+        <c-azure-results-nav
+            check-in={checkIn}
+            check-out={checkOut}
+            guests={guests}
+            onmodifysearch={handleModifySearch}>
+        </c-azure-results-nav>
+
+        <c-azure-search-summary
+            check-in={checkIn}
+            check-out={checkOut}
+            guests={guests}
+            nights={nights}
+            result-count={filteredCount}>
+        </c-azure-search-summary>
+
+        <div class="results-body">
+            <c-azure-room-filters
+                filters={filters}
+                onfilterchange={handleFilterChange}>
+            </c-azure-room-filters>
+
+            <c-azure-room-results
+                rooms={filteredRooms}
+                check-in={checkIn}
+                check-out={checkOut}
+                nights={nights}
+                onroomselect={handleRoomSelect}>
+            </c-azure-room-results>
+        </div>
+
+        <template if:true={selectedRoom}>
+            <c-azure-room-detail-modal
+                room={selectedRoom}
+                check-in={checkIn}
+                check-out={checkOut}
+                nights={nights}
+                guests={guests}
+                onclose={handleModalClose}
+                onbookroom={handleBookRoom}>
+            </c-azure-room-detail-modal>
+        </template>
+
+        <template if:true={bookingConfirmed}>
+            <div class="confirmation-toast">
+                <span class="toast-icon">✓</span>
+                <span class="toast-msg">{confirmationMsg}</span>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,125 @@
+:host { display: block; }
+
+@font-face {
+    font-family: 'Jost';
+    src: url('sfsites/c/resource/Jost') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('sfsites/c/resource/Cormorant_Garamond') format('truetype');
+}
+
+.footer {
+    background: #111009;
+    padding: 72px 0 36px;
+    font-family: 'Jost', sans-serif;
+}
+
+.footer-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 48px;
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 56px;
+    padding-bottom: 52px;
+    border-bottom: 1px solid rgba(200,185,154,0.15);
+}
+
+.footer-logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.logo-ring {
+    display: inline-block;
+    width: 24px; height: 24px;
+    border: 1.5px solid #c8b99a;
+    border-radius: 50%;
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.footer-tagline {
+    font-size: 0.78rem;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.3);
+    max-width: 240px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 10px;
+    margin-top: 26px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    border: 1px solid rgba(200,185,154,0.2);
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.social-btn:hover {
+    border-color: #c8b99a;
+    color: #c8b99a;
+}
+
+.col-heading {
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #c8b99a;
+    margin-bottom: 20px;
+}
+
+.col-links {
+    list-style: none;
+    margin: 0; padding: 0;
+}
+
+.col-links li + li { margin-top: 10px; }
+
+.col-links a {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.col-links a:hover { color: rgba(255,255,255,0.75); }
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 28px;
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.18);
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 900px) {
+    .footer-inner { padding: 0 24px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+}

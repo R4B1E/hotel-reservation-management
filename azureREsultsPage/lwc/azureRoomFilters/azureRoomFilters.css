@@ -1,0 +1,150 @@
+:host { display: block; }
+
+@font-face {
+    font-family: 'Jost';
+    src: url('sfsites/c/resource/Jost') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('sfsites/c/resource/Cormorant_Garamond') format('truetype');
+}
+
+.filters {
+    position: sticky;
+    top: 80px;
+    padding: 32px 28px 32px 0;
+    border-right: 1px solid rgba(200,185,154,0.2);
+    align-self: start;
+}
+
+.filters-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: #2c2520;
+    margin: 0 0 28px;
+}
+
+.filter-group {
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(200,185,154,0.18);
+}
+
+.group-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #b8956a;
+    margin: 0 0 14px;
+}
+
+/* ─── Button groups ─── */
+.sort-options,
+.type-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.opt-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: #9e8e7a;
+    background: #fff;
+    border: 1px solid rgba(200,185,154,0.3);
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.opt-btn:hover {
+    border-color: #b8956a;
+    color: #2c2520;
+}
+
+.opt-btn.active {
+    background: #2c2520;
+    border-color: #2c2520;
+    color: #fff;
+}
+
+/* ─── Price slider ─── */
+.price-display {
+    margin-bottom: 12px;
+}
+
+.price-val {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #2c2520;
+}
+
+.price-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #b8956a 0%, #b8956a var(--pct, 100%), #e5ddd3 var(--pct, 100%), #e5ddd3 100%);
+    outline: none;
+    cursor: pointer;
+}
+
+.price-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #b8956a;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 8px rgba(184,149,106,0.4);
+    cursor: pointer;
+}
+
+.price-range-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    color: #9e8e7a;
+}
+
+/* ─── Reset ─── */
+.reset-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #9e8e7a;
+    background: none;
+    border: 1px solid rgba(200,185,154,0.3);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 4px;
+}
+
+.reset-btn:hover {
+    border-color: #2c2520;
+    color: #2c2520;
+}
+
+@media (max-width: 900px) {
+    .filters {
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid rgba(200,185,154,0.2);
+        padding: 20px 0 24px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .filters-title { grid-column: span 2; }
+}

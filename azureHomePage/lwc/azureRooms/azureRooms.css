@@ -1,0 +1,177 @@
+:host { display: block; }
+
+@font-face {
+    font-family: 'Jost';
+    src: url('sfsites/c/resource/Jost') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('sfsites/c/resource/Cormorant_Garamond') format('truetype');
+}
+
+.rooms {
+    padding: 120px 0;
+    background: #2c2520;
+}
+
+.rooms-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 48px;
+}
+
+.rooms-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 52px;
+}
+
+.eyebrow {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: #c8b99a;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    color: #f5f0e8;
+    margin: 0;
+}
+
+.view-all {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.42);
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+    padding-bottom: 8px;
+}
+
+.view-all:hover { color: rgba(255,255,255,0.8); }
+
+/* ─── Grid ─── */
+.rooms-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 18px;
+}
+
+/* ─── Card ─── */
+.room-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.room-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.room-img-wrap { overflow: hidden; }
+
+.room-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+
+.room-card.featured .room-img { aspect-ratio: 3/4.5; }
+
+.room-card:hover .room-img { transform: scale(1.05); }
+
+.room-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(26,23,20,0.88) 0%, transparent 52%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+    transition: background 0.4s;
+}
+
+.room-card:hover .room-overlay {
+    background: linear-gradient(0deg, rgba(26,23,20,0.94) 0%, rgba(26,23,20,0.15) 60%);
+}
+
+.room-type {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #c8b99a;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.room-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: #fff;
+    margin: 0;
+}
+
+.room-price {
+    margin-top: 8px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+}
+
+.room-price strong {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    color: #c8b99a;
+    font-weight: 300;
+}
+
+.room-cta {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 3px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.room-card:hover .room-cta { opacity: 1; transform: translateY(0); }
+
+/* ─── Reveal base ─── */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+}
+[data-reveal].visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+    .rooms-inner { padding: 0 24px; }
+    .rooms-grid { grid-template-columns: 1fr; }
+    .rooms-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+}

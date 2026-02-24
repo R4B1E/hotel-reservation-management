@@ -1,0 +1,89 @@
+<template>
+    <aside class="summary-panel">
+        <!-- Room image -->
+        <div class="summary-img-wrap">
+            <img class="summary-img" src={room.image} alt={room.name} />
+            <div class="summary-img-overlay">
+                <span class="room-category">{room.category}</span>
+                <h3 class="room-name">{room.name}</h3>
+            </div>
+        </div>
+
+        <!-- Dates & guests -->
+        <div class="summary-dates">
+            <div class="date-row">
+                <div class="date-block">
+                    <span class="date-label">Check-In</span>
+                    <span class="date-val">{checkIn}</span>
+                </div>
+                <div class="date-arrow">→</div>
+                <div class="date-block">
+                    <span class="date-label">Check-Out</span>
+                    <span class="date-val">{checkOut}</span>
+                </div>
+            </div>
+            <div class="meta-row">
+                <span class="meta-item">{nights} {nightLabel}</span>
+                <span class="meta-dot">·</span>
+                <span class="meta-item">{guests}</span>
+                <span class="meta-dot">·</span>
+                <span class="meta-item">{room.bed}</span>
+            </div>
+        </div>
+
+        <!-- Room specs -->
+        <div class="summary-specs">
+            <template for:each={room.amenities} for:item="a">
+                <span key={a} class="spec-chip">✓ {a}</span>
+            </template>
+        </div>
+
+        <!-- Guest recap (when filled) -->
+        <template if:true={hasGuest}>
+            <div class="guest-recap">
+                <span class="recap-label">Reserved for</span>
+                <span class="recap-name">{guestFullName}</span>
+                <template if:true={guestData.email}>
+                    <span class="recap-email">{guestData.email}</span>
+                </template>
+            </div>
+        </template>
+
+        <!-- Price breakdown -->
+        <div class="price-breakdown">
+            <div class="pb-row">
+                <span>€{room.pricePerNight} × {nights} nights</span>
+                <span>€{subtotal}</span>
+            </div>
+            <div class="pb-row">
+                <span>Taxes &amp; fees (12%)</span>
+                <span>€{taxes}</span>
+            </div>
+            <div class="pb-divider"></div>
+            <div class="pb-total">
+                <span class="total-label">Total Due</span>
+                <span class="total-val">€{total}</span>
+            </div>
+        </div>
+
+        <!-- Trust signals -->
+        <div class="trust-badges">
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <span>Free cancellation up to 48h before</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <span>Best rate guaranteed</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <span>Complimentary breakfast included</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">🔒</span>
+                <span>256-bit SSL encryption</span>
+            </div>
+        </div>
+    </aside>
+</template>

@@ -1,0 +1,176 @@
+<template>
+    <div class="guest-form">
+        <header class="form-header">
+            <span class="form-eyebrow">Step 01</span>
+            <h1 class="form-title">Your Details</h1>
+            <p class="form-sub">Tell us a little about yourself so we can prepare the perfect arrival.</p>
+        </header>
+
+        <!-- Personal Information -->
+        <section class="form-section">
+            <h2 class="section-heading">Personal Information</h2>
+            <div class="field-grid two-col">
+                <div class={firstNameCls}>
+                    <label class="field-label" for="firstName">First Name <span class="req">*</span></label>
+                    <input id="firstName" class="field-input" type="text"
+                           placeholder="e.g. Alexandra"
+                           value={guestData.firstName}
+                           onblur={handleBlur}
+                           oninput={handleInput}
+                           data-field="firstName" />
+                    <template if:true={errors.firstName}>
+                        <span class="field-error">{errors.firstName}</span>
+                    </template>
+                </div>
+                <div class={lastNameCls}>
+                    <label class="field-label" for="lastName">Last Name <span class="req">*</span></label>
+                    <input id="lastName" class="field-input" type="text"
+                           placeholder="e.g. Beaumont"
+                           value={guestData.lastName}
+                           onblur={handleBlur}
+                           oninput={handleInput}
+                           data-field="lastName" />
+                    <template if:true={errors.lastName}>
+                        <span class="field-error">{errors.lastName}</span>
+                    </template>
+                </div>
+            </div>
+
+            <div class="field-grid two-col">
+                <div class={emailCls}>
+                    <label class="field-label" for="email">Email Address <span class="req">*</span></label>
+                    <input id="email" class="field-input" type="email"
+                           placeholder="alexandra@example.com"
+                           value={guestData.email}
+                           onblur={handleBlur}
+                           oninput={handleInput}
+                           data-field="email" />
+                    <template if:true={errors.email}>
+                        <span class="field-error">{errors.email}</span>
+                    </template>
+                </div>
+                <div class="field-wrap">
+                    <label class="field-label" for="phone">Phone Number</label>
+                    <input id="phone" class="field-input" type="tel"
+                           placeholder="+33 6 00 00 00 00"
+                           value={guestData.phone}
+                           oninput={handleInput}
+                           data-field="phone" />
+                </div>
+            </div>
+
+            <div class="field-grid two-col">
+                <div class="field-wrap">
+                    <label class="field-label" for="nationality">Nationality</label>
+                    <select id="nationality" class="field-input field-select"
+                            onchange={handleInput}
+                            data-field="nationality">
+                        <option value="">Select country…</option>
+                        <template for:each={countries} for:item="c">
+                            <option key={c} value={c}>{c}</option>
+                        </template>
+                    </select>
+                </div>
+                <div class="field-wrap">
+                    <label class="field-label" for="dob">Date of Birth</label>
+                    <input id="dob" class="field-input" type="date"
+                           value={guestData.dob}
+                           oninput={handleInput}
+                           data-field="dob" />
+                </div>
+            </div>
+        </section>
+
+        <!-- Travel Document -->
+        <section class="form-section">
+            <h2 class="section-heading">Travel Document</h2>
+            <p class="section-note">Required for international guests. Your data is encrypted and never shared.</p>
+            <div class="field-grid one-col">
+                <div class="field-wrap">
+                    <label class="field-label" for="passportNum">Passport / ID Number</label>
+                    <input id="passportNum" class="field-input" type="text"
+                           placeholder="e.g. AB1234567"
+                           value={guestData.passportNum}
+                           oninput={handleInput}
+                           data-field="passportNum" />
+                </div>
+            </div>
+        </section>
+
+        <!-- Arrival Preferences -->
+        <section class="form-section">
+            <h2 class="section-heading">Arrival Preferences</h2>
+            <div class="field-grid two-col">
+                <div class="field-wrap">
+                    <label class="field-label" for="arrivalTime">Estimated Arrival Time</label>
+                    <select id="arrivalTime" class="field-input field-select"
+                            onchange={handleInput}
+                            data-field="arrivalTime">
+                        <option value="">Select a time window…</option>
+                        <template for:each={arrivalTimes} for:item="t">
+                            <option key={t} value={t}>{t}</option>
+                        </template>
+                    </select>
+                </div>
+                <div class="field-wrap">
+                    <label class="field-label" for="transport">Arrival Transport</label>
+                    <select id="transport" class="field-input field-select"
+                            onchange={handleInput}
+                            data-field="transport">
+                        <option value="">Select…</option>
+                        <option value="flight">Flight — transfer requested</option>
+                        <option value="helicopter">Private Helicopter</option>
+                        <option value="yacht">Yacht</option>
+                        <option value="self">Self Arrangement</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Requests -->
+        <section class="form-section">
+            <h2 class="section-heading">Special Requests</h2>
+            <div class="field-wrap">
+                <label class="field-label" for="requests">Additional Notes</label>
+                <textarea id="requests" class="field-input field-textarea"
+                          placeholder="Anniversary celebration, dietary requirements, preferred pillow firmness, room fragrance…"
+                          value={guestData.requests}
+                          oninput={handleInput}
+                          data-field="requests"
+                          rows="4"></textarea>
+                <span class="field-hint">We read every note. Our concierge team will reach out to confirm.</span>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="form-section">
+            <label class="checkbox-label">
+                <input type="checkbox"
+                       class="checkbox-input"
+                       checked={guestData.newsletter}
+                       onchange={handleNewsletter} />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-text">
+                    Join The Inner Circle — seasonal offers and exclusive availability, sent sparingly.
+                </span>
+            </label>
+        </section>
+
+        <!-- Error summary -->
+        <template if:true={showErrorSummary}>
+            <div class="error-summary">
+                <span class="error-summary-icon">!</span>
+                Please complete all required fields before continuing.
+            </div>
+        </template>
+
+        <!-- CTA -->
+        <div class="form-actions">
+            <a href="#" class="back-link">← Back to results</a>
+            <button class="next-btn" onclick={handleNext}>
+                Continue to Payment
+                <span class="btn-arrow">→</span>
+            </button>
+        </div>
+    </div>
+</template>

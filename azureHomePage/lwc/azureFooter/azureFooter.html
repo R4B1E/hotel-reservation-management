@@ -1,0 +1,35 @@
+<template>
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a class="footer-logo" href="#">
+                        <span class="logo-ring"></span>The Azure
+                    </a>
+                    <p class="footer-tagline">{tagline}</p>
+                    <div class="footer-socials">
+                        <template for:each={socials} for:item="s">
+                            <a key={s.label} href={s.href} class="social-btn" aria-label={s.label}>{s.abbr}</a>
+                        </template>
+                    </div>
+                </div>
+                <template for:each={footerCols} for:item="col">
+                    <div key={col.heading} class="footer-col">
+                        <h4 class="col-heading">{col.heading}</h4>
+                        <ul class="col-links">
+                            <template for:each={col.links} for:item="link">
+                                <li key={link.label}>
+                                    <a href={link.href}>{link.label}</a>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+            </div>
+            <div class="footer-bottom">
+                <p>{copyright}</p>
+                <p>Designed with care — Santorini, Greece</p>
+            </div>
+        </div>
+    </footer>
+</template>

@@ -1,0 +1,113 @@
+<template>
+    <div class="modal-backdrop" onclick={handleBackdropClick}>
+        <div class="modal" onclick={stopProp}>
+            <!-- Close -->
+            <button class="modal-close" onclick={handleClose} aria-label="Close">✕</button>
+
+            <!-- Left: gallery -->
+            <div class="modal-gallery">
+                <div class="gallery-main">
+                    <img class="gallery-main-img" src={currentImage} alt={room.name} />
+                    <button class="gallery-arrow left" onclick={prevImage}>‹</button>
+                    <button class="gallery-arrow right" onclick={nextImage}>›</button>
+                    <div class="gallery-counter">{imageCounter}</div>
+                </div>
+                <div class="gallery-thumbs">
+                    <template for:each={thumbImages} for:item="t">
+                        <img key={t.idx}
+                             class={t.cls}
+                             src={t.src}
+                             alt={room.name}
+                             data-idx={t.idx}
+                             onclick={handleThumb} />
+                    </template>
+                </div>
+            </div>
+
+            <!-- Right: details + booking -->
+            <div class="modal-detail">
+                <div class="modal-header">
+                    <div>
+                        <span class="room-category">{room.category}</span>
+                        <h2 class="room-name">{room.name}</h2>
+                        <p class="room-tagline">{room.tagline}</p>
+                    </div>
+                    <div class="room-rating">
+                        <span class="star">★</span>
+                        <span class="rating-val">{room.rating}</span>
+                        <span class="rating-count">({room.reviews} reviews)</span>
+                    </div>
+                </div>
+
+                <p class="room-description">{room.description}</p>
+
+                <div class="detail-specs">
+                    <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-val">{room.sqm} m²</span>
+                    </div>
+                    <div class="spec">
+                        <span class="spec-label">Bed</span>
+                        <span class="spec-val">{room.bed}</span>
+                    </div>
+                    <div class="spec">
+                        <span class="spec-label">View</span>
+                        <span class="spec-val">{room.view}</span>
+                    </div>
+                    <div class="spec">
+                        <span class="spec-label">Max Guests</span>
+                        <span class="spec-val">{room.maxGuests}</span>
+                    </div>
+                </div>
+
+                <div class="amenities-section">
+                    <h4 class="amenities-heading">Included</h4>
+                    <div class="amenities-grid">
+                        <template for:each={room.amenities} for:item="a">
+                            <span key={a} class="amenity-item">✓ {a}</span>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Booking summary -->
+                <div class="booking-summary">
+                    <div class="booking-dates">
+                        <div class="bdate">
+                            <span class="bdate-label">Check-In</span>
+                            <span class="bdate-val">{checkIn}</span>
+                        </div>
+                        <div class="bdate-arrow">→</div>
+                        <div class="bdate">
+                            <span class="bdate-label">Check-Out</span>
+                            <span class="bdate-val">{checkOut}</span>
+                        </div>
+                        <div class="bdate">
+                            <span class="bdate-label">Guests</span>
+                            <span class="bdate-val">{guests}</span>
+                        </div>
+                    </div>
+
+                    <div class="price-breakdown">
+                        <div class="pb-row">
+                            <span>€{room.pricePerNight} × {nights} nights</span>
+                            <span>€{subtotal}</span>
+                        </div>
+                        <div class="pb-row">
+                            <span>Taxes &amp; fees (12%)</span>
+                            <span>€{taxes}</span>
+                        </div>
+                        <div class="pb-row total">
+                            <span>Total</span>
+                            <span>€{total}</span>
+                        </div>
+                    </div>
+
+                    <button class="book-btn" onclick={handleBook}>
+                        Confirm Reservation
+                    </button>
+                    <p class="cancel-note">✓ Free cancellation up to 48 hours before arrival</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

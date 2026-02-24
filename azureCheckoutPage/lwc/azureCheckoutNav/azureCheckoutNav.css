@@ -1,0 +1,82 @@
+:host { display: block; position: sticky; top: 0; z-index: 500; }
+
+@font-face {
+    font-family: 'Jost';
+    src: url('sfsites/c/resource/Jost') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('sfsites/c/resource/Cormorant_Garamond') format('truetype');
+}
+
+.checkout-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(250,248,244,0.97);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(200,185,154,0.2);
+}
+
+.nav-logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #2c2520;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.logo-ring {
+    display: inline-block;
+    width: 22px; height: 22px;
+    border: 1.5px solid #b8956a;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-secure {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9e8e7a;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.lock-icon { font-size: 0.75rem; }
+
+.nav-help {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #9e8e7a;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(158,142,122,0.35);
+    padding-bottom: 2px;
+    transition: color 0.2s;
+}
+
+.nav-help:hover { color: #2c2520; }
+
+@media (max-width: 640px) {
+    .checkout-nav { padding: 14px 20px; }
+    .nav-center { display: none; }
+}

@@ -1,0 +1,74 @@
+:host { display: block; }
+
+.summary-bar {
+    background: #2c2520;
+    padding: 32px 48px;
+}
+
+@font-face {
+    font-family: 'Jost';
+    src: url('sfsites/c/resource/Jost') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('sfsites/c/resource/Cormorant_Garamond') format('truetype');
+}
+
+.summary-inner {
+    max-width: 1380px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.summary-headline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 300;
+    color: #fff;
+    margin: 0;
+    line-height: 1.15;
+}
+
+.summary-headline em {
+    font-style: italic;
+    color: #c8b99a;
+}
+
+.summary-sub {
+    margin-top: 6px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.06em;
+}
+
+.summary-badges {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.06em;
+}
+
+.badge-icon {
+    color: #b8956a;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 900px) {
+    .summary-bar { padding: 24px 20px; }
+    .summary-badges { display: none; }
+}

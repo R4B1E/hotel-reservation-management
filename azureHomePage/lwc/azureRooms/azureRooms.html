@@ -1,0 +1,32 @@
+<template>
+    <section id="rooms" class="rooms">
+        <div class="rooms-inner">
+            <div class="rooms-header" data-reveal>
+                <div>
+                    <span class="eyebrow">{eyebrow}</span>
+                    <h2 class="section-title">{title}</h2>
+                </div>
+                <a href="#" class="view-all">View All Rooms →</a>
+            </div>
+            <div class="rooms-grid">
+                <template for:each={rooms} for:item="room" for:index="idx">
+                    <div key={room.id}
+                         class={room.cardClass}
+                         data-reveal
+                         onclick={handleRoomSelect}
+                         data-id={room.id}>
+                        <div class="room-img-wrap">
+                            <img src={room.image} alt={room.name} class="room-img" />
+                        </div>
+                        <div class="room-overlay">
+                            <span class="room-type">{room.type}</span>
+                            <h3 class="room-name">{room.name}</h3>
+                            <p class="room-price">From <strong>{room.price}</strong> / night</p>
+                            <span class="room-cta">Reserve Now</span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+</template>

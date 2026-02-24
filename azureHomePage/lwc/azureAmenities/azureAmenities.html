@@ -1,0 +1,27 @@
+<template>
+    <section id="amenities" class="amenities">
+        <div class="amenities-inner">
+            <div class="amenities-header" data-reveal>
+                <span class="eyebrow">{eyebrow}</span>
+                <h2 class="section-title">{title}</h2>
+                <p class="subtitle">{subtitle}</p>
+            </div>
+            <div class="amenities-grid">
+                <template for:each={amenities} for:item="item" for:index="idx">
+                    <div key={item.id} class="amenity-card" data-reveal onclick={handleAmenityClick}
+                         data-id={item.id}>
+                        <div class="card-img-wrap">
+                            <img src={item.image} alt={item.name} class="card-img" />
+                            <div class="card-img-overlay"></div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-name">{item.name}</h3>
+                            <p class="card-desc">{item.description}</p>
+                            <span class="card-tag">Explore →</span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+</template>

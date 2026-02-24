@@ -1,0 +1,285 @@
+:host { display: block; }
+
+.guest-form {
+    padding-right: 56px;
+    animation: fadeUp 0.5s ease both;
+}
+
+@font-face {
+    font-family: 'Jost';
+    src: url('sfsites/c/resource/Jost') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('sfsites/c/resource/Cormorant_Garamond') format('truetype');
+}
+
+@keyframes fadeUp {
+    from { opacity:0; transform: translateY(16px); }
+    to   { opacity:1; transform: translateY(0); }
+}
+
+/* ─── Header ─── */
+.form-header { margin-bottom: 44px; }
+
+.form-eyebrow {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: #b8956a;
+    margin-bottom: 12px;
+}
+
+.form-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: #2c2520;
+    margin: 0 0 10px;
+    line-height: 1.1;
+}
+
+.form-sub {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.84rem;
+    color: #9e8e7a;
+    line-height: 1.7;
+    max-width: 440px;
+}
+
+/* ─── Section ─── */
+.form-section {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(200,185,154,0.18);
+}
+
+.form-section:last-of-type { border-bottom: none; }
+
+.section-heading {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #2c2520;
+    margin: 0 0 20px;
+}
+
+.section-note {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.76rem;
+    color: #9e8e7a;
+    margin: -12px 0 18px;
+    line-height: 1.6;
+}
+
+/* ─── Grid ─── */
+.field-grid { display: grid; gap: 20px; margin-bottom: 20px; }
+.field-grid:last-child { margin-bottom: 0; }
+.two-col { grid-template-columns: 1fr 1fr; }
+.one-col  { grid-template-columns: 1fr; }
+
+/* ─── Field ─── */
+.field-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    position: relative;
+}
+
+.field-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #9e8e7a;
+    transition: color 0.2s;
+}
+
+.req { color: #b8956a; }
+
+.field-input {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: #2c2520;
+    background: #fff;
+    border: 1px solid rgba(200,185,154,0.3);
+    border-bottom: 2px solid rgba(200,185,154,0.4);
+    padding: 13px 16px;
+    outline: none;
+    transition: border-color 0.22s, box-shadow 0.22s;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+}
+
+.field-input::placeholder { color: rgba(158,142,122,0.5); }
+
+.field-input:focus {
+    border-color: rgba(184,149,106,0.5);
+    border-bottom-color: #b8956a;
+    box-shadow: 0 4px 16px rgba(184,149,106,0.1);
+}
+
+.field-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b8956a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+.field-textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.7;
+}
+
+/* ─── States ─── */
+.field-wrap.error   .field-input  { border-bottom-color: #c0392b; }
+.field-wrap.error   .field-label  { color: #c0392b; }
+.field-wrap.valid   .field-input  { border-bottom-color: #7daa8f; }
+
+.field-error {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    color: #c0392b;
+    letter-spacing: 0.04em;
+    animation: errIn 0.2s ease;
+}
+
+@keyframes errIn { from { opacity:0; transform: translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+
+.field-hint {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    color: #9e8e7a;
+    font-style: italic;
+    letter-spacing: 0.03em;
+}
+
+/* ─── Checkbox ─── */
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+}
+
+.checkbox-input { display: none; }
+
+.checkbox-custom {
+    display: inline-block;
+    width: 18px; height: 18px;
+    border: 1.5px solid rgba(200,185,154,0.5);
+    background: #fff;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: background 0.2s, border-color 0.2s;
+    position: relative;
+}
+
+.checkbox-input:checked + .checkbox-custom {
+    background: #b8956a;
+    border-color: #b8956a;
+}
+
+.checkbox-input:checked + .checkbox-custom::after {
+    content: '✓';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 0.7rem;
+}
+
+.checkbox-text {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    color: #9e8e7a;
+    line-height: 1.7;
+}
+
+/* ─── Error summary ─── */
+.error-summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fdf0ef;
+    border: 1px solid rgba(192,57,43,0.2);
+    border-left: 3px solid #c0392b;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    color: #c0392b;
+    animation: errIn 0.25s ease;
+}
+
+.error-summary-icon {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #c0392b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+/* ─── Actions ─── */
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(200,185,154,0.2);
+}
+
+.back-link {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #9e8e7a;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.back-link:hover { color: #2c2520; }
+
+.next-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #2c2520;
+    border: none;
+    padding: 17px 36px;
+    cursor: pointer;
+    transition: background 0.22s, transform 0.15s;
+}
+
+.next-btn:hover { background: #b8956a; }
+.next-btn:active { transform: scale(0.98); }
+
+.btn-arrow { font-size: 1rem; }
+
+@media (max-width: 960px) {
+    .guest-form { padding-right: 0; }
+    .two-col { grid-template-columns: 1fr; }
+}

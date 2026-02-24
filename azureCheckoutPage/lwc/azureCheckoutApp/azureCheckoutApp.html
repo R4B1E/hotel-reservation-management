@@ -1,0 +1,68 @@
+<template>
+    <div class="checkout-shell">
+
+        <c-azure-checkout-nav step={currentStep}></c-azure-checkout-nav>
+
+        <template if:false={confirmed}>
+            <div class="checkout-layout">
+
+                <!-- LEFT: multi-step form -->
+                <div class="checkout-main">
+
+                    <!-- Step indicator -->
+                    <div class="steps-indicator">
+                        <template for:each={steps} for:item="s">
+                            <div key={s.id} class={s.cls}>
+                                <span class="step-num">{s.num}</span>
+                                <span class="step-lbl">{s.label}</span>
+                                <span class="step-line"></span>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- Step 1: Guest details -->
+                    <template if:true={isStep1}>
+                        <c-azure-guest-form
+                            guest-data={guestData}
+                            onguestchange={handleGuestChange}
+                            onnext={goStep2}>
+                        </c-azure-guest-form>
+                    </template>
+
+                    <!-- Step 2: Payment -->
+                    <template if:true={isStep2}>
+                        <c-azure-payment-form
+                            onback={goStep1}
+                            onpaymentsubmit={handlePaymentSubmit}>
+                        </c-azure-payment-form>
+                    </template>
+
+                </div>
+
+                <!-- RIGHT: sticky booking summary -->
+                <c-azure-booking-summary-panel
+                    room={room}
+                    check-in={checkIn}
+                    check-out={checkOut}
+                    nights={nights}
+                    guests={guests}
+                    guest-data={guestData}>
+                </c-azure-booking-summary-panel>
+
+            </div>
+        </template>
+
+        <!-- Confirmation screen -->
+        <template if:true={confirmed}>
+            <c-azure-checkout-confirmation
+                room={room}
+                check-in={checkIn}
+                check-out={checkOut}
+                nights={nights}
+                guest-data={guestData}
+                confirmation-code={confirmationCode}>
+            </c-azure-checkout-confirmation>
+        </template>
+
+    </div>
+</template>

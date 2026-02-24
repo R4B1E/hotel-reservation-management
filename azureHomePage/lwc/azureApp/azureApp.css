@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'Jost';
+    src: url('sfsites/c/resource/Jost') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('sfsites/c/resource/Cormorant_Garamond') format('truetype');
+}
+
+:host {
+    display: block;
+    --sand: #c8b99a;
+    --dusk: #8b7355;
+    --stone: #2c2520;
+    --ivory: #f5f0e8;
+    --warm-white: #faf8f4;
+    --charcoal: #1a1714;
+    --accent: #b8956a;
+    --muted: #9e8e7a;
+    --border: rgba(200, 185, 154, 0.25);
+    --ff-serif: 'Cormorant Garamond', Georgia, serif;
+    --ff-sans: 'Jost', sans-serif;
+    font-family: var(--ff-sans);
+    background: var(--warm-white);
+    color: var(--stone);
+}
+
+.app-shell {
+    overflow-x: hidden;
+}
