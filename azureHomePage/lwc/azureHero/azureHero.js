@@ -9,6 +9,8 @@ export default class AzureHero extends LightningElement {
     get backgroundStyle()
     {
         // return `background: url(${this.backgroundImage});`;
-        
+        return `background:
+        linear-gradient(160deg, rgba(26,23,20,0.55) 0%, rgba(80,55,30,0.3) 50%, rgba(26,23,20,0.7) 100%),
+        url(${this.backgroundImage}) center/cover no-repeat;`
     }
 }
