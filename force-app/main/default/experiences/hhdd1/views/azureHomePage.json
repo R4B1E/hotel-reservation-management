@@ -1,0 +1,68 @@
+{
+  "appPageId" : "619c0306-581b-4f1e-9794-35c96243845a",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "18927b34-8f7c-4f37-b29e-5e20e1a8e229",
+  "label" : "azureHomePage",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "1ea01ec8-1f2e-4d9b-be4f-32e1a8b24d15",
+          "columns" : [ {
+            "UUID" : "91da8112-b174-48bb-a1c3-148b477dd284",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "1ea01ec8-1f2e-4d9b-be4f-32e1a8b24d15",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : { },
+          "componentName" : "c:azureApp",
+          "id" : "dcfe38a4-7b73-4178-9afc-b02a2dab48f9",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "91da8112-b174-48bb-a1c3-148b477dd284",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "21927594-44a8-4bb3-849a-e7757f8c7842",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "azureHomePage"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "71852886-7a94-41e8-9669-ad3c8a81dcf2",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "1bf30ca1-60e9-4925-a715-94afa408a136",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-azurehomepage"
+}

@@ -1,0 +1,218 @@
+{
+  "type" : "sfdc_cms__themeLayout",
+  "title" : "Scoped Header and Footer",
+  "contentBody" : {
+    "component" : {
+      "attributes" : {
+        "hideThemeFooter" : false,
+        "showThemeFooterAtBottom" : true,
+        "stickyThemeHeader" : false
+      },
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "{\"url\":\"/cms/delivery/media/MCODF5WFHMW5APFP2T2Z622B4WUQ\",\"contentKey\":\"MCODF5WFHMW5APFP2T2Z622B4WUQ\",\"altText\":\"\",\"contentType\":\"\",\"bgPosition\":\"center center\",\"bgSizeOrRepeat\":\"repeat\"}",
+            "backgroundImageOverlay" : "rgba(156, 156, 156, 0.26)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "1rem",
+            "sectionConfig" : "{\"UUID\":\"a0f572b7-7f4e-438d-8a8e-d7ed9e209f36\",\"columns\":[{\"UUID\":\"7ad8c6b9-ee8c-4268-9fed-a5c068b2c093\",\"columnName\":\"Column 1\",\"columnKey\":\"headerSection\",\"columnWidth\":\"6\",\"seedComponents\":null},{\"UUID\":\"defecf3c-760f-46ee-932d-b6450a83e6a0\",\"columnName\":\"Column 2\",\"columnKey\":\"0bc17\",\"columnWidth\":\"6\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "center"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "alignment" : "left",
+                "imageInfo" : "{\"imageInfoV1\":{\"url\":\"/sfsites/c/cms/delivery/media/MCD5YLLMOSOZEJRBKWMXZRLZ7WZE?lastModifiedDate=Fri Feb 20 13:06:02 GMT 2026\",\"altText\":\"\",\"contentKey\":\"MCD5YLLMOSOZEJRBKWMXZRLZ7WZE\",\"contentType\":null}}",
+                "imageInfoMobile" : "",
+                "logoWidth" : 250
+              },
+              "definition" : "dxp_content_layout:siteLogo",
+              "id" : "5579a8a7-7d89-414c-be3c-4c3482eec948",
+              "type" : "component"
+            } ],
+            "id" : "7ad8c6b9-ee8c-4268-9fed-a5c068b2c093",
+            "name" : "headerSection",
+            "title" : "Column 1",
+            "type" : "region"
+          }, {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : {
+                  "padding" : {
+                    "bottom" : "5px",
+                    "left" : "5px",
+                    "right" : "5px",
+                    "top" : "5px"
+                  }
+                }
+              },
+              "children" : [ {
+                "children" : [ {
+                  "attributes" : {
+                    "activeLineWeight" : "3px",
+                    "backgroundColor" : "rgba(255, 255, 255, 0)",
+                    "dropdownAccordionIconSize" : "xx-small",
+                    "dropdownActiveLineWeight" : "5px",
+                    "dropdownBackgroundActiveColor" : "rgba(0, 0, 0, 0)",
+                    "dropdownBackgroundColor" : "",
+                    "dropdownBackgroundHoverColor" : "",
+                    "dropdownBottomBorderRadius" : "5px",
+                    "dropdownFontSizeOverride" : "",
+                    "dropdownFontWeightOverride" : "300",
+                    "dropdownItemPadding" : "{\"top\":\"10px\",\"right\":\"10px\",\"bottom\":\"10px\",\"left\":\"10px\"}",
+                    "dropdownLineHeightOverride" : "",
+                    "dropdownMenuPadding" : "{\"top\":\"0px\",\"right\":\"0px\",\"bottom\":\"0px\",\"left\":\"0px\"}",
+                    "dropdownOverrideTextStyle" : true,
+                    "dropdownShowDividerLines" : false,
+                    "dropdownTextDecorationOverride" : "",
+                    "dropdownTextStyle" : "body-regular",
+                    "dropdownTopBorderRadius" : "5px",
+                    "fontSizeOverride" : "",
+                    "fontWeightOverride" : "",
+                    "iconSize" : "xx-small",
+                    "itemBackgroundActiveColor" : "rgba(255, 255, 255, 0)",
+                    "itemBackgroundHoverColor" : "rgba(255, 255, 255, 0)",
+                    "lineHeightOverride" : "",
+                    "menuHorizontalAlignment" : "left",
+                    "overrideTextStyle" : false,
+                    "showHomeLink" : true,
+                    "showParentMenuIcon" : true,
+                    "spaceBetweenMenuItems" : "30px",
+                    "textColor" : "rgb(255, 255, 255)",
+                    "textDecorationOverride" : "",
+                    "textStyle" : "body-regular"
+                  },
+                  "definition" : "community_navigation:customizableNavigationBarContainer",
+                  "id" : "edc2a7d9-85c6-4a84-98a0-4cd0a3da17f4",
+                  "type" : "component"
+                } ],
+                "id" : "a3a2a567-bbb0-4840-a32a-f9d16575e78b",
+                "name" : "desktop",
+                "title" : "Desktop View",
+                "type" : "region"
+              }, {
+                "children" : [ {
+                  "attributes" : {
+                    "burgerIconHorizontalAlignment" : "left",
+                    "modalAccordionIconSize" : "xx-small",
+                    "modalActiveBackgroundColor" : "rgba(255, 255, 255, 0)",
+                    "modalActiveLineWeight" : "5px",
+                    "modalFontSizeOverride" : "",
+                    "modalFontWeightOverride" : "",
+                    "modalItemPadding" : "{\"top\":\"10px\",\"right\":\"10px\",\"bottom\":\"10px\",\"left\":\"15px\"}",
+                    "modalLineHeightOverride" : "",
+                    "modalMenuPadding" : "{\"top\":\"0px\",\"right\":\"0px\",\"bottom\":\"0px\",\"left\":\"0px\"}",
+                    "modalOverrideTextStyle" : false,
+                    "modalShowDividerLines" : true,
+                    "modalSubmenuFontSizeOverride" : "",
+                    "modalSubmenuFontWeightOverride" : "300",
+                    "modalSubmenuLineHeightOverride" : "",
+                    "modalSubmenuOverrideTextStyle" : true,
+                    "modalSubmenuTextDecorationOverride" : "",
+                    "modalSubmenuTextStyle" : "body-regular",
+                    "modalTextDecorationOverride" : "",
+                    "modalTextStyle" : "body-regular",
+                    "showHomeLink" : true
+                  },
+                  "definition" : "community_navigation:customizableNavigationHamburgerMenuContainer",
+                  "id" : "ba4e371c-4f2a-4494-9118-6e4e552da1ff",
+                  "type" : "component"
+                } ],
+                "id" : "38c338d0-ae89-4793-a044-00c5878288fb",
+                "name" : "mobile",
+                "title" : "Mobile View",
+                "type" : "region"
+              } ],
+              "definition" : "community_navigation:customizableNavigationMenu",
+              "id" : "42b08fcf-39e7-49ea-8641-0a0de2197840",
+              "type" : "component"
+            } ],
+            "id" : "defecf3c-760f-46ee-932d-b6450a83e6a0",
+            "name" : "0bc17",
+            "title" : "Column 2",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "a0f572b7-7f4e-438d-8a8e-d7ed9e209f36",
+          "type" : "component"
+        } ],
+        "id" : "caf42ad4-9ec2-4c24-bffc-8250ce91963c",
+        "name" : "header",
+        "title" : "Theme Header",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "{\"url\":\"/cms/delivery/media/MCODF5WFHMW5APFP2T2Z622B4WUQ\",\"contentKey\":\"MCODF5WFHMW5APFP2T2Z622B4WUQ\",\"altText\":\"\",\"contentType\":\"\",\"bgPosition\":\"center center\",\"bgSizeOrRepeat\":\"/cover\"}",
+            "backgroundImageOverlay" : "rgba(145, 145, 145, 0.53)",
+            "componentSpacerSize" : "0.25rem",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "0rem",
+            "sectionConfig" : "{\"UUID\":\"1d813e17-a951-410e-9e48-6c1cd83891df\",\"columns\":[{\"UUID\":\"644a15ed-d2c5-47d3-8414-77351632252d\",\"columnName\":\"Column 1\",\"columnKey\":\"footerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "backgroundColor" : "",
+                "isLinkable" : false,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "Reach Us :",
+                "textAlign" : "left",
+                "textColor" : "rgb(0, 0, 0)",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"headingTag\":\"h3\",\"textStyle\":\"heading-medium\"}"
+              },
+              "definition" : "dxp_base:textBlock",
+              "id" : "779180ab-8561-4dc4-a1e6-25167795334c",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "backgroundColor" : "",
+                "isLinkable" : true,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "> 250 angle boulevard Moulay youssef et, Bd de Bordeaux, Casablanca",
+                "textAlign" : "left",
+                "textColor" : "rgb(255, 255, 255)",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"headingTag\":\"h3\",\"textStyle\":\"heading-medium\"}",
+                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://www.google.com/maps/place/Oreivaton+Sarl/@33.5994973,-7.6353411,17z/data=!3m1!4b1!4m6!3m5!1s0xda7d3f933b9fe4f:0x106675cd1794fe05!8m2!3d33.5994929!4d-7.6327662!16s%2Fg%2F11scfph0w1?entry=ttu&g_ep=EgoyMDI2MDIxNy4wIKXMDSoASAFQAw%3D%3D\"}}}}"
+              },
+              "definition" : "dxp_base:textBlock",
+              "id" : "ed8b1d79-9112-4edf-b4b7-48db458c373d",
+              "type" : "component"
+            } ],
+            "id" : "644a15ed-d2c5-47d3-8414-77351632252d",
+            "name" : "footerSection",
+            "title" : "Theme Footer",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "1d813e17-a951-410e-9e48-6c1cd83891df",
+          "type" : "component"
+        } ],
+        "id" : "4064ccfd-273d-4b4b-bab9-e42fcbf7b5e0",
+        "name" : "footer",
+        "title" : "Theme Footer",
+        "type" : "region"
+      } ],
+      "definition" : "community_byo:scopedHeaderAndFooter",
+      "id" : "d07d0e73-fc4d-457b-87d7-797b710d4f15",
+      "type" : "component"
+    }
+  },
+  "urlName" : "scoped-header-and-footer"
+}

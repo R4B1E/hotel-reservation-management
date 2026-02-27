@@ -1,0 +1,43 @@
+<template>
+    <div class="confirmation-page">
+        <div class="confirmation-inner">
+            <div class="confirm-icon">
+                <span class="confirm-check">✓</span>
+                <div class="confirm-ring"></div>
+            </div>
+
+            <p class="confirm-eyebrow">Booking Confirmed</p>
+            <h1 class="confirm-headline">
+                <em>Your sanctuary</em>
+                <span>awaits</span>
+            </h1>
+
+            <p class="confirm-ref">Reservation #<strong>{confirmationNumber}</strong></p>
+            <p class="confirm-msg">A confirmation has been sent to <strong>{guestEmail}</strong>. Our concierge team will reach out within 24 hours.</p>
+
+            <div class="confirm-summary">
+                <div class="cs-item">
+                    <span class="cs-label">Room</span>
+                    <span class="cs-val">{roomName}</span>
+                </div>
+                <div class="cs-item">
+                    <span class="cs-label">Arrival</span>
+                    <span class="cs-val">{checkInDisplay}</span>
+                </div>
+                <div class="cs-item">
+                    <span class="cs-label">Departure</span>
+                    <span class="cs-val">{checkOutDisplay}</span>
+                </div>
+                <div class="cs-item">
+                    <span class="cs-label">Guests</span>
+                    <span class="cs-val">{guestCount}</span>
+                </div>
+            </div>
+
+            <div class="confirm-actions">
+                <c-azure-button label="View My Reservations" variant="primary" show-arrow="true" onbuttonclick={handleViewReservations}></c-azure-button>
+                <c-azure-button label="Return to Home" variant="ghost" onbuttonclick={handleHome}></c-azure-button>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,52 @@
+/* ============================================================
+   THE AZURE — Global Design Tokens
+   Luxury Hotel Experience Cloud Theme
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@200;300;400;500;600&display=swap');
+
+:root {
+  /* ── Palette ── */
+  --azure-black:        #0d0d0b;
+  --azure-charcoal:     #1a1a18;
+  --azure-dark:         #232320;
+  --azure-mid:          #3a3a36;
+  --azure-warm-gray:    #7a7a72;
+  --azure-silver:       #c2c2b8;
+  --azure-cream:        #f5f0e8;
+  --azure-white:        #fdfaf5;
+  --azure-gold:         #c9a96e;
+  --azure-gold-light:   #e0c898;
+  --azure-gold-dark:    #9e7d4a;
+  --azure-sky:          #6b9ab8;
+  --azure-terracotta:   #8b4513;
+
+  /* ── Typography ── */
+  --font-display:       'Cormorant Garamond', Georgia, serif;
+  --font-body:          'Raleway', sans-serif;
+
+  /* ── Spacing ── */
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  /* ── Transitions ── */
+  --ease-luxury: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --duration-fast: 200ms;
+  --duration-mid:  400ms;
+  --duration-slow: 700ms;
+
+  /* ── Borders ── */
+  --radius-sm:  2px;
+  --radius-md:  4px;
+  --radius-lg:  8px;
+
+  /* ── Shadows ── */
+  --shadow-card:    0 8px 40px rgba(0,0,0,0.35);
+  --shadow-hover:   0 16px 60px rgba(0,0,0,0.5);
+  --shadow-gold:    0 0 30px rgba(201,169,110,0.15);
+}

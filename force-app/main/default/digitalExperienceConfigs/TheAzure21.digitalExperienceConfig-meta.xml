@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DigitalExperienceConfig xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>TheAzure2</label>
+    <site>
+        <urlPathPrefix>TheAzure2</urlPathPrefix>
+    </site>
+    <space>site/TheAzure21</space>
+</DigitalExperienceConfig>

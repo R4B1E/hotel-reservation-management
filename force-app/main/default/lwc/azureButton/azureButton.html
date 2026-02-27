@@ -1,0 +1,19 @@
+<template>
+    <button
+        class={computedClass}
+        disabled={disabled}
+        onclick={handleClick}
+        type={type}
+    >
+        <span class="btn-content">
+            <template if:true={iconLeft}>
+                <span class="btn-icon btn-icon--left">{iconLeft}</span>
+            </template>
+            <span class="btn-label">{label}</span>
+            <template if:true={showArrow}>
+                <span class="btn-arrow">→</span>
+            </template>
+        </span>
+        <span class="btn-shimmer"></span>
+    </button>
+</template>

@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Marriot search bar",
+  "contentBody" : {
+    "activeViewId" : "Marriot_search_bar",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "global-search",
+    "urlPrefix" : "global-search"
+  },
+  "urlName" : "marriot-search-bar"
+}

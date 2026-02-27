@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Highlight__c</fullName><label>Is Highlight</label>
+    <type>Checkbox</type><defaultValue>false</defaultValue>
+</CustomField>

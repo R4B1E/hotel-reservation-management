@@ -1,0 +1,20 @@
+<template>
+    <div class="availability-results">
+        <div class="results-header">
+            <p class="results-summary">{resultsSummary}</p>
+            <div class="results-sort">
+                <label class="sort-label">Sort by</label>
+                <select class="sort-select" onchange={handleSort}>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="size">Room Size</option>
+                </select>
+            </div>
+        </div>
+        <div class="results-grid">
+            <template for:each={sortedRooms} for:item="room">
+                <c-azure-room-card key={room.id} room={room} onroomselect={handleSelect}></c-azure-room-card>
+            </template>
+        </div>
+    </div>
+</template>

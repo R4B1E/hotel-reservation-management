@@ -1,0 +1,17 @@
+<template>
+    <section class="amenities-section">
+        <div class="section-header">
+            <p class="section-eyebrow">The Azure Experience</p>
+            <h2 class="section-title">
+                <em>Curated</em>
+                <span>Amenities</span>
+            </h2>
+            <p class="section-subtitle">Every element of your stay has been considered, from the hand-woven linens to the private sunrise breakfasts.</p>
+        </div>
+        <div class="amenities-grid">
+            <template for:each={amenities} for:item="amenity">
+                <c-azure-amenity-card key={amenity.id} amenity={amenity}></c-azure-amenity-card>
+            </template>
+        </div>
+    </section>
+</template>

@@ -1,0 +1,90 @@
+
+:host { display: inline-block; }
+
+.azure-btn {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-weight: 500;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: all var(--duration-base) var(--ease-luxury);
+    outline: none;
+    white-space: nowrap;
+}
+
+.btn-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.btn-shimmer {
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+    transition: left 0.6s var(--ease-luxury);
+    z-index: 1;
+}
+.azure-btn:hover .btn-shimmer { left: 100%; }
+
+.btn-arrow {
+    display: inline-block;
+    transition: transform var(--duration-fast) var(--ease-luxury);
+}
+.azure-btn:hover .btn-arrow { transform: translateX(4px); }
+
+/* Sizes */
+.azure-btn--sm { padding: var(--space-2) var(--space-6); font-size: var(--text-xs); }
+.azure-btn--md { padding: var(--space-3) var(--space-8); font-size: var(--text-sm); }
+.azure-btn--lg { padding: var(--space-4) var(--space-12); font-size: var(--text-base); }
+
+/* Primary — Gold fill */
+.azure-btn--primary {
+    background: var(--azure-gold);
+    color: var(--azure-black);
+}
+.azure-btn--primary:hover {
+    background: var(--azure-gold-light);
+    box-shadow: var(--shadow-gold);
+    transform: translateY(-1px);
+}
+
+/* Secondary — Outlined gold */
+.azure-btn--secondary {
+    background: transparent;
+    color: var(--azure-gold);
+    border: var(--border-gold);
+}
+.azure-btn--secondary:hover {
+    background: rgba(201, 169, 110, 0.08);
+    box-shadow: var(--shadow-gold);
+}
+
+/* Ghost — Outlined white */
+.azure-btn--ghost {
+    background: transparent;
+    color: var(--azure-cream);
+    border: 1px solid rgba(240, 235, 224, 0.4);
+}
+.azure-btn--ghost:hover {
+    background: rgba(240, 235, 224, 0.08);
+    border-color: var(--azure-cream);
+}
+
+/* Dark */
+.azure-btn--dark {
+    background: var(--azure-charcoal);
+    color: var(--azure-gold);
+    border: var(--border-thin);
+}
+
+.azure-btn--disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }

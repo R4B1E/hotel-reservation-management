@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  THE AZURE — Icon Sprite Sheet
+  All icons are inline SVG symbols.
+  Reference in HTML: <svg><use href="/resource/azureTheme/icons/azure-icons.svg#icon-pool"/></svg>
+-->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+
+  <!-- pool -->
+  <symbol id="icon-pool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 12c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/>
+    <path d="M2 17c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/>
+    <path d="M9 6a3 3 0 1 0 6 0 3 3 0 0 0-6 0"/>
+    <line x1="12" y1="9" x2="12" y2="12"/>
+  </symbol>
+
+  <!-- spa -->
+  <symbol id="icon-spa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10"/>
+    <path d="M12 2c0 5.5 4 10 10 10"/>
+    <path d="M12 12c0-5.5-4-10-10-10"/>
+    <circle cx="12" cy="12" r="2"/>
+  </symbol>
+
+  <!-- dining -->
+  <symbol id="icon-dining" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+    <line x1="7" y1="2" x2="7" y2="11"/>
+    <path d="M21 15V2a5 5 0 0 0-5 5v6h3.5a1.5 1.5 0 0 1 1.5 1.5v.5"/>
+    <path d="M19 22H5a2 2 0 0 1-2-2v-3h18v3a2 2 0 0 1-2 2z"/>
+  </symbol>
+
+  <!-- wine -->
+  <symbol id="icon-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 22h8"/>
+    <line x1="12" y1="11" x2="12" y2="22"/>
+    <path d="M7 2h10l-2 9a5 5 0 0 1-10 0L7 2z"/>
+  </symbol>
+
+  <!-- concierge / bell -->
+  <symbol id="icon-concierge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 18H6a8 8 0 0 1 8-8v0a8 8 0 0 1 4 1.46"/>
+    <path d="M4 18h16"/>
+    <line x1="12" y1="2" x2="12" y2="4"/>
+    <circle cx="12" cy="5" r="1"/>
+  </symbol>
+
+  <!-- sunset / lounge -->
+  <symbol id="icon-sunset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 10a4 4 0 0 0-4 4H3"/>
+    <path d="M12 10a4 4 0 0 1 4 4h5"/>
+    <line x1="12" y1="2" x2="12" y2="4"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+    <line x1="19.78" y1="4.22" x2="18.36" y2="5.64"/>
+    <line x1="2" y1="14" x2="22" y2="14"/>
+    <line x1="4" y1="18" x2="20" y2="18"/>
+  </symbol>
+
+  <!-- yoga -->
+  <symbol id="icon-yoga" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="4" r="1.5"/>
+    <path d="M7 20l2-6 3 3 3-3 2 6"/>
+    <path d="M5 12l2-2 5 2 5-2 2 2"/>
+    <path d="M7 14l-2 2"/>
+    <path d="M17 14l2 2"/>
+  </symbol>
+
+  <!-- transfer / car -->
+  <symbol id="icon-transfer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h11l5 5v5h-2"/>
+    <circle cx="7.5" cy="17.5" r="2.5"/>
+    <circle cx="17.5" cy="17.5" r="2.5"/>
+  </symbol>
+
+  <!-- caldera / view -->
+  <symbol id="icon-view" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M2 12h2M20 12h2M12 2v2M12 20v2"/>
+    <path d="M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M19.07 4.93l-1.41 1.41M5.34 17.66l-1.41 1.41"/>
+  </symbol>
+
+  <!-- terrace -->
+  <symbol id="icon-terrace" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="14" width="20" height="2" rx="1"/>
+    <path d="M4 14V8a8 8 0 0 1 16 0v6"/>
+    <line x1="8" y1="22" x2="8" y2="16"/>
+    <line x1="16" y1="22" x2="16" y2="16"/>
+    <line x1="4" y1="22" x2="20" y2="22"/>
+  </symbol>
+
+  <!-- bed / king bed -->
+  <symbol id="icon-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 4v16"/>
+    <path d="M22 4v16"/>
+    <path d="M2 8h20"/>
+    <path d="M2 20h20"/>
+    <rect x="6" y="8" width="4" height="6" rx="1"/>
+    <rect x="14" y="8" width="4" height="6" rx="1"/>
+  </symbol>
+
+  <!-- shower / rain shower -->
+  <symbol id="icon-shower" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h1a4 4 0 0 1 4 4v1"/>
+    <path d="M9 9a11 11 0 0 1 11 11"/>
+    <line x1="8" y1="13" x2="8.01" y2="13"/>
+    <line x1="11" y1="16" x2="11.01" y2="16"/>
+    <line x1="5" y1="16" x2="5.01" y2="16"/>
+    <line x1="8" y1="19" x2="8.01" y2="19"/>
+    <line x1="14" y1="19" x2="14.01" y2="19"/>
+    <line x1="11" y1="22" x2="11.01" y2="22"/>
+  </symbol>
+
+  <!-- espresso / coffee -->
+  <symbol id="icon-coffee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+    <line x1="6" y1="1" x2="6" y2="4"/>
+    <line x1="10" y1="1" x2="10" y2="4"/>
+    <line x1="14" y1="1" x2="14" y2="4"/>
+  </symbol>
+
+  <!-- butler / service -->
+  <symbol id="icon-butler" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+    <circle cx="12" cy="7" r="4"/>
+    <path d="M12 11v3"/>
+    <path d="M9 14h6"/>
+  </symbol>
+
+  <!-- turndown / moon -->
+  <symbol id="icon-turndown" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </symbol>
+
+  <!-- jacuzzi / hot tub -->
+  <symbol id="icon-jacuzzi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="10" width="20" height="12" rx="2"/>
+    <path d="M6 10V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/>
+    <path d="M6 14c1-1 2-1 3 0s2 1 3 0 2-1 3 0"/>
+    <path d="M6 18c1-1 2-1 3 0s2 1 3 0 2-1 3 0"/>
+  </symbol>
+
+  <!-- helicopter -->
+  <symbol id="icon-helicopter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11h16"/>
+    <path d="M8 11V7l4-2 4 2v4"/>
+    <path d="M8 17h8"/>
+    <path d="M12 11v6"/>
+    <line x1="2" y1="11" x2="4" y2="11"/>
+    <line x1="20" y1="11" x2="22" y2="11"/>
+  </symbol>
+
+  <!-- wifi -->
+  <symbol id="icon-wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+    <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+    <circle cx="12" cy="20" r="1" fill="currentColor"/>
+  </symbol>
+
+  <!-- climate / ac -->
+  <symbol id="icon-climate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2v20M2 12h20"/>
+    <path d="M12 2l3 3M12 2l-3 3"/>
+    <path d="M12 22l3-3M12 22l-3-3"/>
+    <path d="M2 12l3 3M2 12l3-3"/>
+    <path d="M22 12l-3 3M22 12l-3-3"/>
+  </symbol>
+
+  <!-- sea view -->
+  <symbol id="icon-sea" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 16c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/>
+    <path d="M2 20c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/>
+    <path d="M6 8l6-6 6 6"/>
+    <line x1="12" y1="2" x2="12" y2="13"/>
+  </symbol>
+
+  <!-- private pool -->
+  <symbol id="icon-private-pool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="8" width="20" height="12" rx="2"/>
+    <path d="M6 14c1-1.3 2-1.3 3 0s2 1.3 3 0 2-1.3 3 0"/>
+    <path d="M2 12h20"/>
+    <path d="M9 4l3-3 3 3"/>
+    <line x1="12" y1="1" x2="12" y2="8"/>
+  </symbol>
+
+  <!-- arrow right -->
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12"/>
+    <polyline points="12 5 19 12 12 19"/>
+  </symbol>
+
+  <!-- calendar -->
+  <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+    <line x1="16" y1="2" x2="16" y2="6"/>
+    <line x1="8" y1="2" x2="8" y2="6"/>
+    <line x1="3" y1="10" x2="21" y2="10"/>
+  </symbol>
+
+  <!-- user -->
+  <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+    <circle cx="12" cy="7" r="4"/>
+  </symbol>
+
+  <!-- close / x -->
+  <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18"/>
+    <line x1="6" y1="6" x2="18" y2="18"/>
+  </symbol>
+
+  <!-- check / confirm -->
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="20 6 9 17 4 12"/>
+  </symbol>
+
+  <!-- location pin -->
+  <symbol id="icon-location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </symbol>
+
+  <!-- phone -->
+  <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.72-.72a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </symbol>
+
+  <!-- email -->
+  <symbol id="icon-email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+    <polyline points="22,6 12,13 2,6"/>
+  </symbol>
+
+  <!-- star / rating -->
+  <symbol id="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+  </symbol>
+
+  <!-- menu / hamburger -->
+  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="3" y1="12" x2="21" y2="12"/>
+    <line x1="3" y1="6" x2="21" y2="6"/>
+    <line x1="3" y1="18" x2="21" y2="18"/>
+  </symbol>
+
+  <!-- chevron down -->
+  <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 12 15 18 9"/>
+  </symbol>
+
+  <!-- lock / secure -->
+  <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+  </symbol>
+
+</svg>

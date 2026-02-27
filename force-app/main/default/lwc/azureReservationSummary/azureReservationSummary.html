@@ -1,0 +1,54 @@
+<template>
+    <div class="summary-panel">
+        <div class="summary-image" style={imageStyle}></div>
+
+        <div class="summary-body">
+            <h3 class="summary-room">{reservation.roomName}</h3>
+            <span class="summary-category">{reservation.category}</span>
+
+            <div class="summary-dates">
+                <div class="date-block">
+                    <span class="date-label">Check-In</span>
+                    <span class="date-val">{checkInFormatted}</span>
+                </div>
+                <div class="date-arrow">→</div>
+                <div class="date-block">
+                    <span class="date-label">Check-Out</span>
+                    <span class="date-val">{checkOutFormatted}</span>
+                </div>
+            </div>
+
+            <div class="summary-meta">
+                <div class="meta-row">
+                    <span class="meta-label">Duration</span>
+                    <span class="meta-val">{nightsLabel}</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">Guests</span>
+                    <span class="meta-val">{guestLabel}</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">Room Rate</span>
+                    <span class="meta-val">${reservation.pricePerNight} / night</span>
+                </div>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-pricing">
+                <div class="price-row">
+                    <span>Room ({reservation.nights} nights)</span>
+                    <span>${subtotal}</span>
+                </div>
+                <div class="price-row">
+                    <span>Taxes &amp; Fees (12%)</span>
+                    <span>${taxes}</span>
+                </div>
+                <div class="price-row price-row--total">
+                    <span>Total</span>
+                    <span>${total}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

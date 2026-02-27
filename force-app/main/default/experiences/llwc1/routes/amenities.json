@@ -1,0 +1,11 @@
+{
+    "label": "Amenities",
+    "path": "/amenities",
+    "title": "Amenities — The Azure",
+    "isDefault": false,
+    "pageAccess": "Public",
+    "themeLayoutType": "Inner",
+    "changeFrequency": "monthly",
+    "priority": "0.7",
+    "shouldIndex": true
+}

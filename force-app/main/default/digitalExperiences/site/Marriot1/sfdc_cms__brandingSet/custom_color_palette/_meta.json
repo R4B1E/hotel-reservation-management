@@ -1,0 +1,5 @@
+{
+  "apiName" : "custom_color_palette",
+  "type" : "sfdc_cms__brandingSet",
+  "path" : "brandingSets"
+}

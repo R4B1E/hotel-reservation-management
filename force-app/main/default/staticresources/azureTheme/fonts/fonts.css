@@ -1,0 +1,117 @@
+/*
+ * THE AZURE — Custom Font Declarations
+ *
+ * Typefaces used:
+ *   Display : Cormorant Garamond (300, 400, 500 — normal + italic)
+ *   Body    : Raleway (200, 300, 400, 500, 600)
+ *
+ * DEPLOYMENT NOTE
+ * ---------------
+ * Download the woff2 files from Google Fonts or a licensed source and place
+ * them next to this file before deploying. Files expected:
+ *
+ *   CormorantGaramond-Light.woff2
+ *   CormorantGaramond-LightItalic.woff2
+ *   CormorantGaramond-Regular.woff2
+ *   CormorantGaramond-Italic.woff2
+ *   CormorantGaramond-Medium.woff2
+ *   CormorantGaramond-MediumItalic.woff2
+ *   Raleway-ExtraLight.woff2
+ *   Raleway-Light.woff2
+ *   Raleway-Regular.woff2
+ *   Raleway-Medium.woff2
+ *   Raleway-SemiBold.woff2
+ *
+ * The fallback @import below loads from Google Fonts when the local woff2
+ * files are not yet present (development / preview environments).
+ */
+
+/* ── Self-hosted Cormorant Garamond ── */
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('CormorantGaramond-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('CormorantGaramond-LightItalic.woff2') format('woff2');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('CormorantGaramond-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('CormorantGaramond-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('CormorantGaramond-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('CormorantGaramond-MediumItalic.woff2') format('woff2');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* ── Self-hosted Raleway ── */
+@font-face {
+    font-family: 'Raleway';
+    src: url('Raleway-ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('Raleway-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('Raleway-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('Raleway-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('Raleway-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}

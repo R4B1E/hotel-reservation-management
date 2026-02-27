@@ -1,0 +1,36 @@
+<template>
+    <div class="guest-selector">
+        <button class="selector-trigger" onclick={toggleDropdown}>
+            <span class="selector-label">Guests</span>
+            <span class="selector-value">{guestSummary}</span>
+            <span class="selector-chevron">{chevron}</span>
+        </button>
+        <template if:true={open}>
+            <div class="selector-panel">
+                <div class="row">
+                    <div>
+                        <span class="row-type">Adults</span>
+                        <span class="row-sub">Age 13+</span>
+                    </div>
+                    <div class="counter">
+                        <button class="c-btn" onclick={dec} data-type="adults">−</button>
+                        <span class="c-val">{adults}</span>
+                        <button class="c-btn" onclick={inc} data-type="adults">+</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <span class="row-type">Children</span>
+                        <span class="row-sub">Age 0–12</span>
+                    </div>
+                    <div class="counter">
+                        <button class="c-btn" onclick={dec} data-type="children">−</button>
+                        <span class="c-val">{children}</span>
+                        <button class="c-btn" onclick={inc} data-type="children">+</button>
+                    </div>
+                </div>
+                <button class="apply-btn" onclick={handleApply}>Apply</button>
+            </div>
+        </template>
+    </div>
+</template>

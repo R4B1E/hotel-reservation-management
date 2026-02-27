@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Icon_Key__c</fullName><label>Icon Key</label>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>false</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value><fullName>icon-pool</fullName><default>false</default><label>icon-pool</label></value>
+            <value><fullName>icon-spa</fullName><default>false</default><label>icon-spa</label></value>
+            <value><fullName>icon-dining</fullName><default>false</default><label>icon-dining</label></value>
+            <value><fullName>icon-wine</fullName><default>false</default><label>icon-wine</label></value>
+            <value><fullName>icon-concierge</fullName><default>false</default><label>icon-concierge</label></value>
+            <value><fullName>icon-sunset</fullName><default>false</default><label>icon-sunset</label></value>
+            <value><fullName>icon-yoga</fullName><default>false</default><label>icon-yoga</label></value>
+            <value><fullName>icon-transfer</fullName><default>false</default><label>icon-transfer</label></value>
+            <value><fullName>icon-bed</fullName><default>false</default><label>icon-bed</label></value>
+            <value><fullName>icon-shower</fullName><default>false</default><label>icon-shower</label></value>
+            <value><fullName>icon-coffee</fullName><default>false</default><label>icon-coffee</label></value>
+            <value><fullName>icon-butler</fullName><default>false</default><label>icon-butler</label></value>
+            <value><fullName>icon-turndown</fullName><default>false</default><label>icon-turndown</label></value>
+            <value><fullName>icon-jacuzzi</fullName><default>false</default><label>icon-jacuzzi</label></value>
+            <value><fullName>icon-helicopter</fullName><default>false</default><label>icon-helicopter</label></value>
+            <value><fullName>icon-wifi</fullName><default>false</default><label>icon-wifi</label></value>
+            <value><fullName>icon-climate</fullName><default>false</default><label>icon-climate</label></value>
+            <value><fullName>icon-sea</fullName><default>false</default><label>icon-sea</label></value>
+            <value><fullName>icon-view</fullName><default>false</default><label>icon-view</label></value>
+            <value><fullName>icon-terrace</fullName><default>false</default><label>icon-terrace</label></value>
+        </valueSetDefinition>
+    </valueSet>
+    <required>false</required>
+</CustomField>

@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "574388b2-f933-42d6-8866-cc7b8785e7d9",
+  "appPageId" : "619c0306-581b-4f1e-9794-35c96243845a",
+  "configurationTags" : [ ],
+  "devName" : "azureResultsPage__c",
+  "id" : "0b80bb99-205b-4a8f-944f-bf19d6069572",
+  "label" : "azureResultsPage",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-azureresultspage",
+  "type" : "route",
+  "urlPrefix" : "azureresultspage"
+}

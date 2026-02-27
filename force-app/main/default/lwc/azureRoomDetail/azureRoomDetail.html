@@ -1,0 +1,94 @@
+<template>
+  <div class="room-detail">
+    <!-- Hero Image Gallery -->
+    <div class="detail-gallery">
+      <div class="gallery-main" style={mainImageStyle}>
+        <div class="gallery-overlay"></div>
+        <button class="gallery-prev" onclick={prevImage}>‹</button>
+        <button class="gallery-next" onclick={nextImage}>›</button>
+        <span class="gallery-count">{imageIndex} / {totalImages}</span>
+      </div>
+      <div class="gallery-thumbs">
+        <template for:each={mappedImages} for:item="img">
+          <div
+            key={img.url}
+            class={img.className}
+            style={img.style}
+            data-index={img.index}
+            onclick={handleThumbClick}
+          ></div>
+        </template>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="detail-content">
+      <div class="detail-left">
+        <span class="detail-category">{room.category}</span>
+        <h1 class="detail-title">{room.name}</h1>
+        <p class="detail-tagline">{room.tagline}</p>
+        <div class="detail-divider"></div>
+        <p class="detail-description">{room.fullDescription}</p>
+
+        <!-- Amenities Grid -->
+        <div class="detail-amenities">
+          <h3 class="amenities-heading">Room Features</h3>
+          <div class="amenities-grid">
+            <template for:each={room.amenities} for:item="amenity">
+              <div key={amenity.name} class="amenity-item">
+                <span class="amenity-icon">{amenity.icon}</span>
+                <span class="amenity-name">{amenity.name}</span>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Panel -->
+      <div class="detail-right">
+        <div class="booking-panel">
+          <div class="panel-price">
+            <span class="panel-from">From</span>
+            <span class="panel-amount">${room.pricePerNight}</span>
+            <span class="panel-unit">per night</span>
+          </div>
+
+          <div class="panel-stats">
+            <div class="stat">
+              <span class="stat-label">Size</span>
+              <span class="stat-val">{room.squareMeters} m²</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Guests</span>
+              <span class="stat-val">{room.maxGuests}</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Beds</span>
+              <span class="stat-val">{room.bedType}</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">View</span>
+              <span class="stat-val">{room.view}</span>
+            </div>
+          </div>
+
+          <div class="panel-divider"></div>
+
+          <c-azure-booking-bar onsearch={handleBooking}></c-azure-booking-bar>
+
+          <c-azure-button
+            label="Reserve This Room"
+            variant="primary"
+            size="lg"
+            show-arrow="true"
+            onbuttonclick={handleReserve}
+          ></c-azure-button>
+
+          <p class="panel-note">
+            Free cancellation up to 48 hours before arrival
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

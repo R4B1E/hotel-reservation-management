@@ -1,0 +1,34 @@
+<template>
+    <div class="datepicker-overlay" onclick={handleOverlayClick}>
+        <div class="datepicker-panel" onclick={stopProp}>
+            <div class="dp-header">
+                <button class="dp-nav" onclick={prevMonth}>‹</button>
+                <h3 class="dp-month-label">{monthLabel}</h3>
+                <button class="dp-nav" onclick={nextMonth}>›</button>
+            </div>
+
+            <div class="dp-weekdays">
+                <template for:each={weekdays} for:item="day">
+                    <span key={day} class="dp-weekday">{day}</span>
+                </template>
+            </div>
+
+            <div class="dp-grid">
+                <template for:each={calendarDays} for:item="day">
+                    <button
+                        key={day.key}
+                        class={day.cssClass}
+                        disabled={day.disabled}
+                        data-date={day.dateStr}
+                        onclick={handleDayClick}
+                    >{day.label}</button>
+                </template>
+            </div>
+
+            <div class="dp-footer">
+                <button class="dp-clear" onclick={handleClear}>Clear</button>
+                <button class="dp-apply" onclick={handleApply}>Apply</button>
+            </div>
+        </div>
+    </div>
+</template>

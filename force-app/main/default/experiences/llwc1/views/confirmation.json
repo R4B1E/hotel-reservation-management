@@ -1,0 +1,38 @@
+{
+    "view": {
+        "label": "Booking Confirmed",
+        "type": "default"
+    },
+    "regions": [
+        {
+            "name": "header",
+            "components": [
+                {
+                    "id": "confirmation_header",
+                    "componentName": "c:azureNavbar",
+                    "attributes": {}
+                }
+            ]
+        },
+        {
+            "name": "main",
+            "components": [
+                {
+                    "id": "confirmation_screen",
+                    "componentName": "c:azureConfirmation",
+                    "attributes": {}
+                }
+            ]
+        },
+        {
+            "name": "footer",
+            "components": [
+                {
+                    "id": "confirmation_footer",
+                    "componentName": "c:azureFooter",
+                    "attributes": {}
+                }
+            ]
+        }
+    ]
+}

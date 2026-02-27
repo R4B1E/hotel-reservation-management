@@ -1,0 +1,11 @@
+{
+    "label": "Home",
+    "path": "/",
+    "title": "The Azure — Sanctuary of Serenity",
+    "isDefault": true,
+    "pageAccess": "Public",
+    "themeLayoutType": "Inner",
+    "changeFrequency": "daily",
+    "priority": "1.0",
+    "shouldIndex": true
+}

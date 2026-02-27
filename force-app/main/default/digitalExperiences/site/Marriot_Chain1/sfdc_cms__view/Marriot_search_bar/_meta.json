@@ -1,0 +1,5 @@
+{
+  "apiName" : "Marriot_search_bar",
+  "type" : "sfdc_cms__view",
+  "path" : "views"
+}

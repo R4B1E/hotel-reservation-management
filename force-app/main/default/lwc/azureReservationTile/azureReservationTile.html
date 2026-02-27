@@ -1,0 +1,30 @@
+<template>
+    <div class={tileClass}>
+        <div class="tile-image" style={imageStyle}></div>
+        <div class="tile-body">
+            <div class="tile-header">
+                <div>
+                    <h3 class="tile-room">{reservation.roomName}</h3>
+                    <span class="tile-ref">#{reservation.confirmationNumber}</span>
+                </div>
+                <span class={statusClass}>{reservation.status}</span>
+            </div>
+            <div class="tile-dates">
+                <span>{checkInDisplay}</span>
+                <span class="tile-dash">→</span>
+                <span>{checkOutDisplay}</span>
+                <span class="tile-nights">({reservation.nights} nights)</span>
+            </div>
+            <div class="tile-footer">
+                <span class="tile-total">${totalFormatted}</span>
+                <template if:true={isUpcoming}>
+                    <button class="tile-cta" onclick={handleModify}>Modify</button>
+                    <button class="tile-cancel" onclick={handleCancel}>Cancel</button>
+                </template>
+                <template if:false={isUpcoming}>
+                    <button class="tile-cta" onclick={handleRebook}>Book Again</button>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

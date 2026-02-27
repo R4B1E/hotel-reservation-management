@@ -1,0 +1,38 @@
+{
+    "view": {
+        "label": "My Reservations",
+        "type": "default"
+    },
+    "regions": [
+        {
+            "name": "header",
+            "components": [
+                {
+                    "id": "myReservations_header",
+                    "componentName": "c:azureNavbar",
+                    "attributes": {}
+                }
+            ]
+        },
+        {
+            "name": "main",
+            "components": [
+                {
+                    "id": "my_reservations",
+                    "componentName": "c:azureMyReservations",
+                    "attributes": {}
+                }
+            ]
+        },
+        {
+            "name": "footer",
+            "components": [
+                {
+                    "id": "myReservations_footer",
+                    "componentName": "c:azureFooter",
+                    "attributes": {}
+                }
+            ]
+        }
+    ]
+}

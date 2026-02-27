@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Primary_Image_URL__c</fullName><label>Primary Image URL</label>
+    <type>Text</type><length>255</length>
+    <required>false</required><unique>false</unique><externalId>false</externalId>
+    <description>Full public URL to the room hero image. Stored in Salesforce Files or an external CDN. See Image Storage section in README.</description>
+</CustomField>

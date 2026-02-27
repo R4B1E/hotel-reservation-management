@@ -1,0 +1,11 @@
+{
+    "label": "Room Detail",
+    "path": "/rooms/:roomId",
+    "title": "Room Detail — The Azure",
+    "isDefault": false,
+    "pageAccess": "Public",
+    "themeLayoutType": "Inner",
+    "changeFrequency": "weekly",
+    "priority": "0.8",
+    "shouldIndex": false
+}

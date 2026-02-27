@@ -1,0 +1,39 @@
+<template>
+    <article class="room-card" onclick={handleClick}>
+        <div class="card-image-wrap">
+            <div class="card-image" style={imageStyle}></div>
+            <div class="card-image-overlay"></div>
+            <span class="card-badge">{room.category}</span>
+            <template if:true={room.isFeatured}>
+                <span class="card-featured">Featured</span>
+            </template>
+        </div>
+
+        <div class="card-body">
+            <div class="card-header">
+                <h3 class="card-title">{room.name}</h3>
+                <div class="card-price">
+                    <span class="price-from">from</span>
+                    <span class="price-amount">${room.pricePerNight}</span>
+                    <span class="price-unit">/ night</span>
+                </div>
+            </div>
+
+            <p class="card-desc">{room.shortDescription}</p>
+
+            <div class="card-amenities">
+                <template for:each={room.topAmenities} for:item="amenity">
+                    <span key={amenity} class="card-amenity">{amenity}</span>
+                </template>
+            </div>
+
+            <div class="card-footer">
+                <span class="card-size">{room.squareMeters} m²</span>
+                <button class="card-cta">
+                    View Room
+                    <span class="cta-arrow">→</span>
+                </button>
+            </div>
+        </div>
+    </article>
+</template>

@@ -1,0 +1,56 @@
+<template>
+    <section class="location-section">
+        <div class="location-inner">
+            <div class="location-text">
+                <p class="location-eyebrow">Location</p>
+                <h2 class="location-title">
+                    <em>Find</em>
+                    <span>The Azure</span>
+                </h2>
+                <p class="location-desc">Perched on the rim of the ancient Santorini caldera, The Azure is located in the village of Oia — widely considered the most beautiful village in the world.</p>
+
+                <div class="location-details">
+                    <div class="location-detail">
+                        <span class="detail-icon">◈</span>
+                        <div>
+                            <span class="detail-label">Address</span>
+                            <span class="detail-val">Oia 847 02, Santorini, Greece</span>
+                        </div>
+                    </div>
+                    <div class="location-detail">
+                        <span class="detail-icon">◈</span>
+                        <div>
+                            <span class="detail-label">Nearest Airport</span>
+                            <span class="detail-val">Santorini (JTR) — 14 km</span>
+                        </div>
+                    </div>
+                    <div class="location-detail">
+                        <span class="detail-icon">◈</span>
+                        <div>
+                            <span class="detail-label">Transfer Options</span>
+                            <span class="detail-val">Private speedboat, helicopter, luxury car</span>
+                        </div>
+                    </div>
+                    <div class="location-detail">
+                        <span class="detail-icon">◈</span>
+                        <div>
+                            <span class="detail-label">Coordinates</span>
+                            <span class="detail-val">36.4618° N, 25.3753° E</span>
+                        </div>
+                    </div>
+                </div>
+
+                <c-azure-button label="Get Directions" variant="secondary" show-arrow="true"></c-azure-button>
+            </div>
+
+            <div class="location-map-wrap">
+                <lightning-map
+                    map-markers={mapMarkers}
+                    zoom-level="14"
+                    list-view="hidden"
+                    class="azure-map"
+                ></lightning-map>
+            </div>
+        </div>
+    </section>
+</template>

@@ -1,0 +1,49 @@
+<template>
+    <div class="profile-page">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <span class="avatar-initials">{initials}</span>
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name">{guest.firstName} {guest.lastName}</h1>
+                <p class="profile-since">Member since {memberSince}</p>
+                <span class="profile-tier">{guest.tier}</span>
+            </div>
+        </div>
+
+        <div class="profile-body">
+            <div class="profile-section">
+                <h3 class="section-heading">Personal Details</h3>
+                <c-azure-guest-form onformchange={handleFormChange}></c-azure-guest-form>
+                <div class="section-actions">
+                    <c-azure-button label="Save Changes" variant="primary" onbuttonclick={handleSave}></c-azure-button>
+                </div>
+            </div>
+
+            <div class="profile-sidebar">
+                <div class="sidebar-card">
+                    <h4 class="sidebar-heading">Stay Statistics</h4>
+                    <div class="sidebar-stats">
+                        <div class="sidebar-stat">
+                            <span class="stat-n">{guest.totalNights}</span>
+                            <span class="stat-l">Nights Stayed</span>
+                        </div>
+                        <div class="sidebar-stat">
+                            <span class="stat-n">{guest.totalStays}</span>
+                            <span class="stat-l">Total Stays</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h4 class="sidebar-heading">Preferences</h4>
+                    <div class="preference-list">
+                        <template for:each={guest.preferences} for:item="pref">
+                            <span key={pref} class="pref-tag">{pref}</span>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,11 @@
+{
+    "label": "Our Story",
+    "path": "/story",
+    "title": "Our Story — The Azure",
+    "isDefault": false,
+    "pageAccess": "Public",
+    "themeLayoutType": "Inner",
+    "changeFrequency": "monthly",
+    "priority": "0.7",
+    "shouldIndex": true
+}

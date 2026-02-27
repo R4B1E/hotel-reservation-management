@@ -1,0 +1,23 @@
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: var(--z-modal); display: flex; align-items: center; justify-content: center; padding: var(--space-6); animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal-panel { background: var(--azure-dark); border: var(--border-thin); display: flex; flex-direction: column; max-height: 90vh; overflow: hidden; animation: slideUp 0.3s var(--ease-luxury); }
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+.modal-panel--sm { width: 440px; }
+.modal-panel--md { width: 640px; }
+.modal-panel--lg { width: 860px; }
+
+.modal-header { display: flex; align-items: center; justify-content: space-between; padding: var(--space-6) var(--space-8); border-bottom: var(--border-thin); }
+
+.modal-title { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 400; color: var(--azure-white); letter-spacing: var(--tracking-tight); margin: 0; }
+
+.modal-close { background: none; border: none; color: var(--azure-silver); font-size: var(--text-base); cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; transition: color var(--duration-fast); }
+.modal-close:hover { color: var(--azure-gold); }
+
+.modal-body { padding: var(--space-8); overflow-y: auto; flex: 1; }
+
+.modal-footer { padding: var(--space-6) var(--space-8); border-top: var(--border-thin); display: flex; gap: var(--space-4); justify-content: flex-end; }
+
+@media (max-width: 700px) { .modal-panel--sm, .modal-panel--md, .modal-panel--lg { width: 100%; } }

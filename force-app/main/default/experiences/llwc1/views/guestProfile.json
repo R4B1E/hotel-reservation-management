@@ -1,0 +1,38 @@
+{
+    "view": {
+        "label": "My Profile",
+        "type": "default"
+    },
+    "regions": [
+        {
+            "name": "header",
+            "components": [
+                {
+                    "id": "guestProfile_header",
+                    "componentName": "c:azureNavbar",
+                    "attributes": {}
+                }
+            ]
+        },
+        {
+            "name": "main",
+            "components": [
+                {
+                    "id": "guest_profile",
+                    "componentName": "c:azureGuestProfile",
+                    "attributes": {}
+                }
+            ]
+        },
+        {
+            "name": "footer",
+            "components": [
+                {
+                    "id": "guestProfile_footer",
+                    "componentName": "c:azureFooter",
+                    "attributes": {}
+                }
+            ]
+        }
+    ]
+}

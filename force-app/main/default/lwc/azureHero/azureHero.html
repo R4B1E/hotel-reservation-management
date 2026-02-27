@@ -1,0 +1,28 @@
+<template>
+    <section class="hero">
+        <!-- Background Image -->
+        <div class="hero-bg" style={heroStyle}></div>
+        <div class="hero-overlay"></div>
+
+        <!-- Content -->
+        <div class="hero-content">
+            <p class="hero-location">Santorini, Greece</p>
+            <h1 class="hero-headline">
+                <em class="hero-headline--italic">Sanctuary of</em>
+                <span class="hero-headline--bold">Serenity</span>
+            </h1>
+            <p class="hero-tagline">Where time stands still and the Aegean Sea whispers ancient secrets.</p>
+
+            <div class="hero-cta">
+                <c-azure-button label="Explore Rooms" variant="primary" show-arrow="true" onbuttonclick={handleExplore}></c-azure-button>
+                <c-azure-button label="Our Story" variant="ghost" onbuttonclick={handleStory}></c-azure-button>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="hero-scroll">
+            <span class="scroll-label">Scroll</span>
+            <span class="scroll-line"></span>
+        </div>
+    </section>
+</template>

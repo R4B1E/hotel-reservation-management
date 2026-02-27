@@ -1,0 +1,11 @@
+{
+    "label": "Booking Confirmed",
+    "path": "/confirmation",
+    "title": "Booking Confirmed — The Azure",
+    "isDefault": false,
+    "pageAccess": "RequireLogin",
+    "themeLayoutType": "Inner",
+    "changeFrequency": "never",
+    "priority": "0.0",
+    "shouldIndex": false
+}

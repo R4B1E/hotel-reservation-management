@@ -1,0 +1,75 @@
+/*
+ * THE AZURE — Icon Utilities
+ *
+ * Two ways to use icons:
+ *
+ * 1. Inline SVG sprite (preferred — inherits currentColor):
+ *    <svg class="az-icon az-icon--gold"><use href="/resource/azureTheme/icons/azure-icons.svg#icon-pool"/></svg>
+ *
+ * 2. CSS background (for decorative use):
+ *    <span class="az-icon-bg az-icon-bg--pool"></span>
+ */
+
+/* ── Base icon sizing ── */
+.az-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    flex-shrink: 0;
+    transition: color 200ms ease;
+}
+
+.az-icon--xs  { width: 12px; height: 12px; }
+.az-icon--sm  { width: 16px; height: 16px; }
+.az-icon--md  { width: 20px; height: 20px; }
+.az-icon--lg  { width: 28px; height: 28px; }
+.az-icon--xl  { width: 40px; height: 40px; }
+.az-icon--2xl { width: 56px; height: 56px; }
+
+/* ── Colour variants ── */
+.az-icon--gold   { color: #c9a96e; }
+.az-icon--cream  { color: #f0ebe0; }
+.az-icon--white  { color: #faf8f4; }
+.az-icon--silver { color: #9b9590; }
+.az-icon--black  { color: #0e0e0e; }
+
+/* ── Background image helpers ── */
+.az-icon-bg {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.az-icon-bg--pool       { background-image: url('icon-pool.svg'); }
+.az-icon-bg--spa        { background-image: url('icon-spa.svg'); }
+.az-icon-bg--dining     { background-image: url('icon-dining.svg'); }
+.az-icon-bg--wine       { background-image: url('icon-wine.svg'); }
+.az-icon-bg--concierge  { background-image: url('icon-concierge.svg'); }
+.az-icon-bg--sunset     { background-image: url('icon-sunset.svg'); }
+.az-icon-bg--yoga       { background-image: url('icon-yoga.svg'); }
+.az-icon-bg--transfer   { background-image: url('icon-transfer.svg'); }
+.az-icon-bg--bed        { background-image: url('icon-bed.svg'); }
+.az-icon-bg--shower     { background-image: url('icon-shower.svg'); }
+.az-icon-bg--coffee     { background-image: url('icon-coffee.svg'); }
+.az-icon-bg--butler     { background-image: url('icon-butler.svg'); }
+.az-icon-bg--turndown   { background-image: url('icon-turndown.svg'); }
+.az-icon-bg--jacuzzi    { background-image: url('icon-jacuzzi.svg'); }
+.az-icon-bg--helicopter { background-image: url('icon-helicopter.svg'); }
+.az-icon-bg--wifi       { background-image: url('icon-wifi.svg'); }
+.az-icon-bg--climate    { background-image: url('icon-climate.svg'); }
+.az-icon-bg--sea        { background-image: url('icon-sea.svg'); }
+.az-icon-bg--view       { background-image: url('icon-view.svg'); }
+.az-icon-bg--terrace    { background-image: url('icon-terrace.svg'); }
+.az-icon-bg--location   { background-image: url('icon-location.svg'); }
+.az-icon-bg--calendar   { background-image: url('icon-calendar.svg'); }
+.az-icon-bg--user       { background-image: url('icon-user.svg'); }
+.az-icon-bg--star       { background-image: url('icon-star.svg'); }
+.az-icon-bg--lock       { background-image: url('icon-lock.svg'); }
+.az-icon-bg--check      { background-image: url('icon-check.svg'); }
+.az-icon-bg--menu       { background-image: url('icon-menu.svg'); }
+.az-icon-bg--close      { background-image: url('icon-close.svg'); }
+.az-icon-bg--arrow-right { background-image: url('icon-arrow-right.svg'); }
+.az-icon-bg--phone      { background-image: url('icon-phone.svg'); }
+.az-icon-bg--email      { background-image: url('icon-email.svg'); }

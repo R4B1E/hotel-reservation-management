@@ -1,0 +1,68 @@
+{
+  "appPageId" : "619c0306-581b-4f1e-9794-35c96243845a",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "9c854080-049c-4e7c-8aec-beb569d66967",
+  "label" : "azureCheckoutPage",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "c7289c0b-ebd0-4006-944a-8ef984c19509",
+          "columns" : [ {
+            "UUID" : "5ccea0f4-f1ef-43a6-a4e0-a1cbf4f0bc93",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "c7289c0b-ebd0-4006-944a-8ef984c19509",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : { },
+          "componentName" : "c:azureCheckoutApp",
+          "id" : "a61d2a75-fa16-4c33-b37d-dc4c024a41d0",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "5ccea0f4-f1ef-43a6-a4e0-a1cbf4f0bc93",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "a7019472-8f42-4bf7-9ffa-1c16bc174e38",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "azureCheckoutPage"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "02f63e7c-7dbc-4f5a-99a2-64b3047a8225",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "9c9e83da-964f-462d-ade5-c48c697c1663",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-azurecheckoutpage"
+}

@@ -1,0 +1,42 @@
+<template>
+    <div class="my-reservations">
+        <div class="page-header">
+            <p class="page-eyebrow">My Account</p>
+            <h1 class="page-title">
+                <em>Your</em>
+                <span>Reservations</span>
+            </h1>
+        </div>
+
+        <div class="reservations-tabs">
+            <button class={upcomingTabClass} data-tab="upcoming" onclick={handleTab}>Upcoming</button>
+            <button class={pastTabClass} data-tab="past" onclick={handleTab}>Past Stays</button>
+        </div>
+
+        <template if:true={isLoading}>
+            <div class="res-loading">
+                <div class="loading-spinner"></div>
+            </div>
+        </template>
+
+        <template if:false={isLoading}>
+            <div class="reservations-list">
+                <template for:each={displayedReservations} for:item="res">
+                    <c-azure-reservation-tile key={res.id} reservation={res}
+                        onmodify={handleModify}
+                        oncancel={handleCancel}
+                        onrebook={handleRebook}>
+                    </c-azure-reservation-tile>
+                </template>
+
+                <template if:true={noReservations}>
+                    <div class="no-reservations">
+                        <p class="no-res-title">No {activeTab} reservations</p>
+                        <p class="no-res-sub">Ready to plan your next escape?</p>
+                        <c-azure-button label="Explore Rooms" variant="primary" show-arrow="true"></c-azure-button>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,54 @@
+{
+  "appPageId" : "619c0306-581b-4f1e-9794-35c96243845a",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "56e2330b-c509-4cb3-a454-53c29a1b9691",
+  "label" : "Home",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:azureApp",
+      "id" : "55606761-88d3-4079-a66c-db1334cccb50",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "988b5d8a-b0bc-400b-bd21-dd8ee1d32394",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "id" : "df7b95e8-15d8-4a15-81c4-9249a4947bd4",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "629b0f97-3103-44b4-bda4-696d89b9e1af",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "TheAzure"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "c1ff3c93-939c-4960-b4c0-7d8a1dc7d3c2",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "5b510262-c5c0-4922-9afb-a9c329e6c7c7",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  }, {
+    "id" : "da03e15f-3b85-4c7e-8803-729916f133c7",
+    "regionName" : "featured",
+    "type" : "region"
+  }, {
+    "id" : "45dadcc8-11ce-4559-bf7a-589f85f4f974",
+    "regionName" : "sidebar",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "home"
+}

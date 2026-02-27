@@ -1,0 +1,11 @@
+{
+    "label": "Location",
+    "path": "/location",
+    "title": "Location — The Azure, Oia Santorini",
+    "isDefault": false,
+    "pageAccess": "Public",
+    "themeLayoutType": "Inner",
+    "changeFrequency": "monthly",
+    "priority": "0.6",
+    "shouldIndex": true
+}

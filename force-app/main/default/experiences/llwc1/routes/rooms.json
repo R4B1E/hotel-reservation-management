@@ -1,0 +1,11 @@
+{
+    "label": "Rooms & Suites",
+    "path": "/rooms",
+    "title": "Rooms & Suites — The Azure",
+    "isDefault": false,
+    "pageAccess": "Public",
+    "themeLayoutType": "Inner",
+    "changeFrequency": "weekly",
+    "priority": "0.9",
+    "shouldIndex": true
+}

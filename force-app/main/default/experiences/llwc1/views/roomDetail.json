@@ -1,0 +1,38 @@
+{
+    "view": {
+        "label": "Room Detail",
+        "type": "default"
+    },
+    "regions": [
+        {
+            "name": "header",
+            "components": [
+                {
+                    "id": "roomDetail_header",
+                    "componentName": "c:azureNavbar",
+                    "attributes": {}
+                }
+            ]
+        },
+        {
+            "name": "main",
+            "components": [
+                {
+                    "id": "roomdetail_main",
+                    "componentName": "c:azureRoomDetail",
+                    "attributes": {}
+                }
+            ]
+        },
+        {
+            "name": "footer",
+            "components": [
+                {
+                    "id": "roomDetail_footer",
+                    "componentName": "c:azureFooter",
+                    "attributes": {}
+                }
+            ]
+        }
+    ]
+}

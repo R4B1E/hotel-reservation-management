@@ -1,0 +1,46 @@
+<template>
+    <header class={headerClass}>
+        <div class="nav-inner">
+            <!-- Logo -->
+            <a href="/" class="nav-logo" onclick={handleLogoClick}>
+                <span class="logo-ring">◯</span>
+                <span class="logo-text">The Azure</span>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="nav-links">
+                <a href="/story" class="nav-link" data-page="story">Story</a>
+                <a href="/rooms" class="nav-link" data-page="rooms">Rooms</a>
+                <a href="/amenities" class="nav-link" data-page="amenities">Amenities</a>
+                <a href="/location" class="nav-link" data-page="location">Location</a>
+            </nav>
+
+            <!-- CTA -->
+            <div class="nav-actions">
+                <a href="/login" class="nav-login">Login</a>
+                <a href="/book" class="nav-book-btn">
+                    <span>Book Stay</span>
+                </a>
+            </div>
+
+            <!-- Hamburger -->
+            <button class="nav-hamburger" onclick={toggleMenu} aria-label="Toggle menu">
+                <span class={menuLine1}></span>
+                <span class={menuLine2}></span>
+                <span class={menuLine3}></span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class={mobileMenuClass}>
+            <nav class="mobile-nav-links">
+                <a href="/story" class="mobile-nav-link">Story</a>
+                <a href="/rooms" class="mobile-nav-link">Rooms</a>
+                <a href="/amenities" class="mobile-nav-link">Amenities</a>
+                <a href="/location" class="mobile-nav-link">Location</a>
+                <a href="/login" class="mobile-nav-link">Login</a>
+                <a href="/book" class="mobile-nav-cta">Book Stay</a>
+            </nav>
+        </div>
+    </header>
+</template>

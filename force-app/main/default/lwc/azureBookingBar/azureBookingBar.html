@@ -1,0 +1,66 @@
+<template>
+    <div class="booking-bar">
+        <div class="booking-bar-inner">
+            <!-- Check-in -->
+            <div class="booking-field" onclick={handleCheckIn}>
+                <label class="field-label">Check-In</label>
+                <div class="field-value">
+                    <span class="field-text">{checkInDisplay}</span>
+                    <span class="field-icon">📅</span>
+                </div>
+                <div class="field-underline"></div>
+            </div>
+
+            <div class="booking-divider"></div>
+
+            <!-- Check-out -->
+            <div class="booking-field" onclick={handleCheckOut}>
+                <label class="field-label">Check-Out</label>
+                <div class="field-value">
+                    <span class="field-text">{checkOutDisplay}</span>
+                    <span class="field-icon">📅</span>
+                </div>
+                <div class="field-underline"></div>
+            </div>
+
+            <div class="booking-divider"></div>
+
+            <!-- Guests -->
+            <div class="booking-field booking-field--guests" onclick={toggleGuestDropdown}>
+                <label class="field-label">Guests</label>
+                <div class="field-value">
+                    <span class="field-text">{guestSummary}</span>
+                    <span class="field-chevron">{chevronIcon}</span>
+                </div>
+                <div class="field-underline"></div>
+
+                <!-- Guest dropdown -->
+                <template if:true={guestDropdownOpen}>
+                    <div class="guest-dropdown">
+                        <div class="guest-row">
+                            <span class="guest-type">Adults</span>
+                            <div class="guest-counter">
+                                <button class="counter-btn" onclick={decrementAdults}>−</button>
+                                <span class="counter-val">{adults}</span>
+                                <button class="counter-btn" onclick={incrementAdults}>+</button>
+                            </div>
+                        </div>
+                        <div class="guest-row">
+                            <span class="guest-type">Children</span>
+                            <div class="guest-counter">
+                                <button class="counter-btn" onclick={decrementChildren}>−</button>
+                                <span class="counter-val">{children}</span>
+                                <button class="counter-btn" onclick={incrementChildren}>+</button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- CTA -->
+            <button class="booking-cta" onclick={handleSearch}>
+                <span>Check Availability</span>
+            </button>
+        </div>
+    </div>
+</template>

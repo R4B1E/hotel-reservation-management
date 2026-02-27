@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="backgroundImage" type="String" label="Background Image URL"/>
+            <property name="headlineItalic"  type="String" default="Sanctuary of"  label="Headline — Italic Line"/>
+            <property name="headlineBold"    type="String" default="Serenity"       label="Headline — Bold Line"/>
+            <property name="tagline"         type="String" default="Where time stands still and the Aegean Sea whispers ancient secrets." label="Tagline"/>
+            <property name="location"        type="String" default="Santorini, Greece" label="Location Label"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

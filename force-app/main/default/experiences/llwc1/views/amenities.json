@@ -1,0 +1,38 @@
+{
+    "view": {
+        "label": "Amenities",
+        "type": "default"
+    },
+    "regions": [
+        {
+            "name": "header",
+            "components": [
+                {
+                    "id": "amenities_header",
+                    "componentName": "c:azureNavbar",
+                    "attributes": {}
+                }
+            ]
+        },
+        {
+            "name": "main",
+            "components": [
+                {
+                    "id": "amenities_section",
+                    "componentName": "c:azureAmenitiesSection",
+                    "attributes": {}
+                }
+            ]
+        },
+        {
+            "name": "footer",
+            "components": [
+                {
+                    "id": "amenities_footer",
+                    "componentName": "c:azureFooter",
+                    "attributes": {}
+                }
+            ]
+        }
+    ]
+}

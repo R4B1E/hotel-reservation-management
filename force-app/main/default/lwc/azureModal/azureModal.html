@@ -1,0 +1,19 @@
+<template>
+    <div class="modal-overlay" onclick={handleOverlayClick}>
+        <div class={modalClass} onclick={stopProp}>
+            <div class="modal-header">
+                <h3 class="modal-title">{title}</h3>
+                <button class="modal-close" onclick={handleClose}>✕</button>
+            </div>
+            <div class="modal-body">
+                <slot></slot>
+            </div>
+            <template if:false={hideFooter}>
+                <div class="modal-footer">
+                    <c-azure-button label={cancelLabel} variant="ghost" onbuttonclick={handleClose}></c-azure-button>
+                    <c-azure-button label={confirmLabel} variant="primary" onbuttonclick={handleConfirm}></c-azure-button>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

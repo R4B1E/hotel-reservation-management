@@ -1,0 +1,35 @@
+<template>
+    <section class="story-section">
+        <div class="story-inner">
+            <div class="story-text">
+                <p class="story-eyebrow">Our Story</p>
+                <h2 class="story-headline">
+                    <em>Born from</em>
+                    <span>Volcanic Stone</span>
+                </h2>
+                <p class="story-body">The Azure began as a dream — a single cave house perched above the caldera, discovered in 1987 by architect Elena Vassilou. What started as a personal sanctuary evolved, stone by stone, into one of the Aegean's most intimate retreats.</p>
+                <p class="story-body">Every wall tells the story of the earth that formed it. Every view is a meditation. We do not compete with nature; we surrender to it.</p>
+                <div class="story-signature">— Elena Vassilou, Founder</div>
+                <c-azure-button label="Read the Full Story" variant="secondary" show-arrow="true"></c-azure-button>
+            </div>
+            <div class="story-visual">
+                <div class="story-image story-image--main" style={mainImageStyle}></div>
+                <div class="story-image story-image--accent" style={accentImageStyle}></div>
+                <div class="story-stat-box">
+                    <span class="stat-num">37</span>
+                    <span class="stat-lbl">Years of Excellence</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Horizontal Stats Bar -->
+        <div class="story-stats-bar">
+            <template for:each={stats} for:item="stat">
+                <div key={stat.label} class="stats-item">
+                    <span class="stats-num">{stat.value}</span>
+                    <span class="stats-lbl">{stat.label}</span>
+                </div>
+            </template>
+        </div>
+    </section>
+</template>

@@ -1,0 +1,47 @@
+<template>
+    <section class="rooms-section">
+        <div class="section-header">
+            <p class="section-eyebrow">Accommodations</p>
+            <h2 class="section-title">
+                <em>Rooms &amp;</em>
+                <span>Suites</span>
+            </h2>
+            <p class="section-subtitle">Each space is a private sanctuary, thoughtfully designed to merge Cycladean tradition with modern luxury.</p>
+        </div>
+
+        <!-- Filters -->
+        <div class="rooms-filters">
+            <template for:each={categories} for:item="cat">
+                <button
+                    key={cat.value}
+                    class={cat.cssClass}
+                    data-value={cat.value}
+                    onclick={handleFilter}
+                >{cat.label}</button>
+            </template>
+        </div>
+
+        <!-- Loading -->
+        <template if:true={isLoading}>
+            <div class="rooms-loading">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Curating your experience…</p>
+            </div>
+        </template>
+
+        <!-- Grid -->
+        <template if:false={isLoading}>
+            <div class="rooms-grid">
+                <template for:each={filteredRooms} for:item="room">
+                    <c-azure-room-card key={room.id} room={room} onroomselect={handleRoomSelect}></c-azure-room-card>
+                </template>
+            </div>
+
+            <template if:true={noResults}>
+                <div class="no-results">
+                    <p>No rooms found for the selected filter.</p>
+                </div>
+            </template>
+        </template>
+    </section>
+</template>

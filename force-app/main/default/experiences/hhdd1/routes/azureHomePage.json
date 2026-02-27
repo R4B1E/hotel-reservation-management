@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "18927b34-8f7c-4f37-b29e-5e20e1a8e229",
+  "appPageId" : "619c0306-581b-4f1e-9794-35c96243845a",
+  "configurationTags" : [ ],
+  "devName" : "azureHomePage__c",
+  "id" : "67a60e55-73d8-498e-ad42-84395a149b6c",
+  "label" : "azureHomePage",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-azurehomepage",
+  "type" : "route",
+  "urlPrefix" : "azurehomepage"
+}

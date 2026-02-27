@@ -1,0 +1,89 @@
+/* =============================================
+   THE AZURE — Global Design Tokens
+   Luxury Hotel · Santorini, Greece
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Raleway:wght@200;300;400;500;600&family=Playfair+Display:ital@1&display=swap');
+
+:root {
+  /* Color Palette */
+  --azure-black:        #0e0e0e;
+  --azure-charcoal:     #1a1918;
+  --azure-dark:         #242220;
+  --azure-mid:          #2e2b28;
+  --azure-warm-gray:    #5a5550;
+  --azure-silver:       #9b9590;
+  --azure-light:        #d6d0c8;
+  --azure-cream:        #f0ebe0;
+  --azure-white:        #faf8f4;
+
+  --azure-gold:         #c9a96e;
+  --azure-gold-light:   #dfc28f;
+  --azure-gold-dark:    #a8863f;
+  --azure-gold-muted:   #8c6e3d;
+
+  --azure-accent:       #7a9cad;   /* muted Aegean blue */
+
+  /* Typography */
+  --font-display:       'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-body:          'Raleway', 'Gill Sans', sans-serif;
+
+  --text-xs:    0.625rem;   /* 10px */
+  --text-sm:    0.75rem;    /* 12px */
+  --text-base:  0.875rem;   /* 14px */
+  --text-md:    1rem;       /* 16px */
+  --text-lg:    1.25rem;    /* 20px */
+  --text-xl:    1.5rem;     /* 24px */
+  --text-2xl:   2rem;       /* 32px */
+  --text-3xl:   2.75rem;    /* 44px */
+  --text-4xl:   3.75rem;    /* 60px */
+  --text-5xl:   5rem;       /* 80px */
+  --text-hero:  7rem;       /* 112px */
+
+  --tracking-tight:   -0.02em;
+  --tracking-normal:   0;
+  --tracking-wide:     0.08em;
+  --tracking-wider:    0.16em;
+  --tracking-widest:   0.28em;
+
+  /* Spacing */
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-6:   1.5rem;
+  --space-8:   2rem;
+  --space-10:  2.5rem;
+  --space-12:  3rem;
+  --space-16:  4rem;
+  --space-20:  5rem;
+  --space-24:  6rem;
+  --space-32:  8rem;
+
+  /* Borders */
+  --border-thin:   1px solid rgba(201, 169, 110, 0.3);
+  --border-gold:   1px solid var(--azure-gold);
+  --border-light:  1px solid rgba(240, 235, 224, 0.15);
+
+  /* Shadows */
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.25);
+  --shadow-md:  0 8px 32px rgba(0,0,0,0.4);
+  --shadow-lg:  0 24px 64px rgba(0,0,0,0.6);
+  --shadow-gold: 0 4px 24px rgba(201, 169, 110, 0.2);
+
+  /* Transitions */
+  --ease-luxury:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-dramatic:  cubic-bezier(0.76, 0, 0.24, 1);
+  --duration-fast:  200ms;
+  --duration-base:  400ms;
+  --duration-slow:  700ms;
+  --duration-enter: 1000ms;
+
+  /* Z-index scale */
+  --z-base:    1;
+  --z-raised:  10;
+  --z-nav:     100;
+  --z-overlay: 200;
+  --z-modal:   300;
+  --z-toast:   400;
+}

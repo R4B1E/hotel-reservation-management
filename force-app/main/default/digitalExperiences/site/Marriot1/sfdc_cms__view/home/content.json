@@ -1,0 +1,419 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Home",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "{\"url\":\"/cms/delivery/media/MCODF5WFHMW5APFP2T2Z622B4WUQ\",\"contentKey\":\"MCODF5WFHMW5APFP2T2Z622B4WUQ\",\"altText\":\"\",\"contentType\":\"\",\"bgPosition\":\"center center\",\"bgSizeOrRepeat\":\"/cover\"}",
+            "backgroundImageOverlay" : "rgba(188, 188, 188, 0.36)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "column",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"505fff77-8321-4210-b513-65b7e2950e81\",\"columns\":[{\"UUID\":\"e8ce76d4-c9e7-484c-bfef-7383063cf934\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "center"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "backgroundColor" : "",
+                "isLinkable" : false,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "Discover Our Top Picks For The Month !",
+                "textAlign" : "center",
+                "textColor" : "rgba(47, 47, 47, 0.95)",
+                "textDecoration" : "{\"bold\":true,\"italic\":true,\"underline\":true}",
+                "textDisplayInfo" : "{\"textStyle\":\"heading-xlarge\",\"headingTag\":\"h1\",\"enableOverride\":false}"
+              },
+              "definition" : "dxp_base:textBlock",
+              "id" : "9042659a-4a84-4f6a-b797-ab2e21cc63de",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "backgroundColor" : "rgba(255, 255, 255, 0)",
+                "borderRadius" : 0,
+                "borderWidth" : 0,
+                "buttonDirection" : "horizontal",
+                "buttonGroupAlignment" : "center",
+                "buttonGroupHeight" : 50,
+                "buttonGroupSpacingHorizontal" : "space-evenly",
+                "buttonGroupSpacingVertical" : "space-evenly",
+                "buttonGroupWidth" : 50,
+                "contentPadding" : "none",
+                "contentPosition" : "center",
+                "contentWidth" : 50,
+                "height" : 500,
+                "imageAlignment" : "left",
+                "imageFit" : "cover",
+                "imageInfo" : "{\"imageInfoV1\":{\"url\":\"/sfsites/c/cms/delivery/media/MCSDIBWNCRK5E7BMFXLJY6KKPJZU?lastModifiedDate=Fri Feb 20 11:51:48 GMT 2026\",\"altText\":\"\",\"contentKey\":\"MCSDIBWNCRK5E7BMFXLJY6KKPJZU\",\"contentType\":null}}",
+                "imagePortion" : "50%",
+                "imagePosition" : "center center",
+                "isLink" : false,
+                "linkAssistiveText" : "",
+                "linkUrl" : "",
+                "showButtons" : true,
+                "showSecondaryButton" : true,
+                "singleButtonAlignment" : "center",
+                "width" : 100
+              },
+              "children" : [ {
+                "children" : [ {
+                  "attributes" : {
+                    "backgroundColor" : "",
+                    "isLinkable" : false,
+                    "linkAssistiveText" : "",
+                    "paddingHorizontal" : "none",
+                    "paddingVertical" : "none",
+                    "text" : "The Skyline Sanctuary",
+                    "textAlign" : "center",
+                    "textDecoration" : "{\"bold\":true}",
+                    "textDisplayInfo" : "{\"headingTag\": \"h1\", \"textStyle\": \"heading-large\"}"
+                  },
+                  "definition" : "dxp_base:textBlock",
+                  "id" : "05b63cf2-3ce6-449c-8c3f-5c7cc12c4918",
+                  "type" : "component"
+                }, {
+                  "attributes" : {
+                    "backgroundColor" : "",
+                    "isLinkable" : false,
+                    "linkAssistiveText" : "",
+                    "paddingHorizontal" : "none",
+                    "paddingVertical" : "none",
+                    "text" : "Room Description ",
+                    "textAlign" : "center",
+                    "textDecoration" : "{}",
+                    "textDisplayInfo" : "{\"headingTag\": \"h3\", \"textStyle\": \"heading-medium\"}"
+                  },
+                  "definition" : "dxp_base:textBlock",
+                  "id" : "ac0d8300-5c78-411a-88b4-03c1bcf608d8",
+                  "type" : "component"
+                } ],
+                "id" : "c4090876-fa45-4cac-a903-5100033fcbb0",
+                "name" : "contentRegion",
+                "title" : "Content Region",
+                "type" : "region"
+              }, {
+                "children" : [ {
+                  "attributes" : {
+                    "alignment" : "center",
+                    "size" : "standard",
+                    "stretch" : "standard",
+                    "text" : "Learn More",
+                    "type" : "primary"
+                  },
+                  "definition" : "dxp_base:button",
+                  "id" : "f732c61e-1c40-4072-a0e8-92bd3dd5081f",
+                  "type" : "component"
+                } ],
+                "id" : "164a1d1c-5d58-438e-af9d-eaf80582b711",
+                "name" : "primaryButton",
+                "title" : "primaryButton",
+                "type" : "region"
+              }, {
+                "children" : [ {
+                  "attributes" : {
+                    "alignment" : "center",
+                    "size" : "standard",
+                    "stretch" : "standard",
+                    "text" : "Book Now",
+                    "type" : "secondary"
+                  },
+                  "definition" : "dxp_base:button",
+                  "id" : "d829596a-387a-477d-8aaf-bd58377a535e",
+                  "type" : "component"
+                } ],
+                "id" : "751e423d-a49f-41a2-9018-a6bf29f27dbf",
+                "name" : "secondaryButton",
+                "title" : "secondaryButton",
+                "type" : "region"
+              }, {
+                "children" : [ {
+                  "attributes" : { },
+                  "definition" : "dxp_page_layout:placeHolder",
+                  "id" : "71b67fc7-7121-4659-a9b1-a981277c74b4",
+                  "type" : "component"
+                } ],
+                "id" : "386e3f19-4f6a-48c0-8bbc-64fc546a6b80",
+                "name" : "placeholder",
+                "title" : "placeholder",
+                "type" : "region"
+              } ],
+              "definition" : "dxp_content_layout:card",
+              "id" : "d37a5b2e-4034-4ab7-870b-4a125f97f9b7",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "backgroundColor" : "rgba(255, 255, 255, 0)",
+                "borderRadius" : 0,
+                "borderWidth" : 0,
+                "buttonDirection" : "horizontal",
+                "buttonGroupAlignment" : "center",
+                "buttonGroupHeight" : 50,
+                "buttonGroupSpacingHorizontal" : "space-evenly",
+                "buttonGroupSpacingVertical" : "space-evenly",
+                "buttonGroupWidth" : 50,
+                "contentPadding" : "none",
+                "contentPosition" : "center",
+                "contentWidth" : 50,
+                "height" : 500,
+                "imageAlignment" : "left",
+                "imageFit" : "cover",
+                "imageInfo" : "{\"imageInfoV1\":{\"url\":\"/sfsites/c/cms/delivery/media/MCAMUB3XN7FRESTFDMRH6Q76E4LA?lastModifiedDate=Fri Feb 20 11:51:48 GMT 2026\",\"altText\":\"\",\"contentKey\":\"MCAMUB3XN7FRESTFDMRH6Q76E4LA\",\"contentType\":null}}",
+                "imagePortion" : "50%",
+                "imagePosition" : "center center",
+                "isLink" : false,
+                "linkAssistiveText" : "",
+                "linkUrl" : "",
+                "showButtons" : true,
+                "showSecondaryButton" : true,
+                "singleButtonAlignment" : "center",
+                "width" : 100
+              },
+              "children" : [ {
+                "children" : [ {
+                  "attributes" : {
+                    "backgroundColor" : "",
+                    "isLinkable" : false,
+                    "linkAssistiveText" : "",
+                    "paddingHorizontal" : "none",
+                    "paddingVertical" : "none",
+                    "text" : "The Heritage Hideaway",
+                    "textAlign" : "center",
+                    "textDecoration" : "{\"bold\":true}",
+                    "textDisplayInfo" : "{\"headingTag\": \"h1\", \"textStyle\": \"heading-large\"}"
+                  },
+                  "definition" : "dxp_base:textBlock",
+                  "id" : "b9b888a0-0a4c-4ba4-af49-cb5e05eb3bc6",
+                  "type" : "component"
+                }, {
+                  "attributes" : {
+                    "backgroundColor" : "",
+                    "isLinkable" : false,
+                    "linkAssistiveText" : "",
+                    "paddingHorizontal" : "none",
+                    "paddingVertical" : "none",
+                    "text" : "Room Description",
+                    "textAlign" : "center",
+                    "textDecoration" : "{}",
+                    "textDisplayInfo" : "{\"headingTag\": \"h3\", \"textStyle\": \"heading-medium\"}"
+                  },
+                  "definition" : "dxp_base:textBlock",
+                  "id" : "20408c8c-cbaa-4336-b4bb-eb7700887579",
+                  "type" : "component"
+                } ],
+                "id" : "67fde66d-9103-4baf-a61f-2ae212f3dfb6",
+                "name" : "contentRegion",
+                "title" : "Content Region",
+                "type" : "region"
+              }, {
+                "children" : [ {
+                  "attributes" : {
+                    "alignment" : "center",
+                    "size" : "standard",
+                    "stretch" : "standard",
+                    "text" : "Learn More",
+                    "type" : "primary"
+                  },
+                  "definition" : "dxp_base:button",
+                  "id" : "f180a1d5-8382-4e17-92f9-bbb458bc8397",
+                  "type" : "component"
+                } ],
+                "id" : "daa228a0-504c-4432-a396-2e0af6b5ff05",
+                "name" : "primaryButton",
+                "title" : "primaryButton",
+                "type" : "region"
+              }, {
+                "children" : [ {
+                  "attributes" : {
+                    "alignment" : "center",
+                    "size" : "standard",
+                    "stretch" : "standard",
+                    "text" : "Book Now",
+                    "type" : "secondary"
+                  },
+                  "definition" : "dxp_base:button",
+                  "id" : "c6a29cad-b99b-4fd3-be23-a775bcbfa1f2",
+                  "type" : "component"
+                } ],
+                "id" : "2eeecd0b-1557-424e-8094-1b5f3fec71c7",
+                "name" : "secondaryButton",
+                "title" : "secondaryButton",
+                "type" : "region"
+              }, {
+                "children" : [ {
+                  "attributes" : { },
+                  "definition" : "dxp_page_layout:placeHolder",
+                  "id" : "c04fd9a8-63dd-4a41-9548-64661b91185e",
+                  "type" : "component"
+                } ],
+                "id" : "db5a2e3d-99b7-46df-87b1-ea7ff7ff2b48",
+                "name" : "placeholder",
+                "title" : "placeholder",
+                "type" : "region"
+              } ],
+              "definition" : "dxp_content_layout:card",
+              "id" : "06511d6e-17aa-4ffc-a9ff-48672228685e",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "backgroundColor" : "rgba(247, 247, 247, 0)",
+                "borderRadius" : 0,
+                "borderWidth" : 0,
+                "buttonDirection" : "horizontal",
+                "buttonGroupAlignment" : "center",
+                "buttonGroupHeight" : 50,
+                "buttonGroupSpacingHorizontal" : "space-evenly",
+                "buttonGroupSpacingVertical" : "space-evenly",
+                "buttonGroupWidth" : 50,
+                "contentPadding" : "none",
+                "contentPosition" : "center",
+                "contentWidth" : 50,
+                "height" : 500,
+                "imageAlignment" : "left",
+                "imageFit" : "cover",
+                "imageInfo" : "{\"imageInfoV1\":{\"url\":\"/sfsites/c/cms/delivery/media/MCEE6BXXDZ4JFH5NVF47WJ77VIQU?lastModifiedDate=Fri Feb 20 11:51:48 GMT 2026\",\"altText\":\"\",\"contentKey\":\"MCEE6BXXDZ4JFH5NVF47WJ77VIQU\",\"contentType\":null}}",
+                "imagePortion" : "50%",
+                "imagePosition" : "center center",
+                "isLink" : false,
+                "linkAssistiveText" : "",
+                "linkUrl" : "",
+                "overlayColor" : "rgba(255, 255, 255, 0)",
+                "showButtons" : true,
+                "showSecondaryButton" : true,
+                "singleButtonAlignment" : "center",
+                "width" : 100
+              },
+              "children" : [ {
+                "children" : [ {
+                  "attributes" : {
+                    "backgroundColor" : "",
+                    "isLinkable" : false,
+                    "linkAssistiveText" : "",
+                    "paddingHorizontal" : "none",
+                    "paddingVertical" : "none",
+                    "text" : "Executive Flow Studio",
+                    "textAlign" : "center",
+                    "textDecoration" : "{}",
+                    "textDisplayInfo" : "{\"headingTag\": \"h1\", \"textStyle\": \"heading-large\"}"
+                  },
+                  "definition" : "dxp_base:textBlock",
+                  "id" : "4c541fa5-8592-461a-95e6-bb08f02abc95",
+                  "type" : "component"
+                }, {
+                  "attributes" : {
+                    "backgroundColor" : "",
+                    "isLinkable" : false,
+                    "linkAssistiveText" : "",
+                    "paddingHorizontal" : "none",
+                    "paddingVertical" : "none",
+                    "text" : "Room Decription",
+                    "textAlign" : "center",
+                    "textDecoration" : "{}",
+                    "textDisplayInfo" : "{\"headingTag\": \"h3\", \"textStyle\": \"heading-medium\"}"
+                  },
+                  "definition" : "dxp_base:textBlock",
+                  "id" : "b6526837-960d-49bd-b700-41572c78fe4f",
+                  "type" : "component"
+                } ],
+                "id" : "26192e1c-7d36-4536-999d-bc7e1995ebe6",
+                "name" : "contentRegion",
+                "title" : "Content Region",
+                "type" : "region"
+              }, {
+                "children" : [ {
+                  "attributes" : {
+                    "alignment" : "center",
+                    "size" : "standard",
+                    "stretch" : "standard",
+                    "text" : "Learn More",
+                    "type" : "primary"
+                  },
+                  "definition" : "dxp_base:button",
+                  "id" : "7c435ee6-61bc-4491-b41c-f19269fdff75",
+                  "type" : "component"
+                } ],
+                "id" : "be9ed8c0-04cb-4815-b8b3-2023983cbf03",
+                "name" : "primaryButton",
+                "title" : "primaryButton",
+                "type" : "region"
+              }, {
+                "children" : [ {
+                  "attributes" : {
+                    "alignment" : "center",
+                    "size" : "standard",
+                    "stretch" : "standard",
+                    "text" : "Book Now",
+                    "type" : "secondary",
+                    "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{}}}}"
+                  },
+                  "definition" : "dxp_base:button",
+                  "id" : "ee7443e3-e85f-4f87-8da7-10a3d8db320e",
+                  "type" : "component"
+                } ],
+                "id" : "3829c697-48f0-415a-8845-e91f4d957378",
+                "name" : "secondaryButton",
+                "title" : "secondaryButton",
+                "type" : "region"
+              }, {
+                "children" : [ {
+                  "attributes" : { },
+                  "definition" : "dxp_page_layout:placeHolder",
+                  "id" : "097a9431-f37e-472e-9966-60048fdf9972",
+                  "type" : "component"
+                } ],
+                "id" : "e45e2b7a-0a10-4dea-baf7-e1a168238f29",
+                "name" : "placeholder",
+                "title" : "placeholder",
+                "type" : "region"
+              } ],
+              "definition" : "dxp_content_layout:card",
+              "id" : "41aeebeb-6abb-4f4a-a02c-bf405310915b",
+              "type" : "component"
+            } ],
+            "id" : "e8ce76d4-c9e7-484c-bfef-7383063cf934",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "505fff77-8321-4210-b513-65b7e2950e81",
+          "type" : "component"
+        } ],
+        "id" : "9696ebf5-29b0-4366-aaa5-dd7542ea2469",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "pageTitle" : "Home",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "e0511c2a-4902-4789-a9e0-8bddf32fdb4a",
+          "type" : "component"
+        } ],
+        "id" : "d306c546-7764-49d1-91df-6c8c38cd4560",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "22406919-99b3-447a-a7e0-756bd9bfd021",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "home"
+  },
+  "urlName" : "home"
+}

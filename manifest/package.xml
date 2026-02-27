@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <version>65.0</version>
+
+    <!-- ── Lightning Web Components ── -->
+    <types>
+        <members>azureNavbar</members>
+        <members>azureFooter</members>
+        <members>azureHero</members>
+        <members>azureBookingBar</members>
+        <members>azureDatePicker</members>
+        <members>azureGuestSelector</members>
+        <members>azureAvailabilityResults</members>
+        <members>azureRoomCard</members>
+        <members>azureRoomGrid</members>
+        <members>azureRoomDetail</members>
+        <members>azureAmenitiesSection</members>
+        <members>azureAmenityCard</members>
+        <members>azureStorySection</members>
+        <members>azureLocationMap</members>
+        <members>azureReservationSummary</members>
+        <members>azureGuestForm</members>
+        <members>azurePaymentForm</members>
+        <members>azureConfirmation</members>
+        <members>azureMyReservations</members>
+        <members>azureReservationTile</members>
+        <members>azureGuestProfile</members>
+        <members>azureButton</members>
+        <members>azureModal</members>
+        <members>azureToast</members>
+        <name>LightningComponentBundle</name>
+    </types>
+
+    <!-- ── Apex Classes ── -->
+    <types>
+        <members>HotelRoomController</members>
+        <members>ReservationController</members>
+        <members>GuestProfileController</members>
+        <name>ApexClass</name>
+    </types>
+
+    <!-- ── Custom Objects ── -->
+    <types>
+        <members>Hotel_Room__c</members>
+        <members>Reservation__c</members>
+        <members>Room_Amenity__c</members>
+        <name>CustomObject</name>
+    </types>
+
+    <!-- ── Custom Fields — Hotel_Room__c ── -->
+    <types>
+        <members>Hotel_Room__c.Category__c</members>
+        <members>Hotel_Room__c.Price_Per_Night__c</members>
+        <members>Hotel_Room__c.Short_Description__c</members>
+        <members>Hotel_Room__c.Full_Description__c</members>
+        <members>Hotel_Room__c.Square_Meters__c</members>
+        <members>Hotel_Room__c.Max_Guests__c</members>
+        <members>Hotel_Room__c.Bed_Type__c</members>
+        <members>Hotel_Room__c.View_Type__c</members>
+        <members>Hotel_Room__c.Is_Featured__c</members>
+        <members>Hotel_Room__c.Is_Active__c</members>
+        <members>Hotel_Room__c.Primary_Image_URL__c</members>
+        <members>Hotel_Room__c.Tagline__c</members>
+        <name>CustomField</name>
+    </types>
+
+    <!-- ── Custom Fields — Reservation__c ── -->
+    <types>
+        <members>Reservation__c.Room__c</members>
+        <members>Reservation__c.Contact__c</members>
+        <members>Reservation__c.Confirmation_Number__c</members>
+        <members>Reservation__c.Check_In_Date__c</members>
+        <members>Reservation__c.Check_Out_Date__c</members>
+        <members>Reservation__c.Adults__c</members>
+        <members>Reservation__c.Children__c</members>
+        <members>Reservation__c.Nights__c</members>
+        <members>Reservation__c.Room_Rate__c</members>
+        <members>Reservation__c.Subtotal__c</members>
+        <members>Reservation__c.Taxes__c</members>
+        <members>Reservation__c.Total__c</members>
+        <members>Reservation__c.Status__c</members>
+        <members>Reservation__c.Guest_First_Name__c</members>
+        <members>Reservation__c.Guest_Last_Name__c</members>
+        <members>Reservation__c.Guest_Email__c</members>
+        <members>Reservation__c.Guest_Phone__c</members>
+        <members>Reservation__c.Special_Requests__c</members>
+        <name>CustomField</name>
+    </types>
+
+    <!-- ── Custom Fields — Room_Amenity__c ── -->
+    <types>
+        <members>Room_Amenity__c.Room__c</members>
+        <members>Room_Amenity__c.Icon__c</members>
+        <members>Room_Amenity__c.Icon_Key__c</members>
+        <members>Room_Amenity__c.Category__c</members>
+        <members>Room_Amenity__c.Sort_Order__c</members>
+        <members>Room_Amenity__c.Is_Highlight__c</members>
+        <members>Room_Amenity__c.Short_Description__c</members>
+        <name>CustomField</name>
+    </types>
+
+    <!-- ── Custom Fields — Contact (guest profile) ── -->
+    <types>
+        <members>Contact.Guest_Tier__c</members>
+        <members>Contact.Member_Since__c</members>
+        <members>Contact.Total_Stays__c</members>
+        <members>Contact.Total_Nights__c</members>
+        <members>Contact.Guest_Preferences__c</members>
+        <name>CustomField</name>
+    </types>
+
+    <!-- ── Static Resource ── -->
+    <types>
+        <members>azureTheme</members>
+        <name>StaticResource</name>
+    </types>
+
+    <!-- ── Experience Bundle (LWR site) ── -->
+    <types>
+        <members>llwc1</members>
+        <name>ExperienceBundle</name>
+    </types>
+
+</Package>

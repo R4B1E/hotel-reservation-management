@@ -1,0 +1,44 @@
+<template>
+    <div class="payment-form">
+        <h3 class="form-heading">Secure Payment</h3>
+        <div class="payment-notice">
+            <span class="notice-icon">🔒</span>
+            <span class="notice-text">Your payment information is encrypted and secure.</span>
+        </div>
+
+        <div class="form-row">
+            <div class="form-field form-field--full">
+                <label class="field-lbl">Cardholder Name</label>
+                <input class="field-input" type="text" placeholder="Name as it appears on card" data-field="cardName" onchange={handleChange}/>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-field form-field--full">
+                <label class="field-lbl">Card Number</label>
+                <input class="field-input" type="text" placeholder="•••• •••• •••• ••••" maxlength="19" data-field="cardNumber" onchange={handleChange} onkeyup={formatCardNumber}/>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-field">
+                <label class="field-lbl">Expiry Date</label>
+                <input class="field-input" type="text" placeholder="MM / YY" maxlength="7" data-field="expiry" onchange={handleChange}/>
+            </div>
+            <div class="form-field">
+                <label class="field-lbl">CVV</label>
+                <input class="field-input" type="password" placeholder="•••" maxlength="4" data-field="cvv" onchange={handleChange}/>
+            </div>
+        </div>
+
+        <div class="payment-methods">
+            <span class="method-label">Accepted:</span>
+            <div class="method-icons">
+                <span class="method-icon">VISA</span>
+                <span class="method-icon">MC</span>
+                <span class="method-icon">AMEX</span>
+                <span class="method-icon">PayPal</span>
+            </div>
+        </div>
+    </div>
+</template>

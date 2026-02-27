@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="mainImageUrl"   type="String" label="Main Story Image URL"/>
+            <property name="accentImageUrl" type="String" label="Accent Image URL"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

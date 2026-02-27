@@ -1,0 +1,32 @@
+{
+    "appConfiguration": {
+        "isAvailableToGuests": true,
+        "authenticationType": "AUTHENTICATED",
+        "headMarkup": "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Raleway:wght@200;300;400;500;600&display=swap\" rel=\"stylesheet\">",
+        "navigationMenus": {
+            "mainNav": {
+                "label": "Main Navigation",
+                "menuItems": [
+                    { "label": "Story",      "target": "/theazure/story",     "type": "InternalLink" },
+                    { "label": "Rooms",      "target": "/theazure/rooms",     "type": "InternalLink" },
+                    { "label": "Amenities",  "target": "/theazure/amenities", "type": "InternalLink" },
+                    { "label": "Location",   "target": "/theazure/location",  "type": "InternalLink" }
+                ]
+            }
+        },
+        "branding": {
+            "primaryColor":   "#c9a96e",
+            "secondaryColor": "#1a1918",
+            "bodyTextColor":  "#f0ebe0",
+            "backgroundColor":"#0e0e0e",
+            "primaryFont":    "Cormorant Garamond, Georgia, serif",
+            "bodyFont":       "Raleway, sans-serif"
+        },
+        "cspSettings": {
+            "trustedSites": [
+                "https://fonts.googleapis.com",
+                "https://fonts.gstatic.com"
+            ]
+        }
+    }
+}

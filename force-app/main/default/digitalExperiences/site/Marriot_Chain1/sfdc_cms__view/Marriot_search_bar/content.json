@@ -1,0 +1,58 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Marriot search bar",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"94acd3c7-ead2-4f78-ac74-3e0aef857a57\",\"columns\":[{\"UUID\":\"9224ab06-5c4c-4a8f-bb05-7a7f807278e6\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "id" : "9224ab06-5c4c-4a8f-bb05-7a7f807278e6",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "94acd3c7-ead2-4f78-ac74-3e0aef857a57",
+          "type" : "component"
+        } ],
+        "id" : "94b63e0d-716d-4e62-9d21-88f8294328f7",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "d34c95d2-ff60-4dda-8218-917d18a1c742",
+          "type" : "component"
+        } ],
+        "id" : "cb3e9a23-1eef-4e8b-8e41-f714fc1f1dcc",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "e79d50fe-81f3-4a3d-8d0d-44d95bba84c5",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "McYbDsOxUqcBBixzKBBp6rMIAkJmiH",
+    "viewType" : "global-search"
+  },
+  "urlName" : "marriot-search-bar"
+}
