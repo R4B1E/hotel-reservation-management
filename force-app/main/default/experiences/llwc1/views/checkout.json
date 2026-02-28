@@ -1,48 +1,79 @@
 {
-    "view": {
-        "label": "Checkout",
-        "type": "default"
-    },
-    "regions": [
-        {
-            "name": "header",
-            "components": [
-                {
-                    "id": "checkout_header",
-                    "componentName": "c:azureNavbar",
-                    "attributes": {}
-                }
-            ]
-        },
-        {
-            "name": "main",
-            "components": [
-                {
-                    "id": "checkout_summary",
-                    "componentName": "c:azureReservationSummary",
-                    "attributes": {}
-                },
-                {
-                    "id": "checkout_guest",
-                    "componentName": "c:azureGuestForm",
-                    "attributes": {}
-                },
-                {
-                    "id": "checkout_payment",
-                    "componentName": "c:azurePaymentForm",
-                    "attributes": {}
-                }
-            ]
-        },
-        {
-            "name": "footer",
-            "components": [
-                {
-                    "id": "checkout_footer",
-                    "componentName": "c:azureFooter",
-                    "attributes": {}
-                }
-            ]
-        }
-    ]
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "configurationTags" : [ ],
+  "dataProviders" : [ ],
+  "devName" : "Checkout",
+  "id" : "24bd1d6b-5ba6-4301-b44f-8c1fec27a25a",
+  "label" : "Checkout",
+  "viewType" : "custom-checkout",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "themeLayoutType" : "Inner",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:azureNavbar",
+      "id" : "co_navbar",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f1a2b3c4-7001-4000-8001-000000000001",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:azureReservationSummary",
+      "id" : "co_summary",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : { },
+      "componentName" : "c:azureGuestForm",
+      "id" : "co_guest",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : { },
+      "componentName" : "c:azurePaymentForm",
+      "id" : "co_payment",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f1a2b3c4-7001-4000-8001-000000000002",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:azureFooter",
+      "id" : "co_footer",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f1a2b3c4-7001-4000-8001-000000000003",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Checkout"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "5a3f1b9e-6c4d-4e0a-f12b-3d4e5f6a7b8c",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "6b4a2c0f-7d5e-4f1b-a23c-4e5f6a7b8c9d",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "type" : "view"
 }

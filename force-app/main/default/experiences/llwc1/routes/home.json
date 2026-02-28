@@ -1,11 +1,19 @@
 {
-    "label": "Home",
-    "path": "/",
-    "title": "The Azure — Sanctuary of Serenity",
-    "isDefault": true,
-    "pageAccess": "Public",
-    "themeLayoutType": "Inner",
-    "changeFrequency": "daily",
-    "priority": "1.0",
-    "shouldIndex": true
+  "activeViewId" : "b0d4abd9-25a0-4cd4-9868-89d412ddcc26",
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "configurationTags" : [ ],
+  "devName" : "Home",
+  "id" : "3641b0eb-c930-4e62-9e73-06ec21e5c9c4",
+  "isDefault" : true,
+  "label" : "Home",
+  "pageAccess" : "Public",
+  "path" : "",
+  "routeType" : "home",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "title" : "The Azure — Luxury Hotel Santorini",
+  "shouldIndex" : true,
+  "changeFrequency" : "daily",
+  "priority" : "1.0",
+  "type" : "route",
+  "urlPrefix" : "home"
 }

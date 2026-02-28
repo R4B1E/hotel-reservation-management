@@ -1,38 +1,72 @@
 {
-    "view": {
-        "label": "Rooms & Suites",
-        "type": "default"
-    },
-    "regions": [
-        {
-            "name": "header",
-            "components": [
-                {
-                    "id": "rooms_header",
-                    "componentName": "c:azureNavbar",
-                    "attributes": {}
-                }
-            ]
-        },
-        {
-            "name": "main",
-            "components": [
-                {
-                    "id": "rooms_grid",
-                    "componentName": "c:azureRoomGrid",
-                    "attributes": {}
-                }
-            ]
-        },
-        {
-            "name": "footer",
-            "components": [
-                {
-                    "id": "rooms_footer",
-                    "componentName": "c:azureFooter",
-                    "attributes": {}
-                }
-            ]
-        }
-    ]
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "configurationTags" : [ ],
+  "dataProviders" : [ ],
+  "devName" : "Rooms",
+  "id" : "aaea5a19-ae5f-43fd-8cd7-dca61113d7eb",
+  "label" : "Rooms",
+  "viewType" : "custom-rooms",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "themeLayoutType" : "Inner",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:azureNavbar",
+      "id" : "rooms_navbar",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f1a2b3c4-2001-4000-8001-000000000001",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:azureBookingBar",
+      "id" : "rooms_booking",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : { },
+      "componentName" : "c:azureRoomGrid",
+      "id" : "rooms_grid",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f1a2b3c4-2001-4000-8001-000000000002",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:azureFooter",
+      "id" : "rooms_footer",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f1a2b3c4-2001-4000-8001-000000000003",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Rooms"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "5c3b1d9a-6e4f-4a0c-b12d-3f4a5b6c7d8e",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "6d4c2e0b-7f5a-4b1d-c23e-4a5b6c7d8e9f",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "type" : "view"
 }

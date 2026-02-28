@@ -1,0 +1,13 @@
+{
+    "type": "sfdc_cms__languageSettings",
+    "defaultLanguage": "en_US",
+    "enableMultiLanguage": false,
+    "languages": [
+        {
+            "code": "en_US",
+            "label": "English",
+            "isDefault": true,
+            "isActive": true
+        }
+    ]
+}

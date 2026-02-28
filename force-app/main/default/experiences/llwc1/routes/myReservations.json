@@ -1,11 +1,19 @@
 {
-    "label": "My Reservations",
-    "path": "/my-reservations",
-    "title": "My Reservations — The Azure",
-    "isDefault": false,
-    "pageAccess": "RequireLogin",
-    "themeLayoutType": "Inner",
-    "changeFrequency": "never",
-    "priority": "0.0",
-    "shouldIndex": false
+  "activeViewId" : "c6fbc6e4-ed28-411a-b78e-36bdfea6a0b4",
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "configurationTags" : [ ],
+  "devName" : "My_Reservations",
+  "id" : "cf8911c0-9203-4efc-bad1-7edb5260101a",
+  "isDefault" : false,
+  "label" : "My Reservations",
+  "pageAccess" : "RequiresLogin",
+  "path" : "/my-reservations",
+  "routeType" : "custom-my-reservations",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "title" : "My Reservations — The Azure Hotel",
+  "shouldIndex" : false,
+  "changeFrequency" : "never",
+  "priority" : "0.1",
+  "type" : "route",
+  "urlPrefix" : "my-reservations"
 }

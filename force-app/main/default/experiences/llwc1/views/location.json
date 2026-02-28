@@ -1,38 +1,65 @@
 {
-    "view": {
-        "label": "Location",
-        "type": "default"
-    },
-    "regions": [
-        {
-            "name": "header",
-            "components": [
-                {
-                    "id": "location_header",
-                    "componentName": "c:azureNavbar",
-                    "attributes": {}
-                }
-            ]
-        },
-        {
-            "name": "main",
-            "components": [
-                {
-                    "id": "location_map",
-                    "componentName": "c:azureLocationMap",
-                    "attributes": {}
-                }
-            ]
-        },
-        {
-            "name": "footer",
-            "components": [
-                {
-                    "id": "location_footer",
-                    "componentName": "c:azureFooter",
-                    "attributes": {}
-                }
-            ]
-        }
-    ]
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "configurationTags" : [ ],
+  "dataProviders" : [ ],
+  "devName" : "Location",
+  "id" : "eaa0be6c-7de5-44f4-8b18-ad5106db1d36",
+  "label" : "Location",
+  "viewType" : "custom-location",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "themeLayoutType" : "Inner",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:azureNavbar",
+      "id" : "loc_navbar",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f1a2b3c4-6001-4000-8001-000000000001",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:azureLocationMap",
+      "id" : "loc_main",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f1a2b3c4-6001-4000-8001-000000000002",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:azureFooter",
+      "id" : "loc_footer",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f1a2b3c4-6001-4000-8001-000000000003",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Location"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "3e1d9f7c-4a2b-4c8e-d90f-1b2c3d4e5f6a",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "4f2e0a8d-5b3c-4d9f-e01a-2c3d4e5f6a7b",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "type" : "view"
 }

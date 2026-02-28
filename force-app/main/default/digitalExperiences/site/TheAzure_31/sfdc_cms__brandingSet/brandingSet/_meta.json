@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__brandingSet",
+    "label": "The Azure Branding",
+    "apiName": "brandingSet",
+    "description": "Design tokens — gold #c9a96e, charcoal #1a1918, cream #faf8f4 palette with Cormorant Garamond + Raleway fonts"
+}

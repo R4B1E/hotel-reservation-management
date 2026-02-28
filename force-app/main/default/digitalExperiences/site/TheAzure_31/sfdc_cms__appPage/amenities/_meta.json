@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__appPage",
+    "label": "Amenities",
+    "apiName": "amenities",
+    "description": "Page layout for the Amenities page"
+}

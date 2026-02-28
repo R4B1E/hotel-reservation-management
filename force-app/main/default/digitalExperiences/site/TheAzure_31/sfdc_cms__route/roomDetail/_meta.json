@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__route",
+    "label": "Room Detail",
+    "apiName": "roomDetail",
+    "description": "Route for the Room Detail page"
+}

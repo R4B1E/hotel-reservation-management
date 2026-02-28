@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__appPage",
+    "label": "My Profile",
+    "apiName": "guestProfile",
+    "description": "Page layout for the My Profile page"
+}

@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__appPage",
+    "label": "Our Story",
+    "apiName": "story",
+    "description": "Page layout for the Our Story page"
+}

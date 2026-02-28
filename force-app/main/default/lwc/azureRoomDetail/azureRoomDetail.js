@@ -1,6 +1,11 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import { CurrentPageReference } from 'lightning/navigation';
 import { loadAzureTheme } from 'c/azureThemeLoader';
+// TODO: Wire to Apex — replace MOCK_ROOM with live data
+// import getRoomById from '@salesforce/apex/HotelRoomController.getRoomById';
+// import getRoomAmenities from '@salesforce/apex/HotelRoomController.getRoomAmenities';
+// Usage: @wire(getRoomById, { roomId: '$roomId' }) wiredRoom({ data, error }) { ... }
+// Usage: @wire(getRoomAmenities, { roomId: '$roomId' }) wiredAmenities({ data, error }) { ... }
 
 const MOCK_ROOM = {
     id: '1',

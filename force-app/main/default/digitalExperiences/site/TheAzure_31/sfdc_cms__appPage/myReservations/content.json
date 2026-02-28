@@ -1,0 +1,17 @@
+{
+    "type": "sfdc_cms__appPage",
+    "layout": {
+        "regions": [
+            {
+                "name": "content",
+                "components": [
+                    {
+                        "id": "reservations_main",
+                        "componentName": "c:azureMyReservations",
+                        "attributes": {}
+                    }
+                ]
+            }
+        ]
+    }
+}

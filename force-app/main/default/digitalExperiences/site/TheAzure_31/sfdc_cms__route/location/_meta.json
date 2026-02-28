@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__route",
+    "label": "Location",
+    "apiName": "location",
+    "description": "Route for the Location page"
+}

@@ -1,11 +1,19 @@
 {
-    "label": "Room Detail",
-    "path": "/rooms/:roomId",
-    "title": "Room Detail — The Azure",
-    "isDefault": false,
-    "pageAccess": "Public",
-    "themeLayoutType": "Inner",
-    "changeFrequency": "weekly",
-    "priority": "0.8",
-    "shouldIndex": false
+  "activeViewId" : "a1b9065f-2f88-4c30-9190-98cd9ee4bf61",
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "configurationTags" : [ ],
+  "devName" : "Room_Detail",
+  "id" : "0e303268-ae53-426a-8a53-dfb717c254b6",
+  "isDefault" : false,
+  "label" : "Room Detail",
+  "pageAccess" : "Public",
+  "path" : "/rooms/{roomId}",
+  "routeType" : "custom-room-detail",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "title" : "Room Details — The Azure Hotel",
+  "shouldIndex" : true,
+  "changeFrequency" : "weekly",
+  "priority" : "0.8",
+  "type" : "route",
+  "urlPrefix" : "room-detail"
 }

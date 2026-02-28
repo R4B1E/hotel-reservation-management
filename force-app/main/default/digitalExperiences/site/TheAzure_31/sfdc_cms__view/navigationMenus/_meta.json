@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__view",
+    "label": "Navigation Menus",
+    "apiName": "navigationMenus",
+    "description": "Site-wide navigation menu definitions"
+}

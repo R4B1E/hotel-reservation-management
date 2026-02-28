@@ -1,0 +1,4 @@
+{
+    "type": "sfdc_cms__styles",
+    "style": ":root { --dxp-g-root: #0e0e0e; --dxp-g-root-contrast: #faf8f4; --dxp-g-brand-primary: #c9a96e; --dxp-g-brand-primary-contrast: #0e0e0e; --dxp-g-brand-secondary: #1a1918; --dxp-g-brand-secondary-contrast: #faf8f4; --dxp-g-neutral: #2e2b28; --dxp-g-neutral-contrast: #f0ebe0; --dxp-g-root-font-family: 'Raleway', sans-serif; --dxp-g-heading-font-family: 'Cormorant Garamond', Georgia, serif; --dxp-g-root-font-size: 16px; --dxp-g-root-line-height: 1.7; --dxp-g-color-success: #4a7c59; --dxp-g-color-error: #c0392b; --dxp-g-color-warning: #d4a017; --dxp-g-border-color: #2e2b28; --dxp-g-link-color: #c9a96e; --dxp-g-link-color-hover: #e8d5b0; }"
+}

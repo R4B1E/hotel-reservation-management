@@ -1,11 +1,19 @@
 {
-    "label": "Booking Confirmed",
-    "path": "/confirmation",
-    "title": "Booking Confirmed — The Azure",
-    "isDefault": false,
-    "pageAccess": "RequireLogin",
-    "themeLayoutType": "Inner",
-    "changeFrequency": "never",
-    "priority": "0.0",
-    "shouldIndex": false
+  "activeViewId" : "16fe215d-73e7-4e84-be91-374074ca73a1",
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "configurationTags" : [ ],
+  "devName" : "Confirmation",
+  "id" : "23e6e3b3-f514-4b30-b460-ddae7faecb67",
+  "isDefault" : false,
+  "label" : "Confirmation",
+  "pageAccess" : "RequiresLogin",
+  "path" : "/confirmation",
+  "routeType" : "custom-confirmation",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "title" : "Booking Confirmed — The Azure Hotel",
+  "shouldIndex" : false,
+  "changeFrequency" : "never",
+  "priority" : "0.1",
+  "type" : "route",
+  "urlPrefix" : "confirmation"
 }

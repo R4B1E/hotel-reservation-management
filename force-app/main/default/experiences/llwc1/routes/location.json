@@ -1,11 +1,19 @@
 {
-    "label": "Location",
-    "path": "/location",
-    "title": "Location — The Azure, Oia Santorini",
-    "isDefault": false,
-    "pageAccess": "Public",
-    "themeLayoutType": "Inner",
-    "changeFrequency": "monthly",
-    "priority": "0.6",
-    "shouldIndex": true
+  "activeViewId" : "eaa0be6c-7de5-44f4-8b18-ad5106db1d36",
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "configurationTags" : [ ],
+  "devName" : "Location",
+  "id" : "48a63437-b918-44fa-89bd-49e31ae5984b",
+  "isDefault" : false,
+  "label" : "Location",
+  "pageAccess" : "Public",
+  "path" : "/location",
+  "routeType" : "custom-location",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "title" : "Location — The Azure Hotel, Santorini",
+  "shouldIndex" : true,
+  "changeFrequency" : "monthly",
+  "priority" : "0.7",
+  "type" : "route",
+  "urlPrefix" : "location"
 }

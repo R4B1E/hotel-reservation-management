@@ -1,7 +1,19 @@
 import { LightningElement, track } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import { loadAzureTheme } from 'c/azureThemeLoader';
+import basePath from '@salesforce/community/basePath';
 
-export default class AzureNavbar extends LightningElement {
+const PATH_MAP = {
+    home:      '/',
+    story:     '/story',
+    rooms:     '/rooms',
+    amenities: '/amenities',
+    location:  '/location',
+    login:     '/login',
+    book:      '/rooms'
+};
+
+export default class AzureNavbar extends NavigationMixin(LightningElement) {
     @track isScrolled = false;
     @track menuOpen = false;
 
@@ -33,8 +45,18 @@ export default class AzureNavbar extends LightningElement {
         this.menuOpen = !this.menuOpen;
     }
 
-    handleLogoClick(event) {
+    handleNav(event) {
         event.preventDefault();
-        this.dispatchEvent(new CustomEvent('navigate', { detail: { page: 'home' }, bubbles: true, composed: true }));
+        const page = event.currentTarget.dataset.page;
+        const path = PATH_MAP[page];
+        if (path !== undefined) {
+            this.menuOpen = false;
+            this[NavigationMixin.Navigate]({
+                type: 'standard__webPage',
+                attributes: {
+                    url: basePath + path
+                }
+            });
+        }
     }
 }

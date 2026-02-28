@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__site",
+    "label": "The Azure Site",
+    "apiName": "theAzureSite",
+    "description": "Site configuration for The Azure — Santorini luxury hotel reservation site"
+}

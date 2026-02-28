@@ -1,11 +1,19 @@
 {
-    "label": "My Profile",
-    "path": "/profile",
-    "title": "My Profile — The Azure",
-    "isDefault": false,
-    "pageAccess": "RequireLogin",
-    "themeLayoutType": "Inner",
-    "changeFrequency": "never",
-    "priority": "0.0",
-    "shouldIndex": false
+  "activeViewId" : "04fde3c3-e291-441b-889c-4fcac31e623f",
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "configurationTags" : [ ],
+  "devName" : "Guest_Profile",
+  "id" : "2641a6f6-e44e-481c-a3ff-284acf23f42e",
+  "isDefault" : false,
+  "label" : "Guest Profile",
+  "pageAccess" : "RequiresLogin",
+  "path" : "/guest-profile",
+  "routeType" : "custom-guest-profile",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "title" : "My Profile — The Azure Hotel",
+  "shouldIndex" : false,
+  "changeFrequency" : "never",
+  "priority" : "0.1",
+  "type" : "route",
+  "urlPrefix" : "guest-profile"
 }

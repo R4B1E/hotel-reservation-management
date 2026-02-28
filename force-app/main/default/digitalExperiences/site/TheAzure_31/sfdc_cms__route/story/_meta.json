@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__route",
+    "label": "Our Story",
+    "apiName": "story",
+    "description": "Route for the Our Story page"
+}

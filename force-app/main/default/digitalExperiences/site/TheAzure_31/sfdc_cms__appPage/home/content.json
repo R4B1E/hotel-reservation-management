@@ -1,0 +1,37 @@
+{
+    "type": "sfdc_cms__appPage",
+    "layout": {
+        "regions": [
+            {
+                "name": "content",
+                "components": [
+                    {
+                        "id": "home_hero",
+                        "componentName": "c:azureHero",
+                        "attributes": {
+                            "headlineItalic": "Sanctuary of",
+                            "headlineBold": "Serenity",
+                            "tagline": "Where time stands still and the Aegean Sea whispers ancient secrets.",
+                            "location": "Santorini, Greece"
+                        }
+                    },
+                    {
+                        "id": "home_story",
+                        "componentName": "c:azureStorySection",
+                        "attributes": {}
+                    },
+                    {
+                        "id": "home_rooms",
+                        "componentName": "c:azureRoomGrid",
+                        "attributes": {}
+                    },
+                    {
+                        "id": "home_amenities",
+                        "componentName": "c:azureAmenitiesSection",
+                        "attributes": {}
+                    }
+                ]
+            }
+        ]
+    }
+}

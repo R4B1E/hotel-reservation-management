@@ -1,5 +1,9 @@
 import { LightningElement, api } from 'lwc';
 import { loadAzureTheme } from 'c/azureThemeLoader';
+// TODO: Wire to Apex — load confirmation details from Reservation__c
+// After checkout, navigate here with confirmationNumber in page state.
+// import getReservationByConfirmation from '@salesforce/apex/ReservationController.getReservationByConfirmation';
+// Usage: @wire(getReservationByConfirmation, { confirmationNumber: '$confirmationNumber' })
 
 export default class AzureConfirmation extends LightningElement {
 

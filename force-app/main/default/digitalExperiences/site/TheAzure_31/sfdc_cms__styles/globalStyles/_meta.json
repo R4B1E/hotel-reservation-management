@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__styles",
+    "label": "Global Styles",
+    "apiName": "globalStyles",
+    "description": "Global CSS custom properties injected into the DXP runtime — maps branding tokens to --dxp-g-* variables"
+}

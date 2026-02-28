@@ -1,0 +1,16 @@
+<!-- <template>
+    <c-azure-navbar></c-azure-navbar>
+    <main class="az-site-body">
+        <slot name="content"></slot>
+    </main>
+    <c-azure-footer></c-azure-footer>
+</template> -->
+<template>
+    <div class="az-site-wrapper">
+        <slot name="header"></slot>
+        <main class="az-site-body">
+            <slot></slot>
+        </main>
+        <slot name="footer"></slot>
+    </div>
+</template>

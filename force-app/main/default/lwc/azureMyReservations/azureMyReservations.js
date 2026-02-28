@@ -1,5 +1,10 @@
 import { LightningElement, track } from 'lwc';
 import { loadAzureTheme } from 'c/azureThemeLoader';
+// TODO: Wire to Apex — replace MOCK_RESERVATIONS with live data
+// import getMyReservations from '@salesforce/apex/ReservationController.getMyReservations';
+// import cancelReservation from '@salesforce/apex/ReservationController.cancelReservation';
+// Usage: @wire(getMyReservations) wiredReservations({ data, error }) { ... }
+// Usage (imperative): cancelReservation({ reservationId }) for handleCancel
 
 const MOCK_RESERVATIONS = [
     { id:'1', roomName:'Aegean Suite', confirmationNumber:'AZR-20241024-001', status:'Upcoming', checkIn: new Date(2025,0,15), checkOut: new Date(2025,0,19), nights:4, total:3570, imageUrl:'' },

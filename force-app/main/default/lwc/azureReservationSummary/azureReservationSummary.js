@@ -1,5 +1,9 @@
 import { LightningElement, api } from 'lwc';
 import { loadAzureTheme } from 'c/azureThemeLoader';
+// TODO: Wire to Apex — submit reservation via ReservationController
+// import createReservation from '@salesforce/apex/ReservationController.createReservation';
+// Orchestrates checkout: collects data from c-azure-guest-form + c-azure-payment-form,
+// then calls createReservation imperatively and navigates to confirmation page on success.
 
 export default class AzureReservationSummary extends LightningElement {
 

@@ -1,0 +1,15 @@
+{
+    "type": "sfdc_cms__route",
+    "urlPath": "/location",
+    "pageAccess": "Public",
+    "isDefault": false,
+    "shouldIndex": true,
+    "changeFrequency": "monthly",
+    "priority": "0.6",
+    "pageRef": {
+        "type": "standard__webPage",
+        "attributes": {
+            "appPage": "location"
+        }
+    }
+}

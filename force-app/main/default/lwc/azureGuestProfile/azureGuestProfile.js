@@ -1,5 +1,10 @@
 import { LightningElement, track } from 'lwc';
 import { loadAzureTheme } from 'c/azureThemeLoader';
+// TODO: Wire to Apex — replace hardcoded guest with live Contact data
+// import getGuestProfile from '@salesforce/apex/GuestProfileController.getGuestProfile';
+// import updateGuestProfile from '@salesforce/apex/GuestProfileController.updateGuestProfile';
+// Usage: @wire(getGuestProfile) wiredProfile({ data, error }) { ... }
+// Usage (imperative): updateGuestProfile({ firstName, lastName, phone, country }) for handleSave
 
 export default class AzureGuestProfile extends LightningElement {
 

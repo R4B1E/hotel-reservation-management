@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__appPage",
+    "label": "Location",
+    "apiName": "location",
+    "description": "Page layout for the Location page"
+}

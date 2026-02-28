@@ -1,0 +1,23 @@
+{
+    "type": "sfdc_cms__theme",
+    "defaultBrandingSet": "brandingSet",
+    "themeLayout": "main",
+    "themeRouteOverrides": [
+        {
+            "routePattern": "/checkout",
+            "themeLayout": "main"
+        },
+        {
+            "routePattern": "/confirmation",
+            "themeLayout": "main"
+        },
+        {
+            "routePattern": "/my-reservations",
+            "themeLayout": "main"
+        },
+        {
+            "routePattern": "/guest-profile",
+            "themeLayout": "main"
+        }
+    ]
+}

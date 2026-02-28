@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__route",
+    "label": "My Reservations",
+    "apiName": "myReservations",
+    "description": "Route for the My Reservations page"
+}

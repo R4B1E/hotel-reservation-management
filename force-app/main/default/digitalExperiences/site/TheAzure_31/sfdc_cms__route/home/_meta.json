@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__route",
+    "label": "Home",
+    "apiName": "home",
+    "description": "Route for the Home page"
+}

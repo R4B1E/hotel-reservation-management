@@ -1,58 +1,91 @@
 {
-    "view": {
-        "label": "Home",
-        "type": "default"
-    },
-    "regions": [
-        {
-            "name": "header",
-            "components": [
-                {
-                    "id": "home_header",
-                    "componentName": "c:azureNavbar",
-                    "attributes": {}
-                }
-            ]
-        },
-        {
-            "name": "main",
-            "components": [
-                {
-                    "id": "home_hero",
-                    "componentName": "c:azureHero",
-                    "attributes": {
-                        "headlineItalic": "Sanctuary of",
-                        "headlineBold": "Serenity",
-                        "tagline": "Where time stands still and the Aegean Sea whispers ancient secrets.",
-                        "location": "Santorini, Greece"
-                    }
-                },
-                {
-                    "id": "home_story",
-                    "componentName": "c:azureStorySection",
-                    "attributes": {}
-                },
-                {
-                    "id": "home_rooms",
-                    "componentName": "c:azureRoomGrid",
-                    "attributes": {}
-                },
-                {
-                    "id": "home_amenities",
-                    "componentName": "c:azureAmenitiesSection",
-                    "attributes": {}
-                }
-            ]
-        },
-        {
-            "name": "footer",
-            "components": [
-                {
-                    "id": "home_footer",
-                    "componentName": "c:azureFooter",
-                    "attributes": {}
-                }
-            ]
-        }
-    ]
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "configurationTags" : [ ],
+  "dataProviders" : [ ],
+  "devName" : "Home",
+  "id" : "b0d4abd9-25a0-4cd4-9868-89d412ddcc26",
+  "label" : "Home",
+  "viewType" : "home",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "themeLayoutType" : "Inner",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:azureNavbar",
+      "id" : "home_navbar",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f1a2b3c4-1001-4000-8001-000000000001",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "headlineItalic" : "Sanctuary of",
+        "headlineBold" : "Serenity",
+        "tagline" : "Where time stands still and the Aegean Sea whispers ancient secrets.",
+        "location" : "Santorini, Greece"
+      },
+      "componentName" : "c:azureHero",
+      "id" : "home_hero",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : { },
+      "componentName" : "c:azureStorySection",
+      "id" : "home_story",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : { },
+      "componentName" : "c:azureRoomGrid",
+      "id" : "home_rooms",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : { },
+      "componentName" : "c:azureAmenitiesSection",
+      "id" : "home_amenities",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f1a2b3c4-1001-4000-8001-000000000002",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:azureFooter",
+      "id" : "home_footer",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f1a2b3c4-1001-4000-8001-000000000003",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Home"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "3a1f9b7e-4c2d-4e8a-9f0b-1d2e3f4a5b6c",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "4b2a0c8f-5d3e-4f9b-a01c-2e3f4a5b6c7d",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "type" : "view"
 }

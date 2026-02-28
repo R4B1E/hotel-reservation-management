@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__themeLayout",
+    "label": "Main Layout",
+    "apiName": "main",
+    "description": "Primary LWR theme layout — wraps all pages with the Azure navbar and footer"
+}

@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__appPage",
+    "label": "My Reservations",
+    "apiName": "myReservations",
+    "description": "Page layout for the My Reservations page"
+}

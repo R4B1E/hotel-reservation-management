@@ -1,11 +1,19 @@
 {
-    "label": "Our Story",
-    "path": "/story",
-    "title": "Our Story — The Azure",
-    "isDefault": false,
-    "pageAccess": "Public",
-    "themeLayoutType": "Inner",
-    "changeFrequency": "monthly",
-    "priority": "0.7",
-    "shouldIndex": true
+  "activeViewId" : "c8ef364b-bada-4a44-a1f2-122c3a95d22f",
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "configurationTags" : [ ],
+  "devName" : "Story",
+  "id" : "885b8001-9b74-4f8f-949a-b683defdee7b",
+  "isDefault" : false,
+  "label" : "Our Story",
+  "pageAccess" : "Public",
+  "path" : "/story",
+  "routeType" : "custom-story",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "title" : "Our Story — The Azure Hotel",
+  "shouldIndex" : true,
+  "changeFrequency" : "monthly",
+  "priority" : "0.8",
+  "type" : "route",
+  "urlPrefix" : "story"
 }

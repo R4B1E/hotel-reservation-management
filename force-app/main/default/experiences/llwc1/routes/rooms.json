@@ -1,11 +1,19 @@
 {
-    "label": "Rooms & Suites",
-    "path": "/rooms",
-    "title": "Rooms & Suites — The Azure",
-    "isDefault": false,
-    "pageAccess": "Public",
-    "themeLayoutType": "Inner",
-    "changeFrequency": "weekly",
-    "priority": "0.9",
-    "shouldIndex": true
+  "activeViewId" : "aaea5a19-ae5f-43fd-8cd7-dca61113d7eb",
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "configurationTags" : [ ],
+  "devName" : "Rooms",
+  "id" : "0f076499-8578-4517-b952-1317c32bf245",
+  "isDefault" : false,
+  "label" : "Rooms",
+  "pageAccess" : "Public",
+  "path" : "/rooms",
+  "routeType" : "custom-rooms",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "title" : "Rooms & Suites — The Azure Hotel",
+  "shouldIndex" : true,
+  "changeFrequency" : "weekly",
+  "priority" : "0.9",
+  "type" : "route",
+  "urlPrefix" : "rooms"
 }

@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__theme",
+    "label": "The Azure Theme",
+    "apiName": "theAzureTheme",
+    "description": "Global LWR theme — gold/charcoal/cream palette, Cormorant Garamond + Raleway typography"
+}

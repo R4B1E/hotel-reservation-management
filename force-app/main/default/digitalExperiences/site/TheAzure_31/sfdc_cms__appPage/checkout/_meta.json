@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__appPage",
+    "label": "Checkout",
+    "apiName": "checkout",
+    "description": "Page layout for the Checkout page"
+}

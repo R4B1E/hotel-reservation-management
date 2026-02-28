@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__appPage",
+    "label": "Room Detail",
+    "apiName": "roomDetail",
+    "description": "Page layout for the Room Detail page"
+}

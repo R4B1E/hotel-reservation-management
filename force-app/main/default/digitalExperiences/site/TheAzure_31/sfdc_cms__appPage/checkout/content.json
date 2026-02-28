@@ -1,0 +1,27 @@
+{
+    "type": "sfdc_cms__appPage",
+    "layout": {
+        "regions": [
+            {
+                "name": "content",
+                "components": [
+                    {
+                        "id": "checkout_summary",
+                        "componentName": "c:azureReservationSummary",
+                        "attributes": {}
+                    },
+                    {
+                        "id": "checkout_guest",
+                        "componentName": "c:azureGuestForm",
+                        "attributes": {}
+                    },
+                    {
+                        "id": "checkout_payment",
+                        "componentName": "c:azurePaymentForm",
+                        "attributes": {}
+                    }
+                ]
+            }
+        ]
+    }
+}

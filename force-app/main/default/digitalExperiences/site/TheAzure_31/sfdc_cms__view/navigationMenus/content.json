@@ -1,0 +1,35 @@
+{
+    "type": "sfdc_cms__view",
+    "navigationMenus": [
+        {
+            "name": "mainNav",
+            "label": "Main Navigation",
+            "menuItems": [
+                {
+                    "label": "Story",
+                    "target": "/theazure/story",
+                    "type": "InternalLink",
+                    "position": 1
+                },
+                {
+                    "label": "Rooms",
+                    "target": "/theazure/rooms",
+                    "type": "InternalLink",
+                    "position": 2
+                },
+                {
+                    "label": "Amenities",
+                    "target": "/theazure/amenities",
+                    "type": "InternalLink",
+                    "position": 3
+                },
+                {
+                    "label": "Location",
+                    "target": "/theazure/location",
+                    "type": "InternalLink",
+                    "position": 4
+                }
+            ]
+        }
+    ]
+}

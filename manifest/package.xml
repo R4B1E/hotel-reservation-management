@@ -4,29 +4,31 @@
 
     <!-- ── Lightning Web Components ── -->
     <types>
-        <members>azureNavbar</members>
-        <members>azureFooter</members>
-        <members>azureHero</members>
-        <members>azureBookingBar</members>
-        <members>azureDatePicker</members>
-        <members>azureGuestSelector</members>
-        <members>azureAvailabilityResults</members>
-        <members>azureRoomCard</members>
-        <members>azureRoomGrid</members>
-        <members>azureRoomDetail</members>
         <members>azureAmenitiesSection</members>
         <members>azureAmenityCard</members>
-        <members>azureStorySection</members>
-        <members>azureLocationMap</members>
-        <members>azureReservationSummary</members>
-        <members>azureGuestForm</members>
-        <members>azurePaymentForm</members>
-        <members>azureConfirmation</members>
-        <members>azureMyReservations</members>
-        <members>azureReservationTile</members>
-        <members>azureGuestProfile</members>
+        <members>azureAvailabilityResults</members>
+        <members>azureBookingBar</members>
         <members>azureButton</members>
+        <members>azureConfirmation</members>
+        <members>azureDatePicker</members>
+        <members>azureFooter</members>
+        <members>azureGuestForm</members>
+        <members>azureGuestProfile</members>
+        <members>azureGuestSelector</members>
+        <members>azureHero</members>
+        <members>azureLocationMap</members>
         <members>azureModal</members>
+        <members>azureMyReservations</members>
+        <members>azureNavbar</members>
+        <members>azurePaymentForm</members>
+        <members>azureReservationSummary</members>
+        <members>azureReservationTile</members>
+        <members>azureRoomCard</members>
+        <members>azureRoomDetail</members>
+        <members>azureRoomGrid</members>
+        <members>azureStorySection</members>
+        <members>azureThemeLayout</members>
+        <members>azureThemeLoader</members>
         <members>azureToast</members>
         <name>LightningComponentBundle</name>
     </types>
@@ -47,8 +49,9 @@
         <name>CustomObject</name>
     </types>
 
-    <!-- ── Custom Fields — Hotel_Room__c ── -->
+    <!-- ── Custom Fields ── -->
     <types>
+        <!-- Hotel_Room__c -->
         <members>Hotel_Room__c.Category__c</members>
         <members>Hotel_Room__c.Price_Per_Night__c</members>
         <members>Hotel_Room__c.Short_Description__c</members>
@@ -61,11 +64,7 @@
         <members>Hotel_Room__c.Is_Active__c</members>
         <members>Hotel_Room__c.Primary_Image_URL__c</members>
         <members>Hotel_Room__c.Tagline__c</members>
-        <name>CustomField</name>
-    </types>
-
-    <!-- ── Custom Fields — Reservation__c ── -->
-    <types>
+        <!-- Reservation__c -->
         <members>Reservation__c.Room__c</members>
         <members>Reservation__c.Contact__c</members>
         <members>Reservation__c.Confirmation_Number__c</members>
@@ -84,11 +83,7 @@
         <members>Reservation__c.Guest_Email__c</members>
         <members>Reservation__c.Guest_Phone__c</members>
         <members>Reservation__c.Special_Requests__c</members>
-        <name>CustomField</name>
-    </types>
-
-    <!-- ── Custom Fields — Room_Amenity__c ── -->
-    <types>
+        <!-- Room_Amenity__c -->
         <members>Room_Amenity__c.Room__c</members>
         <members>Room_Amenity__c.Icon__c</members>
         <members>Room_Amenity__c.Icon_Key__c</members>
@@ -96,11 +91,7 @@
         <members>Room_Amenity__c.Sort_Order__c</members>
         <members>Room_Amenity__c.Is_Highlight__c</members>
         <members>Room_Amenity__c.Short_Description__c</members>
-        <name>CustomField</name>
-    </types>
-
-    <!-- ── Custom Fields — Contact (guest profile) ── -->
-    <types>
+        <!-- Contact -->
         <members>Contact.Guest_Tier__c</members>
         <members>Contact.Member_Since__c</members>
         <members>Contact.Total_Stays__c</members>
@@ -109,13 +100,19 @@
         <name>CustomField</name>
     </types>
 
-    <!-- ── Static Resource ── -->
+    <!-- ── Static Resources ── -->
     <types>
         <members>azureTheme</members>
         <name>StaticResource</name>
     </types>
 
-    <!-- ── Experience Bundle (LWR site) ── -->
+    <!-- ── Aura Components ── -->
+    <types>
+        <members>azureThemeLayoutAura</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
+
+    <!-- ── Experience Bundles ── -->
     <types>
         <members>llwc1</members>
         <name>ExperienceBundle</name>

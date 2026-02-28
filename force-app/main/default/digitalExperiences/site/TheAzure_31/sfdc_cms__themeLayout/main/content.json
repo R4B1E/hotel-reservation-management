@@ -1,0 +1,35 @@
+{
+    "type": "sfdc_cms__themeLayout",
+    "layoutType": "inner",
+    "themeLayoutComponent": {
+        "componentName": "c:azureThemeLayout",
+        "attributes": {}
+    },
+    "regions": [
+        {
+            "name": "header",
+            "label": "Header",
+            "defaultContent": [
+                {
+                    "componentName": "c:azureNavbar",
+                    "attributes": {}
+                }
+            ]
+        },
+        {
+            "name": "content",
+            "label": "Content",
+            "defaultContent": []
+        },
+        {
+            "name": "footer",
+            "label": "Footer",
+            "defaultContent": [
+                {
+                    "componentName": "c:azureFooter",
+                    "attributes": {}
+                }
+            ]
+        }
+    ]
+}

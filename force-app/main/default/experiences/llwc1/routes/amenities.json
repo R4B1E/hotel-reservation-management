@@ -1,11 +1,19 @@
 {
-    "label": "Amenities",
-    "path": "/amenities",
-    "title": "Amenities — The Azure",
-    "isDefault": false,
-    "pageAccess": "Public",
-    "themeLayoutType": "Inner",
-    "changeFrequency": "monthly",
-    "priority": "0.7",
-    "shouldIndex": true
+  "activeViewId" : "c9d79313-a599-48e5-a6a4-4acd462870d5",
+  "appPageId" : "09675e97-f09a-4639-a1d6-77bc3ee604bf",
+  "configurationTags" : [ ],
+  "devName" : "Amenities",
+  "id" : "310615ad-2eef-40a0-bf53-1df495ad7616",
+  "isDefault" : false,
+  "label" : "Amenities",
+  "pageAccess" : "Public",
+  "path" : "/amenities",
+  "routeType" : "custom-amenities",
+  "themeLayoutId" : "90fb69da-5e66-4b50-9015-9a4cdfe99bf3",
+  "title" : "Amenities — The Azure Hotel",
+  "shouldIndex" : true,
+  "changeFrequency" : "monthly",
+  "priority" : "0.7",
+  "type" : "route",
+  "urlPrefix" : "amenities"
 }

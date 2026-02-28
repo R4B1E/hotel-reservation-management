@@ -1,0 +1,6 @@
+{
+    "type": "sfdc_cms__route",
+    "label": "My Profile",
+    "apiName": "guestProfile",
+    "description": "Route for the My Profile page"
+}
