@@ -6,5 +6,6 @@
         {!v.header}
         <div class="az-site-body" role="main">{!v.body}</div>
         {!v.footer}
+        <c:azureToast />
     </div>
 </aura:component>

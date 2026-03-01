@@ -1,7 +1,9 @@
 import { LightningElement, api } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import { loadAzureTheme } from 'c/azureThemeLoader';
+import basePath from '@salesforce/community/basePath';
 
-export default class AzureHero extends LightningElement {
+export default class AzureHero extends NavigationMixin(LightningElement) {
 
     connectedCallback() {
         loadAzureTheme(this);
@@ -20,10 +22,16 @@ export default class AzureHero extends LightningElement {
     }
 
     handleExplore() {
-        this.dispatchEvent(new CustomEvent('navigate', { detail: { page: 'rooms' }, bubbles: true, composed: true }));
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: { url: basePath + '/rooms' }
+        });
     }
 
     handleStory() {
-        this.dispatchEvent(new CustomEvent('navigate', { detail: { page: 'story' }, bubbles: true, composed: true }));
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: { url: basePath + '/story' }
+        });
     }
 }

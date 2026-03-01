@@ -112,6 +112,18 @@
         <name>AuraDefinitionBundle</name>
     </types>
 
+    <!-- ── Permission Sets ── -->
+    <types>
+        <members>Azure_Guest</members>
+        <name>PermissionSet</name>
+    </types>
+
+    <!-- ── Apex Triggers ── -->
+    <types>
+        <members>GuestContactInit</members>
+        <name>ApexTrigger</name>
+    </types>
+
     <!-- ── Experience Bundles ── -->
     <types>
         <members>llwc1</members>

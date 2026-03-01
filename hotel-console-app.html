@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grandeur HMS · Salesforce Console</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --surface3: #222d42;
+    --border: #2a3650;
+    --border2: #1e2d47;
+    --accent: #3b82f6;
+    --accent2: #6366f1;
+    --gold: #f59e0b;
+    --green: #10b981;
+    --red: #ef4444;
+    --orange: #f97316;
+    --pink: #ec4899;
+    --purple: #8b5cf6;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --nav-h: 44px;
+    --tabs-h: 38px;
+    --sidebar-w: 52px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; display: flex; flex-direction: column; font-size: 13px; }
+
+  /* ====== TOP NAV ====== */
+  .top-nav {
+    height: var(--nav-h); background: #0f172a; border-bottom: 1px solid var(--border2);
+    display: flex; align-items: center; padding: 0 12px; gap: 10px; flex-shrink: 0; z-index: 100;
+  }
+  .app-brand { display: flex; align-items: center; gap: 8px; margin-right: 8px; }
+  .app-icon { width: 28px; height: 28px; background: linear-gradient(135deg, #3b82f6, #6366f1); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .app-name { font-family: 'Playfair Display', serif; font-size: 15px; color: #f8fafc; letter-spacing: 0.3px; }
+  .app-name span { color: var(--gold); }
+
+  .search-bar { flex: 1; max-width: 380px; position: relative; }
+  .search-bar input { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px 6px 30px; color: var(--text); font-size: 12px; font-family: inherit; outline: none; }
+  .search-bar input::placeholder { color: var(--text3); }
+  .search-bar .icon { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 13px; }
+
+  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+  .nav-btn { width: 30px; height: 30px; border-radius: 6px; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text2); transition: all 0.15s; font-size: 14px; }
+  .nav-btn:hover { background: var(--surface3); color: var(--text); }
+  .avatar { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #fff; cursor: pointer; }
+  .badge-dot { position: relative; }
+  .badge-dot::after { content: ''; position: absolute; top: 4px; right: 4px; width: 7px; height: 7px; background: var(--red); border-radius: 50%; border: 1px solid #0f172a; }
+
+  /* ====== TABS BAR ====== */
+  .tabs-bar {
+    height: var(--tabs-h); background: var(--surface); border-bottom: 1px solid var(--border);
+    display: flex; align-items: stretch; padding: 0 6px; gap: 2px; flex-shrink: 0; overflow-x: auto;
+  }
+  .tabs-bar::-webkit-scrollbar { height: 0; }
+  .tab { display: flex; align-items: center; gap: 6px; padding: 0 14px; border-radius: 6px 6px 0 0; cursor: pointer; color: var(--text2); font-size: 12px; white-space: nowrap; transition: all 0.15s; border: 1px solid transparent; border-bottom: none; margin-top: 4px; }
+  .tab:hover { color: var(--text); background: var(--surface2); }
+  .tab.active { background: var(--bg); color: var(--text); border-color: var(--border); border-bottom-color: var(--bg); }
+  .tab .tab-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .tab .tab-close { width: 16px; height: 16px; border-radius: 3px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.1s; font-size: 10px; }
+  .tab:hover .tab-close { opacity: 1; }
+  .tab.active .tab-close { opacity: 0.6; }
+  .tab-add { display: flex; align-items: center; padding: 0 10px; color: var(--text3); cursor: pointer; font-size: 16px; align-self: center; }
+  .tab-add:hover { color: var(--text2); }
+
+  /* ====== MAIN AREA ====== */
+  .main { display: flex; flex: 1; overflow: hidden; }
+
+  /* ====== SIDEBAR ====== */
+  .sidebar {
+    width: var(--sidebar-w); background: var(--surface); border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; align-items: center; padding: 8px 0; gap: 2px; flex-shrink: 0;
+  }
+  .side-btn { width: 38px; height: 38px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; color: var(--text3); transition: all 0.15s; gap: 3px; position: relative; }
+  .side-btn:hover { background: var(--surface2); color: var(--text2); }
+  .side-btn.active { background: rgba(59,130,246,0.15); color: var(--accent); }
+  .side-btn svg { width: 18px; height: 18px; }
+  .side-btn .label { font-size: 9px; letter-spacing: 0.3px; line-height: 1; }
+  .side-divider { width: 28px; height: 1px; background: var(--border); margin: 4px 0; }
+
+  /* ====== CONTENT ====== */
+  .content { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+
+  /* page visibility */
+  .page { display: none; flex: 1; overflow: hidden; flex-direction: column; }
+  .page.active { display: flex; }
+
+  /* ====== DASHBOARD ====== */
+  .dash-scroll { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+  .dash-scroll::-webkit-scrollbar { width: 4px; }
+  .dash-scroll::-webkit-scrollbar-track { background: transparent; }
+  .dash-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .dash-header { display: flex; align-items: center; justify-content: space-between; }
+  .dash-title { font-size: 18px; font-weight: 700; color: var(--text); }
+  .dash-title span { color: var(--text2); font-size: 13px; font-weight: 400; margin-left: 8px; }
+  .date-range { display: flex; align-items: center; gap: 8px; }
+  .dr-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 12px; color: var(--text2); cursor: pointer; font-size: 12px; font-family: inherit; }
+  .dr-btn.active { background: rgba(59,130,246,0.15); border-color: var(--accent); color: var(--accent); }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; position: relative; overflow: hidden; transition: border-color 0.2s; }
+  .kpi-card:hover { border-color: var(--accent); }
+  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: 10px 10px 0 0; }
+  .kpi-card.blue::before { background: var(--accent); }
+  .kpi-card.green::before { background: var(--green); }
+  .kpi-card.gold::before { background: var(--gold); }
+  .kpi-card.red::before { background: var(--red); }
+  .kpi-card.purple::before { background: var(--purple); }
+  .kpi-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.7px; font-weight: 500; margin-bottom: 8px; }
+  .kpi-value { font-size: 26px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+  .kpi-card.blue .kpi-value { color: #93c5fd; }
+  .kpi-card.green .kpi-value { color: #6ee7b7; }
+  .kpi-card.gold .kpi-value { color: #fcd34d; }
+  .kpi-card.red .kpi-value { color: #fca5a5; }
+  .kpi-card.purple .kpi-value { color: #c4b5fd; }
+  .kpi-change { font-size: 11px; color: var(--text3); }
+  .kpi-change .up { color: var(--green); }
+  .kpi-change .down { color: var(--red); }
+
+  .charts-row { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+  .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .chart-title { font-size: 13px; font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+  .chart-title .ct-right { font-size: 11px; color: var(--text3); font-weight: 400; }
+
+  /* bar chart */
+  .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 120px; }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; }
+  .bar-wrap { flex: 1; width: 100%; display: flex; align-items: flex-end; }
+  .bar { width: 100%; border-radius: 4px 4px 0 0; transition: opacity 0.2s; min-height: 4px; }
+  .bar:hover { opacity: 0.8; }
+  .bar-label { font-size: 10px; color: var(--text3); }
+
+  /* donut */
+  .donut-wrap { display: flex; align-items: center; gap: 16px; }
+  .donut-svg { flex-shrink: 0; }
+  .donut-legend { display: flex; flex-direction: column; gap: 8px; }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--text2); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .legend-val { margin-left: auto; font-weight: 600; color: var(--text); }
+
+  .dash-bottom { display: grid; grid-template-columns: 1.3fr 1fr; gap: 12px; }
+
+  /* recent reservations mini-table */
+  .mini-table { width: 100%; border-collapse: collapse; }
+  .mini-table th { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; padding: 0 10px 10px 0; text-align: left; border-bottom: 1px solid var(--border2); }
+  .mini-table td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--border2); font-size: 12px; color: var(--text2); vertical-align: middle; }
+  .mini-table tr:last-child td { border-bottom: none; }
+  .mini-table tr:hover td { color: var(--text); }
+  .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 600; }
+  .badge.confirmed { background: rgba(16,185,129,0.15); color: #34d399; }
+  .badge.pending { background: rgba(245,158,11,0.15); color: #fbbf24; }
+  .badge.checked-in { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .badge.checked-out { background: rgba(100,116,139,0.2); color: var(--text3); }
+  .badge.cancelled { background: rgba(239,68,68,0.15); color: #f87171; }
+
+  /* timeline mini */
+  .occ-bars { display: flex; flex-direction: column; gap: 6px; }
+  .occ-row { display: flex; align-items: center; gap: 8px; font-size: 11px; }
+  .occ-label { width: 60px; color: var(--text3); flex-shrink: 0; }
+  .occ-track { flex: 1; height: 16px; background: var(--surface3); border-radius: 4px; overflow: hidden; }
+  .occ-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+  .occ-pct { width: 32px; text-align: right; color: var(--text2); flex-shrink: 0; }
+
+  /* ====== CALENDAR PAGE ====== */
+  .cal-toolbar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--surface); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .cal-stat { display: flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 5px; background: var(--surface2); border: 1px solid var(--border); font-size: 11px; color: var(--text2); }
+  .cal-stat strong { color: var(--text); font-weight: 600; }
+  .btn { padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface2); color: var(--text2); cursor: pointer; font-size: 12px; font-family: inherit; transition: all 0.15s; display: flex; align-items: center; gap: 5px; }
+  .btn:hover { background: var(--surface3); color: var(--text); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.primary:hover { background: #2563eb; }
+  .cal-nav { display: flex; align-items: center; gap: 6px; margin: 0 4px; }
+  .cal-nav-btn { width: 26px; height: 26px; border-radius: 5px; background: var(--surface2); border: 1px solid var(--border); color: var(--text2); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+  .cal-nav-btn:hover { background: var(--surface3); color: var(--text); }
+  .cal-date-label { font-weight: 600; font-size: 13px; min-width: 120px; text-align: center; }
+  .view-toggle { display: flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .vt-btn { padding: 4px 10px; background: var(--surface2); color: var(--text3); cursor: pointer; font-size: 11px; transition: all 0.15s; border: none; font-family: inherit; }
+  .vt-btn.active { background: var(--accent); color: #fff; }
+
+  /* Calendar Gantt */
+  .cal-wrap { flex: 1; overflow: auto; }
+  .cal-wrap::-webkit-scrollbar { width: 6px; height: 6px; }
+  .cal-wrap::-webkit-scrollbar-track { background: transparent; }
+  .cal-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .cal-grid { display: grid; min-width: 900px; }
+  .cal-header-row { display: flex; background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+  .cal-room-col { width: 160px; flex-shrink: 0; padding: 8px 10px; font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; border-right: 1px solid var(--border); }
+  .cal-day-headers { display: flex; flex: 1; }
+  .cal-day-hdr { flex: 1; min-width: 70px; text-align: center; padding: 6px 4px; font-size: 11px; border-right: 1px solid var(--border2); }
+  .cal-day-hdr .dow { color: var(--text3); font-size: 10px; text-transform: uppercase; }
+  .cal-day-hdr .dom { font-size: 15px; font-weight: 700; color: var(--text); }
+  .cal-day-hdr.today .dom { color: var(--accent); }
+  .cal-day-hdr.weekend { background: rgba(255,255,255,0.02); }
+
+  .cal-section-hdr { background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 5px 10px; gap: 8px; }
+  .cal-section-hdr span { font-size: 11px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.8px; }
+  .cal-section-stats { display: flex; gap: 10px; margin-left: auto; }
+  .cs-stat { font-size: 10px; color: var(--text3); }
+  .cs-stat strong { color: var(--text2); }
+
+  .cal-room-row { display: flex; align-items: stretch; border-bottom: 1px solid var(--border2); min-height: 42px; }
+  .cal-room-row:hover { background: rgba(255,255,255,0.01); }
+  .cal-room-info { width: 160px; flex-shrink: 0; padding: 6px 10px; border-right: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+  .room-num { font-size: 13px; font-weight: 600; color: var(--text); }
+  .room-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+  .room-tag { font-size: 9px; background: var(--surface3); border-radius: 3px; padding: 1px 5px; color: var(--text3); }
+  .cal-cells { flex: 1; display: flex; position: relative; }
+  .cal-cell { flex: 1; min-width: 70px; border-right: 1px solid var(--border2); }
+  .cal-cell.weekend { background: rgba(255,255,255,0.015); }
+  .cal-cell.today { background: rgba(59,130,246,0.04); }
+
+  /* booking blocks */
+  .bookings-layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; }
+  .booking-block { position: absolute; top: 5px; height: calc(100% - 10px); border-radius: 5px; display: flex; align-items: center; padding: 0 8px; font-size: 11px; font-weight: 500; cursor: pointer; pointer-events: all; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: filter 0.15s; z-index: 2; }
+  .booking-block:hover { filter: brightness(1.15); z-index: 5; }
+  .booking-block.green { background: #059669; color: #fff; }
+  .booking-block.blue { background: #2563eb; color: #fff; }
+  .booking-block.orange { background: #d97706; color: #fff; }
+  .booking-block.red { background: #dc2626; color: #fff; }
+  .booking-block.purple { background: #7c3aed; color: #fff; }
+  .booking-block.pink { background: #db2777; color: #fff; }
+  .booking-block.teal { background: #0d9488; color: #fff; }
+  .booking-block.maintenance { background: repeating-linear-gradient(45deg, #dc2626, #dc2626 4px, #991b1b 4px, #991b1b 8px); color: #fff; }
+
+  /* ====== RESERVATIONS PAGE ====== */
+  .res-layout { display: flex; flex: 1; overflow: hidden; }
+  .res-list-panel { width: 300px; flex-shrink: 0; border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+  .panel-header { padding: 10px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+  .panel-title { font-size: 14px; font-weight: 700; }
+  .count-badge { background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; }
+  .panel-search { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  .panel-search input { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; color: var(--text); font-size: 12px; font-family: inherit; outline: none; }
+  .filter-tabs { display: flex; padding: 6px 12px; gap: 4px; border-bottom: 1px solid var(--border); }
+  .ftab { padding: 4px 10px; border-radius: 20px; font-size: 11px; cursor: pointer; color: var(--text3); transition: all 0.15s; }
+  .ftab.active { background: rgba(59,130,246,0.15); color: var(--accent); }
+  .res-items { flex: 1; overflow-y: auto; }
+  .res-items::-webkit-scrollbar { width: 4px; }
+  .res-items::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .res-item { padding: 10px 12px; border-bottom: 1px solid var(--border2); cursor: pointer; transition: background 0.1s; }
+  .res-item:hover { background: var(--surface2); }
+  .res-item.active { background: rgba(59,130,246,0.1); border-left: 2px solid var(--accent); }
+  .res-item-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  .res-guest-avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .res-guest-name { font-size: 12px; font-weight: 600; color: var(--text); flex: 1; margin: 0 8px; }
+  .res-amount { font-size: 12px; font-weight: 600; color: var(--text); }
+  .res-item-mid { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px; }
+  .res-id { font-size: 10px; color: var(--text3); font-family: monospace; }
+  .res-item-bot { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 6px; }
+  .res-detail { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .detail-scroll { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+  .detail-scroll::-webkit-scrollbar { width: 4px; }
+  .detail-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .detail-topbar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .detail-res-id { font-size: 11px; color: var(--text3); font-family: monospace; }
+  .detail-guest { font-size: 17px; font-weight: 700; flex: 1; }
+  .detail-actions { display: flex; gap: 6px; }
+  .btn-action { padding: 5px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); cursor: pointer; font-size: 12px; font-family: inherit; font-weight: 500; transition: all 0.15s; }
+  .btn-action:hover { background: var(--surface3); }
+  .btn-action.success { background: var(--green); border-color: var(--green); color: #fff; }
+  .btn-action.success:hover { background: #059669; }
+
+  .detail-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); padding: 0 14px; flex-shrink: 0; background: var(--surface); }
+  .dtab { padding: 9px 14px; font-size: 12px; color: var(--text3); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .dtab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .dtab:hover { color: var(--text2); }
+
+  .detail-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .dcard { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .dcard-title { font-size: 11px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+  .dcard-edit { font-size: 11px; color: var(--accent); cursor: pointer; font-weight: 400; text-transform: none; letter-spacing: 0; }
+  .dcard-field { margin-bottom: 10px; }
+  .dcard-field:last-child { margin-bottom: 0; }
+  .dfield-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+  .dfield-val { font-size: 13px; color: var(--text); }
+  .dfield-val.accent { color: var(--accent); }
+  .dfield-val.gold { color: var(--gold); }
+  .dfield-val.green { color: var(--green); }
+
+  /* room visual */
+  .room-visual { background: linear-gradient(135deg, #1e3a5f, #0f2540); border-radius: 8px; padding: 16px; text-align: center; margin-bottom: 12px; }
+  .room-number-big { font-family: 'Playfair Display', serif; font-size: 40px; color: #fff; opacity: 0.9; }
+  .room-type-tag { display: inline-block; margin-top: 4px; background: rgba(255,255,255,0.15); padding: 3px 10px; border-radius: 20px; font-size: 11px; color: rgba(255,255,255,0.8); }
+
+  .amenity-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .amenity-tag { background: var(--surface3); border: 1px solid var(--border); border-radius: 5px; padding: 3px 9px; font-size: 11px; color: var(--text2); display: flex; align-items: center; gap: 4px; }
+
+  /* activity */
+  .activity-feed { display: flex; flex-direction: column; gap: 12px; }
+  .activity-item { display: flex; gap: 10px; }
+  .act-avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .act-content { flex: 1; }
+  .act-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .act-name { font-size: 12px; font-weight: 600; }
+  .act-time { font-size: 10px; color: var(--text3); }
+  .act-text { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+  .right-rail { width: 260px; flex-shrink: 0; border-left: 1px solid var(--border); display: flex; flex-direction: column; }
+  .rail-tabs { display: flex; border-bottom: 1px solid var(--border); }
+  .rail-tab { flex: 1; text-align: center; padding: 9px 4px; font-size: 11px; color: var(--text3); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .rail-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .rail-body { flex: 1; overflow-y: auto; padding: 12px; }
+  .rail-body::-webkit-scrollbar { width: 4px; }
+  .rail-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .note-input { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; width: 100%; padding: 8px; color: var(--text); font-size: 12px; font-family: inherit; resize: none; outline: none; min-height: 70px; }
+
+  /* ====== ROOMS PAGE ====== */
+  .rooms-grid { padding: 14px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; overflow-y: auto; }
+  .rooms-grid::-webkit-scrollbar { width: 4px; }
+  .rooms-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .room-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
+  .room-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .room-card-hdr { padding: 14px; background: linear-gradient(135deg, #1e3a5f 0%, #0f2040 100%); text-align: center; }
+  .room-card-num { font-family: 'Playfair Display', serif; font-size: 28px; color: #fff; }
+  .room-card-type { font-size: 11px; color: rgba(255,255,255,0.6); }
+  .room-card-body { padding: 10px 12px; }
+  .room-status-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .room-status { display: flex; align-items: center; gap: 5px; font-size: 11px; }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; }
+  .status-dot.clean { background: var(--green); }
+  .status-dot.dirty { background: var(--gold); }
+  .status-dot.maintenance { background: var(--red); }
+  .room-floor { font-size: 10px; color: var(--text3); }
+  .room-meta { display: flex; gap: 6px; font-size: 10px; color: var(--text3); }
+  .room-meta-item { display: flex; align-items: center; gap: 3px; }
+
+  /* ====== GUESTS PAGE ====== */
+  .guests-page { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .table-toolbar { padding: 10px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .data-table-wrap { flex: 1; overflow: auto; padding: 0 14px 14px; }
+  .data-table-wrap::-webkit-scrollbar { width: 5px; height: 5px; }
+  .data-table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  table.dt { width: 100%; border-collapse: collapse; }
+  table.dt th { position: sticky; top: 0; background: var(--surface); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text3); font-weight: 600; padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  table.dt td { padding: 10px 12px; border-bottom: 1px solid var(--border2); font-size: 12px; color: var(--text2); vertical-align: middle; }
+  table.dt tr:hover td { background: rgba(255,255,255,0.02); color: var(--text); }
+  .guest-cell { display: flex; align-items: center; gap: 8px; }
+  .guest-av { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .guest-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .guest-email { font-size: 10px; color: var(--text3); }
+  .vip-tag { display: inline-flex; align-items: center; gap: 3px; background: rgba(245,158,11,0.15); color: var(--gold); border-radius: 4px; padding: 2px 6px; font-size: 10px; font-weight: 600; }
+
+  /* ====== REPORTS PAGE ====== */
+  .reports-page { flex: 1; overflow-y: auto; padding: 16px; }
+  .reports-page::-webkit-scrollbar { width: 4px; }
+  .reports-page::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .reports-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .report-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; cursor: pointer; transition: border-color 0.2s; }
+  .report-card:hover { border-color: var(--accent); }
+  .report-icon { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 10px; }
+  .report-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .report-desc { font-size: 11px; color: var(--text3); line-height: 1.4; }
+  .report-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; font-size: 11px; color: var(--text3); }
+  .run-btn { color: var(--accent); font-weight: 600; }
+
+  /* scrollbars global */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+
+  /* ====== CASES PAGE ====== */
+  .cases-toolbar { display:flex; align-items:center; gap:10px; padding:10px 14px; background:var(--surface); border-bottom:1px solid var(--border); flex-shrink:0; flex-wrap:wrap; }
+  .cases-stats { display:flex; gap:8px; }
+  .cstat { display:flex; align-items:center; gap:5px; padding:4px 10px; border-radius:5px; background:var(--surface2); border:1px solid var(--border); font-size:11px; color:var(--text2); }
+  .cstat strong { color:var(--text); font-weight:700; }
+
+  .kanban-board { display:flex; flex:1; gap:0; overflow-x:auto; overflow-y:hidden; padding:14px; gap:12px; }
+  .kanban-board::-webkit-scrollbar { height:5px; }
+  .kanban-col { width:290px; min-width:290px; display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+  .kanban-col-hdr { display:flex; align-items:center; gap:8px; padding:10px 12px; border-bottom:1px solid var(--border); background:var(--surface2); }
+  .kcol-title { font-size:12px; font-weight:700; flex:1; }
+  .kcol-count { background:var(--surface3); border-radius:20px; padding:2px 8px; font-size:11px; font-weight:600; color:var(--text2); }
+  .kcol-add { background:transparent; border:none; color:var(--text3); cursor:pointer; font-size:16px; line-height:1; padding:0 2px; }
+  .kcol-add:hover { color:var(--text); }
+  .kanban-cards { flex:1; overflow-y:auto; padding:10px; display:flex; flex-direction:column; gap:8px; }
+  .kanban-cards::-webkit-scrollbar { width:3px; }
+  .kanban-cards::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+
+  .case-card { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:11px 12px; cursor:pointer; transition:border-color 0.15s, transform 0.15s; }
+  .case-card:hover { border-color:var(--accent); transform:translateY(-1px); }
+  .case-card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .case-num { font-size:10px; color:var(--text3); font-family:monospace; }
+  .case-priority { display:inline-flex; align-items:center; gap:3px; font-size:10px; font-weight:600; padding:2px 6px; border-radius:4px; }
+  .case-priority.high { background:rgba(239,68,68,0.15); color:#f87171; }
+  .case-priority.medium { background:rgba(245,158,11,0.15); color:#fbbf24; }
+  .case-priority.low { background:rgba(16,185,129,0.15); color:#34d399; }
+  .case-subject { font-size:12px; font-weight:600; color:var(--text); margin-bottom:5px; line-height:1.3; }
+  .case-meta { display:flex; flex-wrap:wrap; gap:5px; font-size:10px; color:var(--text3); margin-bottom:8px; }
+  .case-meta span { display:flex; align-items:center; gap:3px; }
+  .case-footer { display:flex; align-items:center; justify-content:space-between; }
+  .case-assignee { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--text2); }
+  .case-av { width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; }
+  .case-age { font-size:10px; color:var(--text3); }
+  .case-cat { display:inline-flex; padding:2px 7px; border-radius:4px; font-size:10px; font-weight:500; }
+  .case-cat.complaint { background:rgba(239,68,68,0.12); color:#f87171; }
+  .case-cat.maintenance { background:rgba(245,158,11,0.12); color:#fbbf24; }
+  .case-cat.service { background:rgba(59,130,246,0.12); color:#60a5fa; }
+  .case-cat.billing { background:rgba(139,92,246,0.12); color:#a78bfa; }
+  .case-cat.request { background:rgba(16,185,129,0.12); color:#34d399; }
+
+  /* ====== HOUSEKEEPING PAGE ====== */
+  .hk-layout { display:flex; flex:1; overflow:hidden; }
+  .hk-staff-panel { width:220px; flex-shrink:0; border-right:1px solid var(--border); overflow-y:auto; padding:12px; }
+  .hk-staff-panel::-webkit-scrollbar { width:3px; }
+  .hk-panel-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text3); margin-bottom:10px; }
+  .hk-staff-card { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:10px; margin-bottom:8px; }
+  .hk-staff-top { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .hk-staff-av { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; }
+  .hk-staff-name { font-size:12px; font-weight:600; }
+  .hk-staff-role { font-size:10px; color:var(--text3); }
+  .hk-progress-bar { height:4px; background:var(--surface3); border-radius:2px; overflow:hidden; margin-bottom:5px; }
+  .hk-progress-fill { height:100%; border-radius:2px; }
+  .hk-stats-row { display:flex; justify-content:space-between; font-size:10px; color:var(--text3); }
+
+  .hk-rooms-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:8px; padding:14px; }
+  .hk-room-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; cursor:pointer; transition:border-color 0.15s; }
+  .hk-room-card:hover { border-color:var(--accent); }
+  .hk-room-hdr { padding:10px 12px; display:flex; align-items:center; justify-content:space-between; }
+  .hk-room-num { font-size:16px; font-weight:700; }
+  .hk-room-status-dot { width:10px; height:10px; border-radius:50%; }
+  .hk-room-body { padding:0 12px 10px; }
+  .hk-room-type { font-size:10px; color:var(--text3); margin-bottom:6px; }
+  .hk-room-info { display:flex; flex-direction:column; gap:3px; }
+  .hk-info-row { display:flex; align-items:center; justify-content:space-between; font-size:11px; }
+  .hk-info-label { color:var(--text3); }
+  .hk-info-val { color:var(--text2); font-weight:500; }
+  .hk-action-bar { display:flex; gap:4px; padding:8px 12px; border-top:1px solid var(--border2); }
+  .hk-action { flex:1; text-align:center; padding:4px; border-radius:4px; font-size:10px; cursor:pointer; border:1px solid var(--border); color:var(--text3); background:var(--surface2); transition:all 0.15s; }
+  .hk-action:hover { border-color:var(--accent); color:var(--accent); }
+  .hk-stats { display:flex; gap:8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* tooltip */
+  .tooltip { position: relative; }
+  .tooltip::after { content: attr(data-tip); position: absolute; left: 110%; top: 50%; transform: translateY(-50%); background: #1e2d47; color: var(--text); font-size: 11px; white-space: nowrap; padding: 4px 8px; border-radius: 5px; border: 1px solid var(--border); pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 999; }
+  .tooltip:hover::after { opacity: 1; }
+
+  /* fade in animation */
+  .page.active { animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0.6; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* modal overlay */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(3px); }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; width: 480px; max-height: 80vh; overflow-y: auto; padding: 20px; }
+  .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .modal-title { font-size: 16px; font-weight: 700; }
+  .modal-close { width: 26px; height: 26px; border-radius: 5px; background: var(--surface2); border: 1px solid var(--border); color: var(--text2); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .form-group { margin-bottom: 12px; }
+  .form-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+  .form-input { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; color: var(--text); font-size: 12px; font-family: inherit; outline: none; }
+  .form-input:focus { border-color: var(--accent); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="app-brand">
+    <div class="app-icon">🏨</div>
+    <div class="app-name">Grandeur <span>HMS</span></div>
+  </div>
+  <div class="search-bar">
+    <span class="icon">🔍</span>
+    <input type="text" placeholder="Search reservations, guests, rooms…">
+  </div>
+  <div class="nav-right">
+    <div class="nav-btn badge-dot tooltip" data-tip="Notifications">🔔</div>
+    <div class="nav-btn tooltip" data-tip="Settings">⚙️</div>
+    <div class="nav-btn tooltip" data-tip="Help">❓</div>
+    <div class="avatar">SC</div>
+  </div>
+</nav>
+
+<!-- TABS BAR -->
+<div class="tabs-bar">
+  <div class="tab active" onclick="openTab(this,'dashboard')">
+    <div class="tab-dot" style="background:#3b82f6"></div>Dashboard
+    <div class="tab-close">✕</div>
+  </div>
+  <div class="tab" onclick="openTab(this,'calendar')">
+    <div class="tab-dot" style="background:#10b981"></div>Room Calendar
+    <div class="tab-close">✕</div>
+  </div>
+  <div class="tab" onclick="openTab(this,'reservations')">
+    <div class="tab-dot" style="background:#f59e0b"></div>Reservations
+    <div class="tab-close">✕</div>
+  </div>
+  <div class="tab" onclick="openTab(this,'rooms')">
+    <div class="tab-dot" style="background:#8b5cf6"></div>Rooms
+    <div class="tab-close">✕</div>
+  </div>
+  <div class="tab" onclick="openTab(this,'guests')">
+    <div class="tab-dot" style="background:#ec4899"></div>Guests
+    <div class="tab-close">✕</div>
+  </div>
+  <div class="tab" onclick="openTab(this,'reports')">
+    <div class="tab-dot" style="background:#06b6d4"></div>Reports
+    <div class="tab-close">✕</div>
+  </div>
+  <div class="tab" onclick="openTab(this,'cases')">
+    <div class="tab-dot" style="background:#ef4444"></div>Cases
+    <div class="tab-close">✕</div>
+  </div>
+  <div class="tab" onclick="openTab(this,'housekeeping')">
+    <div class="tab-dot" style="background:#10b981"></div>Housekeeping
+    <div class="tab-close">✕</div>
+  </div>
+  <div class="tab-add" onclick="document.getElementById('newResModal').classList.add('open')">＋</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="side-btn active tooltip" data-tip="Dashboard" onclick="navTo('dashboard',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span class="label">Dash</span>
+    </div>
+    <div class="side-btn tooltip" data-tip="Calendar" onclick="navTo('calendar',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span class="label">Cal</span>
+    </div>
+    <div class="side-btn tooltip" data-tip="Reservations" onclick="navTo('reservations',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+      <span class="label">Res.</span>
+    </div>
+    <div class="side-divider"></div>
+    <div class="side-btn tooltip" data-tip="Rooms" onclick="navTo('rooms',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M9 21V12h6v9"/></svg>
+      <span class="label">Rooms</span>
+    </div>
+    <div class="side-btn tooltip" data-tip="Guests" onclick="navTo('guests',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <span class="label">Guests</span>
+    </div>
+    <div class="side-btn tooltip" data-tip="Reports" onclick="navTo('reports',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <span class="label">Reports</span>
+    </div>
+    <div class="side-divider"></div>
+    <div class="side-btn tooltip" data-tip="Cases" onclick="navTo('cases',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span class="label">Cases</span>
+    </div>
+    <div class="side-btn tooltip" data-tip="Housekeeping" onclick="navTo('housekeeping',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4a2 2 0 014 0v4"/></svg>
+      <span class="label">HK</span>
+    </div>
+    <div class="side-btn tooltip" data-tip="Settings" style="margin-top:auto">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      <span class="label">Set.</span>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- ====== DASHBOARD PAGE ====== -->
+    <div class="page active" id="page-dashboard">
+      <div class="dash-scroll">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">Operations Dashboard <span>All Inclusive · Today</span></div>
+          </div>
+          <div class="date-range">
+            <button class="dr-btn">Jun 10 – Jun 20</button>
+            <button class="dr-btn active">Today</button>
+            <button class="btn primary" onclick="document.getElementById('newResModal').classList.add('open')">+ New Reservation</button>
+          </div>
+        </div>
+
+        <!-- KPIs -->
+        <div class="kpi-grid">
+          <div class="kpi-card blue">
+            <div class="kpi-label">Total Rooms</div>
+            <div class="kpi-value">67</div>
+            <div class="kpi-change">All properties</div>
+          </div>
+          <div class="kpi-card green">
+            <div class="kpi-label">Occupied</div>
+            <div class="kpi-value">23</div>
+            <div class="kpi-change"><span class="up">▲ 4</span> vs yesterday</div>
+          </div>
+          <div class="kpi-card gold">
+            <div class="kpi-label">Due Out Today</div>
+            <div class="kpi-value">8</div>
+            <div class="kpi-change">3 checked out already</div>
+          </div>
+          <div class="kpi-card red">
+            <div class="kpi-label">Dirty Rooms</div>
+            <div class="kpi-value">33</div>
+            <div class="kpi-change"><span class="down">▼ 12</span> cleaned today</div>
+          </div>
+          <div class="kpi-card purple">
+            <div class="kpi-label">Occupancy %</div>
+            <div class="kpi-value">34%</div>
+            <div class="kpi-change"><span class="up">▲ 6%</span> vs last week</div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-title">Occupancy Rate — Last 10 Days <span class="ct-right">Revenue Target: $45,000</span></div>
+            <div class="bar-chart" id="occ-chart"></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Room Status Breakdown</div>
+            <div class="donut-wrap">
+              <svg class="donut-svg" width="100" height="100" viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#222d42" stroke-width="4"/>
+                <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#3b82f6" stroke-width="4" stroke-dasharray="37 63" stroke-dashoffset="0" transform="rotate(-90 18 18)"/>
+                <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#10b981" stroke-width="4" stroke-dasharray="24 76" stroke-dashoffset="-37" transform="rotate(-90 18 18)"/>
+                <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#ef4444" stroke-width="4" stroke-dasharray="12 88" stroke-dashoffset="-61" transform="rotate(-90 18 18)"/>
+                <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#f59e0b" stroke-width="4" stroke-dasharray="27 73" stroke-dashoffset="-73" transform="rotate(-90 18 18)"/>
+                <text x="18" y="20" text-anchor="middle" fill="#e2e8f0" font-size="6" font-weight="700">67</text>
+              </svg>
+              <div class="donut-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Vacant <span class="legend-val">25</span></div>
+                <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>Occupied <span class="legend-val">16</span></div>
+                <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Blocked <span class="legend-val">8</span></div>
+                <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Dirty <span class="legend-val">18</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Row -->
+        <div class="dash-bottom">
+          <div class="chart-card">
+            <div class="chart-title">Recent Reservations</div>
+            <table class="mini-table">
+              <thead><tr><th>Guest</th><th>Room</th><th>Dates</th><th>Status</th><th>Amount</th></tr></thead>
+              <tbody>
+                <tr><td>Marcus Thompson</td><td>308 · Deluxe King</td><td>Feb 24–28</td><td><span class="badge confirmed">Confirmed</span></td><td style="color:var(--text)">$1,240</td></tr>
+                <tr><td>Linda Kim</td><td>412 · Standard Twin</td><td>Feb 23–26</td><td><span class="badge checked-in">Checked In</span></td><td style="color:var(--text)">$650</td></tr>
+                <tr><td>Robert Patel</td><td>512 · Ocean Suite</td><td>Feb 24–Mar 1</td><td><span class="badge pending">Pending</span></td><td style="color:var(--text)">$2,850</td></tr>
+                <tr><td>Sophie Dubois</td><td>201 · Presidential</td><td>Feb 25–27</td><td><span class="badge confirmed">Confirmed</span></td><td style="color:var(--text)">$4,200</td></tr>
+                <tr><td>James Johnson</td><td>115 · Standard Queen</td><td>Feb 20–24</td><td><span class="badge checked-out">Checked Out</span></td><td style="color:var(--text)">$820</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Occupancy by Room Type</div>
+            <div class="occ-bars">
+              <div class="occ-row"><div class="occ-label">Regular</div><div class="occ-track"><div class="occ-fill" style="width:62%;background:#3b82f6"></div></div><div class="occ-pct">62%</div></div>
+              <div class="occ-row"><div class="occ-label">Duplex</div><div class="occ-track"><div class="occ-fill" style="width:45%;background:#6366f1"></div></div><div class="occ-pct">45%</div></div>
+              <div class="occ-row"><div class="occ-label">Bhunga</div><div class="occ-track"><div class="occ-fill" style="width:78%;background:#10b981"></div></div><div class="occ-pct">78%</div></div>
+              <div class="occ-row"><div class="occ-label">Suite</div><div class="occ-track"><div class="occ-fill" style="width:33%;background:#f59e0b"></div></div><div class="occ-pct">33%</div></div>
+              <div class="occ-row"><div class="occ-label">Ocean</div><div class="occ-track"><div class="occ-fill" style="width:90%;background:#ec4899"></div></div><div class="occ-pct">90%</div></div>
+              <div class="occ-row"><div class="occ-label">Penthouse</div><div class="occ-track"><div class="occ-fill" style="width:20%;background:#8b5cf6"></div></div><div class="occ-pct">20%</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== CALENDAR PAGE ====== -->
+    <div class="page" id="page-calendar">
+      <div class="cal-toolbar">
+        <div class="cal-stat">All <strong>67</strong></div>
+        <div class="cal-stat">Vacant <strong style="color:#3b82f6">42</strong></div>
+        <div class="cal-stat">Occupied <strong style="color:#10b981">23</strong></div>
+        <div class="cal-stat">Blocked <strong style="color:#ef4444">1</strong></div>
+        <div class="cal-stat">Due Out <strong style="color:#f59e0b">8</strong></div>
+        <div class="cal-stat">Dirty <strong style="color:#f97316">33</strong></div>
+        <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
+          <div class="cal-nav">
+            <div class="cal-nav-btn">‹</div>
+            <div class="cal-date-label">Jun 10 – Jun 20, 2025</div>
+            <div class="cal-nav-btn">›</div>
+          </div>
+          <div class="view-toggle">
+            <button class="vt-btn active">Day</button>
+            <button class="vt-btn">Week</button>
+            <button class="vt-btn">Month</button>
+          </div>
+          <button class="btn primary" onclick="document.getElementById('newResModal').classList.add('open')">+ Reservation</button>
+        </div>
+      </div>
+      <div class="cal-wrap" id="calWrap"></div>
+    </div>
+
+    <!-- ====== RESERVATIONS PAGE ====== -->
+    <div class="page" id="page-reservations">
+      <div class="res-layout">
+        <!-- List Panel -->
+        <div class="res-list-panel">
+          <div class="panel-header">
+            <div class="panel-title">Reservations</div>
+            <div class="count-badge">48</div>
+            <div style="margin-left:auto"><button class="btn primary" onclick="document.getElementById('newResModal').classList.add('open')">+ New</button></div>
+          </div>
+          <div class="panel-search"><input type="text" placeholder="Search by guest, room, dates…"></div>
+          <div class="filter-tabs">
+            <div class="ftab active">All</div>
+            <div class="ftab">Arrivals</div>
+            <div class="ftab">Departures</div>
+            <div class="ftab">In-House</div>
+          </div>
+          <div class="res-items" id="resList"></div>
+        </div>
+
+        <!-- Detail Panel -->
+        <div class="res-detail" id="resDetail">
+          <div class="detail-topbar">
+            <div class="detail-res-id">RES-2024-0892</div>
+            <div class="detail-guest">Marcus Thompson</div>
+            <div class="detail-actions">
+              <button class="btn-action">✏ Edit</button>
+              <button class="btn-action">🖨</button>
+              <button class="btn-action success">✓ Check In</button>
+            </div>
+          </div>
+          <div class="detail-tabs">
+            <div class="dtab active">Details</div>
+            <div class="dtab">Services & Charges</div>
+            <div class="dtab">Payment</div>
+            <div class="dtab">History</div>
+          </div>
+          <div style="display:flex;flex:1;overflow:hidden;">
+            <div class="detail-scroll" style="flex:1;">
+              <div class="detail-cards">
+                <div class="dcard">
+                  <div class="dcard-title">Guest Information <span class="dcard-edit">Edit</span></div>
+                  <div class="dcard-field"><div class="dfield-label">Full Name</div><div class="dfield-val accent">Marcus Thompson</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Guest Type</div><div class="dfield-val gold">⭐ VIP</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Email</div><div class="dfield-val accent">m.thompson@email.com</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Phone</div><div class="dfield-val">+1 (555) 234-5678</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Nationality</div><div class="dfield-val">🇺🇸 United States</div></div>
+                  <div class="dcard-field"><div class="dfield-label">ID / Passport</div><div class="dfield-val">A12345678</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Special Requests</div><div class="dfield-val" style="font-size:12px;color:var(--text2)">High floor preference, hypoallergenic bedding, late check-out if available.</div></div>
+                </div>
+                <div class="dcard">
+                  <div class="dcard-title">Room Details <span class="dcard-edit">Change</span></div>
+                  <div class="room-visual"><div class="room-number-big">308</div><div class="room-type-tag">Deluxe King</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Floor / View</div><div class="dfield-val">3rd Floor · Pool View</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Bed / Size</div><div class="dfield-val">King · 42 m²</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Rate / Night</div><div class="dfield-val green">$310</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Amenities</div>
+                    <div class="amenity-tags" style="margin-top:4px">
+                      <div class="amenity-tag">🛁 Bathtub</div>
+                      <div class="amenity-tag">📺 Smart TV</div>
+                      <div class="amenity-tag">☕ Nespresso</div>
+                      <div class="amenity-tag">📶 WiFi</div>
+                      <div class="amenity-tag">🍳 Mini Kitchen</div>
+                      <div class="amenity-tag">❄️ Climate Ctrl</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dcard">
+                  <div class="dcard-title">Stay Details</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                    <div class="dcard-field"><div class="dfield-label">Check-In Date</div><div class="dfield-val">Feb 24, 2026</div></div>
+                    <div class="dcard-field"><div class="dfield-label">Check-Out Date</div><div class="dfield-val">Feb 28, 2026</div></div>
+                    <div class="dcard-field"><div class="dfield-label">Arrival Time</div><div class="dfield-val">3:00 PM</div></div>
+                    <div class="dcard-field"><div class="dfield-label">No. of Nights</div><div class="dfield-val">4 nights</div></div>
+                    <div class="dcard-field"><div class="dfield-label">Adults</div><div class="dfield-val">2</div></div>
+                    <div class="dcard-field"><div class="dfield-label">Children</div><div class="dfield-val">0</div></div>
+                    <div class="dcard-field"><div class="dfield-label">Rate Plan</div><div class="dfield-val accent">BAR Weekend</div></div>
+                    <div class="dcard-field"><div class="dfield-label">Booking Source</div><div class="dfield-val">Direct Booking</div></div>
+                  </div>
+                </div>
+                <div class="dcard">
+                  <div class="dcard-title">Housekeeping</div>
+                  <div class="dcard-field"><div class="dfield-label">Room Status</div><div class="dfield-val green">● Clean</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Last Cleaned</div><div class="dfield-val">Today, 10:30 AM</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Assigned HK</div><div class="dfield-val accent">Maria Santos</div></div>
+                  <div class="dcard-field"><div class="dfield-label">DND Status</div><div class="dfield-val">Not Active</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Notes</div><div class="dfield-val" style="font-size:12px;color:var(--text2)">Hypoallergenic pillow set placed. Extra towels requested.</div></div>
+                </div>
+              </div>
+            </div>
+            <!-- Right Rail -->
+            <div class="right-rail">
+              <div class="rail-tabs">
+                <div class="rail-tab active">Activity</div>
+                <div class="rail-tab">Email</div>
+                <div class="rail-tab">Tasks</div>
+              </div>
+              <div class="rail-body">
+                <textarea class="note-input" placeholder="Leave a note about this reservation…" style="margin-bottom:8px"></textarea>
+                <button class="btn primary" style="width:100%;justify-content:center;margin-bottom:14px">Save Note</button>
+                <div class="activity-feed">
+                  <div class="activity-item">
+                    <div class="act-avatar" style="background:linear-gradient(135deg,#3b82f6,#6366f1)">SC</div>
+                    <div class="act-content">
+                      <div class="act-header"><div class="act-name">Sarah Chen</div><div class="act-time">2h ago</div></div>
+                      <div class="act-text">Confirmed hypoallergenic pillow setup with housekeeping. Room 308 will be ready with all special requests met.</div>
+                    </div>
+                  </div>
+                  <div class="activity-item">
+                    <div class="act-avatar" style="background:linear-gradient(135deg,#10b981,#059669)">JW</div>
+                    <div class="act-content">
+                      <div class="act-header"><div class="act-name">James Wu</div><div class="act-time">Yesterday</div></div>
+                      <div class="act-text">Guest called to confirm arrival time. Expected 3–4 PM. VIP welcome amenity arranged.</div>
+                    </div>
+                  </div>
+                  <div class="activity-item">
+                    <div class="act-avatar" style="background:var(--surface3)">⚙</div>
+                    <div class="act-content">
+                      <div class="act-header"><div class="act-name" style="color:var(--text3)">System</div><div class="act-time">Feb 22</div></div>
+                      <div class="act-text">Pre-arrival email sent automatically. Includes online check-in link and hotel directions.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== ROOMS PAGE ====== -->
+    <div class="page" id="page-rooms">
+      <div class="cal-toolbar">
+        <div class="cal-stat">All <strong>67</strong></div>
+        <div class="cal-stat">Vacant <strong style="color:#3b82f6">42</strong></div>
+        <div class="cal-stat">Occupied <strong style="color:#10b981">23</strong></div>
+        <div class="cal-stat">Clean <strong style="color:#10b981">34</strong></div>
+        <div class="cal-stat">Dirty <strong style="color:#f59e0b">33</strong></div>
+        <div style="margin-left:auto; display:flex; gap:8px;">
+          <input type="text" placeholder="Search rooms…" style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:5px 10px;color:var(--text);font-size:12px;font-family:inherit;outline:none;">
+          <div class="view-toggle">
+            <button class="vt-btn active">Grid</button>
+            <button class="vt-btn">List</button>
+          </div>
+        </div>
+      </div>
+      <div class="rooms-grid" id="roomsGrid"></div>
+    </div>
+
+    <!-- ====== GUESTS PAGE ====== -->
+    <div class="page" id="page-guests">
+      <div class="guests-page">
+        <div class="table-toolbar">
+          <div class="panel-title">Guests</div>
+          <div class="count-badge">124</div>
+          <input type="text" placeholder="Search guests…" style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:5px 10px;color:var(--text);font-size:12px;font-family:inherit;outline:none;width:240px;">
+          <div style="margin-left:auto; display:flex; gap:6px;">
+            <button class="btn">⬇ Export</button>
+            <button class="btn primary">+ New Guest</button>
+          </div>
+        </div>
+        <div class="data-table-wrap">
+          <table class="dt">
+            <thead><tr>
+              <th>Guest</th><th>Guest Type</th><th>Nationality</th><th>Phone</th>
+              <th>Stays</th><th>Total Spent</th><th>Last Stay</th><th>Status</th>
+            </tr></thead>
+            <tbody id="guestTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== REPORTS PAGE ====== -->
+    <div class="page" id="page-reports">
+      <div class="reports-page">
+        <div class="dash-header" style="margin-bottom:16px">
+          <div class="dash-title">Reports & Analytics</div>
+          <button class="btn primary">+ Create Custom Report</button>
+        </div>
+        <div class="reports-grid" id="reportsGrid"></div>
+      </div>
+    </div>
+
+    <!-- ====== CASES PAGE ====== -->
+    <div class="page" id="page-cases">
+      <div class="cases-toolbar">
+        <div class="panel-title" style="font-size:15px;font-weight:700">Cases</div>
+        <div class="count-badge" style="background:#ef4444">31</div>
+        <div class="cases-stats">
+          <div class="cstat cstat-red">🔴 Open <strong>12</strong></div>
+          <div class="cstat cstat-orange">🟡 In Progress <strong>9</strong></div>
+          <div class="cstat cstat-blue">🔵 Pending <strong>6</strong></div>
+          <div class="cstat cstat-green">🟢 Resolved <strong>4</strong></div>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+          <input type="text" placeholder="Search cases…" style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:5px 10px;color:var(--text);font-size:12px;font-family:inherit;outline:none;width:200px;">
+          <div class="view-toggle">
+            <button class="vt-btn active" onclick="switchCasesView('kanban',this)">Kanban</button>
+            <button class="vt-btn" onclick="switchCasesView('list',this)">List</button>
+          </div>
+          <button class="btn primary" onclick="document.getElementById('newCaseModal').classList.add('open')">+ New Case</button>
+        </div>
+      </div>
+
+      <!-- Kanban View -->
+      <div id="cases-kanban" class="kanban-board">
+        <div class="kanban-col">
+          <div class="kanban-col-hdr" style="border-top:3px solid #ef4444">
+            <div class="kcol-title">🔴 Open</div>
+            <div class="kcol-count">12</div>
+            <button class="kcol-add" onclick="document.getElementById('newCaseModal').classList.add('open')">＋</button>
+          </div>
+          <div class="kanban-cards" id="col-open"></div>
+        </div>
+        <div class="kanban-col">
+          <div class="kanban-col-hdr" style="border-top:3px solid #f59e0b">
+            <div class="kcol-title">🟡 In Progress</div>
+            <div class="kcol-count">9</div>
+            <button class="kcol-add" onclick="document.getElementById('newCaseModal').classList.add('open')">＋</button>
+          </div>
+          <div class="kanban-cards" id="col-inprogress"></div>
+        </div>
+        <div class="kanban-col">
+          <div class="kanban-col-hdr" style="border-top:3px solid #3b82f6">
+            <div class="kcol-title">🔵 Pending Guest</div>
+            <div class="kcol-count">6</div>
+            <button class="kcol-add" onclick="document.getElementById('newCaseModal').classList.add('open')">＋</button>
+          </div>
+          <div class="kanban-cards" id="col-pending"></div>
+        </div>
+        <div class="kanban-col">
+          <div class="kanban-col-hdr" style="border-top:3px solid #10b981">
+            <div class="kcol-title">🟢 Resolved</div>
+            <div class="kcol-count">4</div>
+            <button class="kcol-add" onclick="document.getElementById('newCaseModal').classList.add('open')">＋</button>
+          </div>
+          <div class="kanban-cards" id="col-resolved"></div>
+        </div>
+      </div>
+
+      <!-- List View -->
+      <div id="cases-list" style="display:none;flex:1;overflow:auto;padding:0 14px 14px;">
+        <table class="dt" style="margin-top:14px">
+          <thead><tr>
+            <th>Case #</th><th>Subject</th><th>Guest</th><th>Room</th>
+            <th>Category</th><th>Priority</th><th>Assigned To</th><th>Created</th><th>Status</th>
+          </tr></thead>
+          <tbody id="caseListBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ====== HOUSEKEEPING PAGE ====== -->
+    <div class="page" id="page-housekeeping">
+      <div class="cases-toolbar">
+        <div class="panel-title" style="font-size:15px;font-weight:700">Housekeeping</div>
+        <div class="hk-stats">
+          <div class="cstat" style="color:#ef4444">🔴 Dirty <strong>33</strong></div>
+          <div class="cstat" style="color:#10b981">🟢 Clean <strong>34</strong></div>
+          <div class="cstat" style="color:#f59e0b">🟡 In Progress <strong>8</strong></div>
+          <div class="cstat" style="color:#8b5cf6">🟣 Inspecting <strong>4</strong></div>
+          <div class="cstat" style="color:#ef4444">🚫 Maintenance <strong>2</strong></div>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+          <select style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:5px 10px;color:var(--text);font-size:12px;font-family:inherit;outline:none;">
+            <option>All Staff</option><option>Maria Santos</option><option>John Cruz</option><option>Priya Nair</option>
+          </select>
+          <select style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:5px 10px;color:var(--text);font-size:12px;font-family:inherit;outline:none;">
+            <option>All Floors</option><option>Floor 1</option><option>Floor 2</option><option>Floor 3</option><option>Floor 4</option>
+          </select>
+          <button class="btn primary">+ Request</button>
+        </div>
+      </div>
+
+      <div class="hk-layout">
+        <!-- Staff panel -->
+        <div class="hk-staff-panel">
+          <div class="hk-panel-title">Staff On Duty</div>
+          <div id="hkStaffList"></div>
+        </div>
+        <!-- Rooms grid -->
+        <div style="flex:1;overflow:auto;">
+          <div class="hk-rooms-grid" id="hkRoomsGrid"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<!-- NEW RESERVATION MODAL -->
+<div class="modal-overlay" id="newResModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">New Reservation</div>
+      <div class="modal-close" onclick="document.getElementById('newResModal').classList.remove('open')">✕</div>
+    </div>
+    <div class="form-group"><div class="form-label">Guest Name</div><input class="form-input" type="text" placeholder="Full name"></div>
+    <div class="form-row">
+      <div class="form-group"><div class="form-label">Room Type</div>
+        <select class="form-input"><option>Deluxe King</option><option>Ocean Suite</option><option>Presidential Suite</option><option>Standard Twin</option><option>Duplex</option></select>
+      </div>
+      <div class="form-group"><div class="form-label">Room Number</div><input class="form-input" type="text" placeholder="e.g. 308"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><div class="form-label">Check-In Date</div><input class="form-input" type="date"></div>
+      <div class="form-group"><div class="form-label">Check-Out Date</div><input class="form-input" type="date"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><div class="form-label">Adults</div><input class="form-input" type="number" value="2" min="1"></div>
+      <div class="form-group"><div class="form-label">Children</div><input class="form-input" type="number" value="0" min="0"></div>
+    </div>
+    <div class="form-group"><div class="form-label">Rate Plan</div>
+      <select class="form-input"><option>BAR Weekend</option><option>All Inclusive</option><option>Bed & Breakfast</option><option>Room Only</option></select>
+    </div>
+    <div class="form-group"><div class="form-label">Booking Source</div>
+      <select class="form-input"><option>Direct Booking</option><option>Booking.com</option><option>Expedia</option><option>Airbnb</option><option>Walk-In</option></select>
+    </div>
+    <div class="form-group"><div class="form-label">Special Requests</div><input class="form-input" type="text" placeholder="Any special requirements…"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px">
+      <button class="btn" onclick="document.getElementById('newResModal').classList.remove('open')">Cancel</button>
+      <button class="btn primary" onclick="document.getElementById('newResModal').classList.remove('open')">Create Reservation</button>
+    </div>
+  </div>
+</div>
+
+<!-- NEW CASE MODAL -->
+<div class="modal-overlay" id="newCaseModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">New Case</div>
+      <div class="modal-close" onclick="document.getElementById('newCaseModal').classList.remove('open')">✕</div>
+    </div>
+    <div class="form-group"><div class="form-label">Subject</div><input class="form-input" type="text" placeholder="Brief description of the issue"></div>
+    <div class="form-row">
+      <div class="form-group"><div class="form-label">Category</div>
+        <select class="form-input"><option>Complaint</option><option>Maintenance</option><option>Service Request</option><option>Billing</option><option>General Request</option></select>
+      </div>
+      <div class="form-group"><div class="form-label">Priority</div>
+        <select class="form-input"><option>High</option><option>Medium</option><option>Low</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><div class="form-label">Guest Name</div><input class="form-input" type="text" placeholder="Guest name"></div>
+      <div class="form-group"><div class="form-label">Room Number</div><input class="form-input" type="text" placeholder="e.g. 308"></div>
+    </div>
+    <div class="form-group"><div class="form-label">Assigned To</div>
+      <select class="form-input"><option>Sarah Chen</option><option>James Wu</option><option>Maria Santos</option><option>David Kim</option><option>Unassigned</option></select>
+    </div>
+    <div class="form-group"><div class="form-label">Description</div>
+      <textarea class="form-input" rows="3" placeholder="Detailed description of the case…" style="resize:vertical"></textarea>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px">
+      <button class="btn" onclick="document.getElementById('newCaseModal').classList.remove('open')">Cancel</button>
+      <button class="btn primary" onclick="document.getElementById('newCaseModal').classList.remove('open')">Create Case</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ====== PAGE NAVIGATION ======
+function openTab(tabEl, pageId) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tabEl.classList.add('active');
+  navToPage(pageId);
+}
+function navTo(pageId, sideEl) {
+  document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+  sideEl.classList.add('active');
+  navToPage(pageId);
+  // sync tabs
+  const tabMap = {dashboard:0,calendar:1,reservations:2,rooms:3,guests:4,reports:5,cases:6,housekeeping:7};
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(t => t.classList.remove('active'));
+  if (tabMap[pageId] !== undefined) tabs[tabMap[pageId]]?.classList.add('active');
+}
+function navToPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + pageId)?.classList.add('active');
+}
+
+// ====== DASHBOARD CHART ======
+const occData = [24, 36, 45, 39, 30, 28, 24, 27, 26, 22];
+const days = ['Jun 10','11','12','13','14','15','16','17','18','19'];
+const maxOcc = 50;
+const chart = document.getElementById('occ-chart');
+occData.forEach((val, i) => {
+  const col = document.createElement('div');
+  col.className = 'bar-col';
+  const pct = (val / maxOcc) * 100;
+  const color = val > 40 ? '#10b981' : val > 30 ? '#3b82f6' : '#6366f1';
+  col.innerHTML = `<div class="bar-wrap"><div class="bar" style="height:${pct}%;background:${color}"></div></div><div class="bar-label">${days[i]}</div>`;
+  chart.appendChild(col);
+});
+
+// ====== RESERVATIONS LIST ======
+const reservations = [
+  {id:'0892', name:'Marcus Thompson', room:'308 · Deluxe King', dates:'Feb 24–28', status:'confirmed', amount:'$1,240', color:'#3b82f6', vip:true},
+  {id:'0893', name:'Linda Kim', room:'412 · Standard Twin', dates:'Feb 23–26', status:'checked-in', amount:'$650', color:'#10b981', vip:false},
+  {id:'0894', name:'Robert Patel', room:'512 · Ocean Suite', dates:'Feb 24–Mar 1', status:'pending', amount:'$2,850', color:'#f59e0b', vip:false},
+  {id:'0895', name:'Sophie Dubois', room:'201 · Presidential', dates:'Feb 25–27', status:'confirmed', amount:'$4,200', color:'#ec4899', vip:true},
+  {id:'0891', name:'James Johnson', room:'115 · Standard Queen', dates:'Feb 20–24', status:'checked-out', amount:'$820', color:'#64748b', vip:false},
+  {id:'0896', name:'Aisha Williams', room:'305 · Deluxe Double', dates:'Feb 26–Mar 2', status:'confirmed', amount:'$1,560', color:'#8b5cf6', vip:false},
+  {id:'0897', name:'Chen Wei', room:'408 · Deluxe King', dates:'Mar 1–5', status:'pending', amount:'$1,380', color:'#f59e0b', vip:false},
+  {id:'0898', name:'Emma Larsson', room:'209 · Junior Suite', dates:'Feb 28–Mar 3', status:'confirmed', amount:'$2,100', color:'#06b6d4', vip:true},
+];
+const resList = document.getElementById('resList');
+reservations.forEach((r, i) => {
+  const initials = r.name.split(' ').map(n=>n[0]).join('');
+  const el = document.createElement('div');
+  el.className = 'res-item' + (i===0?' active':'');
+  el.innerHTML = `
+    <div class="res-item-top">
+      <div class="res-guest-avatar" style="background:${r.color}22;color:${r.color}">${initials}</div>
+      <div class="res-guest-name">${r.name}${r.vip?' <span style="font-size:10px;color:#f59e0b">⭐</span>':''}</div>
+      <div class="res-amount">${r.amount}</div>
+    </div>
+    <div class="res-item-mid">
+      <div class="res-id">RES-2024-${r.id}</div>
+      <span class="badge ${r.status}">${r.status.replace('-',' ')}</span>
+    </div>
+    <div class="res-item-bot">🛏 ${r.room} &nbsp;·&nbsp; 📅 ${r.dates}</div>
+  `;
+  resList.appendChild(el);
+});
+
+// ====== ROOMS GRID ======
+const roomTypes = ['Regular','Regular','Duplex','Duplex','Bhunga','Suite','Ocean','Penthouse'];
+const roomNums = ['101','102','1001','1002','0007','501','601','801'];
+const statuses = ['clean','dirty','clean','maintenance','clean','dirty','clean','clean'];
+const statusLabels = {clean:'Clean',dirty:'Dirty',maintenance:'Maintenance'};
+const statusColors = {clean:'#10b981',dirty:'#f59e0b',maintenance:'#ef4444'};
+const occupiedArr = [false,true,true,false,true,false,true,false];
+const roomsGrid = document.getElementById('roomsGrid');
+for (let i = 0; i < 18; i++) {
+  const idx = i % 8;
+  const num = parseInt(roomNums[idx]) + Math.floor(i/8)*100;
+  const type = roomTypes[idx];
+  const st = statuses[idx];
+  const occ = occupiedArr[idx];
+  const card = document.createElement('div');
+  card.className = 'room-card';
+  const hdrBg = occ ? 'linear-gradient(135deg,#1a3a5f 0%,#0a1f40 100%)' : 'linear-gradient(135deg,#1a2235 0%,#0f172a 100%)';
+  card.innerHTML = `
+    <div class="room-card-hdr" style="background:${hdrBg}">
+      <div class="room-card-num">${num}</div>
+      <div class="room-card-type">${type}</div>
+    </div>
+    <div class="room-card-body">
+      <div class="room-status-row">
+        <div class="room-status"><div class="status-dot ${st}"></div><span style="color:${statusColors[st]}">${statusLabels[st]}</span></div>
+        <div class="room-floor">Floor ${Math.floor(i/4)+1}</div>
+      </div>
+      <div class="room-meta">
+        <div class="room-meta-item">🛏 ${type==='Ocean'||type==='Suite'||type==='Penthouse'?'King':type==='Bhunga'?'Twin':'Queen'}</div>
+        <div class="room-meta-item">👥 ${type==='Penthouse'?'4':type==='Suite'||type==='Ocean'?'3':'2'}</div>
+        <div class="room-meta-item">${occ?'<span style="color:#10b981">●</span> Occ':'<span style="color:#64748b">○</span> Vac'}</div>
+      </div>
+    </div>
+  `;
+  roomsGrid.appendChild(card);
+}
+
+// ====== GUESTS TABLE ======
+const guests = [
+  {name:'Marcus Thompson', email:'m.thompson@email.com', type:'VIP', nat:'🇺🇸 US', phone:'+1 555 234 5678', stays:7, spent:'$14,200', last:'Feb 24, 2026', status:'In-House'},
+  {name:'Linda Kim', email:'l.kim@email.com', type:'Regular', nat:'🇰🇷 KR', phone:'+82 10 1234 5678', stays:3, spent:'$4,100', last:'Feb 23, 2026', status:'In-House'},
+  {name:'Robert Patel', email:'r.patel@email.com', type:'Regular', nat:'🇬🇧 UK', phone:'+44 7700 900123', stays:1, spent:'$2,850', last:'Feb 24, 2026', status:'Arriving'},
+  {name:'Sophie Dubois', email:'s.dubois@email.com', type:'VIP', nat:'🇫🇷 FR', phone:'+33 6 12 34 56 78', stays:12, spent:'$52,000', last:'Feb 25, 2026', status:'Arriving'},
+  {name:'Aisha Williams', email:'a.williams@email.com', type:'Regular', nat:'🇿🇦 ZA', phone:'+27 82 123 4567', stays:2, spent:'$3,120', last:'Feb 26, 2026', status:'Confirmed'},
+  {name:'Chen Wei', email:'c.wei@email.com', type:'Regular', nat:'🇨🇳 CN', phone:'+86 138 0000 1234', stays:4, spent:'$5,540', last:'Mar 1, 2026', status:'Confirmed'},
+  {name:'Emma Larsson', email:'e.larsson@email.com', type:'VIP', nat:'🇸🇪 SE', phone:'+46 70 123 4567', stays:9, spent:'$18,900', last:'Feb 28, 2026', status:'Confirmed'},
+  {name:'James Johnson', email:'j.johnson@email.com', type:'Regular', nat:'🇺🇸 US', phone:'+1 555 876 5432', stays:5, spent:'$4,100', last:'Feb 24, 2026', status:'Checked Out'},
+];
+const avColors = ['#3b82f6','#10b981','#f59e0b','#ec4899','#8b5cf6','#06b6d4','#f97316','#64748b'];
+const tbody = document.getElementById('guestTableBody');
+guests.forEach((g, i) => {
+  const inits = g.name.split(' ').map(n=>n[0]).join('');
+  const statusBadge = {
+    'In-House':'checked-in','Arriving':'confirmed','Confirmed':'confirmed','Checked Out':'checked-out'
+  }[g.status]||'confirmed';
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><div class="guest-cell"><div class="guest-av" style="background:${avColors[i]}22;color:${avColors[i]}">${inits}</div><div><div class="guest-name">${g.name}</div><div class="guest-email">${g.email}</div></div></div></td>
+    <td>${g.type==='VIP'?'<span class="vip-tag">⭐ VIP</span>':'Regular'}</td>
+    <td>${g.nat}</td>
+    <td>${g.phone}</td>
+    <td>${g.stays}</td>
+    <td style="color:var(--green);font-weight:600">${g.spent}</td>
+    <td>${g.last}</td>
+    <td><span class="badge ${statusBadge}">${g.status}</span></td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// ====== REPORTS ======
+const reports = [
+  {icon:'📊', color:'#3b82f6', name:'Occupancy Report', desc:'Daily, weekly, monthly room occupancy rates and trends across all room types.', last:'Today'},
+  {icon:'💰', color:'#10b981', name:'Revenue Summary', desc:'Total revenue breakdown by room type, rate plan, and booking source.', last:'Today'},
+  {icon:'👤', color:'#ec4899', name:'Guest Analytics', desc:'Guest demographics, nationality breakdown, repeat visitor rates and spend.', last:'Yesterday'},
+  {icon:'🏨', color:'#8b5cf6', name:'Room Performance', desc:'Revenue per available room (RevPAR), average daily rate (ADR) and occupancy.', last:'Yesterday'},
+  {icon:'🧹', color:'#f59e0b', name:'Housekeeping Log', desc:'Room cleaning status, turnaround times and housekeeper performance.', last:'Today'},
+  {icon:'📅', color:'#06b6d4', name:'Arrival / Departure', desc:'Daily arrivals and departures forecast for the next 30 days.', last:'Today'},
+  {icon:'💳', color:'#f97316', name:'Payment Report', desc:'Payments received, outstanding balances, and method breakdown.', last:'2 days ago'},
+  {icon:'⭐', color:'#fbbf24', name:'VIP & Loyalty Report', desc:'VIP guest frequency, total spend, and loyalty tier progression.', last:'3 days ago'},
+  {icon:'📈', color:'#34d399', name:'Booking Channels', desc:'Reservations and revenue split by OTA, direct, walk-in, and corporate.', last:'Yesterday'},
+];
+const rGrid = document.getElementById('reportsGrid');
+reports.forEach(r => {
+  const card = document.createElement('div');
+  card.className = 'report-card';
+  card.innerHTML = `
+    <div class="report-icon" style="background:${r.color}22;color:${r.color}">${r.icon}</div>
+    <div class="report-name">${r.name}</div>
+    <div class="report-desc">${r.desc}</div>
+    <div class="report-footer"><span>Last run: ${r.last}</span><span class="run-btn">▶ Run Report</span></div>
+  `;
+  rGrid.appendChild(card);
+});
+
+// ====== CALENDAR ======
+const calWrap = document.getElementById('calWrap');
+const cols = 11; // days displayed
+const rooms = [
+  {section:'Regular', rooms:[
+    {num:'Goa 1', tags:['🏊']},
+    {num:'Goa 2', tags:['🏊','🚭']},
+  ]},
+  {section:'Duplex', rooms:[
+    {num:'1001', tags:['☑','🏊']},
+    {num:'1002', tags:['☑','🏊']},
+    {num:'1003', tags:['☑','🏊']},
+    {num:'1004', tags:['☑','🏊']},
+    {num:'1005', tags:['☑','🏊']},
+    {num:'1006', tags:['☑','🏊']},
+  ]},
+  {section:'Bhunga', rooms:[
+    {num:'0007', tags:['🚭']},
+    {num:'102', tags:['☑','🏊']},
+    {num:'103', tags:[]},
+    {num:'104', tags:[]},
+  ]},
+];
+
+// bookings: [room, startDay(0-indexed), span, label, color]
+const bookings = [
+  // Goa 1
+  ['Goa 1', 0, 2, 'MA...', 'green'],
+  ['Goa 1', 2, 4, 'MAINTENANCE B...', 'maintenance'],
+  ['Goa 1', 5, 2, 'M...', 'orange'],
+  ['Goa 1', 8, 2, 'Ms. Je...', 'green'],
+  // Goa 2
+  ['Goa 2', 1, 4, 'Mr. Ilram', 'pink'],
+  ['Goa 2', 3, 5, 'MAINTENANCE BLOCK', 'maintenance'],
+  ['Goa 2', 9, 2, 'Ms. Je...', 'green'],
+  // 1001
+  ['1001', 1, 2, 'Mr. Joy...', 'pink'],
+  ['1001', 4, 6, 'Mr. DIANNE', 'green'],
+  // 1002
+  ['1002', 1, 5, 'Mr. RAHUL TEST', 'green'],
+  ['1002', 4, 4, 'Ms. Jessielyn Andrew', 'green'],
+  ['1002', 7, 3, 'MAINTENANCE B...', 'maintenance'],
+  // 1003
+  ['1003', 1, 5, 'Ms. Garfield B', 'green'],
+  ['1003', 4, 3, 'Mr. Rhodale', 'green'],
+  ['1003', 7, 3, 'Mr. Aman Siddiqui', 'green'],
+  // 1004
+  ['1004', 1, 2, 'Mr. Peet', 'green'],
+  ['1004', 2, 3, 'Ms. Sky W.', 'green'],
+  ['1004', 4, 2, 'D...', 'orange'],
+  ['1004', 5, 4, 'Mr. ezee test', 'green'],
+  // 1005
+  ['1005', 1, 4, 'Ms. Dianne Khristine', 'green'],
+  ['1005', 4, 2, 'Mr. Am...', 'green'],
+  ['1005', 5, 4, 'Mr. ezee test', 'green'],
+  // 1006
+  ['1006', 1, 3, 'Mr. Ton...', 'green'],
+  ['1006', 3, 2, 'Mr. Sumit', 'green'],
+  // Bhunga
+  ['0007', 0, 2, 'Mr. Frankie', 'red'],
+  ['0007', 2, 4, 'Mr. Wil Rodriguez', 'green'],
+  ['0007', 5, 3, 'Jettaw...', 'green'],
+  ['0007', 8, 3, 'Mr. Nishant B', 'green'],
+  ['102', 1, 4, 'Mr. satrio', 'green'],
+  ['102', 4, 3, 'Mr. eze...', 'green'],
+  ['102', 6, 2, 'Mrs. A...', 'purple'],
+  ['103', 0, 2, 'Leo24', 'red'],
+  ['103', 2, 4, 'Mr. Zelnab', 'green'],
+  ['103', 5, 3, 'Mr. WA...', 'green'],
+  ['103', 8, 3, 'Mr. Alexander', 'green'],
+];
+
+const dayNames = ['Tue','Wed','Thu','Fri','Sat','Sun','Mon','Tue','Wed','Thu','Fri'];
+const dayDates = [10,11,12,13,14,15,16,17,18,19,20];
+const todayIdx = 0;
+
+let html = `<div class="cal-grid">`;
+// Header
+html += `<div class="cal-header-row">
+  <div class="cal-room-col">Room</div>
+  <div class="cal-day-headers">`;
+for (let d = 0; d < cols; d++) {
+  const isWeekend = d===4||d===5;
+  const isToday = d===todayIdx;
+  html += `<div class="cal-day-hdr${isWeekend?' weekend':''}${isToday?' today':''}">
+    <div class="dow">${dayNames[d]}</div>
+    <div class="dom">${dayDates[d]}</div>
+  </div>`;
+}
+html += `</div></div>`;
+
+const sectionCounts = {Regular:{vac:3,occ:1},Duplex:{vac:4,occ:8},Bhunga:{vac:4,occ:8}};
+
+rooms.forEach(section => {
+  const sc = sectionCounts[section.section]||{vac:0,occ:0};
+  html += `<div class="cal-section-hdr">
+    <span>— ${section.section}</span>
+    <div class="cal-section-stats">
+      <div class="cs-stat">Vacant <strong>${sc.vac}</strong></div>
+      <div class="cs-stat">Occupied <strong>${sc.occ}</strong></div>
+    </div>
+  </div>`;
+  section.rooms.forEach(room => {
+    const roomBookings = bookings.filter(b => b[0] === room.num);
+    const dayW = 100 / cols;
+    html += `<div class="cal-room-row">
+      <div class="cal-room-info">
+        <div>
+          <div class="room-num">${room.num}</div>
+          <div class="room-tags">${room.tags.map(t=>`<div class="room-tag">${t}</div>`).join('')}</div>
+        </div>
+      </div>
+      <div class="cal-cells">`;
+    for (let d = 0; d < cols; d++) {
+      const isWeekend = d===4||d===5;
+      const isToday = d===todayIdx;
+      html += `<div class="cal-cell${isWeekend?' weekend':''}${isToday?' today':''}"></div>`;
+    }
+    html += `<div class="bookings-layer">`;
+    roomBookings.forEach(b => {
+      const left = (b[2] / cols) * 100;
+      const width = (b[3] / cols) * 100;
+      html += `<div class="booking-block ${b[5]}" style="left:${left}%;width:calc(${width}% - 4px)">${b[4]}</div>`;
+    });
+    html += `</div></div></div>`;
+  });
+});
+html += `</div>`;
+calWrap.innerHTML = html;
+
+// View toggle
+document.querySelectorAll('.vt-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.closest('.view-toggle').querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// filter tabs
+document.querySelectorAll('.ftab').forEach(t=>{
+  t.addEventListener('click', function(){
+    this.closest('.filter-tabs').querySelectorAll('.ftab').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// detail tabs
+document.querySelectorAll('.dtab').forEach(t=>{
+  t.addEventListener('click',function(){
+    this.closest('.detail-tabs').querySelectorAll('.dtab').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// res item click
+document.querySelectorAll('.res-item').forEach(item => {
+  item.addEventListener('click', function(){
+    document.querySelectorAll('.res-item').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// rail tabs
+document.querySelectorAll('.rail-tab').forEach(t=>{
+  t.addEventListener('click',function(){
+    this.closest('.rail-tabs').querySelectorAll('.rail-tab').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ====== CASES ======
+const casesData = {
+  open: [
+    {num:'C-2024-0091', subject:'AC not working in room 308', cat:'maintenance', priority:'high', guest:'Marcus Thompson', room:'308', assignee:'James Wu', assigneeColor:'#10b981', age:'2h ago'},
+    {num:'C-2024-0088', subject:'Noise complaint from room 412 guests', cat:'complaint', priority:'high', guest:'Linda Kim', room:'412', assignee:'Sarah Chen', assigneeColor:'#3b82f6', age:'4h ago'},
+    {num:'C-2024-0085', subject:'Extra towels requested urgently', cat:'request', priority:'medium', guest:'Robert Patel', room:'512', assignee:'Maria Santos', assigneeColor:'#ec4899', age:'5h ago'},
+    {num:'C-2024-0082', subject:'Restaurant booking issue for dinner', cat:'service', priority:'low', guest:'Sophie Dubois', room:'201', assignee:'David Kim', assigneeColor:'#f59e0b', age:'7h ago'},
+    {num:'C-2024-0079', subject:'Minibar charges disputed', cat:'billing', priority:'medium', guest:'Chen Wei', room:'408', assignee:'Sarah Chen', assigneeColor:'#3b82f6', age:'1d ago'},
+  ],
+  inprogress: [
+    {num:'C-2024-0077', subject:'Leaking shower drain — plumber dispatched', cat:'maintenance', priority:'high', guest:'Emma Larsson', room:'209', assignee:'James Wu', assigneeColor:'#10b981', age:'3h ago'},
+    {num:'C-2024-0074', subject:'Room cleaning not done by 2PM', cat:'complaint', priority:'medium', guest:'Aisha Williams', room:'305', assignee:'Maria Santos', assigneeColor:'#ec4899', age:'6h ago'},
+    {num:'C-2024-0071', subject:'Late check-out approval requested', cat:'request', priority:'low', guest:'Marcus Thompson', room:'308', assignee:'David Kim', assigneeColor:'#f59e0b', age:'8h ago'},
+    {num:'C-2024-0068', subject:'Airport transfer rescheduled', cat:'service', priority:'medium', guest:'Linda Kim', room:'412', assignee:'Sarah Chen', assigneeColor:'#3b82f6', age:'1d ago'},
+  ],
+  pending: [
+    {num:'C-2024-0065', subject:'Billing query — duplicate charge', cat:'billing', priority:'high', guest:'Robert Patel', room:'512', assignee:'Sarah Chen', assigneeColor:'#3b82f6', age:'2d ago'},
+    {num:'C-2024-0062', subject:'Early check-in request pending confirmation', cat:'request', priority:'low', guest:'Sophie Dubois', room:'201', assignee:'James Wu', assigneeColor:'#10b981', age:'2d ago'},
+    {num:'C-2024-0059', subject:'Spa appointment waiting for availability', cat:'service', priority:'low', guest:'Emma Larsson', room:'209', assignee:'Maria Santos', assigneeColor:'#ec4899', age:'3d ago'},
+  ],
+  resolved: [
+    {num:'C-2024-0056', subject:'TV remote battery replaced', cat:'maintenance', priority:'low', guest:'Aisha Williams', room:'305', assignee:'James Wu', assigneeColor:'#10b981', age:'1d ago'},
+    {num:'C-2024-0053', subject:'Wake-up call confirmed for 6AM', cat:'service', priority:'low', guest:'Chen Wei', room:'408', assignee:'David Kim', assigneeColor:'#f59e0b', age:'2d ago'},
+    {num:'C-2024-0050', subject:'Complimentary upgrade processed', cat:'request', priority:'medium', guest:'Marcus Thompson', room:'308', assignee:'Sarah Chen', assigneeColor:'#3b82f6', age:'3d ago'},
+    {num:'C-2024-0047', subject:'Mini fridge restocked', cat:'service', priority:'low', guest:'Linda Kim', room:'412', assignee:'Maria Santos', assigneeColor:'#ec4899', age:'3d ago'},
+  ]
+};
+
+const catLabels = {complaint:'Complaint',maintenance:'Maintenance',service:'Service',billing:'Billing',request:'Request'};
+
+function renderCaseCard(c) {
+  const inits = c.assignee.split(' ').map(n=>n[0]).join('');
+  return `<div class="case-card">
+    <div class="case-card-top">
+      <div class="case-num">${c.num}</div>
+      <div class="case-priority ${c.priority}">● ${c.priority.charAt(0).toUpperCase()+c.priority.slice(1)}</div>
+    </div>
+    <div class="case-subject">${c.subject}</div>
+    <div class="case-meta">
+      <span>👤 ${c.guest}</span>
+      <span>🛏 Room ${c.room}</span>
+    </div>
+    <div style="margin-bottom:8px"><span class="case-cat ${c.cat}">${catLabels[c.cat]}</span></div>
+    <div class="case-footer">
+      <div class="case-assignee">
+        <div class="case-av" style="background:${c.assigneeColor}22;color:${c.assigneeColor}">${inits}</div>
+        ${c.assignee.split(' ')[0]}
+      </div>
+      <div class="case-age">${c.age}</div>
+    </div>
+  </div>`;
+}
+
+['open','inprogress','pending','resolved'].forEach(col => {
+  const el = document.getElementById('col-'+col);
+  if (el) el.innerHTML = casesData[col].map(renderCaseCard).join('');
+});
+
+// Case list view
+const caseListBody = document.getElementById('caseListBody');
+const allCases = [...casesData.open.map(c=>({...c,status:'open'})), ...casesData.inprogress.map(c=>({...c,status:'inprogress'})), ...casesData.pending.map(c=>({...c,status:'pending'})), ...casesData.resolved.map(c=>({...c,status:'resolved'}))];
+const statusBadgeMap = {open:'<span class="badge" style="background:rgba(239,68,68,0.15);color:#f87171">Open</span>', inprogress:'<span class="badge" style="background:rgba(245,158,11,0.15);color:#fbbf24">In Progress</span>', pending:'<span class="badge" style="background:rgba(59,130,246,0.15);color:#60a5fa">Pending</span>', resolved:'<span class="badge confirmed">Resolved</span>'};
+allCases.forEach(c => {
+  const inits = c.assignee.split(' ').map(n=>n[0]).join('');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td style="font-family:monospace;font-size:11px">${c.num}</td>
+    <td style="color:var(--text);font-weight:500">${c.subject}</td>
+    <td>${c.guest}</td>
+    <td>${c.room}</td>
+    <td><span class="case-cat ${c.cat}">${catLabels[c.cat]}</span></td>
+    <td><span class="case-priority ${c.priority}" style="display:inline-flex;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600">● ${c.priority}</span></td>
+    <td><div style="display:flex;align-items:center;gap:5px"><div class="case-av" style="background:${c.assigneeColor}22;color:${c.assigneeColor}">${inits}</div>${c.assignee}</div></td>
+    <td style="color:var(--text3)">${c.age}</td>
+    <td>${statusBadgeMap[c.status]}</td>`;
+  caseListBody.appendChild(tr);
+});
+
+function switchCasesView(view, btn) {
+  btn.closest('.view-toggle').querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('cases-kanban').style.display = view==='kanban'?'flex':'none';
+  document.getElementById('cases-list').style.display = view==='list'?'flex':'none';
+}
+
+// ====== HOUSEKEEPING ======
+const hkStaff = [
+  {name:'Maria Santos', role:'Senior HK', color:'#ec4899', tasks:8, done:5},
+  {name:'John Cruz', role:'Housekeeper', color:'#3b82f6', tasks:7, done:3},
+  {name:'Priya Nair', role:'Housekeeper', color:'#10b981', tasks:6, done:6},
+  {name:'Tom Rivera', role:'Supervisor', color:'#f59e0b', tasks:4, done:2},
+  {name:'Ana Lee', role:'Laundry', color:'#8b5cf6', tasks:5, done:4},
+];
+const hkStaffList = document.getElementById('hkStaffList');
+hkStaff.forEach(s => {
+  const inits = s.name.split(' ').map(n=>n[0]).join('');
+  const pct = Math.round(s.done/s.tasks*100);
+  const div = document.createElement('div');
+  div.className = 'hk-staff-card';
+  div.innerHTML = `
+    <div class="hk-staff-top">
+      <div class="hk-staff-av" style="background:${s.color}22;color:${s.color}">${inits}</div>
+      <div><div class="hk-staff-name">${s.name}</div><div class="hk-staff-role">${s.role}</div></div>
+    </div>
+    <div class="hk-progress-bar"><div class="hk-progress-fill" style="width:${pct}%;background:${s.color}"></div></div>
+    <div class="hk-stats-row"><span>${s.done}/${s.tasks} tasks</span><span style="color:${s.color};font-weight:600">${pct}%</span></div>`;
+  hkStaffList.appendChild(div);
+});
+
+const hkRoomStatuses = [
+  {num:'101',type:'Regular',floor:1,status:'clean',statusColor:'#10b981',occ:'Vacant',lastClean:'8:30 AM',assignee:'Maria Santos',priority:false},
+  {num:'102',type:'Regular',floor:1,status:'dirty',statusColor:'#ef4444',occ:'Due Out',lastClean:'Yesterday',assignee:'John Cruz',priority:true},
+  {num:'103',type:'Regular',floor:1,status:'inprogress',statusColor:'#f59e0b',occ:'Occupied',lastClean:'In Progress',assignee:'Priya Nair',priority:false},
+  {num:'201',type:'Suite',floor:2,status:'clean',statusColor:'#10b981',occ:'Occupied',lastClean:'7:45 AM',assignee:'Maria Santos',priority:false},
+  {num:'202',type:'Suite',floor:2,status:'dirty',statusColor:'#ef4444',occ:'Checked Out',lastClean:'Yesterday',assignee:'Tom Rivera',priority:true},
+  {num:'203',type:'Suite',floor:2,status:'inspect',statusColor:'#8b5cf6',occ:'Vacant',lastClean:'9:00 AM',assignee:'Priya Nair',priority:false},
+  {num:'308',type:'Deluxe King',floor:3,status:'clean',statusColor:'#10b981',occ:'Occupied',lastClean:'10:30 AM',assignee:'Ana Lee',priority:false},
+  {num:'309',type:'Deluxe King',floor:3,status:'dirty',statusColor:'#ef4444',occ:'Due Out',lastClean:'Yesterday',assignee:'John Cruz',priority:true},
+  {num:'310',type:'Deluxe King',floor:3,status:'maintenance',statusColor:'#ef4444',occ:'Blocked',lastClean:'—',assignee:'Unassigned',priority:true},
+  {num:'401',type:'Duplex',floor:4,status:'clean',statusColor:'#10b981',occ:'Vacant',lastClean:'8:00 AM',assignee:'Maria Santos',priority:false},
+  {num:'402',type:'Duplex',floor:4,status:'inprogress',statusColor:'#f59e0b',occ:'Due Out',lastClean:'In Progress',assignee:'Tom Rivera',priority:false},
+  {num:'403',type:'Duplex',floor:4,status:'dirty',statusColor:'#ef4444',occ:'Checked Out',lastClean:'Yesterday',assignee:'Ana Lee',priority:true},
+  {num:'501',type:'Ocean Suite',floor:5,status:'clean',statusColor:'#10b981',occ:'Occupied',lastClean:'9:15 AM',assignee:'Priya Nair',priority:false},
+  {num:'502',type:'Ocean Suite',floor:5,status:'inspect',statusColor:'#8b5cf6',occ:'Vacant',lastClean:'10:00 AM',assignee:'Maria Santos',priority:false},
+  {num:'601',type:'Penthouse',floor:6,status:'clean',statusColor:'#10b981',occ:'Occupied',lastClean:'7:00 AM',assignee:'Maria Santos',priority:false},
+  {num:'602',type:'Penthouse',floor:6,status:'dirty',statusColor:'#ef4444',occ:'Due Out',lastClean:'Yesterday',assignee:'John Cruz',priority:true},
+];
+const statusIcons = {clean:'✅',dirty:'🔴',inprogress:'🔄',inspect:'🔍',maintenance:'🔧'};
+const statusText = {clean:'Clean',dirty:'Dirty',inprogress:'Cleaning',inspect:'Inspecting',maintenance:'Maintenance'};
+const hkRoomsGrid = document.getElementById('hkRoomsGrid');
+hkRoomStatuses.forEach(r => {
+  const card = document.createElement('div');
+  card.className = 'hk-room-card';
+  const hdrBg = r.status==='dirty'||r.status==='maintenance'?'rgba(239,68,68,0.08)':r.status==='inprogress'?'rgba(245,158,11,0.08)':r.status==='inspect'?'rgba(139,92,246,0.08)':'rgba(16,185,129,0.06)';
+  card.innerHTML = `
+    <div class="hk-room-hdr" style="background:${hdrBg}">
+      <div>
+        <div class="hk-room-num">${r.num}</div>
+        <div style="font-size:10px;color:var(--text3)">${r.type}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:16px">${statusIcons[r.status]}</div>
+        ${r.priority?'<div style="font-size:9px;color:#f87171;font-weight:700">PRIORITY</div>':''}
+      </div>
+    </div>
+    <div class="hk-room-body">
+      <div class="hk-room-info">
+        <div class="hk-info-row"><span class="hk-info-label">Status</span><span class="hk-info-val" style="color:${r.statusColor}">${statusText[r.status]}</span></div>
+        <div class="hk-info-row"><span class="hk-info-label">Occupancy</span><span class="hk-info-val">${r.occ}</span></div>
+        <div class="hk-info-row"><span class="hk-info-label">Cleaned</span><span class="hk-info-val">${r.lastClean}</span></div>
+        <div class="hk-info-row"><span class="hk-info-label">Assigned</span><span class="hk-info-val" style="color:var(--accent)">${r.assignee.split(' ')[0]}</span></div>
+      </div>
+    </div>
+    <div class="hk-action-bar">
+      <div class="hk-action">✓ Clean</div>
+      <div class="hk-action">🔍 Inspect</div>
+      <div class="hk-action">📋 Note</div>
+    </div>`;
+  hkRoomsGrid.appendChild(card);
+});
+</script>
+</body>
+</html>

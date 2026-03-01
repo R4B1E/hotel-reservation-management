@@ -7,7 +7,7 @@ public with sharing class ReservationController {
      * @description Creates a new reservation record
      */
     @AuraEnabled
-    public static Id createReservation(
+    public static String createReservation(
         Id roomId,
         Date checkIn,
         Date checkOut,
@@ -41,8 +41,17 @@ public with sharing class ReservationController {
         Decimal taxes = subtotal * 0.12;
         Decimal total = subtotal + taxes;
 
+        // Link to logged-in user's Contact
+        Id contactId = null;
+        try {
+            contactId = [SELECT ContactId FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1].ContactId;
+        } catch (Exception e) {
+            // Guest user may not have a Contact
+        }
+
         // Create reservation
         Reservation__c res = new Reservation__c(
+            Contact__c = contactId,
             Room__c = roomId,
             Check_In_Date__c = checkIn,
             Check_Out_Date__c = checkOut,
@@ -63,7 +72,7 @@ public with sharing class ReservationController {
         );
 
         insert res;
-        return res.Id;
+        return res.Confirmation_Number__c;
     }
 
     /**
@@ -103,6 +112,21 @@ public with sharing class ReservationController {
 
         res.Status__c = 'Cancelled';
         update res;
+    }
+
+    /**
+     * @description Returns a reservation by its confirmation number
+     */
+    @AuraEnabled(cacheable=true)
+    public static Reservation__c getReservationByConfirmation(String confirmationNumber) {
+        return [
+            SELECT Id, Confirmation_Number__c, Room__r.Name, Room__r.Category__c,
+                   Check_In_Date__c, Check_Out_Date__c, Adults__c, Children__c,
+                   Guest_Email__c, Guest_First_Name__c, Total__c, Status__c
+            FROM Reservation__c
+            WHERE Confirmation_Number__c = :confirmationNumber
+            LIMIT 1
+        ];
     }
 
     private static String generateConfirmationNumber() {

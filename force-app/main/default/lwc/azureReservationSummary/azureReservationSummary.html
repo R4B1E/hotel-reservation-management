@@ -11,7 +11,7 @@
                     <span class="date-label">Check-In</span>
                     <span class="date-val">{checkInFormatted}</span>
                 </div>
-                <div class="date-arrow">→</div>
+                <div class="date-arrow">&rarr;</div>
                 <div class="date-block">
                     <span class="date-label">Check-Out</span>
                     <span class="date-val">{checkOutFormatted}</span>
@@ -49,6 +49,18 @@
                     <span>${total}</span>
                 </div>
             </div>
+
+            <div class="summary-divider"></div>
+
+            <template if:true={hasError}>
+                <p class="summary-error">{submitError}</p>
+            </template>
+
+            <button class="summary-cta" disabled={isSubmitting} onclick={handleCompleteBooking}>
+                <span>{submitButtonLabel}</span>
+            </button>
+
+            <p class="summary-note">Free cancellation up to 48 hours before arrival</p>
         </div>
     </div>
 </template>

@@ -11,6 +11,8 @@ export default class AzureBookingBar extends LightningElement {
     @track adults = 2;
     @track children = 0;
     @track guestDropdownOpen = false;
+    @track showDatePicker = false;
+    @track datePickerMode = 'checkin';
 
     get checkInDisplay() {
         return this.checkIn ? this.formatDate(this.checkIn) : 'Select date';
@@ -26,7 +28,14 @@ export default class AzureBookingBar extends LightningElement {
     }
 
     get chevronIcon() {
-        return this.guestDropdownOpen ? '▲' : '▼';
+        return this.guestDropdownOpen ? '\u25B2' : '\u25BC';
+    }
+
+    get datePickerMinDate() {
+        if (this.datePickerMode === 'checkout' && this.checkIn) {
+            return this.checkIn.toISOString();
+        }
+        return null;
     }
 
     formatDate(d) {
@@ -34,11 +43,31 @@ export default class AzureBookingBar extends LightningElement {
     }
 
     handleCheckIn() {
-        this.dispatchEvent(new CustomEvent('opencheckin', { bubbles: true, composed: true }));
+        this.datePickerMode = 'checkin';
+        this.showDatePicker = true;
     }
 
     handleCheckOut() {
-        this.dispatchEvent(new CustomEvent('opencheckout', { bubbles: true, composed: true }));
+        this.datePickerMode = 'checkout';
+        this.showDatePicker = true;
+    }
+
+    handleDateSelected(event) {
+        const { date, mode } = event.detail;
+        if (mode === 'checkin') {
+            this.checkIn = new Date(date);
+            // If check-out is before the new check-in, clear it
+            if (this.checkOut && this.checkOut <= this.checkIn) {
+                this.checkOut = null;
+            }
+        } else {
+            this.checkOut = new Date(date);
+        }
+        this.showDatePicker = false;
+    }
+
+    handleDatePickerClose() {
+        this.showDatePicker = false;
     }
 
     toggleGuestDropdown(event) {

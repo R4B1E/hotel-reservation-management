@@ -62,5 +62,15 @@
                 <span>Check Availability</span>
             </button>
         </div>
+
+        <!-- Date Picker -->
+        <template if:true={showDatePicker}>
+            <c-azure-date-picker
+                mode={datePickerMode}
+                min-date={datePickerMinDate}
+                ondateselected={handleDateSelected}
+                onclose={handleDatePickerClose}>
+            </c-azure-date-picker>
+        </template>
     </div>
 </template>

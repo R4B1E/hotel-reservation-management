@@ -1,36 +1,79 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, wire } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import { loadAzureTheme } from 'c/azureThemeLoader';
-// TODO: Wire to Apex — replace MOCK_RESERVATIONS with live data
-// import getMyReservations from '@salesforce/apex/ReservationController.getMyReservations';
-// import cancelReservation from '@salesforce/apex/ReservationController.cancelReservation';
-// Usage: @wire(getMyReservations) wiredReservations({ data, error }) { ... }
-// Usage (imperative): cancelReservation({ reservationId }) for handleCancel
+import { refreshApex } from '@salesforce/apex';
+import basePath from '@salesforce/community/basePath';
+import getMyReservations from '@salesforce/apex/ReservationController.getMyReservations';
+import cancelReservation from '@salesforce/apex/ReservationController.cancelReservation';
 
-const MOCK_RESERVATIONS = [
-    { id:'1', roomName:'Aegean Suite', confirmationNumber:'AZR-20241024-001', status:'Upcoming', checkIn: new Date(2025,0,15), checkOut: new Date(2025,0,19), nights:4, total:3570, imageUrl:'' },
-    { id:'2', roomName:'Caldera View Room', confirmationNumber:'AZR-20240810-002', status:'Completed', checkIn: new Date(2024,7,10), checkOut: new Date(2024,7,14), nights:4, total:2088, imageUrl:'' },
-    { id:'3', roomName:'The Azure Penthouse', confirmationNumber:'AZR-20240501-003', status:'Completed', checkIn: new Date(2024,4,1), checkOut: new Date(2024,4,5), nights:4, total:9677, imageUrl:'' },
-];
+export default class AzureMyReservations extends NavigationMixin(LightningElement) {
 
-export default class AzureMyReservations extends LightningElement {
+    @track activeTab = 'upcoming';
+    @track isLoading = true;
+    @track reservations = [];
+    @track error = null;
+    _wiredResult;
 
     connectedCallback() {
         loadAzureTheme(this);
     }
-    @track activeTab = 'upcoming';
-    @track isLoading = false;
+
+    @wire(getMyReservations)
+    wiredReservations(result) {
+        this._wiredResult = result;
+        this.isLoading = false;
+        if (result.data) {
+            this.reservations = result.data.map(r => ({
+                id: r.Id,
+                roomName: r.Room__r ? r.Room__r.Name : '',
+                confirmationNumber: r.Confirmation_Number__c,
+                status: r.Status__c === 'Confirmed' ? 'Upcoming' : r.Status__c,
+                checkIn: r.Check_In_Date__c,
+                checkOut: r.Check_Out_Date__c,
+                nights: r.Nights__c,
+                total: r.Total__c,
+                imageUrl: (r.Room__r && r.Room__r.Primary_Image_URL__c) || ''
+            }));
+            this.error = null;
+        } else if (result.error) {
+            this.error = result.error;
+            this.reservations = [];
+        }
+    }
 
     get upcomingTabClass() { return `tab-btn${this.activeTab === 'upcoming' ? ' tab-btn--active' : ''}`; }
     get pastTabClass() { return `tab-btn${this.activeTab === 'past' ? ' tab-btn--active' : ''}`; }
 
     get displayedReservations() {
-        return MOCK_RESERVATIONS.filter(r => this.activeTab === 'upcoming' ? r.status === 'Upcoming' : r.status !== 'Upcoming');
+        return this.reservations.filter(r =>
+            this.activeTab === 'upcoming' ? r.status === 'Upcoming' : r.status !== 'Upcoming'
+        );
     }
 
     get noReservations() { return this.displayedReservations.length === 0; }
 
     handleTab(event) { this.activeTab = event.currentTarget.dataset.tab; }
-    handleModify(event) { console.log('Modify', event.detail.id); }
-    handleCancel(event) { console.log('Cancel', event.detail.id); }
-    handleRebook(event) { console.log('Rebook', event.detail.id); }
+
+    handleModify(event) {
+        console.log('Modify', event.detail.id);
+    }
+
+    handleCancel(event) {
+        const reservationId = event.detail.id;
+        cancelReservation({ reservationId })
+            .then(() => refreshApex(this._wiredResult))
+            .catch(err => {
+                this.dispatchEvent(new CustomEvent('showtoast', {
+                    detail: { type: 'error', message: err.body ? err.body.message : 'Unable to cancel reservation.' },
+                    bubbles: true, composed: true
+                }));
+            });
+    }
+
+    handleRebook() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: { url: basePath + '/rooms' }
+        });
+    }
 }
