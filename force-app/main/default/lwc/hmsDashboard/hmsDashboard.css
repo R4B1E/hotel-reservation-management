@@ -1,13 +1,49 @@
 :host { display: block; }
-.page-header { margin-bottom: 20px; padding: 16px 0 0 0; }
-.page-title { font-size: 20px; font-weight: 700; color: var(--hms-text); margin-bottom: 2px; }
-.page-subtitle { font-size: 12px; color: var(--hms-text3); }
-.kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
-.charts-row { display: flex; gap: 12px; margin-bottom: 16px; }
-.chart-col-lg { flex: 2; }
-.chart-col-sm { flex: 1; }
+
+.dash-scroll { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+.dash-scroll::-webkit-scrollbar { width: 4px; }
+.dash-scroll::-webkit-scrollbar-track { background: transparent; }
+.dash-scroll::-webkit-scrollbar-thumb { background: var(--hms-border, #2a3650); border-radius: 2px; }
+
+.dash-header { display: flex; align-items: center; justify-content: space-between; }
+.dash-title { font-size: 18px; font-weight: 700; color: var(--hms-text, #e2e8f0); }
+.dash-title-sub { color: var(--hms-text2, #94a3b8); font-size: 13px; font-weight: 400; margin-left: 8px; }
+.date-range { display: flex; align-items: center; gap: 8px; }
+.dr-btn {
+    background: var(--hms-surface2, #1a2235); border: 1px solid var(--hms-border, #2a3650);
+    border-radius: 6px; padding: 5px 12px; color: var(--hms-text2, #94a3b8);
+    cursor: pointer; font-size: 12px; font-family: inherit; transition: all 0.15s;
+}
+.dr-btn:hover { background: var(--hms-surface3, #222d42); color: var(--hms-text, #e2e8f0); }
+.dr-btn--active { background: rgba(59,130,246,0.15); border-color: var(--hms-accent, #3b82f6); color: var(--hms-accent, #3b82f6); }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.charts-row { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+.chart-col-lg { min-width: 0; }
+.chart-col-sm { min-width: 0; }
+
+.dash-bottom { display: grid; grid-template-columns: 1.3fr 1fr; gap: 12px; }
+
+/* Occupancy by Room Type */
+.occ-type-card {
+    background: var(--hms-surface, #111827);
+    border: 1px solid var(--hms-border, #2a3650);
+    border-radius: 10px;
+    padding: 16px;
+}
+.hms-card-header { margin-bottom: 14px; }
+.hms-card-title { font-size: 13px; font-weight: 600; color: var(--hms-text, #e2e8f0); }
+.occ-bars { display: flex; flex-direction: column; gap: 6px; }
+.occ-row { display: flex; align-items: center; gap: 8px; font-size: 11px; }
+.occ-label { width: 70px; color: var(--hms-text3, #64748b); flex-shrink: 0; }
+.occ-track { flex: 1; height: 16px; background: var(--hms-surface3, #222d42); border-radius: 4px; overflow: hidden; }
+.occ-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+.occ-pct { width: 32px; text-align: right; color: var(--hms-text2, #94a3b8); flex-shrink: 0; }
+
 .loading-wrap { display: flex; justify-content: center; padding: 60px 0; }
 
 @media (max-width: 1200px) {
     .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+    .charts-row { grid-template-columns: 1fr; }
+    .dash-bottom { grid-template-columns: 1fr; }
 }

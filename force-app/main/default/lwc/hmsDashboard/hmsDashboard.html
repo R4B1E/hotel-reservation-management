@@ -1,38 +1,64 @@
 <template>
     <div class="hms-page">
-        <div class="page-header">
-            <h1 class="page-title">Dashboard</h1>
-            <span class="page-subtitle">Hotel Operations Overview</span>
+        <div class="dash-scroll">
+            <div class="dash-header">
+                <div>
+                    <div class="dash-title">Operations Dashboard <span class="dash-title-sub">All Inclusive &middot; Today</span></div>
+                </div>
+                <div class="date-range">
+                    <button class="dr-btn">This Week</button>
+                    <button class="dr-btn dr-btn--active">Today</button>
+                    <button class="hms-btn hms-btn-primary" onclick={handleNewReservation}>+ New Reservation</button>
+                </div>
+            </div>
+
+            <template lwc:if={isLoading}>
+                <div class="loading-wrap"><div class="hms-spinner"></div></div>
+            </template>
+
+            <template lwc:else>
+                <div class="kpi-grid">
+                    <template for:each={kpiCards} for:item="kpi">
+                        <c-hms-kpi-card key={kpi.key}
+                            label={kpi.label}
+                            value={kpi.value}
+                            subtext={kpi.subtext}
+                            accent-color={kpi.accentColor}
+                            trend={kpi.trend}
+                            trend-value={kpi.trendValue}>
+                        </c-hms-kpi-card>
+                    </template>
+                </div>
+
+                <div class="charts-row">
+                    <div class="chart-col-lg">
+                        <c-hms-bar-chart chart-data={occupancyBars}></c-hms-bar-chart>
+                    </div>
+                    <div class="chart-col-sm">
+                        <c-hms-donut-chart segments={donutSegments}></c-hms-donut-chart>
+                    </div>
+                </div>
+
+                <div class="dash-bottom">
+                    <c-hms-recent-reservations reservations={recentRes}></c-hms-recent-reservations>
+                    <div class="hms-card occ-type-card">
+                        <div class="hms-card-header">
+                            <span class="hms-card-title">Occupancy by Room Type</span>
+                        </div>
+                        <div class="occ-bars">
+                            <template for:each={occupancyByType} for:item="occ">
+                                <div class="occ-row" key={occ.category}>
+                                    <div class="occ-label">{occ.category}</div>
+                                    <div class="occ-track">
+                                        <div class="occ-fill" style={occ.barStyle}></div>
+                                    </div>
+                                    <div class="occ-pct">{occ.pct}%</div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </template>
         </div>
-
-        <template lwc:if={isLoading}>
-            <div class="loading-wrap"><div class="hms-spinner"></div></div>
-        </template>
-
-        <template lwc:else>
-            <div class="kpi-grid">
-                <template for:each={kpiCards} for:item="kpi">
-                    <c-hms-kpi-card key={kpi.key}
-                        label={kpi.label}
-                        value={kpi.value}
-                        subtext={kpi.subtext}
-                        accent-color={kpi.accentColor}
-                        trend={kpi.trend}
-                        trend-value={kpi.trendValue}>
-                    </c-hms-kpi-card>
-                </template>
-            </div>
-
-            <div class="charts-row">
-                <div class="chart-col-lg">
-                    <c-hms-bar-chart chart-data={occupancyBars}></c-hms-bar-chart>
-                </div>
-                <div class="chart-col-sm">
-                    <c-hms-donut-chart segments={donutSegments}></c-hms-donut-chart>
-                </div>
-            </div>
-
-            <c-hms-recent-reservations reservations={recentRes}></c-hms-recent-reservations>
-        </template>
     </div>
 </template>

@@ -1,15 +1,18 @@
 import { LightningElement, wire } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import { loadHmsTheme } from 'c/hmsThemeLoader';
 import getDashboardKPIs from '@salesforce/apex/HMSDashboardController.getDashboardKPIs';
 import getOccupancyHistory from '@salesforce/apex/HMSDashboardController.getOccupancyHistory';
 import getRoomStatusBreakdown from '@salesforce/apex/HMSDashboardController.getRoomStatusBreakdown';
 import getRecentReservations from '@salesforce/apex/HMSDashboardController.getRecentReservations';
+import getOccupancyByRoomType from '@salesforce/apex/HMSDashboardController.getOccupancyByRoomType';
 
-export default class HmsDashboard extends LightningElement {
+export default class HmsDashboard extends NavigationMixin(LightningElement) {
     kpis;
     occupancyBars = [];
     donutSegments = [];
     recentRes = [];
+    occupancyByType = [];
     isLoading = true;
 
     connectedCallback() {
@@ -27,7 +30,7 @@ export default class HmsDashboard extends LightningElement {
         }
     }
 
-    @wire(getOccupancyHistory, { days: 14 })
+    @wire(getOccupancyHistory, { days: 10 })
     wiredOccupancy({ data }) {
         if (data) {
             this.occupancyBars = data.map(d => ({
@@ -41,9 +44,10 @@ export default class HmsDashboard extends LightningElement {
     wiredBreakdown({ data }) {
         if (data) {
             const segments = [];
-            if (data.vacant) segments.push({ label: 'Available', value: data.vacant, color: this.getStatusColor('Available') });
-            if (data.occupied) segments.push({ label: 'Occupied', value: data.occupied, color: this.getStatusColor('Occupied') });
-            if (data.blocked) segments.push({ label: 'Blocked', value: data.blocked, color: this.getStatusColor('Blocked') });
+            if (data.vacant) segments.push({ label: 'Vacant', value: data.vacant, color: '#3b82f6' });
+            if (data.occupied) segments.push({ label: 'Occupied', value: data.occupied, color: '#10b981' });
+            if (data.blocked) segments.push({ label: 'Blocked', value: data.blocked, color: '#ef4444' });
+            if (data.dirty) segments.push({ label: 'Dirty', value: data.dirty, color: '#f59e0b' });
             this.donutSegments = segments;
         }
     }
@@ -55,22 +59,37 @@ export default class HmsDashboard extends LightningElement {
         }
     }
 
+    @wire(getOccupancyByRoomType)
+    wiredOccByType({ data }) {
+        if (data) {
+            this.occupancyByType = data.map(d => ({
+                ...d,
+                barStyle: `width:${d.pct}%;background:${d.color}`
+            }));
+        }
+    }
+
     get hasKpis() { return !!this.kpis; }
 
     get kpiCards() {
         if (!this.kpis) return [];
         const k = this.kpis;
         return [
-            { key: 'occ', label: 'Occupancy Rate', value: k.occupancyPct + '%', subtext: k.occupiedRooms + '/' + k.totalRooms + ' rooms', accentColor: 'var(--hms-accent)', trend: k.occupancyPct > 70 ? 'up' : 'neutral', trendValue: '' },
-            { key: 'arr', label: 'Arrivals Today', value: String(k.arrivalsToday), subtext: 'Expected check-ins', accentColor: 'var(--hms-green)' },
-            { key: 'dep', label: 'Departures Today', value: String(k.dueOutToday), subtext: 'Expected check-outs', accentColor: 'var(--hms-orange)' },
-            { key: 'rev', label: 'Revenue (MTD)', value: '$' + (k.revenueMTD || 0).toLocaleString(), subtext: 'Month to date', accentColor: 'var(--hms-gold)' },
-            { key: 'adr', label: 'ADR', value: '$' + (k.adr || 0), subtext: 'Avg daily rate', accentColor: 'var(--hms-purple)' }
+            { key: 'total', label: 'Total Rooms', value: String(k.totalRooms), subtext: 'All properties', accentColor: 'var(--hms-accent)' },
+            { key: 'occ', label: 'Occupied', value: String(k.occupiedRooms), subtext: k.occupiedRooms + ' of ' + k.totalRooms + ' rooms', accentColor: 'var(--hms-green)', trend: 'up', trendValue: '' },
+            { key: 'dep', label: 'Due Out Today', value: String(k.dueOutToday), subtext: 'Expected check-outs', accentColor: 'var(--hms-gold)' },
+            { key: 'dirty', label: 'Dirty Rooms', value: String(k.dirtyRooms), subtext: 'Needs cleaning', accentColor: 'var(--hms-red)' },
+            { key: 'pct', label: 'Occupancy %', value: k.occupancyPct + '%', subtext: 'Current occupancy rate', accentColor: 'var(--hms-purple)', trend: 'up', trendValue: '' }
         ];
     }
 
-    getStatusColor(status) {
-        const map = { 'Available': 'var(--hms-green)', 'Occupied': 'var(--hms-accent)', 'Blocked': 'var(--hms-red)' };
-        return map[status] || 'var(--hms-text3)';
+    handleNewReservation() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__objectPage',
+            attributes: {
+                objectApiName: 'Reservation__c',
+                actionName: 'new'
+            }
+        });
     }
 }

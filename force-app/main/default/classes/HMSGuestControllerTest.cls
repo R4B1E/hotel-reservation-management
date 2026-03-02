@@ -3,7 +3,13 @@ private class HMSGuestControllerTest {
 
     @TestSetup
     static void setup() {
+        // Create Account with Guest record type
+        Id guestRtId = Schema.SObjectType.Account.getRecordTypeInfosByName().get('Guest')?.getRecordTypeId();
+        Account acc = new Account(Name = 'Thompson (Guest)', RecordTypeId = guestRtId);
+        insert acc;
+
         Contact c = new Contact(
+            AccountId = acc.Id,
             FirstName = 'Marcus',
             LastName = 'Thompson',
             Email = 'marcus@test.com',
@@ -32,7 +38,7 @@ private class HMSGuestControllerTest {
 
     @IsTest
     static void testGetGuestDetail() {
-        Contact c = [SELECT Id FROM Contact LIMIT 1];
+        Contact c = [SELECT Id FROM Contact WHERE LastName = 'Thompson' LIMIT 1];
         Test.startTest();
         HMSGuestController.GuestRowWrapper guest = HMSGuestController.getGuestDetail(c.Id);
         Test.stopTest();
@@ -50,7 +56,7 @@ private class HMSGuestControllerTest {
 
     @IsTest
     static void testUpdateGuest() {
-        Contact c = [SELECT Id FROM Contact LIMIT 1];
+        Contact c = [SELECT Id FROM Contact WHERE LastName = 'Thompson' LIMIT 1];
         Test.startTest();
         HMSGuestController.updateGuest(c.Id, '{"firstName":"Updated","email":"updated@test.com"}');
         Test.stopTest();

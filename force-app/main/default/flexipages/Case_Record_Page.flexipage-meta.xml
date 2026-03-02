@@ -3,16 +3,16 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>c:hmsHousekeeping</componentName>
-                <identifier>hmsHousekeeping</identifier>
+                <componentName>hmsCaseRecordPage</componentName>
             </componentInstance>
         </itemInstances>
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>HMS Housekeeping Page</masterLabel>
+    <masterLabel>Case Record Page</masterLabel>
+    <sobjectType>Case</sobjectType>
     <template>
-        <name>flexipage:defaultAppHomeTemplate</name>
+        <name>flexipage:recordHomeFullWidthHeaderTemplate</name>
     </template>
-    <type>AppPage</type>
+    <type>RecordPage</type>
 </FlexiPage>

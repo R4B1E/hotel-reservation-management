@@ -5,10 +5,13 @@ public with sharing class HMSGuestController {
         if (lim == null || lim <= 0) lim = 50;
         if (offset == null || offset < 0) offset = 0;
 
+        // Only fetch contacts whose Account has a record type of 'Guest'
+        Id guestRtId = Schema.SObjectType.Account.getRecordTypeInfosByName().get('Guest')?.getRecordTypeId();
+
         String query = 'SELECT Id, FirstName, LastName, Email, Phone, ' +
-                       'VIP_Status__c, Nationality__c, Total_Stays__c, Total_Spent__c, ' +
-                       'Member_Since__c, Guest_Tier__c ' +
-                       'FROM Contact WHERE Id != null';
+                       'VIP_Status__c, Nationality__c, Total_Spent__c, ' +
+                       'Account.Name ' +
+                       'FROM Contact WHERE Account.RecordTypeId = :guestRtId';
 
         if (String.isNotBlank(search)) {
             String s = '%' + String.escapeSingleQuotes(search) + '%';
@@ -21,7 +24,7 @@ public with sharing class HMSGuestController {
 
         GuestListResult result = new GuestListResult();
         result.guests = new List<GuestRowWrapper>();
-        result.totalCount = [SELECT COUNT() FROM Contact];
+        result.totalCount = [SELECT COUNT() FROM Contact WHERE Account.RecordTypeId = :guestRtId];
 
         for (Contact c : Database.query(query)) {
             result.guests.add(wrapGuest(c));
@@ -33,8 +36,8 @@ public with sharing class HMSGuestController {
     public static GuestRowWrapper getGuestDetail(Id contactId) {
         Contact c = [
             SELECT Id, FirstName, LastName, Email, Phone,
-                   VIP_Status__c, Nationality__c, Total_Stays__c, Total_Spent__c,
-                   Member_Since__c, Guest_Tier__c, Guest_Preferences__c
+                   VIP_Status__c, Nationality__c, Total_Spent__c,
+                   Account.Name
             FROM Contact WHERE Id = :contactId LIMIT 1
         ];
         return wrapGuest(c);
@@ -42,7 +45,14 @@ public with sharing class HMSGuestController {
 
     @AuraEnabled
     public static Id createGuest(String firstName, String lastName, String email, String phone, String nationality, Boolean isVip) {
+        // Find or create "Guest" account
+        Id guestRtId = Schema.SObjectType.Account.getRecordTypeInfosByName().get('Guest')?.getRecordTypeId();
+        String accName = firstName + ' ' + lastName + ' (Guest)';
+        Account acc = new Account(Name = accName, RecordTypeId = guestRtId);
+        insert acc;
+
         Contact c = new Contact(
+            AccountId = acc.Id,
             FirstName = firstName,
             LastName = lastName,
             Email = email,
@@ -77,9 +87,7 @@ public with sharing class HMSGuestController {
         w.phone = c.Phone;
         w.isVip = c.VIP_Status__c;
         w.nationality = c.Nationality__c;
-        w.totalStays = c.Total_Stays__c != null ? Integer.valueOf(c.Total_Stays__c) : 0;
         w.totalSpent = c.Total_Spent__c;
-        w.guestTier = c.Guest_Tier__c;
         w.initials = (c.FirstName != null ? c.FirstName.substring(0, 1) : '') + (c.LastName != null ? c.LastName.substring(0, 1) : '');
         return w;
     }
@@ -98,9 +106,7 @@ public with sharing class HMSGuestController {
         @AuraEnabled public String phone;
         @AuraEnabled public Boolean isVip;
         @AuraEnabled public String nationality;
-        @AuraEnabled public Integer totalStays;
         @AuraEnabled public Decimal totalSpent;
-        @AuraEnabled public String guestTier;
         @AuraEnabled public String initials;
     }
 }

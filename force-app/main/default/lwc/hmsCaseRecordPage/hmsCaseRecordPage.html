@@ -1,0 +1,373 @@
+<template>
+    <template lwc:if={hasData}>
+        <div class="hms-page">
+
+            <!-- ═══ HERO SECTION ═══ -->
+            <div class="hero">
+                <div class="hero-gradient"></div>
+                <div class="hero-content">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb">
+                        <a class="breadcrumb-link" onclick={handleBack}>Cases</a>
+                        <span class="breadcrumb-sep">/</span>
+                        <span class="breadcrumb-current">{caseNumber}</span>
+                    </div>
+
+                    <div class="hero-main">
+                        <div class="hero-left">
+                            <!-- Icon -->
+                            <div class="hero-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6H4V18H20V6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M4 6L12 13L20 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="hero-text">
+                                <h1 class="hero-title">{subject}</h1>
+                                <div class="hero-badges">
+                                    <span class={statusBadgeClass}>{status}</span>
+                                    <template lwc:if={isHighPriority}>
+                                        <span class="badge badge--priority badge--high">High Priority</span>
+                                    </template>
+                                    <template lwc:else>
+                                        <span class={priorityBadgeClass}>{priority}</span>
+                                    </template>
+                                    <template lwc:if={isVip}>
+                                        <span class="badge badge--vip">VIP Guest</span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-right">
+                            <div class="hero-meta">
+                                <span class="meta-label">Case</span>
+                                <span class="meta-value mono">{caseNumber}</span>
+                            </div>
+                            <div class="hero-meta">
+                                <span class="meta-label">Age</span>
+                                <span class="meta-value">{caseAge}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ SLA STATUS BAR ═══ -->
+            <div class="sla-bar-section">
+                <div class="sla-header">
+                    <span class="sla-label">SLA Status</span>
+                    <span class={slaLabelClass}>{slaTimeRemaining}</span>
+                </div>
+                <div class="sla-bar-track">
+                    <div class={slaBarClass} style={slaBarStyle}></div>
+                </div>
+                <template lwc:if={isSlaBreach}>
+                    <div class="sla-breach-warn">SLA has been breached - immediate attention required</div>
+                </template>
+            </div>
+
+            <!-- ═══ PROGRESS TIMELINE ═══ -->
+            <div class="timeline-section">
+                <div class="timeline">
+                    <template for:each={timelineSteps} for:item="step">
+                        <div class={step.cssClass} key={step.key}>
+                            <div class="step-marker">
+                                <template lwc:if={step.isDone}>
+                                    <svg class="step-check" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                        <path d="M3 7L6 10L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </template>
+                                <template lwc:if={step.isCurrent}>
+                                    <div class="step-spinner"></div>
+                                </template>
+                                <template lwc:if={step.isTodo}>
+                                    <span class="step-number">{step.stepNumber}</span>
+                                </template>
+                            </div>
+                            <span class="step-label">{step.label}</span>
+                        </div>
+                        <template lwc:if={step.connectorClass}>
+                            <div class={step.connectorClass} key={step.key}></div>
+                        </template>
+                    </template>
+                </div>
+            </div>
+
+            <!-- ═══ ACTION BUTTONS ═══ -->
+            <div class="actions-bar">
+                <button class="hms-btn hms-btn-primary" onclick={handleResolve}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Resolve
+                </button>
+                <button class="hms-btn hms-btn-secondary" onclick={handleEdit}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M10.5 2.5L11.5 3.5L4 11H3V10L10.5 2.5Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Edit
+                </button>
+                <button class="hms-btn hms-btn-secondary btn--escalate" onclick={handleEscalate}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 11V3M7 3L3 7M7 3L11 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Escalate
+                </button>
+                <button class="hms-btn hms-btn-ghost">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 3H12V11H2V3Z" stroke="currentColor" stroke-width="1.2"/><path d="M2 3L7 8L12 3" stroke="currentColor" stroke-width="1.2"/></svg>
+                    Email
+                </button>
+                <button class="hms-btn hms-btn-ghost">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="3" r="1" fill="currentColor"/><circle cx="7" cy="7" r="1" fill="currentColor"/><circle cx="7" cy="11" r="1" fill="currentColor"/></svg>
+                    More
+                </button>
+            </div>
+
+            <!-- ═══ TWO-COLUMN BODY ═══ -->
+            <div class="body-layout">
+
+                <!-- ── MAIN COLUMN ── -->
+                <div class="body-main">
+                    <!-- Tabs row -->
+                    <div class="tabs-row">
+                        <button class={detailsTabClass} data-tab="details" onclick={handleTabClick}>Details</button>
+                        <button class={resolutionTabClass} data-tab="resolution" onclick={handleTabClick}>Resolution Notes</button>
+                        <button class={relatedTabClass} data-tab="related" onclick={handleTabClick}>Related Records</button>
+                        <button class={auditTabClass} data-tab="audit" onclick={handleTabClick}>Audit Log</button>
+                    </div>
+
+                    <!-- ── DETAILS TAB ── -->
+                    <template lwc:if={isDetailsTab}>
+                        <!-- Case Information -->
+                        <div class="section-card">
+                            <div class="section-header">
+                                <h3 class="section-title">Case Information</h3>
+                            </div>
+                            <div class="info-grid-3">
+                                <div class="info-item">
+                                    <span class="info-label">Case Number</span>
+                                    <span class="info-value mono">{caseNumber}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Status</span>
+                                    <span class={statusBadgeClass}>{status}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Priority</span>
+                                    <span class={priorityBadgeClass}>{priority}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Category</span>
+                                    <span class="info-value">{displayType}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Sub-Category</span>
+                                    <span class="info-value">{displayReason}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Opened</span>
+                                    <span class="info-value">{formattedCreatedDate}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Assigned To</span>
+                                    <div class="assignee-cell">
+                                        <span class="owner-avatar">{ownerInitials}</span>
+                                        <span class="info-value">{ownerName}</span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Team</span>
+                                    <span class="info-value">Front Desk</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Source</span>
+                                    <span class="info-value">{displayOrigin}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Related Guest & Room -->
+                        <div class="section-card">
+                            <div class="section-header">
+                                <h3 class="section-title">Related Guest &amp; Room</h3>
+                            </div>
+                            <div class="info-grid-2">
+                                <div class="info-item">
+                                    <span class="info-label">Guest</span>
+                                    <div class="guest-cell">
+                                        <span class="info-value">{contactName}</span>
+                                        <template lwc:if={isVip}>
+                                            <span class="vip-tag">VIP</span>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Room</span>
+                                    <span class="info-value muted">--</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Reservation</span>
+                                    <span class="info-value muted">--</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Check-out Date</span>
+                                    <span class="info-value muted">--</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="section-card">
+                            <div class="section-header">
+                                <h3 class="section-title">Description</h3>
+                            </div>
+                            <template lwc:if={hasDescription}>
+                                <p class="description-text">{description}</p>
+                            </template>
+                            <template lwc:else>
+                                <p class="description-empty">No description provided.</p>
+                            </template>
+                        </div>
+                    </template>
+
+                    <!-- ── RESOLUTION NOTES TAB ── -->
+                    <template lwc:if={isResolutionTab}>
+                        <div class="section-card">
+                            <div class="section-header">
+                                <h3 class="section-title">Resolution Notes</h3>
+                            </div>
+                            <div class="activity-feed">
+                                <div class="feed-item">
+                                    <div class="feed-dot"></div>
+                                    <div class="feed-content">
+                                        <div class="feed-header">
+                                            <span class="feed-author">{ownerName}</span>
+                                            <span class="feed-time">{formattedCreatedDate}</span>
+                                        </div>
+                                        <p class="feed-text">Case opened via {displayOrigin}.</p>
+                                    </div>
+                                </div>
+                                <div class="feed-empty">
+                                    <p>No additional resolution notes yet. Use the Quick Update panel to add notes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- ── RELATED RECORDS TAB ── -->
+                    <template lwc:if={isRelatedTab}>
+                        <div class="section-card">
+                            <div class="section-header">
+                                <h3 class="section-title">Related Records</h3>
+                            </div>
+                            <div class="empty-state">
+                                <p>No related records found for this case.</p>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- ── AUDIT LOG TAB ── -->
+                    <template lwc:if={isAuditTab}>
+                        <div class="section-card">
+                            <div class="section-header">
+                                <h3 class="section-title">Audit Log</h3>
+                            </div>
+                            <div class="audit-table-wrap">
+                                <table class="hms-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>User</th>
+                                            <th>Field</th>
+                                            <th>Change</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{formattedCreatedDate}</td>
+                                            <td>{ownerName}</td>
+                                            <td>Status</td>
+                                            <td>Created as {status}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- ── RAIL COLUMN ── -->
+                <div class="body-rail">
+                    <!-- Quick Update -->
+                    <div class="rail-card">
+                        <h4 class="rail-card-title">Quick Update</h4>
+                        <div class="rail-form">
+                            <div class="form-group">
+                                <label class="form-label">Status</label>
+                                <select class="hms-input hms-select" value={quickStatus} onchange={handleStatusChange}>
+                                    <template for:each={statusOptions} for:item="opt">
+                                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Assignee</label>
+                                <div class="assignee-display">
+                                    <span class="owner-avatar owner-avatar--sm">{ownerInitials}</span>
+                                    <span class="assignee-name">{ownerName}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Note</label>
+                                <textarea class="hms-input hms-textarea" placeholder="Add a note..." value={quickNote} onchange={handleNoteChange} rows="3"></textarea>
+                            </div>
+                            <div class="rail-actions">
+                                <button class="hms-btn hms-btn-secondary rail-btn" onclick={handleSaveNote} disabled={isSaving}>Save Note</button>
+                                <button class="hms-btn hms-btn-primary rail-btn" onclick={handleResolve} disabled={isSaving}>Resolve</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Metrics -->
+                    <div class="rail-card">
+                        <h4 class="rail-card-title">Case Metrics</h4>
+                        <div class="metrics-list">
+                            <div class="metric-row">
+                                <span class="metric-label">Time to First Response</span>
+                                <span class="metric-value">{caseAge}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Total Interactions</span>
+                                <span class="metric-value">1</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Escalations</span>
+                                <span class="metric-value">0</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Reopened</span>
+                                <span class="metric-value">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Cases -->
+                    <div class="rail-card">
+                        <h4 class="rail-card-title">Related Cases</h4>
+                        <div class="related-empty">
+                            <p>No related cases found.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Loading / Error state -->
+    <template lwc:else>
+        <div class="hms-page">
+            <div class="loading-wrap">
+                <template lwc:if={error}>
+                    <p class="error-text">Unable to load case record.</p>
+                </template>
+                <template lwc:else>
+                    <div class="hms-spinner"></div>
+                </template>
+            </div>
+        </div>
+    </template>
+</template>

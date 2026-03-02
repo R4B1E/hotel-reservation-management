@@ -24,15 +24,8 @@
   }, {
     "components" : [ {
       "componentAttributes" : { },
-      "componentName" : "c:azureBookingBar",
-      "id" : "rooms_bookingbar",
-      "renderPriority" : "NEUTRAL",
-      "renditionMap" : { },
-      "type" : "component"
-    }, {
-      "componentAttributes" : { },
-      "componentName" : "c:azureRoomGrid",
-      "id" : "rooms_grid",
+      "componentName" : "c:azureRoomsPage",
+      "id" : "rooms_page",
       "renderPriority" : "NEUTRAL",
       "renditionMap" : { },
       "type" : "component"

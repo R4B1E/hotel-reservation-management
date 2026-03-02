@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, api, track, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { loadAzureTheme } from 'c/azureThemeLoader';
 import basePath from '@salesforce/community/basePath';
@@ -6,6 +6,10 @@ import getAvailableRooms from '@salesforce/apex/HotelRoomController.getAvailable
 import getRoomCategories from '@salesforce/apex/HotelRoomController.getRoomCategories';
 
 export default class AzureRoomGrid extends NavigationMixin(LightningElement) {
+
+    @api guestCount = null;
+    @api checkIn = null;
+    @api checkOut = null;
 
     @track rooms = [];
     @track allCategories = [];
@@ -17,6 +21,10 @@ export default class AzureRoomGrid extends NavigationMixin(LightningElement) {
         loadAzureTheme(this);
     }
 
+    get activeCategory() {
+        return this.activeFilter === 'All' ? null : this.activeFilter;
+    }
+
     @wire(getRoomCategories)
     wiredCategories({ data, error }) {
         if (data) {
@@ -26,7 +34,12 @@ export default class AzureRoomGrid extends NavigationMixin(LightningElement) {
         }
     }
 
-    @wire(getAvailableRooms, { guestCount: null, category: null, checkIn: null, checkOut: null })
+    @wire(getAvailableRooms, {
+        guestCount: '$guestCount',
+        category: '$activeCategory',
+        checkIn: '$checkIn',
+        checkOut: '$checkOut'
+    })
     wiredRooms({ data, error }) {
         this.isLoading = false;
         if (data) {
@@ -47,8 +60,7 @@ export default class AzureRoomGrid extends NavigationMixin(LightningElement) {
     }
 
     get filteredRooms() {
-        if (this.activeFilter === 'All') return this.rooms;
-        return this.rooms.filter(r => r.category === this.activeFilter);
+        return this.rooms;
     }
 
     get noResults() { return !this.isLoading && this.filteredRooms.length === 0; }

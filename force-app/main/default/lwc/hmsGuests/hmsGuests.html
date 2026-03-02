@@ -1,19 +1,15 @@
 <template>
     <div class="hms-page">
         <div class="page-header">
-            <div>
+            <div class="header-left">
                 <h1 class="page-title">Guests</h1>
-                <span class="page-subtitle">{guestCount} guests found</span>
+                <span class="count-badge">{guestCount}</span>
             </div>
-        </div>
-
-        <div class="toolbar">
-            <input type="text" class="hms-input search-input" placeholder="Search by name, email, phone..." onkeyup={handleSearch} />
-            <select class="hms-input filter-select" onchange={handleFilter}>
-                <template for:each={filterOptions} for:item="opt">
-                    <option key={opt.value} value={opt.value}>{opt.label}</option>
-                </template>
-            </select>
+            <div class="header-right">
+                <input type="text" class="hms-input search-input" placeholder="Search guests..." onkeyup={handleSearch} />
+                <button class="hms-btn" onclick={handleExport}>Export</button>
+                <button class="hms-btn hms-btn-primary" onclick={handleNewGuest}>+ New Guest</button>
+            </div>
         </div>
 
         <template lwc:if={isLoading}>
@@ -25,40 +21,46 @@
                     <thead>
                         <tr>
                             <th>Guest</th>
-                            <th>Email</th>
+                            <th>Guest Type</th>
+                            <th>Nationality</th>
                             <th>Phone</th>
                             <th>Stays</th>
                             <th>Total Spent</th>
+                            <th>Last Stay</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <template for:each={guests} for:item="g">
-                            <tr key={g.id}>
+                            <tr key={g.id} onclick={handleGuestClick} data-id={g.id}>
                                 <td>
                                     <div class="guest-cell">
                                         <span class="avatar-sm">{g.initials}</span>
                                         <div>
-                                            <div class="guest-name">
-                                                {g.name}
-                                                <template lwc:if={g.isVip}>
-                                                    <span class="vip-tag">VIP</span>
-                                                </template>
-                                            </div>
-                                            <div class="guest-tier">{g.tier}</div>
+                                            <div class="guest-name">{g.fullName}</div>
+                                            <div class="guest-email">{g.email}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-muted">{g.email}</td>
-                                <td class="text-muted">{g.phone}</td>
-                                <td>{g.totalStays}</td>
-                                <td class="text-mono">${g.totalSpent}</td>
                                 <td>
-                                    <template lwc:if={g.hasActiveReservation}>
-                                        <c-hms-badge label="In-House" variant="checked-in"></c-hms-badge>
+                                    <template lwc:if={g.isVip}>
+                                        <span class="vip-tag">VIP</span>
                                     </template>
                                     <template lwc:else>
-                                        <span class="text-dim">—</span>
+                                        <span class="text-muted">Regular</span>
+                                    </template>
+                                </td>
+                                <td class="text-muted">{g.nationality}</td>
+                                <td class="text-muted">{g.phone}</td>
+                                <td class="text-muted">{g.stays}</td>
+                                <td class="text-green">{g.formattedSpent}</td>
+                                <td class="text-muted">{g.lastStay}</td>
+                                <td>
+                                    <template lwc:if={g.isActive}>
+                                        <span class="status-badge status-active">Active</span>
+                                    </template>
+                                    <template lwc:else>
+                                        <span class="status-badge status-inactive">Inactive</span>
                                     </template>
                                 </td>
                             </tr>

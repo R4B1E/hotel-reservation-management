@@ -1,15 +1,22 @@
 <template>
     <div class="hms-page">
-        <div class="page-header">
-            <div>
-                <h1 class="page-title">Cases</h1>
-                <span class="page-subtitle">{openCount} open of {totalCount} total</span>
+        <!-- Toolbar -->
+        <div class="cases-toolbar">
+            <span class="toolbar-title">Cases</span>
+            <span class="count-badge">{totalCount}</span>
+            <div class="cases-stats">
+                <div class="cstat cstat-red">Open <strong>{openCount}</strong></div>
+                <div class="cstat cstat-orange">In Progress <strong>{workingCount}</strong></div>
+                <div class="cstat cstat-blue">Pending <strong>{escalatedCount}</strong></div>
+                <div class="cstat cstat-green">Resolved <strong>{closedCount}</strong></div>
             </div>
-            <div class="header-right">
+            <div class="toolbar-right">
+                <input type="text" class="hms-input search-input" placeholder="Search cases..." onkeyup={handleSearch} />
                 <div class="view-toggle">
-                    <button class={kanbanClass} data-view="kanban" onclick={handleViewToggle}>Board</button>
-                    <button class={listClass} data-view="list" onclick={handleViewToggle}>List</button>
+                    <button class={kanbanBtnClass} data-view="kanban" onclick={handleViewToggle}>Kanban</button>
+                    <button class={listBtnClass} data-view="list" onclick={handleViewToggle}>List</button>
                 </div>
+                <button class="hms-btn hms-btn-primary" onclick={handleNewCase}>+ New Case</button>
             </div>
         </div>
 
@@ -17,10 +24,11 @@
             <div class="loading-wrap"><div class="hms-spinner"></div></div>
         </template>
         <template lwc:else>
-            <div class="kanban-board">
+            <!-- Kanban View -->
+            <div class={kanbanBoardClass}>
                 <template for:each={columns} for:item="col">
                     <div class="kanban-column" key={col.key}>
-                        <div class="col-header">
+                        <div class="col-header" style={col.headerBorderStyle}>
                             <span class="col-dot" style={col.dotStyle}></span>
                             <span class="col-label">{col.label}</span>
                             <span class="col-count">{col.cases.length}</span>
@@ -36,6 +44,89 @@
                     </div>
                 </template>
             </div>
+
+            <!-- List View -->
+            <div class={listViewClass}>
+                <table class="hms-table">
+                    <thead>
+                        <tr>
+                            <th>Case #</th>
+                            <th>Subject</th>
+                            <th>Guest</th>
+                            <th>Room</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Assigned To</th>
+                            <th>Created</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={allCases} for:item="c">
+                            <tr key={c.id}>
+                                <td class="cell-mono">{c.caseNumber}</td>
+                                <td class="cell-subject">{c.subject}</td>
+                                <td>{c.contactName}</td>
+                                <td>{c.room}</td>
+                                <td>
+                                    <span class={c.categoryClass}>{c.caseType}</span>
+                                </td>
+                                <td>
+                                    <span class={c.priorityBadge}>{c.priority}</span>
+                                </td>
+                                <td>
+                                    <div class="assignee-cell">
+                                        <span class="assignee-avatar">{c.initials}</span>
+                                        {c.ownerName}
+                                    </div>
+                                </td>
+                                <td class="cell-muted">{c.formattedDate}</td>
+                                <td>
+                                    <span class={c.statusBadge}>{c.statusLabel}</span>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+        <!-- New Case Modal -->
+        <template lwc:if={showNewModal}>
+            <c-hms-modal title="New Case" size="medium" onclose={handleCloseModal}>
+                <div class="form-group">
+                    <label class="form-label">Subject</label>
+                    <input class="hms-input" type="text" placeholder="Brief description of the issue" data-field="subject" />
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select class="hms-input" data-field="caseType">
+                            <option value="Complaint">Complaint</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Service Request">Service Request</option>
+                            <option value="Billing">Billing</option>
+                            <option value="General Request">General Request</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Priority</label>
+                        <select class="hms-input" data-field="priority">
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="hms-input form-textarea" rows="3" placeholder="Detailed description of the case..." data-field="description"></textarea>
+                </div>
+                <div slot="footer">
+                    <button class="hms-btn hms-btn-secondary" onclick={handleCloseModal}>Cancel</button>
+                    <button class="hms-btn hms-btn-primary" onclick={handleCreateCase}>Create Case</button>
+                </div>
+            </c-hms-modal>
         </template>
     </div>
 </template>

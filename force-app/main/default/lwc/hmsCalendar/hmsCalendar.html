@@ -14,8 +14,15 @@
 
         <div class="cal-toolbar">
             <button class="hms-btn hms-btn-secondary" onclick={handlePrev}>&larr;</button>
-            <button class="hms-btn hms-btn-secondary" onclick={handleToday}>Today</button>
+            <span class="cal-date-label">{dateRangeLabel}</span>
             <button class="hms-btn hms-btn-secondary" onclick={handleNext}>&rarr;</button>
+            <button class="hms-btn hms-btn-secondary" onclick={handleToday}>Today</button>
+            <div class="view-toggle">
+                <button class={dayBtnClass} data-view="Day" onclick={handleViewChange}>Day</button>
+                <button class={weekBtnClass} data-view="Week" onclick={handleViewChange}>Week</button>
+                <button class={monthBtnClass} data-view="Month" onclick={handleViewChange}>Month</button>
+            </div>
+            <button class="hms-btn hms-btn-primary" onclick={handleNewReservation}>+ Reservation</button>
         </div>
 
         <template lwc:if={isLoading}>
@@ -27,7 +34,7 @@
                     <!-- Header row -->
                     <div class="gantt-corner">Room</div>
                     <template for:each={dateHeaders} for:item="dh">
-                        <div key={dh.key} class="gantt-date-header">
+                        <div key={dh.key} class={dh.headerClass}>
                             <span class="dh-day">{dh.dayName}</span>
                             <span class="dh-num">{dh.dayNum}</span>
                         </div>
@@ -47,7 +54,7 @@
                                 <span class="room-num">{room.roomNumber}</span>
                             </div>
                             <template for:each={dateHeaders} for:item="dh">
-                                <div key={dh.key} class="gantt-cell"></div>
+                                <div key={dh.key} class={dh.cellClass}></div>
                             </template>
                         </template>
                     </template>

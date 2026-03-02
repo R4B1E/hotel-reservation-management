@@ -1,7 +1,6 @@
 :host { display: block; }
-.page-header { margin-bottom: 20px; padding-top: 16px; }
-.page-title { font-size: 20px; font-weight: 700; color: var(--hms-text); margin-bottom: 2px; }
-.page-subtitle { font-size: 12px; color: var(--hms-text3); }
+.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-top: 16px; }
+.page-title { font-size: 18px; font-weight: 700; color: var(--hms-text); }
 .reports-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .loading-wrap { display: flex; justify-content: center; padding: 60px 0; }
 .empty-state { padding: 60px; text-align: center; color: var(--hms-text3); font-size: 14px; }

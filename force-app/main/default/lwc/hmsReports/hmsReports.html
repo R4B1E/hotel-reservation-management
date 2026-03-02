@@ -1,8 +1,8 @@
 <template>
     <div class="hms-page">
         <div class="page-header">
-            <h1 class="page-title">Reports</h1>
-            <span class="page-subtitle">Hotel analytics and reporting</span>
+            <div class="page-title">Reports &amp; Analytics</div>
+            <button class="hms-btn hms-btn-primary" onclick={handleCreateReport}>+ Create Custom Report</button>
         </div>
 
         <template lwc:if={isLoading}>

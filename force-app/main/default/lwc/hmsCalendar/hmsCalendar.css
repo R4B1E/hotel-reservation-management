@@ -7,7 +7,7 @@
 .blue { color: var(--hms-accent); }
 .red { color: var(--hms-red); }
 .orange { color: var(--hms-orange); }
-.cal-toolbar { display: flex; gap: 6px; margin-bottom: 12px; }
+.cal-toolbar { display: flex; gap: 6px; margin-bottom: 12px; align-items: center; }
 .gantt-wrapper { padding: 0; overflow: auto; }
 .gantt-grid { display: grid; grid-template-columns: 100px repeat(10, 1fr); min-width: 800px; }
 .gantt-corner { padding: 8px 10px; font-size: 11px; font-weight: 600; color: var(--hms-text3); background: var(--hms-surface2); border-bottom: 1px solid var(--hms-border); position: sticky; left: 0; z-index: 2; }
@@ -19,3 +19,19 @@
 .gantt-room-label { padding: 8px 10px; font-size: 12px; font-weight: 600; color: var(--hms-text); border-bottom: 1px solid var(--hms-border2); background: var(--hms-surface); position: sticky; left: 0; z-index: 1; }
 .gantt-cell { border-bottom: 1px solid var(--hms-border2); border-left: 1px solid var(--hms-border2); min-height: 36px; }
 .loading-wrap { display: flex; justify-content: center; padding: 60px 0; }
+
+/* Date range label */
+.cal-date-label { font-weight: 600; font-size: 13px; min-width: 120px; text-align: center; color: var(--hms-text); }
+
+/* View toggle */
+.view-toggle { display: flex; border: 1px solid var(--hms-border); border-radius: 6px; overflow: hidden; }
+.vt-btn { padding: 4px 10px; background: var(--hms-surface2); color: var(--hms-text3); cursor: pointer; font-size: 11px; border: none; font-family: inherit; transition: all 0.15s; }
+.vt-btn--active { background: var(--hms-accent); color: #fff; }
+
+/* Today / Weekend header highlighting */
+.gantt-date-header.today .dh-num { color: var(--hms-accent); }
+.gantt-date-header.weekend { background: rgba(255,255,255,0.02); }
+
+/* Today / Weekend cell highlighting */
+.gantt-cell.weekend { background: rgba(255,255,255,0.015); }
+.gantt-cell.today { background: rgba(59,130,246,0.04); }

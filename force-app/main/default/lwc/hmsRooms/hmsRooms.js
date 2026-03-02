@@ -10,6 +10,7 @@ export default class HmsRooms extends LightningElement {
     statusFilter = 'All';
     hkFilter = 'All';
     isLoading = true;
+    viewMode = 'grid';
 
     connectedCallback() {
         loadHmsTheme(this);
@@ -27,38 +28,29 @@ export default class HmsRooms extends LightningElement {
     }
 
     get hasRooms() { return this.rooms && this.rooms.length > 0; }
-    get roomCount() { return this.rooms ? this.rooms.length : 0; }
-    get availableCount() { return this.stats ? this.stats.available : 0; }
+    get totalCount() { return this.stats ? this.stats.total : 0; }
+    get vacantCount() { return this.stats ? this.stats.vacant : 0; }
     get occupiedCount() { return this.stats ? this.stats.occupied : 0; }
-    get blockedCount() { return this.stats ? this.stats.blocked : 0; }
+    get cleanCount() { return this.stats ? this.stats.clean : 0; }
+    get dirtyCount() { return this.stats ? this.stats.dirty : 0; }
 
-    get statusOptions() {
-        return [
-            { label: 'All Status', value: 'All' },
-            { label: 'Available', value: 'Available' },
-            { label: 'Occupied', value: 'Occupied' },
-            { label: 'Blocked', value: 'Blocked' }
-        ];
+    get gridBtnClass() {
+        return 'vt-btn' + (this.viewMode === 'grid' ? ' active' : '');
     }
 
-    get hkOptions() {
-        return [
-            { label: 'All HK', value: 'All' },
-            { label: 'Clean', value: 'Clean' },
-            { label: 'Dirty', value: 'Dirty' },
-            { label: 'In Progress', value: 'In Progress' }
-        ];
+    get listBtnClass() {
+        return 'vt-btn' + (this.viewMode === 'list' ? ' active' : '');
     }
 
     handleSearch(event) {
         this.searchTerm = event.target.value;
     }
 
-    handleStatusFilter(event) {
-        this.statusFilter = event.target.value;
+    handleGridView() {
+        this.viewMode = 'grid';
     }
 
-    handleHkFilter(event) {
-        this.hkFilter = event.target.value;
+    handleListView() {
+        this.viewMode = 'list';
     }
 }

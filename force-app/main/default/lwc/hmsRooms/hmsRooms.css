@@ -1,15 +1,115 @@
 :host { display: block; }
-.page-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; padding-top: 16px; }
-.page-title { font-size: 20px; font-weight: 700; color: var(--hms-text); margin-bottom: 2px; }
-.page-subtitle { font-size: 12px; color: var(--hms-text3); }
-.header-stats { display: flex; gap: 8px; }
-.stat-chip { padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; }
-.stat-chip--green { background: rgba(16,185,129,0.12); color: #34d399; }
-.stat-chip--blue { background: rgba(59,130,246,0.12); color: #60a5fa; }
-.stat-chip--red { background: rgba(239,68,68,0.12); color: #f87171; }
-.toolbar { display: flex; gap: 8px; margin-bottom: 16px; }
-.search-input { max-width: 280px; }
-.filter-select { width: 160px; }
-.rooms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
-.loading-wrap { display: flex; justify-content: center; padding: 60px 0; }
-.empty-state { padding: 40px; text-align: center; color: var(--hms-text3); }
+
+/* ─── Toolbar ─── */
+.rooms-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--hms-surface);
+    border-bottom: 1px solid var(--hms-border);
+    flex-shrink: 0;
+}
+
+.stat-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 5px;
+    background: var(--hms-surface2);
+    border: 1px solid var(--hms-border);
+    font-size: 11px;
+    color: var(--hms-text2);
+}
+
+.stat-badge strong {
+    color: var(--hms-text);
+    font-weight: 600;
+}
+
+.stat-blue { color: var(--hms-accent) !important; }
+.stat-green { color: var(--hms-green) !important; }
+.stat-gold { color: var(--hms-gold) !important; }
+
+/* ─── Toolbar right section ─── */
+.toolbar-right {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.search-input {
+    width: 200px;
+    background: var(--hms-surface2);
+    border: 1px solid var(--hms-border);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: var(--hms-text);
+    font-size: 12px;
+    font-family: inherit;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: var(--hms-text3);
+}
+
+.search-input:focus {
+    border-color: var(--hms-accent);
+}
+
+/* ─── View toggle ─── */
+.view-toggle {
+    display: flex;
+    border: 1px solid var(--hms-border);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.vt-btn {
+    padding: 4px 10px;
+    background: var(--hms-surface2);
+    color: var(--hms-text3);
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.15s;
+    border: none;
+    font-family: inherit;
+}
+
+.vt-btn:hover {
+    color: var(--hms-text2);
+}
+
+.vt-btn.active {
+    background: var(--hms-accent);
+    color: #fff;
+}
+
+/* ─── Rooms grid ─── */
+.rooms-grid {
+    padding: 14px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.rooms-grid::-webkit-scrollbar { width: 4px; }
+.rooms-grid::-webkit-scrollbar-thumb { background: var(--hms-border); border-radius: 2px; }
+
+/* ─── Loading & empty state ─── */
+.loading-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 60px 0;
+}
+
+.empty-state {
+    padding: 40px;
+    text-align: center;
+    color: var(--hms-text3);
+}

@@ -1,0 +1,418 @@
+<template>
+    <div class="hms-page record-page-wrap">
+        <!-- Loading State -->
+        <template lwc:if={isLoading}>
+            <div class="loading-state">
+                <div class="hms-spinner"></div>
+            </div>
+        </template>
+
+        <template lwc:if={hasReservation}>
+            <!-- ═══ HIGHLIGHT BANNER ═══ -->
+            <div class="highlight-banner">
+                <!-- Breadcrumb -->
+                <div class="hb-breadcrumb">
+                    <a onclick={handleBackToList}>Reservations</a>
+                    <span class="hb-sep">&rsaquo;</span>
+                    <span>{reservation.confirmationNumber}</span>
+                </div>
+
+                <!-- Top row: Icon + Title + Actions -->
+                <div class="hb-top">
+                    <div class="hb-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                        </svg>
+                    </div>
+                    <div class="hb-title-block">
+                        <div class="hb-record-type">
+                            Reservation
+                            <template lwc:if={reservation.ratePlan}>
+                                &middot; {reservation.ratePlan}
+                            </template>
+                        </div>
+                        <div class="hb-title">{reservation.guestFullName}</div>
+                        <div class="hb-sub">
+                            <span class={statusBadgeClass}>
+                                <span class={statusDot}></span> {reservation.status}
+                            </span>
+                            <template lwc:if={isVip}>
+                                <span class="badge badge--vip">VIP</span>
+                            </template>
+                            <span class="hb-conf">{reservation.confirmationNumber}</span>
+                        </div>
+                    </div>
+                    <div class="hb-actions">
+                        <template lwc:if={showCheckIn}>
+                            <button class="btn btn--success" onclick={handleCheckIn} disabled={isProcessing}>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                Check In
+                            </button>
+                        </template>
+                        <template lwc:if={showCheckOut}>
+                            <button class="btn btn--danger" onclick={handleCheckOut} disabled={isProcessing}>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                                Check Out
+                            </button>
+                        </template>
+                        <button class="btn btn--primary" onclick={handleEditRecord}>
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                            Edit
+                        </button>
+                        <button class="btn">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            Email
+                        </button>
+                        <button class="btn">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            Folio
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Highlights Strip -->
+                <div class="highlights-strip">
+                    <div class="hl-item">
+                        <div class="hl-label">Room</div>
+                        <div class="hl-value hl-accent" onclick={handleNavigateToRoom}>{roomDisplay}</div>
+                    </div>
+                    <div class="hl-item">
+                        <div class="hl-label">Check-In</div>
+                        <div class="hl-value">{formattedCheckIn}</div>
+                    </div>
+                    <div class="hl-item">
+                        <div class="hl-label">Check-Out</div>
+                        <div class="hl-value">{formattedCheckOut}</div>
+                    </div>
+                    <div class="hl-item">
+                        <div class="hl-label">Nights</div>
+                        <div class="hl-value">{reservation.nights}</div>
+                    </div>
+                    <div class="hl-item">
+                        <div class="hl-label">Total Amount</div>
+                        <div class="hl-value hl-green">{formattedTotal}</div>
+                    </div>
+                    <div class="hl-item">
+                        <div class="hl-label">Rate Plan</div>
+                        <div class="hl-value hl-gold">{reservation.ratePlan}</div>
+                    </div>
+                    <div class="hl-item">
+                        <div class="hl-label">Payment</div>
+                        <div class="hl-value">{reservation.paymentStatus}</div>
+                    </div>
+                    <div class="hl-item">
+                        <div class="hl-label">Source</div>
+                        <div class="hl-value">{reservation.bookingSource}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ BODY: Main + Rail ═══ -->
+            <div class="record-body">
+                <!-- MAIN AREA -->
+                <div class="record-main">
+                    <!-- Inner Tabs -->
+                    <div class="inner-tabs">
+                        <template for:each={tabs} for:item="tab">
+                            <div key={tab.value} class={tab.className} data-tab={tab.value} onclick={handleTabClick}>
+                                {tab.label}
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- ── DETAILS TAB ── -->
+                    <template lwc:if={isDetailsTab}>
+                        <!-- Guest Information -->
+                        <div class="section">
+                            <div class="section-title">
+                                Guest Information
+                            </div>
+                            <div class="field-grid">
+                                <div class="field">
+                                    <div class="f-label">Full Name</div>
+                                    <div class="f-val f-link" onclick={handleNavigateToGuest}>{reservation.guestFullName}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Guest Type</div>
+                                    <div class="f-val">
+                                        <template lwc:if={isVip}>
+                                            <span class="f-gold">VIP</span>
+                                        </template>
+                                        <template lwc:else>
+                                            <span class="f-muted">Standard</span>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Email</div>
+                                    <div class="f-val f-link">{reservation.guestEmail}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Phone</div>
+                                    <div class="f-val">{reservation.guestPhone}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Nationality</div>
+                                    <div class="f-val">{reservation.nationality}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Confirmation #</div>
+                                    <div class="f-val f-mono">{reservation.confirmationNumber}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stay Details -->
+                        <div class="section">
+                            <div class="section-title">Stay Details</div>
+                            <div class="field-grid field-grid--three">
+                                <div class="field">
+                                    <div class="f-label">Check-In Date</div>
+                                    <div class="f-val">{formattedCheckIn}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Check-Out Date</div>
+                                    <div class="f-val">{formattedCheckOut}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Nights</div>
+                                    <div class="f-val">{reservation.nights}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Adults</div>
+                                    <div class="f-val">{reservation.adults}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Children</div>
+                                    <div class="f-val f-muted">{reservation.children}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Status</div>
+                                    <div class="f-val">
+                                        <span class={statusBadgeClass}>
+                                            <span class={statusDot}></span> {reservation.status}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Booking Source</div>
+                                    <div class="f-val">{reservation.bookingSource}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Rate Plan</div>
+                                    <div class="f-val f-link">{reservation.ratePlan}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Payment Status</div>
+                                    <div class="f-val">
+                                        <span class={paymentBadgeClass}>{reservation.paymentStatus}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Room Assignment -->
+                        <div class="section">
+                            <div class="section-title">Room Assignment</div>
+                            <div class="field-grid">
+                                <div class="field">
+                                    <div class="f-label">Room Number</div>
+                                    <div class="f-val f-link" onclick={handleNavigateToRoom}>{reservation.roomNumber}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Room Type</div>
+                                    <div class="f-val">{reservation.roomCategory}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Floor / View</div>
+                                    <div class="f-val">{floorView}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Bed Type</div>
+                                    <div class="f-val">{reservation.roomBedType}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Room Size</div>
+                                    <div class="f-val">{roomSizeDisplay}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Rate / Night</div>
+                                    <div class="f-val f-green">{formattedRoomRate}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Housekeeping</div>
+                                    <div class="f-val">
+                                        <span class={hkBadgeClass}>{reservation.hkStatus}</span>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Housekeeper</div>
+                                    <div class="f-val f-muted">{reservation.housekeeper}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Special Requests -->
+                        <template lwc:if={hasSpecialRequests}>
+                            <div class="section">
+                                <div class="section-title">Special Requests</div>
+                                <div class="special-requests-box">
+                                    {reservation.specialRequests}
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Charges Summary -->
+                        <div class="section">
+                            <div class="section-title">Charges Summary</div>
+                            <table class="charge-table">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Qty</th>
+                                        <th>Unit Price</th>
+                                        <th class="text-right">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{reservation.roomCategory} &middot; {reservation.ratePlan}</td>
+                                        <td>{reservation.nights} nights</td>
+                                        <td>{formattedRatePerNight} / night</td>
+                                        <td class="text-right td-amount">{formattedSubtotal}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-muted">Tax</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right td-muted">{formattedTaxes}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="total-row">
+                                        <td colspan="3" class="td-muted-label">Total Due</td>
+                                        <td class="text-right td-total">{formattedTotal}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </template>
+
+                    <!-- ── SERVICES TAB (placeholder) ── -->
+                    <template lwc:if={isServicesTab}>
+                        <div class="section">
+                            <div class="section-title">Services &amp; Charges</div>
+                            <div class="empty-tab">No additional services or charges recorded yet.</div>
+                        </div>
+                    </template>
+
+                    <!-- ── PAYMENT TAB (placeholder) ── -->
+                    <template lwc:if={isPaymentTab}>
+                        <div class="section">
+                            <div class="section-title">Payment Information</div>
+                            <div class="field-grid">
+                                <div class="field">
+                                    <div class="f-label">Payment Status</div>
+                                    <div class="f-val">
+                                        <span class={paymentBadgeClass}>{reservation.paymentStatus}</span>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Total Amount</div>
+                                    <div class="f-val f-green">{formattedTotal}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Subtotal</div>
+                                    <div class="f-val">{formattedSubtotal}</div>
+                                </div>
+                                <div class="field">
+                                    <div class="f-label">Taxes</div>
+                                    <div class="f-val f-muted">{formattedTaxes}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- ── DOCUMENTS TAB (placeholder) ── -->
+                    <template lwc:if={isDocumentsTab}>
+                        <div class="section">
+                            <div class="section-title">Documents</div>
+                            <div class="empty-tab">No documents attached to this reservation.</div>
+                        </div>
+                    </template>
+
+                    <!-- ── HISTORY TAB ── -->
+                    <template lwc:if={isHistoryTab}>
+                        <div class="section">
+                            <div class="section-title">Reservation History</div>
+                            <template lwc:if={hasActivities}>
+                                <div class="activity-feed">
+                                    <template for:each={activities} for:item="act">
+                                        <div key={act.id} class="act-item">
+                                            <div class="act-av" style={act.avatarColor}>{act.initials}</div>
+                                            <div class="act-content">
+                                                <div class="act-header">
+                                                    <span class="act-name">{act.author}</span>
+                                                    <span class="act-time">{act.formattedTime}</span>
+                                                </div>
+                                                <div class="act-text">{act.text}</div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                            <template lwc:else>
+                                <div class="empty-tab">No activity history recorded.</div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- ═══ RAIL ═══ -->
+                <div class="record-rail">
+                    <!-- Add Note -->
+                    <div class="rail-section">
+                        <div class="rail-title">Add Note</div>
+                        <textarea
+                            class="note-box"
+                            placeholder="Leave a note..."
+                            value={noteBody}
+                            onchange={handleNoteChange}></textarea>
+                        <button
+                            class="btn btn--primary btn--full"
+                            onclick={handleSaveNote}
+                            disabled={isSavingNote}>
+                            <template lwc:if={isSavingNote}>Saving...</template>
+                            <template lwc:else>Save Note</template>
+                        </button>
+                    </div>
+
+                    <!-- Activity Timeline -->
+                    <div class="rail-section">
+                        <div class="rail-title">Activity Timeline</div>
+                        <template lwc:if={hasActivities}>
+                            <div class="activity-feed">
+                                <template for:each={activities} for:item="act">
+                                    <div key={act.id} class="act-item">
+                                        <div class="act-av" style={act.avatarColor}>{act.initials}</div>
+                                        <div class="act-content">
+                                            <div class="act-header">
+                                                <span class="act-name">{act.author}</span>
+                                                <span class="act-time">{act.formattedTime}</span>
+                                            </div>
+                                            <div class="act-text">{act.text}</div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                        <template lwc:else>
+                            <div class="rail-empty">No activity yet.</div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

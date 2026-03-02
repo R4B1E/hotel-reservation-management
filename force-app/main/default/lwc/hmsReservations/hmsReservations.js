@@ -24,7 +24,10 @@ export default class HmsReservations extends LightningElement {
     wiredReservations(result) {
         this._wiredResult = result;
         if (result.data) {
-            this.reservations = result.data.reservations || [];
+            this.reservations = (result.data.reservations || []).map(r => ({
+                ...r,
+                isSelected: r.id === this.selectedId
+            }));
             this.isLoading = false;
             if (!this.selectedId && this.reservations.length > 0) {
                 this.selectReservation(this.reservations[0].id);
@@ -61,6 +64,10 @@ export default class HmsReservations extends LightningElement {
 
     async selectReservation(id) {
         this.selectedId = id;
+        this.reservations = this.reservations.map(r => ({
+            ...r,
+            isSelected: r.id === id
+        }));
         try {
             this.selectedDetail = await getReservationDetail({ resId: id });
         } catch (error) {

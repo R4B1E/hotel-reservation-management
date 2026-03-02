@@ -5,17 +5,6 @@
     <hasActivationRequired>false</hasActivationRequired>
     <license>Salesforce</license>
 
-    <!-- Housekeeping_Task__c: Full CRUD -->
-    <objectPermissions>
-        <object>Housekeeping_Task__c</object>
-        <allowCreate>true</allowCreate>
-        <allowRead>true</allowRead>
-        <allowEdit>true</allowEdit>
-        <allowDelete>true</allowDelete>
-        <viewAllRecords>true</viewAllRecords>
-        <modifyAllRecords>false</modifyAllRecords>
-    </objectPermissions>
-
     <!-- Hotel_Room__c: Read + Edit -->
     <objectPermissions>
         <object>Hotel_Room__c</object>
@@ -38,7 +27,7 @@
         <modifyAllRecords>false</modifyAllRecords>
     </objectPermissions>
 
-    <!-- ═══ Hotel_Room__c new fields ═══ -->
+    <!-- Hotel_Room__c fields -->
     <fieldPermissions>
         <field>Hotel_Room__c.Room_Number__c</field>
         <readable>true</readable>
@@ -75,7 +64,7 @@
         <editable>true</editable>
     </fieldPermissions>
 
-    <!-- ═══ Reservation__c new fields ═══ -->
+    <!-- Reservation__c fields -->
     <fieldPermissions>
         <field>Reservation__c.Actual_Check_In__c</field>
         <readable>true</readable>
@@ -102,7 +91,7 @@
         <editable>true</editable>
     </fieldPermissions>
 
-    <!-- ═══ Contact new fields ═══ -->
+    <!-- Contact fields -->
     <fieldPermissions>
         <field>Contact.VIP_Status__c</field>
         <readable>true</readable>
@@ -119,70 +108,13 @@
         <editable>true</editable>
     </fieldPermissions>
 
-    <!-- ═══ Housekeeping_Task__c fields ═══ -->
-    <fieldPermissions>
-        <field>Housekeeping_Task__c.Room__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Housekeeping_Task__c.Assigned_To__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Housekeeping_Task__c.Status__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Housekeeping_Task__c.Priority__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Housekeeping_Task__c.Task_Type__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Housekeeping_Task__c.Notes__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Housekeeping_Task__c.Started_At__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Housekeeping_Task__c.Completed_At__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Housekeeping_Task__c.Due_Date__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Housekeeping_Task__c.Reservation__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Housekeeping_Task__c.DND_Override__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-
-    <!-- ═══ App visibility ═══ -->
+    <!-- App visibility -->
     <applicationVisibilities>
         <application>Grandeur_HMS</application>
         <visible>true</visible>
     </applicationVisibilities>
 
-    <!-- ═══ Tab visibility ═══ -->
+    <!-- Tab visibility -->
     <tabSettings>
         <tab>HMS_Dashboard</tab>
         <visibility>Visible</visibility>
@@ -209,14 +141,6 @@
     </tabSettings>
     <tabSettings>
         <tab>HMS_Cases</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
-        <tab>HMS_Housekeeping</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
-        <tab>Housekeeping_Task__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
 </PermissionSet>
