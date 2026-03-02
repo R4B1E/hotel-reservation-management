@@ -1,0 +1,12 @@
+<template>
+    <div class="hms-card report-card">
+        <div class="report-icon" style={iconStyle}>
+            &#128202;
+        </div>
+        <h3 class="report-name">{report.name}</h3>
+        <p class="report-desc">{report.description}</p>
+        <button class="hms-btn hms-btn-secondary run-btn" onclick={handleRun}>
+            Run Report
+        </button>
+    </div>
+</template>

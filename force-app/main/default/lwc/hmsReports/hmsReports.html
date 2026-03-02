@@ -1,0 +1,25 @@
+<template>
+    <div class="hms-page">
+        <div class="page-header">
+            <h1 class="page-title">Reports</h1>
+            <span class="page-subtitle">Hotel analytics and reporting</span>
+        </div>
+
+        <template lwc:if={isLoading}>
+            <div class="loading-wrap"><div class="hms-spinner"></div></div>
+        </template>
+        <template lwc:elseif={hasReports}>
+            <div class="reports-grid">
+                <template for:each={reports} for:item="report">
+                    <c-hms-report-card key={report.id} report={report}></c-hms-report-card>
+                </template>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class="empty-state">
+                <p>No reports configured yet.</p>
+                <p class="text-muted">Create Salesforce Reports to populate this section.</p>
+            </div>
+        </template>
+    </div>
+</template>

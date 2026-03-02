@@ -11,6 +11,8 @@
             <value><fullName>Cancelled</fullName><default>false</default><label>Cancelled</label></value>
             <value><fullName>Completed</fullName><default>false</default><label>Completed</label></value>
             <value><fullName>No Show</fullName><default>false</default><label>No Show</label></value>
+            <value><fullName>Checked In</fullName><default>false</default><label>Checked In</label></value>
+            <value><fullName>Checked Out</fullName><default>false</default><label>Checked Out</label></value>
         </valueSetDefinition>
     </valueSet>
     <required>false</required>

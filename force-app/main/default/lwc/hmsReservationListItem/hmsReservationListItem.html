@@ -1,0 +1,18 @@
+<template>
+    <div class={itemClass} onclick={handleClick}>
+        <div class="item-top">
+            <div class="item-guest">
+                <span class="initials">{reservation.initials}</span>
+                <div>
+                    <div class="guest-name">{reservation.guestName}</div>
+                    <div class="room-info">{reservation.roomInfo}</div>
+                </div>
+            </div>
+            <c-hms-badge label={reservation.status} variant={reservation.status}></c-hms-badge>
+        </div>
+        <div class="item-bottom">
+            <span class="dates">{reservation.dates}</span>
+            <span class="total">${reservation.total}</span>
+        </div>
+    </div>
+</template>

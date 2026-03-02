@@ -1,0 +1,43 @@
+<template>
+    <div class="hms-page">
+        <div class="page-header">
+            <div class="header-left">
+                <h1 class="page-title">Rooms</h1>
+                <span class="page-subtitle">{roomCount} rooms total</span>
+            </div>
+            <div class="header-stats">
+                <span class="stat-chip stat-chip--green">{availableCount} Available</span>
+                <span class="stat-chip stat-chip--blue">{occupiedCount} Occupied</span>
+                <span class="stat-chip stat-chip--red">{blockedCount} Blocked</span>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <input type="text" class="hms-input search-input" placeholder="Search rooms..." onkeyup={handleSearch} />
+            <select class="hms-input filter-select" onchange={handleStatusFilter}>
+                <template for:each={statusOptions} for:item="opt">
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                </template>
+            </select>
+            <select class="hms-input filter-select" onchange={handleHkFilter}>
+                <template for:each={hkOptions} for:item="opt">
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                </template>
+            </select>
+        </div>
+
+        <template lwc:if={isLoading}>
+            <div class="loading-wrap"><div class="hms-spinner"></div></div>
+        </template>
+        <template lwc:elseif={hasRooms}>
+            <div class="rooms-grid">
+                <template for:each={rooms} for:item="room">
+                    <c-hms-room-card key={room.id} room={room}></c-hms-room-card>
+                </template>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class="empty-state">No rooms match your filters</div>
+        </template>
+    </div>
+</template>

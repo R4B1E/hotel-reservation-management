@@ -1,0 +1,35 @@
+<template>
+    <div class="hms-card donut-card">
+        <div class="hms-card-header">
+            <span class="hms-card-title">{title}</span>
+        </div>
+        <div class="donut-wrapper">
+            <div class="donut-svg-wrap">
+                <svg viewBox="0 0 100 100" class="donut-svg">
+                    <template for:each={svgSegments} for:item="seg">
+                        <circle key={seg.key} cx="50" cy="50" r="40"
+                            fill="none"
+                            stroke={seg.color}
+                            stroke-width="12"
+                            stroke-dasharray={seg.dasharray}
+                            stroke-dashoffset={seg.offset}
+                            stroke-linecap="butt"/>
+                    </template>
+                </svg>
+                <div class="donut-center">
+                    <span class="donut-total">{total}</span>
+                    <span class="donut-label">Total</span>
+                </div>
+            </div>
+            <div class="donut-legend">
+                <template for:each={legendItems} for:item="item">
+                    <div class="legend-item" key={item.key}>
+                        <span class="legend-dot" style={item.dotStyle}></span>
+                        <span class="legend-label">{item.label}</span>
+                        <span class="legend-value">{item.value}</span>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

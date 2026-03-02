@@ -1,0 +1,74 @@
+<template>
+    <div class="hms-page">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Guests</h1>
+                <span class="page-subtitle">{guestCount} guests found</span>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <input type="text" class="hms-input search-input" placeholder="Search by name, email, phone..." onkeyup={handleSearch} />
+            <select class="hms-input filter-select" onchange={handleFilter}>
+                <template for:each={filterOptions} for:item="opt">
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                </template>
+            </select>
+        </div>
+
+        <template lwc:if={isLoading}>
+            <div class="loading-wrap"><div class="hms-spinner"></div></div>
+        </template>
+        <template lwc:elseif={hasGuests}>
+            <div class="hms-card table-wrap">
+                <table class="hms-table">
+                    <thead>
+                        <tr>
+                            <th>Guest</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Stays</th>
+                            <th>Total Spent</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={guests} for:item="g">
+                            <tr key={g.id}>
+                                <td>
+                                    <div class="guest-cell">
+                                        <span class="avatar-sm">{g.initials}</span>
+                                        <div>
+                                            <div class="guest-name">
+                                                {g.name}
+                                                <template lwc:if={g.isVip}>
+                                                    <span class="vip-tag">VIP</span>
+                                                </template>
+                                            </div>
+                                            <div class="guest-tier">{g.tier}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-muted">{g.email}</td>
+                                <td class="text-muted">{g.phone}</td>
+                                <td>{g.totalStays}</td>
+                                <td class="text-mono">${g.totalSpent}</td>
+                                <td>
+                                    <template lwc:if={g.hasActiveReservation}>
+                                        <c-hms-badge label="In-House" variant="checked-in"></c-hms-badge>
+                                    </template>
+                                    <template lwc:else>
+                                        <span class="text-dim">—</span>
+                                    </template>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class="empty-state">No guests found</div>
+        </template>
+    </div>
+</template>

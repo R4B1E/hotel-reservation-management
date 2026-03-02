@@ -1,0 +1,58 @@
+<template>
+    <div class="hms-page">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Room Calendar</h1>
+            </div>
+            <div class="header-stats">
+                <span class="stat green">{vacantCount} Vacant</span>
+                <span class="stat blue">{occupiedCount} Occupied</span>
+                <span class="stat red">{blockedCount} Blocked</span>
+                <span class="stat orange">{dirtyCount} Dirty</span>
+            </div>
+        </div>
+
+        <div class="cal-toolbar">
+            <button class="hms-btn hms-btn-secondary" onclick={handlePrev}>&larr;</button>
+            <button class="hms-btn hms-btn-secondary" onclick={handleToday}>Today</button>
+            <button class="hms-btn hms-btn-secondary" onclick={handleNext}>&rarr;</button>
+        </div>
+
+        <template lwc:if={isLoading}>
+            <div class="loading-wrap"><div class="hms-spinner"></div></div>
+        </template>
+        <template lwc:else>
+            <div class="gantt-wrapper hms-card">
+                <div class="gantt-grid" style={gridStyle}>
+                    <!-- Header row -->
+                    <div class="gantt-corner">Room</div>
+                    <template for:each={dateHeaders} for:item="dh">
+                        <div key={dh.key} class="gantt-date-header">
+                            <span class="dh-day">{dh.dayName}</span>
+                            <span class="dh-num">{dh.dayNum}</span>
+                        </div>
+                    </template>
+
+                    <!-- Sections -->
+                    <template for:each={sections} for:item="section">
+                        <!-- Section header row -->
+                        <div key={section.section} class="section-header" style={sectionSpanStyle}>
+                            {section.section}
+                            <span class="section-meta">{section.vacantCount}V / {section.occupiedCount}O</span>
+                        </div>
+
+                        <!-- Room rows -->
+                        <template for:each={section.rooms} for:item="room">
+                            <div key={room.id} class="gantt-room-label">
+                                <span class="room-num">{room.roomNumber}</span>
+                            </div>
+                            <template for:each={dateHeaders} for:item="dh">
+                                <div key={dh.key} class="gantt-cell"></div>
+                            </template>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

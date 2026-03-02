@@ -1,0 +1,340 @@
+/*
+ * Grandeur HMS - Dark Console Theme
+ * Applied via hmsThemeLoader LWC service module
+ */
+
+:root {
+    /* ─── Core palette ─── */
+    --hms-bg: #0a0e1a;
+    --hms-surface: #111827;
+    --hms-surface2: #1a2235;
+    --hms-surface3: #222d42;
+    --hms-border: #2a3650;
+    --hms-border2: #1e2d47;
+
+    /* ─── Accents ─── */
+    --hms-accent: #3b82f6;
+    --hms-accent2: #6366f1;
+    --hms-gold: #f59e0b;
+    --hms-green: #10b981;
+    --hms-red: #ef4444;
+    --hms-orange: #f97316;
+    --hms-pink: #ec4899;
+    --hms-purple: #8b5cf6;
+
+    /* ─── Typography ─── */
+    --hms-text: #e2e8f0;
+    --hms-text2: #94a3b8;
+    --hms-text3: #64748b;
+
+    /* ─── Layout ─── */
+    --hms-radius: 8px;
+    --hms-radius-sm: 6px;
+    --hms-radius-lg: 12px;
+    --hms-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    --hms-shadow-lg: 0 4px 16px rgba(0,0,0,0.5);
+    --hms-transition: all 0.15s ease;
+}
+
+/* ─── Override Lightning page background ─── */
+.slds-template__container,
+.slds-template_default,
+[class*="forcePage"],
+[class*="flexipageBody"] {
+    background: var(--hms-bg) !important;
+}
+
+/* ─── Global resets inside HMS pages ─── */
+.hms-page {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--hms-bg);
+    color: var(--hms-text);
+    font-size: 13px;
+    min-height: 100%;
+}
+
+/* ─── Card base ─── */
+.hms-card {
+    background: var(--hms-surface);
+    border: 1px solid var(--hms-border);
+    border-radius: var(--hms-radius);
+    padding: 16px;
+}
+
+.hms-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.hms-card-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--hms-text2);
+}
+
+/* ─── Buttons ─── */
+.hms-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: var(--hms-radius-sm);
+    font-size: 12px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: var(--hms-transition);
+    border: none;
+    outline: none;
+}
+
+.hms-btn-primary {
+    background: var(--hms-accent);
+    color: #fff;
+}
+
+.hms-btn-primary:hover {
+    background: #2563eb;
+}
+
+.hms-btn-secondary {
+    background: var(--hms-surface2);
+    border: 1px solid var(--hms-border);
+    color: var(--hms-text);
+}
+
+.hms-btn-secondary:hover {
+    background: var(--hms-surface3);
+}
+
+.hms-btn-ghost {
+    background: transparent;
+    color: var(--hms-text2);
+    padding: 4px 8px;
+}
+
+.hms-btn-ghost:hover {
+    background: var(--hms-surface2);
+    color: var(--hms-text);
+}
+
+/* ─── Inputs ─── */
+.hms-input {
+    background: var(--hms-surface2);
+    border: 1px solid var(--hms-border);
+    border-radius: var(--hms-radius-sm);
+    padding: 7px 10px;
+    color: var(--hms-text);
+    font-size: 12px;
+    font-family: inherit;
+    outline: none;
+    width: 100%;
+    transition: var(--hms-transition);
+}
+
+.hms-input:focus {
+    border-color: var(--hms-accent);
+    box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
+}
+
+.hms-input::placeholder {
+    color: var(--hms-text3);
+}
+
+/* ─── Tables ─── */
+.hms-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.hms-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--hms-text3);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--hms-border);
+}
+
+.hms-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--hms-border2);
+    color: var(--hms-text);
+}
+
+.hms-table tr:hover td {
+    background: var(--hms-surface2);
+}
+
+/* ─── Badges ─── */
+.hms-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.hms-badge--confirmed { background: rgba(16,185,129,0.12); color: #34d399; }
+.hms-badge--pending   { background: rgba(249,115,22,0.12); color: #fb923c; }
+.hms-badge--cancelled { background: rgba(239,68,68,0.12);  color: #f87171; }
+.hms-badge--checked-in  { background: rgba(59,130,246,0.12); color: #60a5fa; }
+.hms-badge--checked-out { background: rgba(139,92,246,0.12); color: #a78bfa; }
+.hms-badge--completed { background: rgba(16,185,129,0.12); color: #34d399; }
+.hms-badge--no-show   { background: rgba(239,68,68,0.12);  color: #f87171; }
+
+/* Room statuses */
+.hms-badge--available   { background: rgba(16,185,129,0.12); color: #34d399; }
+.hms-badge--occupied    { background: rgba(59,130,246,0.12); color: #60a5fa; }
+.hms-badge--blocked     { background: rgba(239,68,68,0.12);  color: #f87171; }
+.hms-badge--dirty       { background: rgba(249,115,22,0.12); color: #fb923c; }
+.hms-badge--clean       { background: rgba(16,185,129,0.12); color: #34d399; }
+.hms-badge--inspecting  { background: rgba(139,92,246,0.12); color: #a78bfa; }
+.hms-badge--in-progress { background: rgba(59,130,246,0.12); color: #60a5fa; }
+.hms-badge--maintenance { background: rgba(239,68,68,0.12);  color: #f87171; }
+
+/* Payment statuses */
+.hms-badge--paid    { background: rgba(16,185,129,0.12); color: #34d399; }
+.hms-badge--partial { background: rgba(249,115,22,0.12); color: #fb923c; }
+.hms-badge--refunded{ background: rgba(139,92,246,0.12); color: #a78bfa; }
+
+/* Case priorities */
+.hms-badge--high   { background: rgba(239,68,68,0.12); color: #f87171; }
+.hms-badge--medium { background: rgba(249,115,22,0.12); color: #fb923c; }
+.hms-badge--low    { background: rgba(16,185,129,0.12); color: #34d399; }
+
+/* ─── Scrollbar ─── */
+.hms-page ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.hms-page ::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.hms-page ::-webkit-scrollbar-thumb {
+    background: var(--hms-border);
+    border-radius: 3px;
+}
+
+.hms-page ::-webkit-scrollbar-thumb:hover {
+    background: var(--hms-text3);
+}
+
+/* ─── Utility ─── */
+.hms-flex { display: flex; }
+.hms-flex-col { display: flex; flex-direction: column; }
+.hms-gap-sm { gap: 8px; }
+.hms-gap-md { gap: 12px; }
+.hms-gap-lg { gap: 16px; }
+.hms-items-center { align-items: center; }
+.hms-justify-between { justify-content: space-between; }
+.hms-text-muted { color: var(--hms-text2); }
+.hms-text-dim { color: var(--hms-text3); }
+.hms-mt-sm { margin-top: 8px; }
+.hms-mt-md { margin-top: 12px; }
+.hms-mt-lg { margin-top: 16px; }
+.hms-mb-sm { margin-bottom: 8px; }
+.hms-mb-md { margin-bottom: 12px; }
+.hms-mb-lg { margin-bottom: 16px; }
+
+/* ─── Modal overlay ─── */
+.hms-modal-backdrop {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.hms-modal {
+    background: var(--hms-surface);
+    border: 1px solid var(--hms-border);
+    border-radius: var(--hms-radius-lg);
+    min-width: 400px;
+    max-width: 90vw;
+    max-height: 85vh;
+    overflow: auto;
+    box-shadow: var(--hms-shadow-lg);
+}
+
+.hms-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--hms-border);
+}
+
+.hms-modal-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--hms-text);
+}
+
+.hms-modal-body {
+    padding: 20px;
+}
+
+.hms-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 12px 20px;
+    border-top: 1px solid var(--hms-border);
+}
+
+/* ─── Tooltip ─── */
+.hms-tooltip {
+    position: relative;
+}
+.hms-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--hms-surface3);
+    color: var(--hms-text);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+}
+.hms-tooltip:hover::after {
+    opacity: 1;
+}
+
+/* ─── Loading spinner ─── */
+.hms-spinner {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--hms-border);
+    border-top-color: var(--hms-accent);
+    border-radius: 50%;
+    animation: hms-spin 0.6s linear infinite;
+}
+
+@keyframes hms-spin {
+    to { transform: rotate(360deg); }
+}

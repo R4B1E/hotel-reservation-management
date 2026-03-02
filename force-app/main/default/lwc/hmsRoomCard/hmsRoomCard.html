@@ -1,0 +1,28 @@
+<template>
+    <div class={cardClass} onclick={handleCardClick}>
+        <div class="room-header" style={headerGradient}>
+            <span class="room-number">{room.roomNumber}</span>
+            <span class="room-category">{room.category}</span>
+        </div>
+        <div class="room-body">
+            <div class="room-status-row">
+                <c-hms-badge label={room.roomStatus} variant={room.roomStatus}></c-hms-badge>
+                <c-hms-badge label={room.hkStatus} variant={room.hkStatus}></c-hms-badge>
+            </div>
+            <template lwc:if={showGuestInfo}>
+                <div class="guest-info">
+                    <span class="guest-icon">&#128100;</span>
+                    <div>
+                        <div class="guest-name">{room.guestName}</div>
+                        <div class="guest-checkout">C/O: {room.checkOut}</div>
+                    </div>
+                </div>
+            </template>
+            <div class="room-meta">
+                <span>Floor {room.floor}</span>
+                <span>{room.bedType}</span>
+                <span>{priceDisplay}/night</span>
+            </div>
+        </div>
+    </div>
+</template>

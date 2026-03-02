@@ -1,0 +1,24 @@
+<template>
+    <div class="case-card hms-card" onclick={handleClick}>
+        <div class="case-top">
+            <span class="case-number">{caseItem.caseNumber}</span>
+            <span class={priorityClass}></span>
+        </div>
+        <div class="case-subject">{caseItem.subject}</div>
+        <div class="case-meta">
+            <template lwc:if={caseItem.contactName}>
+                <span class="case-contact">{caseItem.contactName}</span>
+            </template>
+            <template lwc:if={caseItem.isVipGuest}>
+                <span class="vip-tag">VIP</span>
+            </template>
+        </div>
+        <div class="case-footer">
+            <span class="case-owner">
+                <span class="owner-avatar">{caseItem.initials}</span>
+                {caseItem.ownerName}
+            </span>
+            <c-hms-badge label={caseItem.priority} variant={caseItem.priority}></c-hms-badge>
+        </div>
+    </div>
+</template>

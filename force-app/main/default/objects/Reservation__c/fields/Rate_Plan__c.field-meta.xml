@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rate_Plan__c</fullName>
+    <label>Rate Plan</label>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>BAR Weekend</fullName><default>false</default><label>BAR Weekend</label></value>
+            <value><fullName>All Inclusive</fullName><default>false</default><label>All Inclusive</label></value>
+            <value><fullName>Bed &amp; Breakfast</fullName><default>false</default><label>Bed &amp; Breakfast</label></value>
+            <value><fullName>Room Only</fullName><default>false</default><label>Room Only</label></value>
+        </valueSetDefinition>
+    </valueSet>
+    <required>false</required>
+</CustomField>

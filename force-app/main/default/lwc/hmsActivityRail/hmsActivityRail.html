@@ -1,0 +1,31 @@
+<template>
+    <div class="rail">
+        <div class="rail-header">
+            <span class="hms-card-title">Activity</span>
+        </div>
+        <div class="note-input-wrap">
+            <textarea class="hms-input note-input"
+                placeholder="Add a note..."
+                value={noteText}
+                onchange={handleNoteInput}
+                onkeypress={handleKeyPress}></textarea>
+            <button class="hms-btn hms-btn-primary send-btn" onclick={handleAddNote}>Add</button>
+        </div>
+        <div class="activity-list">
+            <template lwc:if={hasActivities}>
+                <template for:each={activities} for:item="a">
+                    <div class="activity-item" key={a.id}>
+                        <div class="activity-avatar">{a.initials}</div>
+                        <div class="activity-content">
+                            <div class="activity-author">{a.author}</div>
+                            <div class="activity-text">{a.text}</div>
+                        </div>
+                    </div>
+                </template>
+            </template>
+            <template lwc:else>
+                <div class="empty-rail">No activity yet</div>
+            </template>
+        </div>
+    </div>
+</template>

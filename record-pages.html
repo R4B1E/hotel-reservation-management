@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grandeur HMS · Record Pages</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080d18;
+  --s1: #0f1624;
+  --s2: #141e30;
+  --s3: #1a2540;
+  --s4: #1f2d4a;
+  --border: #253450;
+  --border2: #1a2842;
+  --blue: #3b82f6;
+  --blue2: #60a5fa;
+  --indigo: #6366f1;
+  --green: #10b981;
+  --green2: #34d399;
+  --gold: #f59e0b;
+  --gold2: #fbbf24;
+  --red: #ef4444;
+  --red2: #f87171;
+  --pink: #ec4899;
+  --purple: #8b5cf6;
+  --cyan: #06b6d4;
+  --orange: #f97316;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --text4: #475569;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 13px; }
+
+/* ── SWITCHER ── */
+.switcher {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(8,13,24,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; padding: 0 20px; height: 52px; gap: 4px;
+}
+.switcher-brand { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--text); margin-right: 20px; }
+.switcher-brand span { color: var(--gold); }
+.sw-btn {
+  display: flex; align-items: center; gap: 7px; padding: 6px 16px;
+  border-radius: 8px; border: 1px solid transparent; cursor: pointer;
+  font-size: 12px; font-weight: 500; font-family: inherit; color: var(--text3);
+  background: transparent; transition: all 0.18s; white-space: nowrap;
+}
+.sw-btn:hover { background: var(--s3); color: var(--text2); border-color: var(--border); }
+.sw-btn.active { background: var(--s3); color: var(--text); border-color: var(--border); }
+.sw-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.sw-btn.active .sw-dot { box-shadow: 0 0 6px currentColor; }
+
+/* ── PAGE ── */
+.record-page { display: none; animation: fadeUp 0.25s ease; }
+.record-page.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── HIGHLIGHT BANNER ── */
+.highlight-banner {
+  padding: 20px 24px 0;
+  background: var(--s1);
+  border-bottom: 1px solid var(--border);
+}
+.hb-breadcrumb { font-size: 11px; color: var(--text3); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.hb-breadcrumb a { color: var(--blue2); cursor: pointer; }
+.hb-breadcrumb a:hover { text-decoration: underline; }
+.hb-top { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+.hb-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.hb-title-block { flex: 1; }
+.hb-record-type { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text3); margin-bottom: 4px; }
+.hb-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
+.hb-sub { font-size: 12px; color: var(--text3); }
+.hb-actions { display: flex; gap: 8px; align-items: flex-start; flex-shrink: 0; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 7px; border: 1px solid var(--border); background: var(--s3); color: var(--text2); cursor: pointer; font-size: 12px; font-family: inherit; font-weight: 500; transition: all 0.15s; white-space: nowrap; }
+.btn:hover { background: var(--s4); color: var(--text); border-color: var(--border); }
+.btn-primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+.btn-primary:hover { background: #2563eb; border-color: #2563eb; color: #fff; }
+.btn-success { background: var(--green); border-color: var(--green); color: #fff; }
+.btn-success:hover { background: #059669; color: #fff; }
+.btn-danger { background: rgba(239,68,68,0.15); border-color: var(--red); color: var(--red2); }
+.btn-danger:hover { background: rgba(239,68,68,0.25); }
+.btn-icon { width: 32px; height: 32px; padding: 0; justify-content: center; }
+
+/* Highlights strip */
+.highlights-strip { display: flex; gap: 0; border-top: 1px solid var(--border2); overflow-x: auto; }
+.highlights-strip::-webkit-scrollbar { height: 0; }
+.hl-item { flex: 1; min-width: 130px; padding: 12px 16px; border-right: 1px solid var(--border2); }
+.hl-item:last-child { border-right: none; }
+.hl-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text3); font-weight: 600; margin-bottom: 5px; }
+.hl-value { font-size: 13px; font-weight: 600; color: var(--text); }
+.hl-value.accent { color: var(--blue2); }
+.hl-value.green { color: var(--green2); }
+.hl-value.gold { color: var(--gold2); }
+.hl-value.red { color: var(--red2); }
+.hl-value.pink { color: #f472b6; }
+
+/* ── BODY LAYOUT ── */
+.record-body { display: grid; grid-template-columns: 1fr 320px; gap: 0; height: calc(100vh - 230px); overflow: hidden; }
+.record-body.three-col { grid-template-columns: 1fr 1fr 300px; }
+.record-main { overflow-y: auto; }
+.record-rail { border-left: 1px solid var(--border); overflow-y: auto; }
+.record-main::-webkit-scrollbar, .record-rail::-webkit-scrollbar { width: 4px; }
+.record-main::-webkit-scrollbar-thumb, .record-rail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ── INNER TABS ── */
+.inner-tabs { display: flex; border-bottom: 1px solid var(--border); padding: 0 20px; background: var(--s1); position: sticky; top: 0; z-index: 5; }
+.it { padding: 11px 16px; font-size: 12px; color: var(--text3); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; font-weight: 500; }
+.it.active { color: var(--blue2); border-bottom-color: var(--blue2); }
+.it:hover:not(.active) { color: var(--text2); }
+
+/* ── SECTION / CARD ── */
+.section { padding: 20px; border-bottom: 1px solid var(--border2); }
+.section:last-child { border-bottom: none; }
+.section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text3); margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+.section-title .st-action { font-weight: 500; font-size: 11px; color: var(--blue2); cursor: pointer; text-transform: none; letter-spacing: 0; }
+
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+.field { }
+.f-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text3); font-weight: 600; margin-bottom: 4px; }
+.f-val { font-size: 13px; color: var(--text); }
+.f-val.muted { color: var(--text2); }
+.f-val.link { color: var(--blue2); cursor: pointer; }
+.f-val.link:hover { text-decoration: underline; }
+.f-val.green { color: var(--green2); font-weight: 600; }
+.f-val.gold { color: var(--gold2); font-weight: 600; }
+.f-val.red { color: var(--red2); }
+
+/* ── BADGE ── */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.b-confirmed { background: rgba(16,185,129,0.15); color: #34d399; }
+.b-pending { background: rgba(245,158,11,0.15); color: #fbbf24; }
+.b-checkedin { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.b-checkedout { background: rgba(100,116,139,0.2); color: var(--text3); }
+.b-cancelled { background: rgba(239,68,68,0.15); color: #f87171; }
+.b-vip { background: rgba(245,158,11,0.15); color: #fbbf24; }
+.b-open { background: rgba(239,68,68,0.15); color: #f87171; }
+.b-inprog { background: rgba(245,158,11,0.15); color: #fbbf24; }
+.b-resolved { background: rgba(16,185,129,0.15); color: #34d399; }
+.b-high { background: rgba(239,68,68,0.12); color: #f87171; }
+.b-medium { background: rgba(245,158,11,0.12); color: #fbbf24; }
+.b-low { background: rgba(16,185,129,0.12); color: #34d399; }
+.b-clean { background: rgba(16,185,129,0.12); color: #34d399; }
+.b-dirty { background: rgba(245,158,11,0.12); color: #fbbf24; }
+.b-maintenance { background: rgba(239,68,68,0.12); color: #f87171; }
+.b-occupied { background: rgba(59,130,246,0.12); color: #60a5fa; }
+.b-vacant { background: rgba(100,116,139,0.15); color: var(--text2); }
+
+/* ── ACTIVITY FEED ── */
+.activity-feed { display: flex; flex-direction: column; }
+.act-item { display: flex; gap: 11px; padding: 14px 20px; border-bottom: 1px solid var(--border2); position: relative; }
+.act-item:last-child { border-bottom: none; }
+.act-av { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.act-content { flex: 1; }
+.act-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+.act-name { font-size: 12px; font-weight: 600; }
+.act-time { font-size: 10px; color: var(--text3); margin-left: auto; }
+.act-text { font-size: 12px; color: var(--text2); line-height: 1.55; }
+.act-tag { font-size: 10px; padding: 1px 7px; border-radius: 4px; font-weight: 500; }
+
+/* ── RELATED LIST ── */
+.related-list { }
+.rl-row { display: flex; align-items: center; gap: 10px; padding: 9px 20px; border-bottom: 1px solid var(--border2); cursor: pointer; transition: background 0.1s; }
+.rl-row:hover { background: rgba(255,255,255,0.02); }
+.rl-row:last-child { border-bottom: none; }
+.rl-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.rl-main { flex: 1; }
+.rl-title { font-size: 12px; font-weight: 600; color: var(--blue2); }
+.rl-sub { font-size: 11px; color: var(--text3); margin-top: 1px; }
+.rl-right { text-align: right; }
+.rl-amount { font-size: 12px; font-weight: 600; color: var(--green2); }
+.rl-date { font-size: 10px; color: var(--text3); }
+
+/* ── RAIL ── */
+.rail-section { padding: 16px; border-bottom: 1px solid var(--border2); }
+.rail-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text3); margin-bottom: 12px; }
+.note-box { background: var(--s2); border: 1px solid var(--border); border-radius: 7px; width: 100%; padding: 8px 10px; color: var(--text); font-size: 12px; font-family: inherit; resize: none; outline: none; min-height: 72px; }
+.note-box:focus { border-color: var(--blue); }
+.rail-stat-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 12px; }
+.rail-stat-label { color: var(--text3); }
+.rail-stat-val { font-weight: 600; color: var(--text); }
+
+/* ── ROOM VISUAL ── */
+.room-visual-big {
+  background: linear-gradient(135deg, #0d2545 0%, #071525 100%);
+  border-radius: 10px; padding: 28px; text-align: center; margin-bottom: 0;
+  position: relative; overflow: hidden;
+}
+.room-visual-big::before {
+  content: ''; position: absolute; top: -30px; right: -30px;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+}
+.rvb-num { font-family: 'Playfair Display', serif; font-size: 72px; color: #fff; opacity: 0.9; line-height: 1; }
+.rvb-type { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; }
+.rvb-badges { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
+
+/* ── OCCUPANCY TIMELINE ── */
+.occ-timeline { display: flex; align-items: center; gap: 0; height: 32px; border-radius: 6px; overflow: hidden; margin-top: 8px; }
+.occ-seg { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; }
+
+/* ── AMENITY CHIPS ── */
+.amenity-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 6px; font-size: 11px; background: var(--s3); border: 1px solid var(--border); color: var(--text2); }
+
+/* ── PROGRESS BAR ── */
+.prog-bar { height: 6px; background: var(--s3); border-radius: 3px; overflow: hidden; margin-top: 6px; }
+.prog-fill { height: 100%; border-radius: 3px; }
+
+/* ── CHARGE TABLE ── */
+table.charge-table { width: 100%; border-collapse: collapse; }
+table.charge-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text3); font-weight: 600; padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+table.charge-table td { padding: 9px 10px; border-bottom: 1px solid var(--border2); font-size: 12px; color: var(--text2); }
+table.charge-table tr:hover td { background: rgba(255,255,255,0.01); color: var(--text); }
+table.charge-table tr:last-child td { border-bottom: none; }
+table.charge-table .total-row td { border-top: 1px solid var(--border); color: var(--text); font-weight: 600; }
+
+/* ── GUEST PAGE SPECIFIC ── */
+.guest-hero {
+  background: linear-gradient(135deg, #0f1e38 0%, #080d18 100%);
+  padding: 28px 24px; display: flex; align-items: center; gap: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.guest-av-big { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 700; flex-shrink: 0; }
+.guest-stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; }
+.gs-item { padding: 16px 20px; border-right: 1px solid var(--border2); }
+.gs-item:last-child { border-right: none; }
+.gs-val { font-size: 24px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+.gs-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text3); font-weight: 600; }
+
+/* ── CASE PAGE SPECIFIC ── */
+.case-hero {
+  background: linear-gradient(135deg, #150d2a 0%, #0a0812 100%);
+  padding: 24px; border-bottom: 1px solid var(--border);
+}
+.priority-indicator { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 8px; border: 1px solid; margin-bottom: 14px; }
+.sla-bar { margin-top: 16px; }
+.sla-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--text3); margin-bottom: 6px; }
+.timeline-steps { display: flex; align-items: center; gap: 0; padding: 16px 0; }
+.ts-step { flex: 1; text-align: center; position: relative; }
+.ts-step::before { content: ''; position: absolute; top: 12px; left: 50%; right: -50%; height: 2px; background: var(--border); }
+.ts-step:last-child::before { display: none; }
+.ts-dot { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; margin: 0 auto 6px; position: relative; z-index: 1; }
+.ts-label { font-size: 10px; color: var(--text3); }
+.ts-step.done .ts-dot { background: var(--green); color: #fff; }
+.ts-step.done::before { background: var(--green); }
+.ts-step.current .ts-dot { background: var(--blue); color: #fff; box-shadow: 0 0 0 3px rgba(59,130,246,0.25); }
+.ts-step.todo .ts-dot { background: var(--s3); border: 1px solid var(--border); color: var(--text3); }
+
+/* scrollbars */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- SWITCHER -->
+<div class="switcher">
+  <div class="switcher-brand">Grandeur <span>HMS</span></div>
+  <button class="sw-btn active" onclick="showPage('reservation',this)">
+    <div class="sw-dot" style="background:#3b82f6;color:#3b82f6"></div>Reservation Record
+  </button>
+  <button class="sw-btn" onclick="showPage('guest',this)">
+    <div class="sw-dot" style="background:#ec4899"></div>Guest Record
+  </button>
+  <button class="sw-btn" onclick="showPage('room',this)">
+    <div class="sw-dot" style="background:#8b5cf6"></div>Room Record
+  </button>
+  <button class="sw-btn" onclick="showPage('case',this)">
+    <div class="sw-dot" style="background:#ef4444"></div>Case Record
+  </button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     RESERVATION RECORD
+═══════════════════════════════════════════ -->
+<div class="record-page active" id="page-reservation">
+
+  <div class="highlight-banner">
+    <div class="hb-breadcrumb">
+      <a>Reservations</a> › <span>RES-2024-0892</span>
+    </div>
+    <div class="hb-top">
+      <div class="hb-icon" style="background:rgba(59,130,246,0.15)">🛎</div>
+      <div class="hb-title-block">
+        <div class="hb-record-type">Reservation · All Inclusive</div>
+        <div class="hb-title">Marcus Thompson</div>
+        <div class="hb-sub" style="display:flex;align-items:center;gap:10px">
+          <span class="badge b-confirmed">● Confirmed</span>
+          <span class="badge b-vip">⭐ VIP</span>
+          <span style="color:var(--text3)">RES-2024-0892</span>
+        </div>
+      </div>
+      <div class="hb-actions">
+        <button class="btn btn-success">✓ Check In</button>
+        <button class="btn btn-primary">✏ Edit</button>
+        <button class="btn">📧 Email</button>
+        <button class="btn">🖨 Folio</button>
+        <button class="btn btn-icon">⋯</button>
+      </div>
+    </div>
+    <div class="highlights-strip">
+      <div class="hl-item"><div class="hl-label">Room</div><div class="hl-value accent">308 · Deluxe King</div></div>
+      <div class="hl-item"><div class="hl-label">Check-In</div><div class="hl-value">Feb 24, 2026</div></div>
+      <div class="hl-item"><div class="hl-label">Check-Out</div><div class="hl-value">Feb 28, 2026</div></div>
+      <div class="hl-item"><div class="hl-label">Nights</div><div class="hl-value">4</div></div>
+      <div class="hl-item"><div class="hl-label">Total Amount</div><div class="hl-value green">$1,240.00</div></div>
+      <div class="hl-item"><div class="hl-label">Rate Plan</div><div class="hl-value gold">BAR Weekend</div></div>
+      <div class="hl-item"><div class="hl-label">Assigned Agent</div><div class="hl-value">Sarah Chen</div></div>
+      <div class="hl-item"><div class="hl-label">Source</div><div class="hl-value">Direct Booking</div></div>
+    </div>
+  </div>
+
+  <div class="record-body">
+    <div class="record-main">
+      <div class="inner-tabs">
+        <div class="it active">Details</div>
+        <div class="it">Services & Charges</div>
+        <div class="it">Payment</div>
+        <div class="it">Documents</div>
+        <div class="it">History</div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Guest Information <span class="st-action">Edit</span></div>
+        <div class="field-grid">
+          <div class="field"><div class="f-label">Full Name</div><div class="f-val link">Marcus Thompson</div></div>
+          <div class="field"><div class="f-label">Guest Type</div><div class="f-val gold">⭐ VIP</div></div>
+          <div class="field"><div class="f-label">Email</div><div class="f-val link">m.thompson@email.com</div></div>
+          <div class="field"><div class="f-label">Phone</div><div class="f-val">+1 (555) 234-5678</div></div>
+          <div class="field"><div class="f-label">Nationality</div><div class="f-val">🇺🇸 United States</div></div>
+          <div class="field"><div class="f-label">ID / Passport</div><div class="f-val muted" style="font-family:'JetBrains Mono',monospace;font-size:12px">A12345678</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Stay Details</div>
+        <div class="field-grid three">
+          <div class="field"><div class="f-label">Check-In Date</div><div class="f-val">Feb 24, 2026</div></div>
+          <div class="field"><div class="f-label">Check-Out Date</div><div class="f-val">Feb 28, 2026</div></div>
+          <div class="field"><div class="f-label">Arrival Time</div><div class="f-val">3:00 PM</div></div>
+          <div class="field"><div class="f-label">Adults</div><div class="f-val">2</div></div>
+          <div class="field"><div class="f-label">Children</div><div class="f-val muted">0</div></div>
+          <div class="field"><div class="f-label">Nights</div><div class="f-val">4</div></div>
+          <div class="field"><div class="f-label">Booking Source</div><div class="f-val">Direct Booking</div></div>
+          <div class="field"><div class="f-label">Rate Plan</div><div class="f-val link">BAR Weekend</div></div>
+          <div class="field"><div class="f-label">Package</div><div class="f-val">All Inclusive</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Room Assignment <span class="st-action">Change Room</span></div>
+        <div class="field-grid">
+          <div class="field"><div class="f-label">Room Number</div><div class="f-val link">308</div></div>
+          <div class="field"><div class="f-label">Room Type</div><div class="f-val">Deluxe King</div></div>
+          <div class="field"><div class="f-label">Floor / View</div><div class="f-val">3rd Floor · Pool View</div></div>
+          <div class="field"><div class="f-label">Bed Type</div><div class="f-val">King (180 × 200 cm)</div></div>
+          <div class="field"><div class="f-label">Room Size</div><div class="f-val">42 m²</div></div>
+          <div class="field"><div class="f-label">Max Occupancy</div><div class="f-val">2 guests</div></div>
+          <div class="field"><div class="f-label">Housekeeping</div><div class="f-val"><span class="badge b-clean">● Clean</span></div></div>
+          <div class="field"><div class="f-label">Rate / Night</div><div class="f-val green">$310.00</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Special Requests</div>
+        <div style="background:var(--s2);border:1px solid var(--border2);border-radius:8px;padding:12px;font-size:13px;color:var(--text2);line-height:1.6">
+          High floor preference, hypoallergenic bedding, late check-out if available. Champagne on arrival (VIP amenity arranged by concierge).
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Charges Summary <span class="st-action">View Full Statement</span></div>
+        <table class="charge-table">
+          <thead><tr><th>Description</th><th>Qty</th><th>Unit</th><th style="text-align:right">Amount</th></tr></thead>
+          <tbody>
+            <tr><td>Deluxe King Room · BAR Weekend</td><td>4 nights</td><td>$310 / night</td><td style="text-align:right;color:var(--text)">$1,240.00</td></tr>
+            <tr><td>All Inclusive Package</td><td>2 guests × 4</td><td>Included</td><td style="text-align:right">—</td></tr>
+            <tr><td>Spa Treatment · Couple's Massage</td><td>1</td><td>$180.00</td><td style="text-align:right;color:var(--text)">$180.00</td></tr>
+            <tr><td>Airport Transfer (arrival)</td><td>1</td><td>$65.00</td><td style="text-align:right;color:var(--text)">$65.00</td></tr>
+            <tr><td style="color:var(--text3)">Tax (15%)</td><td></td><td></td><td style="text-align:right;color:var(--text3)">$222.75</td></tr>
+          </tbody>
+          <tfoot>
+            <tr class="total-row"><td colspan="3" style="color:var(--text2)">Total Due</td><td style="text-align:right;font-size:15px;color:var(--green2)">$1,707.75</td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- Rail -->
+    <div class="record-rail">
+      <div class="rail-section">
+        <div class="rail-title">Add Note</div>
+        <textarea class="note-box" placeholder="Leave a note…"></textarea>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Save Note</button>
+      </div>
+      <div class="rail-section">
+        <div class="rail-title">Activity Timeline</div>
+        <div class="activity-feed">
+          <div class="act-item">
+            <div class="act-av" style="background:rgba(59,130,246,0.2);color:#60a5fa">SC</div>
+            <div class="act-content">
+              <div class="act-header"><span class="act-name">Sarah Chen</span><span class="act-time">2h ago</span></div>
+              <div class="act-text">Confirmed hypoallergenic pillow setup. VIP champagne arranged.</div>
+            </div>
+          </div>
+          <div class="act-item">
+            <div class="act-av" style="background:rgba(16,185,129,0.2);color:#34d399">JW</div>
+            <div class="act-content">
+              <div class="act-header"><span class="act-name">James Wu</span><span class="act-time">Yesterday</span></div>
+              <div class="act-text">Guest confirmed arrival at 3–4 PM. VIP welcome amenity arranged.</div>
+            </div>
+          </div>
+          <div class="act-item">
+            <div class="act-av" style="background:var(--s3);color:var(--text3)">⚙</div>
+            <div class="act-content">
+              <div class="act-header"><span class="act-name" style="color:var(--text3)">System</span><span class="act-time">Feb 22</span></div>
+              <div class="act-text">Pre-arrival email sent with online check-in link.</div>
+            </div>
+          </div>
+          <div class="act-item">
+            <div class="act-av" style="background:rgba(245,158,11,0.2);color:#fbbf24">MT</div>
+            <div class="act-content">
+              <div class="act-header"><span class="act-name">Marcus Thompson</span><span class="act-time">Feb 20</span></div>
+              <div class="act-text">Online check-in completed. ID verified.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rail-section">
+        <div class="rail-title">Related Cases</div>
+        <div class="rl-row" style="padding:8px 0">
+          <div class="rl-icon" style="background:rgba(245,158,11,0.15)">⚠</div>
+          <div class="rl-main">
+            <div class="rl-title">Late check-out request</div>
+            <div class="rl-sub"><span class="badge b-inprog" style="font-size:10px">In Progress</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     GUEST RECORD
+═══════════════════════════════════════════ -->
+<div class="record-page" id="page-guest">
+
+  <div class="highlight-banner" style="padding-bottom:0">
+    <div class="hb-breadcrumb">
+      <a>Guests</a> › <span>Marcus Thompson</span>
+    </div>
+    <div class="guest-hero" style="padding:20px 0 16px;background:none;border:none">
+      <div class="guest-av-big" style="background:rgba(59,130,246,0.2);color:#60a5fa">MT</div>
+      <div style="flex:1">
+        <div class="hb-record-type">Guest Profile</div>
+        <div class="hb-title" style="display:flex;align-items:center;gap:10px">
+          Marcus Thompson
+          <span class="badge b-vip">⭐ VIP</span>
+        </div>
+        <div style="font-size:12px;color:var(--text3);margin-top:4px;display:flex;gap:12px">
+          <span>📧 m.thompson@email.com</span>
+          <span>📞 +1 (555) 234-5678</span>
+          <span>🇺🇸 United States</span>
+        </div>
+      </div>
+      <div class="hb-actions">
+        <button class="btn btn-primary">📋 New Reservation</button>
+        <button class="btn">📧 Send Email</button>
+        <button class="btn">📞 Log Call</button>
+        <button class="btn btn-icon">⋯</button>
+      </div>
+    </div>
+
+    <div class="guest-stats-grid" style="border-top:1px solid var(--border2)">
+      <div class="gs-item"><div class="gs-val" style="color:#60a5fa">7</div><div class="gs-label">Total Stays</div></div>
+      <div class="gs-item"><div class="gs-val" style="color:#34d399">$14,200</div><div class="gs-label">Lifetime Spend</div></div>
+      <div class="gs-item"><div class="gs-val" style="color:#fbbf24">4.8★</div><div class="gs-label">Avg Satisfaction</div></div>
+      <div class="gs-item"><div class="gs-val" style="color:#a78bfa">Gold</div><div class="gs-label">Loyalty Tier</div></div>
+    </div>
+  </div>
+
+  <div class="record-body">
+    <div class="record-main">
+      <div class="inner-tabs">
+        <div class="it active">Profile</div>
+        <div class="it">Stay History</div>
+        <div class="it">Preferences</div>
+        <div class="it">Loyalty & Spend</div>
+        <div class="it">Cases</div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Personal Information <span class="st-action">Edit</span></div>
+        <div class="field-grid three">
+          <div class="field"><div class="f-label">First Name</div><div class="f-val">Marcus</div></div>
+          <div class="field"><div class="f-label">Last Name</div><div class="f-val">Thompson</div></div>
+          <div class="field"><div class="f-label">Title</div><div class="f-val muted">Mr.</div></div>
+          <div class="field"><div class="f-label">Date of Birth</div><div class="f-val muted">Mar 14, 1983</div></div>
+          <div class="field"><div class="f-label">Nationality</div><div class="f-val">🇺🇸 United States</div></div>
+          <div class="field"><div class="f-label">Language</div><div class="f-val">English</div></div>
+          <div class="field"><div class="f-label">Passport No.</div><div class="f-val muted" style="font-family:'JetBrains Mono',monospace;font-size:12px">A12345678</div></div>
+          <div class="field"><div class="f-label">Passport Expiry</div><div class="f-val muted">Jun 2028</div></div>
+          <div class="field"><div class="f-label">Guest Since</div><div class="f-val muted">Jan 2019</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Contact Details</div>
+        <div class="field-grid">
+          <div class="field"><div class="f-label">Email</div><div class="f-val link">m.thompson@email.com</div></div>
+          <div class="field"><div class="f-label">Mobile</div><div class="f-val">+1 (555) 234-5678</div></div>
+          <div class="field"><div class="f-label">Address</div><div class="f-val muted">142 Riverside Dr, New York, NY 10024</div></div>
+          <div class="field"><div class="f-label">Country</div><div class="f-val">United States</div></div>
+          <div class="field"><div class="f-label">Emergency Contact</div><div class="f-val muted">Sarah Thompson · +1 (555) 234-5679</div></div>
+          <div class="field"><div class="f-label">Marketing Consent</div><div class="f-val green">✓ Opted In</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Room & Stay Preferences</div>
+        <div class="amenity-chips" style="margin-bottom:14px">
+          <div class="chip">🛏 King Bed</div>
+          <div class="chip">🏔 High Floor</div>
+          <div class="chip">🌊 Ocean / Pool View</div>
+          <div class="chip">🤧 Hypoallergenic Bedding</div>
+          <div class="chip">🍃 Non-Smoking</div>
+          <div class="chip">🤫 Quiet Room</div>
+          <div class="chip">🛁 Bathtub</div>
+          <div class="chip">☕ Nespresso</div>
+        </div>
+        <div class="field-grid">
+          <div class="field"><div class="f-label">Pillow Type</div><div class="f-val muted">Hypoallergenic soft</div></div>
+          <div class="field"><div class="f-label">Room Temperature</div><div class="f-val muted">20°C / 68°F</div></div>
+          <div class="field"><div class="f-label">Minibar</div><div class="f-val muted">Still water, no alcohol</div></div>
+          <div class="field"><div class="f-label">Newspaper</div><div class="f-val muted">Financial Times (digital)</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Recent Stays <span class="st-action">View All</span></div>
+        <div class="related-list">
+          <div class="rl-row">
+            <div class="rl-icon" style="background:rgba(16,185,129,0.15)">🛎</div>
+            <div class="rl-main">
+              <div class="rl-title">RES-2024-0892 · Room 308</div>
+              <div class="rl-sub">Feb 24 – Feb 28, 2026 · 4 nights · <span class="badge b-confirmed" style="font-size:10px">Confirmed</span></div>
+            </div>
+            <div class="rl-right"><div class="rl-amount">$1,240</div><div class="rl-date">Upcoming</div></div>
+          </div>
+          <div class="rl-row">
+            <div class="rl-icon" style="background:rgba(100,116,139,0.15)">🛎</div>
+            <div class="rl-main">
+              <div class="rl-title">RES-2023-1204 · Room 512</div>
+              <div class="rl-sub">Dec 20 – Dec 27, 2023 · 7 nights · <span class="badge b-checkedout" style="font-size:10px">Checked Out</span></div>
+            </div>
+            <div class="rl-right"><div class="rl-amount">$3,850</div><div class="rl-date">Dec 2023</div></div>
+          </div>
+          <div class="rl-row">
+            <div class="rl-icon" style="background:rgba(100,116,139,0.15)">🛎</div>
+            <div class="rl-main">
+              <div class="rl-title">RES-2023-0441 · Room 308</div>
+              <div class="rl-sub">Apr 10 – Apr 14, 2023 · 4 nights · <span class="badge b-checkedout" style="font-size:10px">Checked Out</span></div>
+            </div>
+            <div class="rl-right"><div class="rl-amount">$1,540</div><div class="rl-date">Apr 2023</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="record-rail">
+      <div class="rail-section">
+        <div class="rail-title">Loyalty Status</div>
+        <div style="background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(99,102,241,0.1));border:1px solid rgba(139,92,246,0.3);border-radius:10px;padding:14px;margin-bottom:12px;text-align:center">
+          <div style="font-size:22px;margin-bottom:4px">🏆</div>
+          <div style="font-family:'Playfair Display',serif;font-size:18px;color:#c4b5fd">Gold Member</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:4px">7,200 points · 2,800 to Platinum</div>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="width:72%;background:linear-gradient(90deg,#8b5cf6,#6366f1)"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:5px">
+          <span>Gold 5,000</span><span>Platinum 10,000</span>
+        </div>
+      </div>
+      <div class="rail-section">
+        <div class="rail-title">Key Metrics</div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Total Stays</span><span class="rail-stat-val">7</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Lifetime Spend</span><span class="rail-stat-val" style="color:var(--green2)">$14,200</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Avg Stay Length</span><span class="rail-stat-val">4.3 nights</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Preferred Room</span><span class="rail-stat-val" style="color:var(--blue2)">Deluxe King</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Last Visit</span><span class="rail-stat-val">Apr 2023</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Open Cases</span><span class="rail-stat-val" style="color:var(--gold2)">1</span></div>
+      </div>
+      <div class="rail-section">
+        <div class="rail-title">Add Note</div>
+        <textarea class="note-box" placeholder="Guest preference or note…"></textarea>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     ROOM RECORD
+═══════════════════════════════════════════ -->
+<div class="record-page" id="page-room">
+
+  <div class="highlight-banner">
+    <div class="hb-breadcrumb">
+      <a>Rooms</a> › <span>Room 308 · Deluxe King</span>
+    </div>
+    <div class="hb-top">
+      <div style="background:linear-gradient(135deg,#0d2545,#071525);border-radius:12px;width:64px;height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;color:#fff;line-height:1">308</div>
+        <div style="font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px">Room</div>
+      </div>
+      <div class="hb-title-block">
+        <div class="hb-record-type">Room · Floor 3 · Pool View</div>
+        <div class="hb-title">308 · Deluxe King</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="badge b-clean">● Clean</span>
+          <span class="badge b-occupied">● Occupied</span>
+          <span style="font-size:12px;color:var(--text3)">King · 42 m² · Max 2 guests</span>
+        </div>
+      </div>
+      <div class="hb-actions">
+        <button class="btn btn-primary">📅 New Booking</button>
+        <button class="btn">🔧 Maintenance</button>
+        <button class="btn">🔄 Status</button>
+        <button class="btn btn-icon">⋯</button>
+      </div>
+    </div>
+    <div class="highlights-strip">
+      <div class="hl-item"><div class="hl-label">Room Type</div><div class="hl-value">Deluxe King</div></div>
+      <div class="hl-item"><div class="hl-label">Floor</div><div class="hl-value">3rd</div></div>
+      <div class="hl-item"><div class="hl-label">View</div><div class="hl-value">Pool View</div></div>
+      <div class="hl-item"><div class="hl-label">Rate / Night</div><div class="hl-value green">$310</div></div>
+      <div class="hl-item"><div class="hl-label">HK Status</div><div class="hl-value" style="color:#34d399">Clean</div></div>
+      <div class="hl-item"><div class="hl-label">Last Cleaned</div><div class="hl-value">Today 10:30 AM</div></div>
+      <div class="hl-item"><div class="hl-label">Current Guest</div><div class="hl-value accent">Marcus Thompson</div></div>
+      <div class="hl-item"><div class="hl-label">Check-Out</div><div class="hl-value gold">Feb 28</div></div>
+    </div>
+  </div>
+
+  <div class="record-body">
+    <div class="record-main">
+      <div class="inner-tabs">
+        <div class="it active">Overview</div>
+        <div class="it">Availability</div>
+        <div class="it">Maintenance</div>
+        <div class="it">Revenue</div>
+        <div class="it">History</div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Room Visual</div>
+        <div class="room-visual-big">
+          <div class="rvb-num">308</div>
+          <div class="rvb-type">Deluxe King · 3rd Floor</div>
+          <div class="rvb-badges">
+            <span class="badge b-clean">● Clean</span>
+            <span class="badge b-occupied">● Occupied</span>
+            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);padding:3px 10px;border-radius:20px;font-size:11px">Pool View</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Room Specifications</div>
+        <div class="field-grid three">
+          <div class="field"><div class="f-label">Room Category</div><div class="f-val">Deluxe</div></div>
+          <div class="field"><div class="f-label">Bed Type</div><div class="f-val">King (180 × 200 cm)</div></div>
+          <div class="field"><div class="f-label">Room Size</div><div class="f-val">42 m²</div></div>
+          <div class="field"><div class="f-label">Floor</div><div class="f-val">3rd Floor</div></div>
+          <div class="field"><div class="f-label">View</div><div class="f-val">Pool View</div></div>
+          <div class="field"><div class="f-label">Max Occupancy</div><div class="f-val">2 guests</div></div>
+          <div class="field"><div class="f-label">Connecting Room</div><div class="f-val muted">309 (available)</div></div>
+          <div class="field"><div class="f-label">Accessibility</div><div class="f-val muted">Standard</div></div>
+          <div class="field"><div class="f-label">Smoking</div><div class="f-val muted">Non-Smoking</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Amenities & Features</div>
+        <div class="amenity-chips">
+          <div class="chip">🛁 Bathtub</div>
+          <div class="chip">🚿 Rain Shower</div>
+          <div class="chip">📺 65" Smart TV</div>
+          <div class="chip">☕ Nespresso Machine</div>
+          <div class="chip">📶 High-Speed WiFi</div>
+          <div class="chip">🍳 Mini Kitchen</div>
+          <div class="chip">❄️ Climate Control</div>
+          <div class="chip">🔒 Electronic Safe</div>
+          <div class="chip">👔 Walk-in Wardrobe</div>
+          <div class="chip">🪞 Full-Length Mirror</div>
+          <div class="chip">🛋 Seating Area</div>
+          <div class="chip">🍷 Minibar</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">30-Day Availability <span class="st-action">Full Calendar</span></div>
+        <div style="margin-bottom:8px;font-size:11px;color:var(--text3);display:flex;gap:14px">
+          <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:3px;background:#10b981;display:inline-block"></span>Available</span>
+          <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:3px;background:#3b82f6;display:inline-block"></span>Booked</span>
+          <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:3px;background:#ef4444;display:inline-block"></span>Blocked</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(15,1fr);gap:3px" id="availGrid"></div>
+        <div style="margin-top:10px;font-size:11px;color:var(--text3)">Occupancy this month: <strong style="color:var(--green2)">76%</strong> · ADR: <strong style="color:var(--green2)">$298</strong> · RevPAR: <strong style="color:var(--green2)">$226</strong></div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Housekeeping & Maintenance</div>
+        <div class="field-grid">
+          <div class="field"><div class="f-label">Current Status</div><div class="f-val"><span class="badge b-clean">● Clean</span></div></div>
+          <div class="field"><div class="f-label">Last Cleaned</div><div class="f-val">Today, 10:30 AM</div></div>
+          <div class="field"><div class="f-label">Assigned HK</div><div class="f-val link">Maria Santos</div></div>
+          <div class="field"><div class="f-label">DND Status</div><div class="f-val muted">Not Active</div></div>
+          <div class="field"><div class="f-label">Open Maintenance</div><div class="f-val muted">None</div></div>
+          <div class="field"><div class="f-label">Last Inspection</div><div class="f-val muted">Feb 20, 2026</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="record-rail">
+      <div class="rail-section">
+        <div class="rail-title">Current Reservation</div>
+        <div style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:12px">
+          <div style="font-size:12px;font-weight:600;color:var(--blue2);margin-bottom:6px">Marcus Thompson</div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:4px">RES-2024-0892</div>
+          <div style="font-size:11px;color:var(--text2);margin-bottom:8px">Feb 24 – Feb 28 · 4 nights</div>
+          <div style="display:flex;gap:6px">
+            <span class="badge b-confirmed" style="font-size:10px">Confirmed</span>
+            <span class="badge b-vip" style="font-size:10px">VIP</span>
+          </div>
+        </div>
+      </div>
+      <div class="rail-section">
+        <div class="rail-title">Revenue (This Month)</div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Occupied Nights</span><span class="rail-stat-val">19 / 25</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Revenue</span><span class="rail-stat-val" style="color:var(--green2)">$5,962</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">ADR</span><span class="rail-stat-val">$298</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">RevPAR</span><span class="rail-stat-val">$226</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Occupancy</span><span class="rail-stat-val" style="color:var(--blue2)">76%</span></div>
+        <div class="prog-bar" style="margin-top:4px"><div class="prog-fill" style="width:76%;background:linear-gradient(90deg,#3b82f6,#6366f1)"></div></div>
+      </div>
+      <div class="rail-section">
+        <div class="rail-title">Upcoming Stays</div>
+        <div class="rl-row" style="padding:8px 0">
+          <div class="rl-icon" style="background:rgba(16,185,129,0.15)">🛎</div>
+          <div class="rl-main">
+            <div class="rl-title">Emma Larsson</div>
+            <div class="rl-sub">Mar 1 – Mar 5 · 4 nights</div>
+          </div>
+        </div>
+        <div class="rl-row" style="padding:8px 0">
+          <div class="rl-icon" style="background:rgba(16,185,129,0.15)">🛎</div>
+          <div class="rl-main">
+            <div class="rl-title">Robert Patel</div>
+            <div class="rl-sub">Mar 8 – Mar 12 · 4 nights</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     CASE RECORD
+═══════════════════════════════════════════ -->
+<div class="record-page" id="page-case">
+
+  <div style="background:var(--s1);border-bottom:1px solid var(--border)">
+    <div style="padding:16px 24px 0">
+      <div class="hb-breadcrumb">
+        <a>Cases</a> › <span>C-2024-0077</span>
+      </div>
+      <div class="hb-top" style="margin-bottom:0">
+        <div class="hb-icon" style="background:rgba(239,68,68,0.15)">🔧</div>
+        <div class="hb-title-block">
+          <div class="hb-record-type">Case · Maintenance</div>
+          <div class="hb-title">Leaking shower drain — plumber dispatched</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
+            <span class="badge b-inprog">🟡 In Progress</span>
+            <span class="badge b-high">🔴 High Priority</span>
+            <span style="font-size:12px;color:var(--text3)">C-2024-0077 · Opened 3h ago</span>
+          </div>
+        </div>
+        <div class="hb-actions">
+          <button class="btn btn-success">🟢 Resolve</button>
+          <button class="btn btn-primary">✏ Edit</button>
+          <button class="btn">↗ Escalate</button>
+          <button class="btn">📧 Email</button>
+          <button class="btn btn-icon">⋯</button>
+        </div>
+      </div>
+
+      <!-- SLA & timeline -->
+      <div style="padding:16px 0 0">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--text3)">SLA Status</div>
+          <div style="font-size:11px;color:var(--gold2);font-weight:600">⚠ 2h 15m remaining</div>
+        </div>
+        <div class="prog-bar" style="height:8px;border-radius:4px">
+          <div class="prog-fill" style="width:65%;background:linear-gradient(90deg,#f59e0b,#ef4444)"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:4px">
+          <span>Opened 3h ago</span><span>SLA: 6 hours total</span><span style="color:var(--red2)">Breach in 2h 15m</span>
+        </div>
+      </div>
+
+      <!-- Progress steps -->
+      <div class="timeline-steps" style="margin:4px 0 0">
+        <div class="ts-step done"><div class="ts-dot">✓</div><div class="ts-label">Opened</div></div>
+        <div class="ts-step done"><div class="ts-dot">✓</div><div class="ts-label">Assigned</div></div>
+        <div class="ts-step current"><div class="ts-dot">⟳</div><div class="ts-label">In Progress</div></div>
+        <div class="ts-step todo"><div class="ts-dot">4</div><div class="ts-label">Pending Guest</div></div>
+        <div class="ts-step todo"><div class="ts-dot">5</div><div class="ts-label">Resolved</div></div>
+        <div class="ts-step todo"><div class="ts-dot">6</div><div class="ts-label">Closed</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="record-body">
+    <div class="record-main">
+      <div class="inner-tabs">
+        <div class="it active">Details</div>
+        <div class="it">Resolution Notes</div>
+        <div class="it">Related Records</div>
+        <div class="it">Audit Log</div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Case Information</div>
+        <div class="field-grid three">
+          <div class="field"><div class="f-label">Case Number</div><div class="f-val muted" style="font-family:'JetBrains Mono',monospace;font-size:12px">C-2024-0077</div></div>
+          <div class="field"><div class="f-label">Status</div><div class="f-val"><span class="badge b-inprog">🟡 In Progress</span></div></div>
+          <div class="field"><div class="f-label">Priority</div><div class="f-val"><span class="badge b-high">🔴 High</span></div></div>
+          <div class="field"><div class="f-label">Category</div><div class="f-val">Maintenance</div></div>
+          <div class="field"><div class="f-label">Sub-Category</div><div class="f-val muted">Plumbing</div></div>
+          <div class="field"><div class="f-label">Opened</div><div class="f-val muted">Feb 26, 2026 · 9:14 AM</div></div>
+          <div class="field"><div class="f-label">Assigned To</div><div class="f-val link">James Wu</div></div>
+          <div class="field"><div class="f-label">Team</div><div class="f-val muted">Maintenance</div></div>
+          <div class="field"><div class="f-label">Source</div><div class="f-val muted">Phone</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Related Guest & Room</div>
+        <div class="field-grid">
+          <div class="field"><div class="f-label">Guest</div><div class="f-val link">Emma Larsson</div></div>
+          <div class="field"><div class="f-label">Room</div><div class="f-val link">209 · Junior Suite</div></div>
+          <div class="field"><div class="f-label">Reservation</div><div class="f-val link">RES-2024-0898</div></div>
+          <div class="field"><div class="f-label">Check-Out</div><div class="f-val muted">Mar 3, 2026</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Description</div>
+        <div style="background:var(--s2);border:1px solid var(--border2);border-radius:8px;padding:14px;font-size:13px;color:var(--text2);line-height:1.65">
+          Guest reported standing water in shower tray. Drain appears to be blocked. Water is not draining at all — guest unable to use shower. Plumber (Ravi Kumar) dispatched at 9:30 AM. Currently on-site diagnosing the issue. Temporary floor towels placed. Room 210 offered as alternative pending resolution.
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Resolution Notes <span class="st-action">Add Note</span></div>
+        <div class="activity-feed">
+          <div class="act-item">
+            <div class="act-av" style="background:rgba(16,185,129,0.2);color:#34d399">JW</div>
+            <div class="act-content">
+              <div class="act-header">
+                <span class="act-name">James Wu</span>
+                <span class="act-tag" style="background:rgba(245,158,11,0.15);color:#fbbf24">Update</span>
+                <span class="act-time">10:45 AM</span>
+              </div>
+              <div class="act-text">Plumber confirmed blockage in drain trap. Parts ordered from maintenance store. ETA 1 hour. Guest has been moved to room 210 temporarily.</div>
+            </div>
+          </div>
+          <div class="act-item">
+            <div class="act-av" style="background:rgba(59,130,246,0.2);color:#60a5fa">SC</div>
+            <div class="act-content">
+              <div class="act-header">
+                <span class="act-name">Sarah Chen</span>
+                <span class="act-tag" style="background:rgba(59,130,246,0.15);color:#60a5fa">Guest Contact</span>
+                <span class="act-time">9:45 AM</span>
+              </div>
+              <div class="act-text">Called Ms. Larsson. Apologized for inconvenience. Offered complimentary room upgrade to Ocean Suite 501 — accepted. Voucher for spa treatment issued.</div>
+            </div>
+          </div>
+          <div class="act-item">
+            <div class="act-av" style="background:rgba(239,68,68,0.2);color:#f87171">JW</div>
+            <div class="act-content">
+              <div class="act-header">
+                <span class="act-name">James Wu</span>
+                <span class="act-tag" style="background:rgba(239,68,68,0.15);color:#f87171">Opened</span>
+                <span class="act-time">9:14 AM</span>
+              </div>
+              <div class="act-text">Case created. Plumber Ravi Kumar dispatched. Priority set to High due to guest impact.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="record-rail">
+      <div class="rail-section">
+        <div class="rail-title">Quick Update</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px">
+          <select style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:7px 10px;color:var(--text);font-size:12px;font-family:inherit;outline:none;">
+            <option>🟡 In Progress</option>
+            <option>🔴 Open</option>
+            <option>🔵 Pending Guest</option>
+            <option>🟢 Resolved</option>
+          </select>
+          <select style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:7px 10px;color:var(--text);font-size:12px;font-family:inherit;outline:none;">
+            <option>James Wu</option>
+            <option>Sarah Chen</option>
+            <option>Maria Santos</option>
+            <option>David Kim</option>
+          </select>
+        </div>
+        <textarea class="note-box" placeholder="Add resolution note…" style="margin-bottom:8px"></textarea>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <button class="btn" style="justify-content:center;font-size:11px">Save Note</button>
+          <button class="btn btn-success" style="justify-content:center;font-size:11px">🟢 Resolve</button>
+        </div>
+      </div>
+      <div class="rail-section">
+        <div class="rail-title">Case Metrics</div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Time Open</span><span class="rail-stat-val" style="color:var(--gold2)">3h 12m</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">SLA Remaining</span><span class="rail-stat-val" style="color:var(--red2)">2h 15m</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Updates</span><span class="rail-stat-val">3</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Guest Contacts</span><span class="rail-stat-val">1</span></div>
+        <div class="rail-stat-row"><span class="rail-stat-label">Compensation</span><span class="rail-stat-val" style="color:var(--green2)">Issued</span></div>
+      </div>
+      <div class="rail-section">
+        <div class="rail-title">Related Cases (Room 209)</div>
+        <div class="rl-row" style="padding:8px 0">
+          <div class="rl-icon" style="background:rgba(100,116,139,0.15)">🔧</div>
+          <div class="rl-main">
+            <div class="rl-title" style="font-size:11px">AC filter replacement</div>
+            <div class="rl-sub"><span class="badge b-resolved" style="font-size:10px">Resolved</span> · Jan 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+function showPage(id, btn) {
+  document.querySelectorAll('.record-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Inner tab switching
+document.querySelectorAll('.inner-tabs').forEach(tabBar => {
+  tabBar.querySelectorAll('.it').forEach(tab => {
+    tab.addEventListener('click', function() {
+      tabBar.querySelectorAll('.it').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+});
+
+// Room availability grid
+const grid = document.getElementById('availGrid');
+if (grid) {
+  const pattern = [1,1,0,0,1,0,0,1,1,1,0,0,0,1,1,  1,0,0,1,1,0,1,1,0,0,1,1,0,0,1];
+  const colors = {0:'#10b981', 1:'#2563eb', 2:'#dc2626'};
+  pattern.forEach((v, i) => {
+    const d = document.createElement('div');
+    const day = i + 1;
+    const color = day >= 24 && day <= 28 ? 1 : v;
+    d.style.cssText = `height:28px;border-radius:4px;background:${
+      color === 1 ? 'rgba(37,99,235,0.6)' : color === 2 ? 'rgba(220,38,38,0.6)' : 'rgba(16,185,129,0.35)'
+    };display:flex;align-items:center;justify-content:center;font-size:9px;color:rgba(255,255,255,0.7);cursor:pointer;transition:opacity 0.15s;`;
+    d.textContent = day;
+    d.title = `Feb ${day}: ${color === 1 ? 'Booked' : 'Available'}`;
+    d.onmouseenter = () => d.style.opacity = '0.75';
+    d.onmouseleave = () => d.style.opacity = '1';
+    grid.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>

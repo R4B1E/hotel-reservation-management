@@ -405,36 +405,7 @@
   .case-cat.billing { background:rgba(139,92,246,0.12); color:#a78bfa; }
   .case-cat.request { background:rgba(16,185,129,0.12); color:#34d399; }
 
-  /* ====== HOUSEKEEPING PAGE ====== */
-  .hk-layout { display:flex; flex:1; overflow:hidden; }
-  .hk-staff-panel { width:220px; flex-shrink:0; border-right:1px solid var(--border); overflow-y:auto; padding:12px; }
-  .hk-staff-panel::-webkit-scrollbar { width:3px; }
-  .hk-panel-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text3); margin-bottom:10px; }
-  .hk-staff-card { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:10px; margin-bottom:8px; }
-  .hk-staff-top { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
-  .hk-staff-av { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; }
-  .hk-staff-name { font-size:12px; font-weight:600; }
-  .hk-staff-role { font-size:10px; color:var(--text3); }
-  .hk-progress-bar { height:4px; background:var(--surface3); border-radius:2px; overflow:hidden; margin-bottom:5px; }
-  .hk-progress-fill { height:100%; border-radius:2px; }
-  .hk-stats-row { display:flex; justify-content:space-between; font-size:10px; color:var(--text3); }
 
-  .hk-rooms-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:8px; padding:14px; }
-  .hk-room-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; cursor:pointer; transition:border-color 0.15s; }
-  .hk-room-card:hover { border-color:var(--accent); }
-  .hk-room-hdr { padding:10px 12px; display:flex; align-items:center; justify-content:space-between; }
-  .hk-room-num { font-size:16px; font-weight:700; }
-  .hk-room-status-dot { width:10px; height:10px; border-radius:50%; }
-  .hk-room-body { padding:0 12px 10px; }
-  .hk-room-type { font-size:10px; color:var(--text3); margin-bottom:6px; }
-  .hk-room-info { display:flex; flex-direction:column; gap:3px; }
-  .hk-info-row { display:flex; align-items:center; justify-content:space-between; font-size:11px; }
-  .hk-info-label { color:var(--text3); }
-  .hk-info-val { color:var(--text2); font-weight:500; }
-  .hk-action-bar { display:flex; gap:4px; padding:8px 12px; border-top:1px solid var(--border2); }
-  .hk-action { flex:1; text-align:center; padding:4px; border-radius:4px; font-size:10px; cursor:pointer; border:1px solid var(--border); color:var(--text3); background:var(--surface2); transition:all 0.15s; }
-  .hk-action:hover { border-color:var(--accent); color:var(--accent); }
-  .hk-stats { display:flex; gap:8px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
@@ -511,10 +482,6 @@
     <div class="tab-dot" style="background:#ef4444"></div>Cases
     <div class="tab-close">✕</div>
   </div>
-  <div class="tab" onclick="openTab(this,'housekeeping')">
-    <div class="tab-dot" style="background:#10b981"></div>Housekeeping
-    <div class="tab-close">✕</div>
-  </div>
   <div class="tab-add" onclick="document.getElementById('newResModal').classList.add('open')">＋</div>
 </div>
 
@@ -552,10 +519,6 @@
     <div class="side-btn tooltip" data-tip="Cases" onclick="navTo('cases',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       <span class="label">Cases</span>
-    </div>
-    <div class="side-btn tooltip" data-tip="Housekeeping" onclick="navTo('housekeeping',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4a2 2 0 014 0v4"/></svg>
-      <span class="label">HK</span>
     </div>
     <div class="side-btn tooltip" data-tip="Settings" style="margin-top:auto">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -736,7 +699,7 @@
                   <div class="dcard-title">Guest Information <span class="dcard-edit">Edit</span></div>
                   <div class="dcard-field"><div class="dfield-label">Full Name</div><div class="dfield-val accent">Marcus Thompson</div></div>
                   <div class="dcard-field"><div class="dfield-label">Guest Type</div><div class="dfield-val gold">⭐ VIP</div></div>
-                  <div class="dcard-field"><div class="dfield-label">Email</div><div class="dfield-val accent">m.thompson@email.com</div></div>
+                  <div class="dcard-field"><div class="dfield-label">Email</div><div class="dfield-val accent"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c4102584443415c5f43426c49414d4540024f4341">[email&#160;protected]</a></div></div>
                   <div class="dcard-field"><div class="dfield-label">Phone</div><div class="dfield-val">+1 (555) 234-5678</div></div>
                   <div class="dcard-field"><div class="dfield-label">Nationality</div><div class="dfield-val">🇺🇸 United States</div></div>
                   <div class="dcard-field"><div class="dfield-label">ID / Passport</div><div class="dfield-val">A12345678</div></div>
@@ -945,40 +908,6 @@
       </div>
     </div>
 
-    <!-- ====== HOUSEKEEPING PAGE ====== -->
-    <div class="page" id="page-housekeeping">
-      <div class="cases-toolbar">
-        <div class="panel-title" style="font-size:15px;font-weight:700">Housekeeping</div>
-        <div class="hk-stats">
-          <div class="cstat" style="color:#ef4444">🔴 Dirty <strong>33</strong></div>
-          <div class="cstat" style="color:#10b981">🟢 Clean <strong>34</strong></div>
-          <div class="cstat" style="color:#f59e0b">🟡 In Progress <strong>8</strong></div>
-          <div class="cstat" style="color:#8b5cf6">🟣 Inspecting <strong>4</strong></div>
-          <div class="cstat" style="color:#ef4444">🚫 Maintenance <strong>2</strong></div>
-        </div>
-        <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
-          <select style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:5px 10px;color:var(--text);font-size:12px;font-family:inherit;outline:none;">
-            <option>All Staff</option><option>Maria Santos</option><option>John Cruz</option><option>Priya Nair</option>
-          </select>
-          <select style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:5px 10px;color:var(--text);font-size:12px;font-family:inherit;outline:none;">
-            <option>All Floors</option><option>Floor 1</option><option>Floor 2</option><option>Floor 3</option><option>Floor 4</option>
-          </select>
-          <button class="btn primary">+ Request</button>
-        </div>
-      </div>
-
-      <div class="hk-layout">
-        <!-- Staff panel -->
-        <div class="hk-staff-panel">
-          <div class="hk-panel-title">Staff On Duty</div>
-          <div id="hkStaffList"></div>
-        </div>
-        <!-- Rooms grid -->
-        <div style="flex:1;overflow:auto;">
-          <div class="hk-rooms-grid" id="hkRoomsGrid"></div>
-        </div>
-      </div>
-    </div>
 
   </div><!-- /content -->
 </div><!-- /main -->
@@ -1052,6 +981,30 @@
   </div>
 </div>
 
+<!-- RECORD DETAIL DRAWER -->
+<div id="drawerBackdrop"></div>
+<div id="recordDrawer">
+  <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border);background:var(--surface2);flex-shrink:0">
+    <div id="drawerTitle" style="font-size:14px;font-weight:700;flex:1"></div>
+    <button id="drawerOpenTabBtn" class="btn" style="font-size:11px;padding:4px 10px;display:flex;align-items:center;gap:4px">⬡ Open Full Record</button>
+    <div onclick="closeDrawer()" style="width:26px;height:26px;border-radius:5px;background:var(--surface3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);font-size:13px">✕</div>
+  </div>
+  <div id="drawerBody" style="flex:1;overflow-y:auto"></div>
+</div>
+
+<style>
+  #recordDrawer { position:fixed; top:0; right:-440px; width:420px; height:100vh; background:var(--surface); border-left:1px solid var(--border); z-index:600; display:flex; flex-direction:column; transition:right 0.28s cubic-bezier(0.4,0,0.2,1); box-shadow:-8px 0 32px rgba(0,0,0,0.4); }
+  #recordDrawer.open { right: 0; }
+  #drawerBackdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:500; backdrop-filter:blur(2px); }
+  #drawerBackdrop.open { display: block; }
+  .dr-field { }
+  .dr-label { font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px }
+  .dr-val { font-size:13px;color:#e2e8f0;font-weight:500 }
+  .dr-section-title { font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.7px;padding-bottom:6px;border-bottom:1px solid var(--border2) }
+  #drawerBody::-webkit-scrollbar { width:4px }
+  #drawerBody::-webkit-scrollbar-thumb { background:var(--border);border-radius:2px }
+</style>
+
 <script>
 // ====== PAGE NAVIGATION ======
 function openTab(tabEl, pageId) {
@@ -1064,7 +1017,7 @@ function navTo(pageId, sideEl) {
   sideEl.classList.add('active');
   navToPage(pageId);
   // sync tabs
-  const tabMap = {dashboard:0,calendar:1,reservations:2,rooms:3,guests:4,reports:5,cases:6,housekeeping:7};
+  const tabMap = {dashboard:0,calendar:1,reservations:2,rooms:3,guests:4,reports:5,cases:6};
   const tabs = document.querySelectorAll('.tab');
   tabs.forEach(t => t.classList.remove('active'));
   if (tabMap[pageId] !== undefined) tabs[tabMap[pageId]]?.classList.add('active');
@@ -1367,14 +1320,6 @@ document.querySelectorAll('.dtab').forEach(t=>{
   });
 });
 
-// res item click
-document.querySelectorAll('.res-item').forEach(item => {
-  item.addEventListener('click', function(){
-    document.querySelectorAll('.res-item').forEach(x=>x.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
-
 // rail tabs
 document.querySelectorAll('.rail-tab').forEach(t=>{
   t.addEventListener('click',function(){
@@ -1468,80 +1413,217 @@ function switchCasesView(view, btn) {
   document.getElementById('cases-list').style.display = view==='list'?'flex':'none';
 }
 
-// ====== HOUSEKEEPING ======
-const hkStaff = [
-  {name:'Maria Santos', role:'Senior HK', color:'#ec4899', tasks:8, done:5},
-  {name:'John Cruz', role:'Housekeeper', color:'#3b82f6', tasks:7, done:3},
-  {name:'Priya Nair', role:'Housekeeper', color:'#10b981', tasks:6, done:6},
-  {name:'Tom Rivera', role:'Supervisor', color:'#f59e0b', tasks:4, done:2},
-  {name:'Ana Lee', role:'Laundry', color:'#8b5cf6', tasks:5, done:4},
+// ====== RECORD DETAIL DRAWER ======
+const roomMeta = [
+  {num:'101',type:'Regular',floor:1,view:'Garden',bed:'Queen',size:'28m²',rate:'$180',status:'clean',maxG:2,amenities:['📺 Smart TV','📶 WiFi','❄️ Climate Ctrl']},
+  {num:'102',type:'Regular',floor:1,view:'Pool',bed:'Twin',size:'26m²',rate:'$160',status:'dirty',maxG:2,amenities:['📺 Smart TV','📶 WiFi']},
+  {num:'201',type:'Suite',floor:2,view:'Ocean',bed:'King',size:'52m²',rate:'$420',status:'clean',maxG:3,amenities:['🛁 Bathtub','📺 Smart TV','☕ Nespresso','📶 WiFi','❄️ Climate Ctrl']},
+  {num:'308',type:'Deluxe King',floor:3,view:'Pool',bed:'King',size:'42m²',rate:'$310',status:'clean',maxG:2,amenities:['🛁 Bathtub','📺 Smart TV','☕ Nespresso','📶 WiFi','🍳 Mini Kitchen','❄️ Climate Ctrl']},
+  {num:'512',type:'Ocean Suite',floor:5,view:'Ocean',bed:'King',size:'68m²',rate:'$580',status:'clean',maxG:3,amenities:['🛁 Jacuzzi','📺 Smart TV','☕ Nespresso','📶 WiFi','🍳 Kitchen','❄️ Climate Ctrl','🛋 Living Room']},
 ];
-const hkStaffList = document.getElementById('hkStaffList');
-hkStaff.forEach(s => {
-  const inits = s.name.split(' ').map(n=>n[0]).join('');
-  const pct = Math.round(s.done/s.tasks*100);
-  const div = document.createElement('div');
-  div.className = 'hk-staff-card';
-  div.innerHTML = `
-    <div class="hk-staff-top">
-      <div class="hk-staff-av" style="background:${s.color}22;color:${s.color}">${inits}</div>
-      <div><div class="hk-staff-name">${s.name}</div><div class="hk-staff-role">${s.role}</div></div>
-    </div>
-    <div class="hk-progress-bar"><div class="hk-progress-fill" style="width:${pct}%;background:${s.color}"></div></div>
-    <div class="hk-stats-row"><span>${s.done}/${s.tasks} tasks</span><span style="color:${s.color};font-weight:600">${pct}%</span></div>`;
-  hkStaffList.appendChild(div);
-});
 
-const hkRoomStatuses = [
-  {num:'101',type:'Regular',floor:1,status:'clean',statusColor:'#10b981',occ:'Vacant',lastClean:'8:30 AM',assignee:'Maria Santos',priority:false},
-  {num:'102',type:'Regular',floor:1,status:'dirty',statusColor:'#ef4444',occ:'Due Out',lastClean:'Yesterday',assignee:'John Cruz',priority:true},
-  {num:'103',type:'Regular',floor:1,status:'inprogress',statusColor:'#f59e0b',occ:'Occupied',lastClean:'In Progress',assignee:'Priya Nair',priority:false},
-  {num:'201',type:'Suite',floor:2,status:'clean',statusColor:'#10b981',occ:'Occupied',lastClean:'7:45 AM',assignee:'Maria Santos',priority:false},
-  {num:'202',type:'Suite',floor:2,status:'dirty',statusColor:'#ef4444',occ:'Checked Out',lastClean:'Yesterday',assignee:'Tom Rivera',priority:true},
-  {num:'203',type:'Suite',floor:2,status:'inspect',statusColor:'#8b5cf6',occ:'Vacant',lastClean:'9:00 AM',assignee:'Priya Nair',priority:false},
-  {num:'308',type:'Deluxe King',floor:3,status:'clean',statusColor:'#10b981',occ:'Occupied',lastClean:'10:30 AM',assignee:'Ana Lee',priority:false},
-  {num:'309',type:'Deluxe King',floor:3,status:'dirty',statusColor:'#ef4444',occ:'Due Out',lastClean:'Yesterday',assignee:'John Cruz',priority:true},
-  {num:'310',type:'Deluxe King',floor:3,status:'maintenance',statusColor:'#ef4444',occ:'Blocked',lastClean:'—',assignee:'Unassigned',priority:true},
-  {num:'401',type:'Duplex',floor:4,status:'clean',statusColor:'#10b981',occ:'Vacant',lastClean:'8:00 AM',assignee:'Maria Santos',priority:false},
-  {num:'402',type:'Duplex',floor:4,status:'inprogress',statusColor:'#f59e0b',occ:'Due Out',lastClean:'In Progress',assignee:'Tom Rivera',priority:false},
-  {num:'403',type:'Duplex',floor:4,status:'dirty',statusColor:'#ef4444',occ:'Checked Out',lastClean:'Yesterday',assignee:'Ana Lee',priority:true},
-  {num:'501',type:'Ocean Suite',floor:5,status:'clean',statusColor:'#10b981',occ:'Occupied',lastClean:'9:15 AM',assignee:'Priya Nair',priority:false},
-  {num:'502',type:'Ocean Suite',floor:5,status:'inspect',statusColor:'#8b5cf6',occ:'Vacant',lastClean:'10:00 AM',assignee:'Maria Santos',priority:false},
-  {num:'601',type:'Penthouse',floor:6,status:'clean',statusColor:'#10b981',occ:'Occupied',lastClean:'7:00 AM',assignee:'Maria Santos',priority:false},
-  {num:'602',type:'Penthouse',floor:6,status:'dirty',statusColor:'#ef4444',occ:'Due Out',lastClean:'Yesterday',assignee:'John Cruz',priority:true},
-];
-const statusIcons = {clean:'✅',dirty:'🔴',inprogress:'🔄',inspect:'🔍',maintenance:'🔧'};
-const statusText = {clean:'Clean',dirty:'Dirty',inprogress:'Cleaning',inspect:'Inspecting',maintenance:'Maintenance'};
-const hkRoomsGrid = document.getElementById('hkRoomsGrid');
-hkRoomStatuses.forEach(r => {
-  const card = document.createElement('div');
-  card.className = 'hk-room-card';
-  const hdrBg = r.status==='dirty'||r.status==='maintenance'?'rgba(239,68,68,0.08)':r.status==='inprogress'?'rgba(245,158,11,0.08)':r.status==='inspect'?'rgba(139,92,246,0.08)':'rgba(16,185,129,0.06)';
-  card.innerHTML = `
-    <div class="hk-room-hdr" style="background:${hdrBg}">
-      <div>
-        <div class="hk-room-num">${r.num}</div>
-        <div style="font-size:10px;color:var(--text3)">${r.type}</div>
+const drawer = document.getElementById('recordDrawer');
+const drawerBackdrop = document.getElementById('drawerBackdrop');
+const drawerBody = document.getElementById('drawerBody');
+
+function openDrawer(type, id) {
+  let html = '';
+  if (type === 'reservation') {
+    const r = reservations.find(x => x.id === id) || reservations[0];
+    const inits = r.name.split(' ').map(n=>n[0]).join('');
+    html = `
+      <div style="background:linear-gradient(135deg,#1e3a5f,#0f2040);padding:20px;border-bottom:1px solid var(--border)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+          <div style="width:44px;height:44px;border-radius:50%;background:${r.color}33;color:${r.color};display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700">${inits}</div>
+          <div>
+            <div style="font-size:16px;font-weight:700;color:#fff">${r.name}${r.vip ? ' ⭐' : ''}</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.4);font-family:monospace">RES-2024-${r.id}</div>
+          </div>
+          <span class="badge ${r.status}" style="margin-left:auto">${r.status.replace('-',' ')}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="dr-field"><div class="dr-label">Room</div><div class="dr-val" style="color:#60a5fa">${r.room}</div></div>
+          <div class="dr-field"><div class="dr-label">Amount</div><div class="dr-val" style="color:#34d399">${r.amount}</div></div>
+          <div class="dr-field"><div class="dr-label">Dates</div><div class="dr-val">${r.dates}</div></div>
+          <div class="dr-field"><div class="dr-label">Source</div><div class="dr-val">Direct</div></div>
+        </div>
       </div>
-      <div style="text-align:right">
-        <div style="font-size:16px">${statusIcons[r.status]}</div>
-        ${r.priority?'<div style="font-size:9px;color:#f87171;font-weight:700">PRIORITY</div>':''}
+      <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
+        <div class="dr-section-title">Stay Details</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="dr-field"><div class="dr-label">Check-In</div><div class="dr-val">Feb 24, 2026</div></div>
+          <div class="dr-field"><div class="dr-label">Check-Out</div><div class="dr-val">Feb 28, 2026</div></div>
+          <div class="dr-field"><div class="dr-label">Nights</div><div class="dr-val">4</div></div>
+          <div class="dr-field"><div class="dr-label">Adults</div><div class="dr-val">2</div></div>
+          <div class="dr-field"><div class="dr-label">Rate Plan</div><div class="dr-val" style="color:#60a5fa">BAR Weekend</div></div>
+          <div class="dr-field"><div class="dr-label">Agent</div><div class="dr-val">Sarah Chen</div></div>
+        </div>
+        <div class="dr-section-title">Special Requests</div>
+        <div style="background:var(--surface3);border-radius:6px;padding:10px;font-size:12px;color:var(--text2);line-height:1.5">High floor preference, hypoallergenic bedding, late check-out if available.</div>
+        <div class="dr-section-title">Quick Actions</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <button class="btn" style="justify-content:center">✏ Edit</button>
+          <button class="btn" style="justify-content:center;background:#10b981;border-color:#10b981;color:#fff">✓ Check In</button>
+          <button class="btn" style="justify-content:center">📧 Email Guest</button>
+          <button class="btn" style="justify-content:center">🖨 Print Folio</button>
+        </div>
+      </div>`;
+  } else if (type === 'guest') {
+    const g = guests.find(x => x.name === id) || guests[0];
+    const inits = g.name.split(' ').map(n=>n[0]).join('');
+    const idx = guests.indexOf(g);
+    const col = avColors[idx] || '#3b82f6';
+    const statusBadgeClass = {'In-House':'checked-in','Arriving':'confirmed','Confirmed':'confirmed','Checked Out':'checked-out'}[g.status] || 'confirmed';
+    html = `
+      <div style="background:linear-gradient(135deg,#1e2a42,#0f172a);padding:20px;border-bottom:1px solid var(--border)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+          <div style="width:46px;height:46px;border-radius:50%;background:${col}33;color:${col};display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700">${inits}</div>
+          <div>
+            <div style="font-size:16px;font-weight:700;color:#fff">${g.name}</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.4)">${g.email}</div>
+          </div>
+          ${g.type==='VIP' ? '<span class="vip-tag" style="margin-left:auto">⭐ VIP</span>' : ''}
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="dr-field"><div class="dr-label">Nationality</div><div class="dr-val">${g.nat}</div></div>
+          <div class="dr-field"><div class="dr-label">Phone</div><div class="dr-val">${g.phone}</div></div>
+          <div class="dr-field"><div class="dr-label">Total Stays</div><div class="dr-val" style="color:#60a5fa">${g.stays}</div></div>
+          <div class="dr-field"><div class="dr-label">Total Spent</div><div class="dr-val" style="color:#34d399">${g.spent}</div></div>
+        </div>
       </div>
-    </div>
-    <div class="hk-room-body">
-      <div class="hk-room-info">
-        <div class="hk-info-row"><span class="hk-info-label">Status</span><span class="hk-info-val" style="color:${r.statusColor}">${statusText[r.status]}</span></div>
-        <div class="hk-info-row"><span class="hk-info-label">Occupancy</span><span class="hk-info-val">${r.occ}</span></div>
-        <div class="hk-info-row"><span class="hk-info-label">Cleaned</span><span class="hk-info-val">${r.lastClean}</span></div>
-        <div class="hk-info-row"><span class="hk-info-label">Assigned</span><span class="hk-info-val" style="color:var(--accent)">${r.assignee.split(' ')[0]}</span></div>
+      <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
+        <div class="dr-section-title">Current Status</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:10px;background:var(--surface3);border-radius:8px">
+          <span class="badge ${statusBadgeClass}">${g.status}</span>
+          <span style="font-size:12px;color:var(--text2)">Last Stay: ${g.last}</span>
+        </div>
+        <div class="dr-section-title">Preferences</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          <div class="amenity-tag">🛏 King Bed</div>
+          <div class="amenity-tag">🏔 High Floor</div>
+          <div class="amenity-tag">🤧 Hypoallergenic</div>
+          <div class="amenity-tag">🌊 Ocean View</div>
+        </div>
+        <div class="dr-section-title">Quick Actions</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <button class="btn" style="justify-content:center">📋 New Booking</button>
+          <button class="btn" style="justify-content:center">📧 Send Email</button>
+          <button class="btn" style="justify-content:center">📞 Log Call</button>
+          <button class="btn" style="justify-content:center">🏷 Edit Profile</button>
+        </div>
+      </div>`;
+  } else if (type === 'room') {
+    const r = roomMeta.find(x => x.num === id) || roomMeta[0];
+    const sc = {clean:'#10b981',dirty:'#f59e0b',maintenance:'#ef4444'}[r.status] || '#64748b';
+    html = `
+      <div style="background:linear-gradient(135deg,#1e3a5f,#0a1f40);padding:20px 20px 16px;border-bottom:1px solid var(--border);text-align:center">
+        <div style="font-family:'Playfair Display',serif;font-size:52px;color:#fff;line-height:1">${r.num}</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px">${r.type} · Floor ${r.floor}</div>
+        <div style="margin-top:10px;display:flex;justify-content:center;gap:8px">
+          <span style="background:${sc}22;color:${sc};padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">● ${r.status.charAt(0).toUpperCase()+r.status.slice(1)}</span>
+          <span style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:3px 10px;border-radius:20px;font-size:11px">${r.view} View</span>
+        </div>
       </div>
-    </div>
-    <div class="hk-action-bar">
-      <div class="hk-action">✓ Clean</div>
-      <div class="hk-action">🔍 Inspect</div>
-      <div class="hk-action">📋 Note</div>
-    </div>`;
-  hkRoomsGrid.appendChild(card);
+      <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="dr-field"><div class="dr-label">Bed Type</div><div class="dr-val">${r.bed}</div></div>
+          <div class="dr-field"><div class="dr-label">Room Size</div><div class="dr-val">${r.size}</div></div>
+          <div class="dr-field"><div class="dr-label">Max Guests</div><div class="dr-val">${r.maxG}</div></div>
+          <div class="dr-field"><div class="dr-label">Rate / Night</div><div class="dr-val" style="color:#34d399">${r.rate}</div></div>
+        </div>
+        <div class="dr-section-title">Amenities</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">${r.amenities.map(a=>`<div class=\"amenity-tag\">${a}</div>`).join('')}</div>
+        <div class="dr-section-title">Quick Actions</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <button class="btn" style="justify-content:center">📅 New Booking</button>
+          <button class="btn" style="justify-content:center">🔧 Maintenance</button>
+          <button class="btn" style="justify-content:center">🔄 Change Status</button>
+          <button class="btn" style="justify-content:center">📋 View History</button>
+        </div>
+      </div>`;
+  } else if (type === 'case') {
+    const allC = [...casesData.open,...casesData.inprogress,...casesData.pending,...casesData.resolved];
+    const c = allC.find(x => x.num === id) || casesData.open[0];
+    const statusMap = {open:'🔴 Open',inprogress:'🟡 In Progress',pending:'🔵 Pending',resolved:'🟢 Resolved'};
+    const cStatus = casesData.open.find(x=>x.num===id)?'open':casesData.inprogress.find(x=>x.num===id)?'inprogress':casesData.pending.find(x=>x.num===id)?'pending':'resolved';
+    html = `
+      <div style="background:linear-gradient(135deg,#1e2438,#0f172a);padding:20px;border-bottom:1px solid var(--border)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);font-family:monospace">${c.num}</div>
+          <span class="case-priority ${c.priority}">${c.priority.charAt(0).toUpperCase()+c.priority.slice(1)} Priority</span>
+        </div>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.3">${c.subject}</div>
+        <div style="display:flex;gap:6px">
+          <span class="case-cat ${c.cat}">${catLabels[c.cat]}</span>
+          <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);padding:2px 8px;border-radius:4px;font-size:10px">${statusMap[cStatus]}</span>
+        </div>
+      </div>
+      <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="dr-field"><div class="dr-label">Guest</div><div class="dr-val" style="color:#60a5fa">${c.guest}</div></div>
+          <div class="dr-field"><div class="dr-label">Room</div><div class="dr-val">${c.room}</div></div>
+          <div class="dr-field"><div class="dr-label">Assigned To</div><div class="dr-val" style="color:${c.assigneeColor}">${c.assignee}</div></div>
+          <div class="dr-field"><div class="dr-label">Opened</div><div class="dr-val">${c.age}</div></div>
+        </div>
+        <div class="dr-section-title">Update Status</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn" style="font-size:11px;padding:4px 10px">🔴 Open</button>
+          <button class="btn" style="font-size:11px;padding:4px 10px">🟡 In Progress</button>
+          <button class="btn" style="font-size:11px;padding:4px 10px">🔵 Pending</button>
+          <button class="btn" style="font-size:11px;padding:4px 10px;background:rgba(16,185,129,0.15);border-color:#10b981;color:#34d399">🟢 Resolve</button>
+        </div>
+        <div class="dr-section-title">Add Note</div>
+        <textarea class="note-input" rows="3" placeholder="Add a case note or update…" style="width:100%"></textarea>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <button class="btn" style="justify-content:center">💬 Save Note</button>
+          <button class="btn" style="justify-content:center">📧 Email Guest</button>
+        </div>
+      </div>`;
+  }
+
+  drawerBody.innerHTML = html;
+  document.getElementById('drawerTitle').textContent = {reservation:'Reservation',guest:'Guest Profile',room:'Room Details',case:'Case Detail'}[type] || 'Record';
+  document.getElementById('drawerOpenTabBtn').onclick = () => {
+    const sideMap = {reservation:'Reservations',guest:'Guests',room:'Rooms',case:'Cases'};
+    const tip = sideMap[type];
+    const btn = document.querySelector(`[data-tip="${tip}"]`);
+    if (btn) navTo(type==='reservation'?'reservations':type==='guest'?'guests':type==='room'?'rooms':'cases', btn);
+    closeDrawer();
+  };
+  drawer.classList.add('open');
+  drawerBackdrop.classList.add('open');
+}
+
+function closeDrawer() {
+  drawer.classList.remove('open');
+  drawerBackdrop.classList.remove('open');
+}
+drawerBackdrop.addEventListener('click', closeDrawer);
+
+// Wire up clickable records
+document.querySelectorAll('.res-item').forEach((item, i) => {
+  item.addEventListener('click', function() {
+    document.querySelectorAll('.res-item').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+    openDrawer('reservation', reservations[i].id);
+  });
+});
+document.querySelectorAll('#guestTableBody tr').forEach((row, i) => {
+  row.style.cursor = 'pointer';
+  row.addEventListener('click', () => openDrawer('guest', guests[i].name));
+});
+document.querySelectorAll('.room-card').forEach((card, i) => {
+  card.addEventListener('click', () => openDrawer('room', roomMeta[i % roomMeta.length].num));
+});
+document.querySelectorAll('.case-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const num = this.querySelector('.case-num')?.textContent;
+    if (num) openDrawer('case', num);
+  });
+});
+document.querySelectorAll('#caseListBody tr').forEach((row, i) => {
+  row.style.cursor = 'pointer';
+  row.addEventListener('click', () => openDrawer('case', allCases[i].num));
 });
 </script>
 </body>

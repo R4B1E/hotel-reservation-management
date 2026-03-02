@@ -1,0 +1,38 @@
+<template>
+    <div class="hms-page">
+        <div class="page-header">
+            <h1 class="page-title">Dashboard</h1>
+            <span class="page-subtitle">Hotel Operations Overview</span>
+        </div>
+
+        <template lwc:if={isLoading}>
+            <div class="loading-wrap"><div class="hms-spinner"></div></div>
+        </template>
+
+        <template lwc:else>
+            <div class="kpi-grid">
+                <template for:each={kpiCards} for:item="kpi">
+                    <c-hms-kpi-card key={kpi.key}
+                        label={kpi.label}
+                        value={kpi.value}
+                        subtext={kpi.subtext}
+                        accent-color={kpi.accentColor}
+                        trend={kpi.trend}
+                        trend-value={kpi.trendValue}>
+                    </c-hms-kpi-card>
+                </template>
+            </div>
+
+            <div class="charts-row">
+                <div class="chart-col-lg">
+                    <c-hms-bar-chart chart-data={occupancyBars}></c-hms-bar-chart>
+                </div>
+                <div class="chart-col-sm">
+                    <c-hms-donut-chart segments={donutSegments}></c-hms-donut-chart>
+                </div>
+            </div>
+
+            <c-hms-recent-reservations reservations={recentRes}></c-hms-recent-reservations>
+        </template>
+    </div>
+</template>

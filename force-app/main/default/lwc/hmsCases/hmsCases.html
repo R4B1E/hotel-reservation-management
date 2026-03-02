@@ -1,0 +1,41 @@
+<template>
+    <div class="hms-page">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Cases</h1>
+                <span class="page-subtitle">{openCount} open of {totalCount} total</span>
+            </div>
+            <div class="header-right">
+                <div class="view-toggle">
+                    <button class={kanbanClass} data-view="kanban" onclick={handleViewToggle}>Board</button>
+                    <button class={listClass} data-view="list" onclick={handleViewToggle}>List</button>
+                </div>
+            </div>
+        </div>
+
+        <template lwc:if={isLoading}>
+            <div class="loading-wrap"><div class="hms-spinner"></div></div>
+        </template>
+        <template lwc:else>
+            <div class="kanban-board">
+                <template for:each={columns} for:item="col">
+                    <div class="kanban-column" key={col.key}>
+                        <div class="col-header">
+                            <span class="col-dot" style={col.dotStyle}></span>
+                            <span class="col-label">{col.label}</span>
+                            <span class="col-count">{col.cases.length}</span>
+                        </div>
+                        <div class="col-body">
+                            <template for:each={col.cases} for:item="c">
+                                <c-hms-case-card key={c.id} case-item={c}></c-hms-case-card>
+                            </template>
+                            <template lwc:if={col.noCases}>
+                                <div class="empty-col">No cases</div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

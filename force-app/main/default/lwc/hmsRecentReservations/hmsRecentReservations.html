@@ -1,0 +1,39 @@
+<template>
+    <div class="hms-card">
+        <div class="hms-card-header">
+            <span class="hms-card-title">Recent Reservations</span>
+        </div>
+        <template lwc:if={hasData}>
+            <table class="hms-table">
+                <thead>
+                    <tr>
+                        <th>Guest</th>
+                        <th>Room</th>
+                        <th>Dates</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={reservations} for:item="r">
+                        <tr key={r.id}>
+                            <td class="guest-cell">
+                                <span class="initials">{r.initials}</span>
+                                <span>{r.guestName}</span>
+                            </td>
+                            <td>{r.roomInfo}</td>
+                            <td class="text-muted">{r.dates}</td>
+                            <td>
+                                <c-hms-badge label={r.status} variant={r.status}></c-hms-badge>
+                            </td>
+                            <td class="text-mono">${r.total}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+        <template lwc:else>
+            <div class="empty-state">No recent reservations</div>
+        </template>
+    </div>
+</template>

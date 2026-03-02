@@ -1,0 +1,16 @@
+<template>
+    <div class="hms-modal-backdrop" onclick={handleBackdropClick}>
+        <div class="hms-modal" style={modalStyle}>
+            <div class="hms-modal-header">
+                <span class="hms-modal-title">{title}</span>
+                <button class="hms-btn-ghost close-btn" onclick={handleClose}>&#x2715;</button>
+            </div>
+            <div class="hms-modal-body">
+                <slot></slot>
+            </div>
+            <div class="hms-modal-footer">
+                <slot name="footer"></slot>
+            </div>
+        </div>
+    </div>
+</template>

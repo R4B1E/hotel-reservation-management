@@ -1,0 +1,82 @@
+<template>
+    <template lwc:if={hasDetail}>
+        <div class="detail-header">
+            <div class="header-top">
+                <div>
+                    <h2 class="guest-name">{detail.guestFullName}</h2>
+                    <span class="conf-number">{detail.confirmationNumber}</span>
+                </div>
+                <div class="header-actions">
+                    <template lwc:if={canCheckIn}>
+                        <button class="hms-btn hms-btn-primary" onclick={handleCheckIn}>Check In</button>
+                    </template>
+                    <template lwc:if={canCheckOut}>
+                        <button class="hms-btn hms-btn-primary" onclick={handleCheckOut}>Check Out</button>
+                    </template>
+                    <c-hms-badge label={detail.status} variant={detail.status}></c-hms-badge>
+                </div>
+            </div>
+            <div class="tabs-row">
+                <button class={stayTabClass} data-tab="stay" onclick={handleTabClick}>Stay</button>
+                <button class={guestTabClass} data-tab="guest" onclick={handleTabClick}>Guest</button>
+                <button class={roomTabClass} data-tab="room" onclick={handleTabClick}>Room</button>
+                <button class={billingTabClass} data-tab="billing" onclick={handleTabClick}>Billing</button>
+            </div>
+        </div>
+
+        <div class="detail-body">
+            <template lwc:if={isStayTab}>
+                <div class="info-grid">
+                    <div class="info-item"><span class="info-label">Check-in</span><span class="info-value">{detail.checkInDate}</span></div>
+                    <div class="info-item"><span class="info-label">Check-out</span><span class="info-value">{detail.checkOutDate}</span></div>
+                    <div class="info-item"><span class="info-label">Nights</span><span class="info-value">{detail.nights}</span></div>
+                    <div class="info-item"><span class="info-label">Adults</span><span class="info-value">{detail.adults}</span></div>
+                    <div class="info-item"><span class="info-label">Children</span><span class="info-value">{detail.children}</span></div>
+                    <div class="info-item"><span class="info-label">Booking Source</span><span class="info-value">{detail.bookingSource}</span></div>
+                    <div class="info-item"><span class="info-label">Rate Plan</span><span class="info-value">{detail.ratePlan}</span></div>
+                </div>
+                <template lwc:if={detail.specialRequests}>
+                    <div class="special-requests">
+                        <span class="info-label">Special Requests</span>
+                        <p class="requests-text">{detail.specialRequests}</p>
+                    </div>
+                </template>
+            </template>
+
+            <template lwc:if={isGuestTab}>
+                <div class="info-grid">
+                    <div class="info-item"><span class="info-label">Name</span><span class="info-value">{detail.guestFullName}</span></div>
+                    <div class="info-item"><span class="info-label">Email</span><span class="info-value">{detail.guestEmail}</span></div>
+                    <div class="info-item"><span class="info-label">Phone</span><span class="info-value">{detail.guestPhone}</span></div>
+                    <div class="info-item"><span class="info-label">Nationality</span><span class="info-value">{detail.nationality}</span></div>
+                    <div class="info-item"><span class="info-label">VIP</span><span class="info-value">{detail.isVip}</span></div>
+                </div>
+            </template>
+
+            <template lwc:if={isRoomTab}>
+                <div class="info-grid">
+                    <div class="info-item"><span class="info-label">Room</span><span class="info-value">{detail.roomNumber}</span></div>
+                    <div class="info-item"><span class="info-label">Category</span><span class="info-value">{detail.roomCategory}</span></div>
+                    <div class="info-item"><span class="info-label">Floor</span><span class="info-value">{detail.roomFloor}</span></div>
+                    <div class="info-item"><span class="info-label">Bed Type</span><span class="info-value">{detail.roomBedType}</span></div>
+                    <div class="info-item"><span class="info-label">Housekeeping</span><span class="info-value">{detail.hkStatus}</span></div>
+                </div>
+            </template>
+
+            <template lwc:if={isBillingTab}>
+                <div class="billing-card">
+                    <div class="billing-row"><span>Room Rate</span><span>${detail.roomRatePerNight}/night</span></div>
+                    <div class="billing-row"><span>Subtotal ({detail.nights} nights)</span><span>${detail.subtotal}</span></div>
+                    <div class="billing-row"><span>Taxes (12%)</span><span>${detail.taxes}</span></div>
+                    <div class="billing-row billing-total"><span>Total</span><span>${detail.total}</span></div>
+                    <div class="billing-row"><span>Payment Status</span><c-hms-badge label={detail.paymentStatus} variant={detail.paymentStatus}></c-hms-badge></div>
+                </div>
+            </template>
+        </div>
+    </template>
+    <template lwc:else>
+        <div class="empty-detail">
+            <p>Select a reservation to view details</p>
+        </div>
+    </template>
+</template>

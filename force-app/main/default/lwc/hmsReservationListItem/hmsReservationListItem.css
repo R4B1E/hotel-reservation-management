@@ -1,0 +1,12 @@
+:host { display: block; }
+.res-item { padding: 12px 14px; border-bottom: 1px solid var(--hms-border2); cursor: pointer; transition: background 0.1s; }
+.res-item:hover { background: var(--hms-surface2); }
+.res-item--selected { background: var(--hms-surface2); border-left: 3px solid var(--hms-accent); }
+.item-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px; }
+.item-guest { display: flex; align-items: center; gap: 8px; }
+.initials { width: 32px; height: 32px; border-radius: 50%; background: var(--hms-surface3); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--hms-text2); flex-shrink: 0; }
+.guest-name { font-size: 13px; font-weight: 600; color: var(--hms-text); }
+.room-info { font-size: 11px; color: var(--hms-text3); margin-top: 1px; }
+.item-bottom { display: flex; justify-content: space-between; align-items: center; }
+.dates { font-size: 11px; color: var(--hms-text3); }
+.total { font-size: 12px; font-weight: 600; color: var(--hms-text); font-family: monospace; }

@@ -1,0 +1,12 @@
+<template>
+    <div class="kpi-card hms-card" style={accentStyle}>
+        <div class="kpi-label">{label}</div>
+        <div class="kpi-value">{value}</div>
+        <div class="kpi-footer">
+            <span class="kpi-subtext">{subtext}</span>
+            <template lwc:if={hasTrend}>
+                <span class={trendClass}>{trendIcon} {trendValue}</span>
+            </template>
+        </div>
+    </div>
+</template>

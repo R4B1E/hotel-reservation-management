@@ -1,0 +1,15 @@
+:host { display: block; }
+.room-card { padding: 0; overflow: hidden; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
+.room-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+.room-header { padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; }
+.room-number { font-size: 16px; font-weight: 700; color: #fff; }
+.room-category { font-size: 11px; color: rgba(255,255,255,0.8); }
+.room-body { padding: 12px 14px; }
+.room-status-row { display: flex; gap: 6px; margin-bottom: 10px; }
+.guest-info { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-top: 1px solid var(--hms-border); margin-bottom: 8px; }
+.guest-icon { font-size: 18px; }
+.guest-name { font-size: 12px; font-weight: 600; color: var(--hms-text); }
+.guest-checkout { font-size: 11px; color: var(--hms-text3); }
+.room-meta { display: flex; gap: 12px; font-size: 11px; color: var(--hms-text3); }
+.room-card--occupied { border-color: rgba(59,130,246,0.3); }
+.room-card--blocked { border-color: rgba(239,68,68,0.3); opacity: 0.7; }

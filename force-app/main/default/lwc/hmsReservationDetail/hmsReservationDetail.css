@@ -1,0 +1,21 @@
+:host { display: block; height: 100%; }
+.detail-header { padding: 16px; border-bottom: 1px solid var(--hms-border); }
+.header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.guest-name { font-size: 18px; font-weight: 700; color: var(--hms-text); margin: 0; }
+.conf-number { font-size: 12px; color: var(--hms-accent); font-family: monospace; }
+.header-actions { display: flex; align-items: center; gap: 8px; }
+.tabs-row { display: flex; gap: 4px; }
+.tab-btn { background: none; border: none; padding: 6px 12px; font-size: 12px; font-weight: 500; color: var(--hms-text3); cursor: pointer; border-radius: 4px; font-family: inherit; }
+.tab-btn:hover { color: var(--hms-text); background: var(--hms-surface2); }
+.tab-btn--active { color: var(--hms-accent); background: rgba(59,130,246,0.1); }
+.detail-body { padding: 16px; overflow-y: auto; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.info-item { display: flex; flex-direction: column; gap: 2px; }
+.info-label { font-size: 11px; text-transform: uppercase; color: var(--hms-text3); font-weight: 600; letter-spacing: 0.3px; }
+.info-value { font-size: 13px; color: var(--hms-text); }
+.special-requests { margin-top: 16px; }
+.requests-text { font-size: 13px; color: var(--hms-text2); margin-top: 4px; line-height: 1.5; }
+.billing-card { display: flex; flex-direction: column; gap: 10px; }
+.billing-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--hms-text2); }
+.billing-total { font-size: 15px; font-weight: 700; color: var(--hms-text); padding-top: 8px; border-top: 1px solid var(--hms-border); }
+.empty-detail { display: flex; align-items: center; justify-content: center; height: 100%; color: var(--hms-text3); font-size: 14px; }

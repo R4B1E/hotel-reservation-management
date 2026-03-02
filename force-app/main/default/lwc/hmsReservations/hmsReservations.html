@@ -1,0 +1,59 @@
+<template>
+    <div class="hms-page reservations-page">
+        <div class="three-panel">
+            <!-- Left: List -->
+            <div class="panel-left">
+                <div class="list-header">
+                    <h2 class="list-title">Reservations</h2>
+                    <button class="hms-btn hms-btn-primary" onclick={handleNewReservation}>+ New</button>
+                </div>
+                <div class="list-toolbar">
+                    <input type="text" class="hms-input" placeholder="Search..." onkeyup={handleSearch}/>
+                    <div class="filter-row">
+                        <template for:each={filterButtons} for:item="f">
+                            <button key={f.value} class={f.className} data-filter={f.value} onclick={handleFilterClick}>{f.label}</button>
+                        </template>
+                    </div>
+                </div>
+                <div class="list-body">
+                    <template lwc:if={hasList}>
+                        <template for:each={reservations} for:item="res">
+                            <c-hms-reservation-list-item
+                                key={res.id}
+                                reservation={res}
+                                selected={res.id}
+                                onselect={handleReservationSelect}>
+                            </c-hms-reservation-list-item>
+                        </template>
+                    </template>
+                    <template lwc:else>
+                        <div class="empty-list">No reservations found</div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Center: Detail -->
+            <div class="panel-center">
+                <c-hms-reservation-detail
+                    detail={selectedDetail}
+                    oncheckin={handleCheckIn}
+                    oncheckout={handleCheckOut}>
+                </c-hms-reservation-detail>
+            </div>
+
+            <!-- Right: Activity -->
+            <div class="panel-right">
+                <c-hms-activity-rail reservation-id={selectedId}></c-hms-activity-rail>
+            </div>
+        </div>
+
+        <template lwc:if={showNewModal}>
+            <c-hms-modal title="New Reservation" size="large" onclose={handleCloseModal}>
+                <p>New reservation form coming soon</p>
+                <div slot="footer">
+                    <button class="hms-btn hms-btn-secondary" onclick={handleCloseModal}>Cancel</button>
+                </div>
+            </c-hms-modal>
+        </template>
+    </div>
+</template>

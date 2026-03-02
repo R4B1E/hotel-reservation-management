@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Reservation__c</fullName>
+    <label>Current Reservation</label>
+    <type>Lookup</type>
+    <referenceTo>Reservation__c</referenceTo>
+    <relationshipLabel>Rooms (Current)</relationshipLabel>
+    <relationshipName>CurrentRooms</relationshipName>
+    <required>false</required>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>
