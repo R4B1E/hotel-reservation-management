@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <description>Screen flow that guides a guest through The Azure Sanctuary hotel reservation process: guest details, payment, record creation, and booking confirmation.</description>
+    <interviewLabel>Hotel Reservation Booking {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Hotel Reservation Booking</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <status>Active</status>
+
+    <!-- ─── Input variables (passed in from the Experience Site page) ─── -->
+    <variables>
+        <name>varRoomName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Cliffside Suite</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>varCheckInDate</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varCheckOutDate</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varGuests</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>2 Adults</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>varPricePerNight</name>
+        <dataType>Currency</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+
+    <!-- ─── Internal variables ─── -->
+    <variables>
+        <name>varConfirmationCode</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>varReservationId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+
+    <!-- ─── Start ─── -->
+    <start>
+        <locationX>176</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>guestDetailsScreen</targetReference>
+        </connector>
+    </start>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SCREEN 1 — Guest Details
+         ══════════════════════════════════════════════════════════════════ -->
+    <screens>
+        <name>guestDetailsScreen</name>
+        <label>Your Details</label>
+        <locationX>176</locationX>
+        <locationY>120</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>false</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>paymentDetailsScreen</targetReference>
+        </connector>
+        <fields>
+            <name>guestDetailsHeader</name>
+            <fieldText>&lt;h2 style=&quot;font-family: Cormorant Garamond, serif; font-size: 1.6rem; color: #1a1714;&quot;&gt;Your Details&lt;/h2&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>varFirstName</name>
+            <dataType>String</dataType>
+            <fieldText>First Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>varLastName</name>
+            <dataType>String</dataType>
+            <fieldText>Last Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>varEmail</name>
+            <dataType>String</dataType>
+            <fieldText>Email Address</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <validationRule>
+                <errorMessage>Please enter a valid email address.</errorMessage>
+                <formulaExpression>NOT(REGEX({!varEmail}, &apos;^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$&apos;))</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>varPhone</name>
+            <dataType>String</dataType>
+            <fieldText>Phone Number</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>varNationality</name>
+            <choiceReferences>choiceNationalityFrance</choiceReferences>
+            <choiceReferences>choiceNationalityUK</choiceReferences>
+            <choiceReferences>choiceNationalityUS</choiceReferences>
+            <choiceReferences>choiceNationalityGermany</choiceReferences>
+            <choiceReferences>choiceNationalityItaly</choiceReferences>
+            <choiceReferences>choiceNationalitySpain</choiceReferences>
+            <choiceReferences>choiceNationalitySwitzerland</choiceReferences>
+            <choiceReferences>choiceNationalityNetherlands</choiceReferences>
+            <choiceReferences>choiceNationalityBelgium</choiceReferences>
+            <choiceReferences>choiceNationalityGreece</choiceReferences>
+            <choiceReferences>choiceNationalityUAE</choiceReferences>
+            <choiceReferences>choiceNationalitySaudiArabia</choiceReferences>
+            <choiceReferences>choiceNationalityRussia</choiceReferences>
+            <choiceReferences>choiceNationalityChina</choiceReferences>
+            <choiceReferences>choiceNationalityJapan</choiceReferences>
+            <choiceReferences>choiceNationalityAustralia</choiceReferences>
+            <choiceReferences>choiceNationalityCanada</choiceReferences>
+            <choiceReferences>choiceNationalityBrazil</choiceReferences>
+            <choiceReferences>choiceNationalitySouthAfrica</choiceReferences>
+            <choiceReferences>choiceNationalityMorocco</choiceReferences>
+            <choiceReferences>choiceNationalityOther</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Nationality</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>varDateOfBirth</name>
+            <dataType>Date</dataType>
+            <fieldText>Date of Birth</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>varPassportNumber</name>
+            <dataType>String</dataType>
+            <fieldText>Passport / ID Number</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>varArrivalTime</name>
+            <choiceReferences>choiceArrivalBefore12</choiceReferences>
+            <choiceReferences>choiceArrival1214</choiceReferences>
+            <choiceReferences>choiceArrival1416</choiceReferences>
+            <choiceReferences>choiceArrival1618</choiceReferences>
+            <choiceReferences>choiceArrival1820</choiceReferences>
+            <choiceReferences>choiceArrival2022</choiceReferences>
+            <choiceReferences>choiceArrivalAfter22</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Estimated Arrival Time</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>varSpecialRequests</name>
+            <dataType>String</dataType>
+            <fieldText>Special Requests</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>varNewsletter</name>
+            <dataType>Boolean</dataType>
+            <defaultValue>
+                <booleanValue>false</booleanValue>
+            </defaultValue>
+            <fieldText>Subscribe to exclusive offers and news from The Azure Sanctuary</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <nextOrFinishButtonLabel>Continue to Payment</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SCREEN 2 — Payment Details
+         ══════════════════════════════════════════════════════════════════ -->
+    <screens>
+        <name>paymentDetailsScreen</name>
+        <label>Payment</label>
+        <locationX>176</locationX>
+        <locationY>240</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>false</allowFinish>
+        <allowPause>false</allowPause>
+        <backButtonLabel>Back</backButtonLabel>
+        <connector>
+            <targetReference>generateConfirmationCode</targetReference>
+        </connector>
+        <fields>
+            <name>paymentDetailsHeader</name>
+            <fieldText>&lt;h2 style=&quot;font-family: Cormorant Garamond, serif; font-size: 1.6rem; color: #1a1714;&quot;&gt;Payment&lt;/h2&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>varPaymentMethod</name>
+            <choiceReferences>choicePaymentCard</choiceReferences>
+            <choiceReferences>choicePaymentTransfer</choiceReferences>
+            <dataType>String</dataType>
+            <defaultSelectedChoiceReference>choicePaymentCard</defaultSelectedChoiceReference>
+            <fieldText>Payment Method</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>varCardholderName</name>
+            <dataType>String</dataType>
+            <fieldText>Cardholder Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>varCardNumber</name>
+            <dataType>String</dataType>
+            <fieldText>Card Number</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <validationRule>
+                <errorMessage>Please enter a valid 13–16 digit card number.</errorMessage>
+                <formulaExpression>AND({!varPaymentMethod} = &apos;card&apos;, OR(LEN(SUBSTITUTE({!varCardNumber}, &apos; &apos;, &apos;&apos;)) &lt; 13, LEN(SUBSTITUTE({!varCardNumber}, &apos; &apos;, &apos;&apos;)) &gt; 16))</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>varCardExpiry</name>
+            <dataType>String</dataType>
+            <fieldText>Expiry Date (MM/YY)</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <validationRule>
+                <errorMessage>Enter a valid expiry date in MM/YY format with a future expiry.</errorMessage>
+                <formulaExpression>AND({!varPaymentMethod} = &apos;card&apos;, OR(NOT(REGEX({!varCardExpiry}, &apos;^\\d{2}/\\d{2}$&apos;)), VALUE(RIGHT({!varCardExpiry}, 2)) + 2000 &lt; YEAR(TODAY()), AND(VALUE(RIGHT({!varCardExpiry}, 2)) + 2000 = YEAR(TODAY()), VALUE(LEFT({!varCardExpiry}, 2)) &lt; MONTH(TODAY()))))</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>varCardCVV</name>
+            <dataType>String</dataType>
+            <fieldText>CVV</fieldText>
+            <fieldType>PasswordField</fieldType>
+            <isRequired>true</isRequired>
+            <validationRule>
+                <errorMessage>Enter a valid 3 or 4 digit CVV.</errorMessage>
+                <formulaExpression>AND({!varPaymentMethod} = &apos;card&apos;, OR(LEN({!varCardCVV}) &lt; 3, LEN({!varCardCVV}) &gt; 4))</formulaExpression>
+            </validationRule>
+        </fields>
+        <nextOrFinishButtonLabel>Complete Reservation</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         FORMULA — Generate confirmation code
+         ══════════════════════════════════════════════════════════════════ -->
+    <formulas>
+        <name>formulaConfirmationCode</name>
+        <dataType>String</dataType>
+        <expression>&apos;AZR-&apos; &amp; SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(TEXT({!$Flow.CurrentDateTime}), &apos;-&apos;, &apos;&apos;), &apos;:&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;)</expression>
+    </formulas>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         ASSIGNMENT — Set confirmation code variable
+         ══════════════════════════════════════════════════════════════════ -->
+    <assignments>
+        <name>generateConfirmationCode</name>
+        <label>Generate Confirmation Code</label>
+        <locationX>176</locationX>
+        <locationY>360</locationY>
+        <assignmentItems>
+            <assignToReference>varConfirmationCode</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>formulaConfirmationCode</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>createReservationRecord</targetReference>
+        </connector>
+    </assignments>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         RECORD CREATE — Hotel_Reservation__c
+         ══════════════════════════════════════════════════════════════════ -->
+    <recordCreates>
+        <name>createReservationRecord</name>
+        <label>Create Reservation Record</label>
+        <locationX>176</locationX>
+        <locationY>480</locationY>
+        <assignRecordIdToReference>varReservationId</assignRecordIdToReference>
+        <connector>
+            <targetReference>sendConfirmationEmail</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>First_Name__c</field>
+            <value>
+                <elementReference>varFirstName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Last_Name__c</field>
+            <value>
+                <elementReference>varLastName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Email__c</field>
+            <value>
+                <elementReference>varEmail</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Phone__c</field>
+            <value>
+                <elementReference>varPhone</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Nationality__c</field>
+            <value>
+                <elementReference>varNationality</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Date_of_Birth__c</field>
+            <value>
+                <elementReference>varDateOfBirth</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Passport_Number__c</field>
+            <value>
+                <elementReference>varPassportNumber</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Arrival_Time__c</field>
+            <value>
+                <elementReference>varArrivalTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Special_Requests__c</field>
+            <value>
+                <elementReference>varSpecialRequests</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Newsletter_Opt_In__c</field>
+            <value>
+                <elementReference>varNewsletter</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Room_Name__c</field>
+            <value>
+                <elementReference>varRoomName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Check_In_Date__c</field>
+            <value>
+                <elementReference>varCheckInDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Check_Out_Date__c</field>
+            <value>
+                <elementReference>varCheckOutDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Guests__c</field>
+            <value>
+                <elementReference>varGuests</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Price_Per_Night__c</field>
+            <value>
+                <elementReference>varPricePerNight</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Payment_Method__c</field>
+            <value>
+                <elementReference>varPaymentMethod</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Confirmation_Code__c</field>
+            <value>
+                <elementReference>varConfirmationCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Confirmed</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Hotel_Reservation__c</object>
+    </recordCreates>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         ACTION — Send confirmation email
+         ══════════════════════════════════════════════════════════════════ -->
+    <actionCalls>
+        <name>sendConfirmationEmail</name>
+        <label>Send Confirmation Email</label>
+        <locationX>176</locationX>
+        <locationY>600</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>confirmationScreen</targetReference>
+        </connector>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>varEmail</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Your Azure Sanctuary Reservation — {!varConfirmationCode}</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <stringValue>Dear {!varFirstName},
+
+Thank you for choosing The Azure Sanctuary.
+
+Your reservation has been confirmed.
+
+Confirmation Code: {!varConfirmationCode}
+Room: {!varRoomName}
+Check-in: {!varCheckInDate}
+Check-out: {!varCheckOutDate}
+Guests: {!varGuests}
+
+We look forward to welcoming you.
+
+Warm regards,
+The Azure Sanctuary Team</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SCREEN 3 — Confirmation
+         ══════════════════════════════════════════════════════════════════ -->
+    <screens>
+        <name>confirmationScreen</name>
+        <label>Confirmation</label>
+        <locationX>176</locationX>
+        <locationY>720</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>confirmationMessage</name>
+            <fieldText>&lt;h2 style=&quot;font-family: Cormorant Garamond, serif; font-size: 1.6rem; color: #1a1714;&quot;&gt;Reservation Confirmed&lt;/h2&gt;
+&lt;p&gt;Dear {!varFirstName}, your reservation at The Azure Sanctuary has been confirmed.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Confirmation Code:&lt;/strong&gt; {!varConfirmationCode}&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Room:&lt;/strong&gt; {!varRoomName}&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Check-in:&lt;/strong&gt; {!varCheckInDate}&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Check-out:&lt;/strong&gt; {!varCheckOutDate}&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Guests:&lt;/strong&gt; {!varGuests}&lt;/p&gt;
+&lt;p&gt;A confirmation email has been sent to {!varEmail}.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <nextOrFinishButtonLabel>Done</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         CHOICES — Nationality
+         ══════════════════════════════════════════════════════════════════ -->
+    <choices>
+        <name>choiceNationalityFrance</name>
+        <choiceText>France</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>France</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityUK</name>
+        <choiceText>United Kingdom</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>United Kingdom</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityUS</name>
+        <choiceText>United States</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>United States</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityGermany</name>
+        <choiceText>Germany</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Germany</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityItaly</name>
+        <choiceText>Italy</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Italy</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalitySpain</name>
+        <choiceText>Spain</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Spain</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalitySwitzerland</name>
+        <choiceText>Switzerland</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Switzerland</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityNetherlands</name>
+        <choiceText>Netherlands</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Netherlands</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityBelgium</name>
+        <choiceText>Belgium</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Belgium</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityGreece</name>
+        <choiceText>Greece</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Greece</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityUAE</name>
+        <choiceText>UAE</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>UAE</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalitySaudiArabia</name>
+        <choiceText>Saudi Arabia</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Saudi Arabia</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityRussia</name>
+        <choiceText>Russia</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Russia</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityChina</name>
+        <choiceText>China</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>China</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityJapan</name>
+        <choiceText>Japan</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Japan</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityAustralia</name>
+        <choiceText>Australia</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Australia</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityCanada</name>
+        <choiceText>Canada</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Canada</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityBrazil</name>
+        <choiceText>Brazil</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Brazil</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalitySouthAfrica</name>
+        <choiceText>South Africa</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>South Africa</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityMorocco</name>
+        <choiceText>Morocco</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Morocco</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceNationalityOther</name>
+        <choiceText>Other</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Other</stringValue>
+        </value>
+    </choices>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         CHOICES — Arrival Time
+         ══════════════════════════════════════════════════════════════════ -->
+    <choices>
+        <name>choiceArrivalBefore12</name>
+        <choiceText>Before 12:00 (Early check-in requested)</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Before 12:00 (Early check-in requested)</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceArrival1214</name>
+        <choiceText>12:00 – 14:00</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>12:00 – 14:00</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceArrival1416</name>
+        <choiceText>14:00 – 16:00</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>14:00 – 16:00</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceArrival1618</name>
+        <choiceText>16:00 – 18:00</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>16:00 – 18:00</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceArrival1820</name>
+        <choiceText>18:00 – 20:00</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>18:00 – 20:00</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceArrival2022</name>
+        <choiceText>20:00 – 22:00</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>20:00 – 22:00</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choiceArrivalAfter22</name>
+        <choiceText>After 22:00 (Late arrival)</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>After 22:00 (Late arrival)</stringValue>
+        </value>
+    </choices>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         CHOICES — Payment Method
+         ══════════════════════════════════════════════════════════════════ -->
+    <choices>
+        <name>choicePaymentCard</name>
+        <choiceText>Credit / Debit Card</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>card</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choicePaymentTransfer</name>
+        <choiceText>Bank Transfer</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>transfer</stringValue>
+        </value>
+    </choices>
+</Flow>
